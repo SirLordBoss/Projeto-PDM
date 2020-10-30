@@ -11,8 +11,8 @@ Actividades necessárias:
   * Gerir turmas?
 * Homepage (educadoras)
   * Gerir alunos (tabela)
-   * Consultar informação
-    * Relatório diário
+    * Consultar informação
+      * Relatório diário
   * Gerir Aulas 
    * Fazer Sumário
    * Marcar faltas (lista de alunos)
