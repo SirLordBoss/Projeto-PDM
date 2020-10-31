@@ -16,7 +16,7 @@ TO DO:
 * Intentos
 * Permissões
 * Login
-* 
+* Classes (Pessoa --> Aluno, Docente, Administrador)
 
 (XML)
 Mockups -> 4/11
