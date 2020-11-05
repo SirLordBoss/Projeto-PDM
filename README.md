@@ -47,11 +47,11 @@ Actividades necessárias:
  
  * Fazer download do **GIT** https://git-scm.com/download/win
  * Abrir a pasta onde querem meter os ficheiros, clicarem no botão direito e clicarem em _"Open Git Bash here"_ 
- * _git clone https://github.com/SirLordBoss/Projeto-PDM_ #para fazer download do projeto (A primeira vez)
- * _git add Ficheiro/Diretoria_ #para adicionarem ficheiros
- * _git pull_ #para fazerem download do projeto (só faz download do que não têm e mete tudo no sítio certo)
- * _git commit -m "TEXTO QUE QUISEREM METER"_ #para fazerem commit
- * _git push_ #para adicionarem o ficheiro ao github (só aparecerá para os outros depois de executarem isto)
+ * `git clone https://github.com/SirLordBoss/Projeto-PDM_ #para fazer download do projeto (A primeira vez)
+ * `git add Ficheiro/Diretoria_ #para adicionarem ficheiros
+ * `git pull_ #para fazerem download do projeto (só faz download do que não têm e mete tudo no sítio certo)
+ * `git commit -m "TEXTO QUE QUISEREM METER"_ #para fazerem commit
+ * `git push_ #para adicionarem o ficheiro ao github (só aparecerá para os outros depois de executarem isto)
  **Lembrem-se** sempre de fazer o **_pull_** e o **_commit_** antes de fazerem o **_push_** para que não se perca nada no caminho
  Se se enganarem por algum motivo ou quiserem reverter algo para o que se encontra no github podem apagar tudo e fazer clone de novo
 
@@ -59,6 +59,6 @@ Actividades necessárias:
   * Fazer commit de vários ficheiros ao mesmo tempo
   * Apagar vários ficheiros com um só commit
   * Adicionar ficheiros com um só commit
-  * Adicionar pastas com vários ficheiros muito facilmente (_git add Pasta/_)
+  * Adicionar pastas com vários ficheiros muito facilmente (`git add Pasta/`)
   * Estar sempre updated
   * Fazer download e upload das coisas bastante rápido (mais rápido do que ir ao site) 
