@@ -37,6 +37,7 @@
         android:text="@string/criar_conta"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="90sp"
+        android:onClick="startRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Título" />
@@ -53,6 +54,7 @@
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="90sp"
+        android:onClick="startLogin"
         app:layout_constraintEnd_toEndOf="@+id/btnCriarConta"
         app:layout_constraintStart_toStartOf="@+id/btnCriarConta"
         app:layout_constraintTop_toBottomOf="@+id/btnCriarConta" />
