@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oTV = (TextView)findViewById(R.id.Título) ;
+        oTV = (TextView)findViewById(R.id.Título);
         btnCriaConta = (Button)findViewById(R.id.btnCriarConta);
         btnLogin = (Button)findViewById(R.id.btnLogin);
 
