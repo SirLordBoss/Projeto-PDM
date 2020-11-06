@@ -24,7 +24,4 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //metodo para confirmar login
-    public void confirmLogin(View v){
-
-    }
 }

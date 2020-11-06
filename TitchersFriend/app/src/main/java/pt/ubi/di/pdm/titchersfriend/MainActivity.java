@@ -12,25 +12,39 @@ public class MainActivity extends AppCompatActivity {
     TextView oTV;
     Button btnCriaConta;
     Button btnLogin;
+    MainActivity Refjanela;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Refjanela = this ;
 
         oTV = (TextView)findViewById(R.id.Título);
         btnCriaConta = (Button)findViewById(R.id.btnCriarConta);
         btnLogin = (Button)findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent A2 = new Intent(Refjanela,LoginActivity.class);
+                startActivity(A2) ;
+            }
+        });
+
+        btnCriaConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent A2 = new Intent(Refjanela,RegisterActivity.class);
+                startActivity(A2) ;
+            }
+        });
+
+
+        }
 
     }
 
-    public void startLogin(View v){
-        Intent A1 = new Intent(this,LoginActivity.class);
-        startActivity(A1) ;
-    }
 
-    public void startRegister(View v){
-        Intent A2 = new Intent(this,RegisterActivity.class);
-        startActivity(A2) ;
-    }
-}
+
+
+

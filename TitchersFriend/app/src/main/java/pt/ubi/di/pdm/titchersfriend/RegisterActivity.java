@@ -29,10 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    //metodo por fazer (serve para confirmar a tentativa de registo)
-    public void criaConta(View v){
 
-    }
 
 
 }

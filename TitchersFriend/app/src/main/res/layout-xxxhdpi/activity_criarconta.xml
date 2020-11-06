@@ -37,7 +37,6 @@
         android:text="@string/criar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="70sp"
-        android:onClick="criaConta"
         app:layout_constraintEnd_toEndOf="@+id/inputPass"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inputPass"
