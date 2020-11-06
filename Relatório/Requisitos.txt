@@ -1,5 +1,7 @@
 Requisitos de utilizador:
 
+    Requisitos Funcionais:
+
     1.  O sistema deve distinguir os utilizadores como educadoras ou administradores;
     2.  Os utilizadores do tipo administrador podem usar a mesma aplicação para aceder e editar as bases de dados;
     3.  O sistema pode implementar uma aplicação diferente para aceder e editar as bases de dados;
@@ -13,7 +15,16 @@ Requisitos de utilizador:
     11. O sistema deve apenas apresentar as funcionalidades a utilizadores autenticados;
     12. O sistema deve permitir que cada educadora de infância registe, edite ou elimine alunos na sua turma.
 
+    Requisitos Não Funcionais:
+    1.  O sistema deve conter uma base de dados concisa e respeitadora de todas as regras da segunda forma normal;
+    2.  O sistema deve conter uma aplicação intuitiva, e uma interface gráfica fácil de usar para todos os utilizadores;
+    3.  O sistema deve ser eficiente;
+    4.  O sistema deve adotar o sistema MVC para facilitar eventuais mudanças posteriores.
+
+
 Requisitos de sistema:
+
+    Requisitos Funcionais:
     1.  
         1.1 O sistema deve conseguir distinguir os administradores de educadoras de infância pelos nomes de utilizador;
         1.2 O sistema deve conter informação na base de dados sobre o tipo de utilizador, administrador ou educadora;
@@ -22,7 +33,7 @@ Requisitos de sistema:
 
     **Numa tabela**
     Função: 
-    Distinção de utilizadores
+    Distinção de utilizadores e login
     
     Entradas e fontes:
     -Username (poderá ser o email) e password
@@ -33,6 +44,7 @@ Requisitos de sistema:
 
     Informações necessárias:
     O tipo de utilizador que introduziu os dados. (Administrador ou educadora)
+    O sistema pode guardar a palavra-passe e username nos documentos da aplicação desde que o utilizador dê permissão para tal.
 
     Ação:
     O utilizador abre a aplicação, escolhe fazer "Login" e depara-se com a página de Login com os campos "Nome de utilizador" e "Password" para preencher. Após ter preenchido carrega no botão de login e o sistema redireciona-o para a página correspondente. Se o utilizador for administrador, é aberta a activity para administradores. Se o utilizador for educadora, é aberta a activity para educadoras.
@@ -60,6 +72,9 @@ Requisitos de sistema:
     Saídas e Destinos:
     -Alterações feitas na base de dados
 
+    Informações necessárias:
+    Todas as activities relacionadas com a administração devem de fazer a verificação do ID do utilizador e da sua palavra-passe. 
+
     Ação:
     O administrador após ter feito login é redirecionado para a activity de Administração onde irá poder aceder e editar todas as bases de dados. 
 
@@ -79,4 +94,21 @@ Requisitos de sistema:
         4.1 Cada turma deve ter uma base de dados diferente;
         4.2 O sistema deve criar uma nova base de dados assim que o administrador cria uma turma e liga-la à base de dados principal;
         4.3 Cada turma deve ter os seus alunos correspondentes assim como um nome/número que a identifique, que deve ser o mesmo da base de dados;
-        4.4 Cada base de dados do tipo turma possuirá uma tabela de alunos e 
+        4.4 Cada base de dados do tipo turma possuirá uma tabela de alunos e uma tabela de relatórios e uma de atividades;
+        4.5 O sistema deve conseguir transferir a base de dados da turma correspondente à educadora de infância para que esta trabalhe na base de dados;
+        4.6 O sistema deve apresentar todos os alunos da base de dados para a educadora assim como permitir que a educadora modifique a base de dados a gosto (p.e. escrever um relatório diário de todos os educandos assim como escrever um sumário de todas as atividades feitas no dia)
+
+    **Numa tabela**
+    Função:
+    Base de dados de uma turma
+
+    Entradas e Fontes:
+    -Download da base de dados
+    -Dados da educadora (como sumários, relatórios e etc);
+
+    Saídas e destinos:
+    -Upload de dados para a base de dados 
+
+    Ação:
+    A Educadora abre a aplicação e o sistema descarrega a base de dados da turma da educadora e mostra os dados através da aplicação.
+    Após a utilizadora saír da aplicação os dados são guardados na base de dados.
