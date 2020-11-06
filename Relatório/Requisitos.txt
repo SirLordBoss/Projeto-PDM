@@ -1,0 +1,82 @@
+Requisitos de utilizador:
+
+    1.  O sistema deve distinguir os utilizadores como educadoras ou administradores;
+    2.  Os utilizadores do tipo administrador podem usar a mesma aplicação para aceder e editar as bases de dados;
+    3.  O sistema pode implementar uma aplicação diferente para aceder e editar as bases de dados;
+    4.  O sistema deve representar cada turma numa base de dados diferente;
+    5.  O sistema deve conter uma base de dados que interligue todas as outras bases de dados de uma maneira coesa;
+    6.  O sistema deve permitir que os administradores controlem toda a informação relativa às educadoras de infância, turmas e educandos;
+    7.  O sistema deve suportar vários utilizadores do tipo educadora de infância diferenciados por um nome de utilizador;
+    8.  O sistema deve fornecer a possibilidade de registar uma nova educadora de infância mediante autorização de um dos administradores;
+    9.  Na parte administrativa, o sistema deve permitir visualizar a totalidade dos dados de forma integrada e intuitiva, nomeadamente através de sumários e estatísticas;
+    10. O sistema deve ainda permitir a gestão dos utilizadores, nomeadamente o registo, edição e eliminação de utilizadores do tipo educadoras;
+    11. O sistema deve apenas apresentar as funcionalidades a utilizadores autenticados;
+    12. O sistema deve permitir que cada educadora de infância registe, edite ou elimine alunos na sua turma.
+
+Requisitos de sistema:
+    1.  
+        1.1 O sistema deve conseguir distinguir os administradores de educadoras de infância pelos nomes de utilizador;
+        1.2 O sistema deve conter informação na base de dados sobre o tipo de utilizador, administrador ou educadora;
+        1.3 Quando o utilizador efetua o login, o sistema deve para além de verificar a password introduzida deve também verificar se o utilizador é educadora ou administrador;
+        1.4 Após o utilizador entrar no sistema, o sistema deve redirecionar o utilizador para a activity que lhe pertence (activity administrativa ou activity das educadoras).
+
+    **Numa tabela**
+    Função: 
+    Distinção de utilizadores
+    
+    Entradas e fontes:
+    -Username (poderá ser o email) e password
+    -Dados da base de dados SQLite
+
+    Saídas e Destinos:
+    -Activity correspondente ao utilizador
+
+    Informações necessárias:
+    O tipo de utilizador que introduziu os dados. (Administrador ou educadora)
+
+    Ação:
+    O utilizador abre a aplicação, escolhe fazer "Login" e depara-se com a página de Login com os campos "Nome de utilizador" e "Password" para preencher. Após ter preenchido carrega no botão de login e o sistema redireciona-o para a página correspondente. Se o utilizador for administrador, é aberta a activity para administradores. Se o utilizador for educadora, é aberta a activity para educadoras.
+
+    Pré condições e pós condições:
+    Os utilizadores devem estar previamente registados na aplicação.
+
+    Efeitos colaterais:
+    Se o utilizador não tiver previamente registado o sistema deve revelar o aviso "O nome de utilizador introduzido não está registado na nossa base de dados" ao utilizador precisa de estar registado para que possa utilizar a aplicação.
+    Se o utilizador errar na palavra passe o sistema deve mostrar o aviso "A password que introduziu não correspondonde ao utilizador indicado".
+
+
+    2.
+        2.1 O sistema deve permitir que os administradores utilizem a mesma aplicação que as educadoras, com vistas diferentes, para que estes possam, a partir dos dispositivos utilizados pelas mesmas, aceder à base de dados e fazer as correções/edições necessárias;
+        2.2 No sistema deve existir uma ou mais activities para os utilizadores poderem editar as bases de dados.
+
+    
+    **Numa tabela**
+    Função:
+    Vista de administrador
+
+    Entradas e fontes:
+    -ID do utilizador (Para posteriores verificações de segurança)
+
+    Saídas e Destinos:
+    -Alterações feitas na base de dados
+
+    Ação:
+    O administrador após ter feito login é redirecionado para a activity de Administração onde irá poder aceder e editar todas as bases de dados. 
+
+    Pré condições e pós condições:
+    O utilizador a entrar activity de administração deve ser obrigatoriamente administrador.
+
+    Efeitos Colaterais:
+    Se um utilizador não administrador por algum motivo entrar em alguma activity da administração, este deve ser diretamente redirecionado para a página de início de sessão.
+
+
+    3.
+        3.1 Como é opção, neste caso, não deve existir uma aplicação diferente para aceder e editar a base de de dados;
+        3.2 Todos os dados devem ser editados através da mesma aplicação, com uma parte de administração.
+
+
+    4.
+        4.1 Cada turma deve ter uma base de dados diferente;
+        4.2 O sistema deve criar uma nova base de dados assim que o administrador cria uma turma e liga-la à base de dados principal;
+        4.3 Cada turma deve ter os seus alunos correspondentes assim como um nome/número que a identifique, que deve ser o mesmo da base de dados;
+        4.4 Cada base de dados do tipo turma possuirá uma tabela de alunos e 
