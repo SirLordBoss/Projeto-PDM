@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
    private static final int DB_VERSION = 1;
    private static final String DB_NAME = "exemplo"; //nome da bd ainda indefinido
+   private SQLiteDatabase oSQL;
 
     public DatabaseOpenHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -26,4 +27,5 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
 }
