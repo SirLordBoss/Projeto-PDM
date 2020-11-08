@@ -111,4 +111,36 @@ Requisitos de sistema:
 
     Ação:
     A Educadora abre a aplicação e o sistema descarrega a base de dados da turma da educadora e mostra os dados através da aplicação.
-    Após a utilizadora saír da aplicação os dados são guardados na base de dados.
+    Após a educadora saír da aplicação os dados da turma são guardados na sua base de dados.
+
+    Pré condições e pós condições:
+    A base de dados relacionará os alunos com as atividades realizadas ao longo do dia através dos relatórios diários.
+
+    Efeitos Colaterais:
+    Se um aluno faltar, o sistema não deve permitir que a educadora elabore um relatório para esse aluno.
+
+
+    5. 
+        5.1 A base de dados global deve interligar os docentes com as suas turmas a lecionar e deve distinguir os docentes dos administradores;
+        5.2 A base de dados deve ter um token para a identificação das bases de dados para as turmas. Esse token deve existir na tabela de turmas, junto com a identificação de cada turma.
+
+    **Numa tabela**
+    Função:
+    Base de dados global
+
+    Entradas e Fontes:
+    -Dados das bases de dados das turmas e utilizadores da app
+
+    Saídas e destinos:
+    -Nenhum
+
+    Ação:
+    Quando criado um novo utilizador, o sistema deve 
+
+    Pré condições e pós condições:
+    A base de dados relacionará os alunos com as atividades realizadas ao longo do dia através dos relatórios diários.
+
+    Efeitos Colaterais:
+    Se um aluno faltar, o sistema não deve permitir que a educadora elabore um relatório para esse aluno.
+
+    
