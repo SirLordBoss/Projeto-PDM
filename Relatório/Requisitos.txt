@@ -1,3 +1,9 @@
+
+Glossário:
+Administrador - 
+Utilizador - 
+
+
 Requisitos de utilizador:
 
     Requisitos Funcionais:
@@ -10,30 +16,29 @@ Requisitos de utilizador:
     6.  O sistema deve permitir que os administradores controlem toda a informação relativa às educadoras de infância, turmas e educandos;
     7.  O sistema deve suportar vários utilizadores do tipo educadora de infância diferenciados por um nome de utilizador;
     8.  O sistema deve fornecer a possibilidade de registar uma nova educadora de infância mediante autorização de um dos administradores;
-    9.  Na parte administrativa, o sistema deve permitir visualizar a totalidade dos dados de forma integrada e intuitiva, nomeadamente através de sumários e estatísticas;
-    10. O sistema deve ainda permitir a gestão dos utilizadores, nomeadamente o registo, edição e eliminação de utilizadores do tipo educadoras;
-    11. O sistema deve apenas apresentar as funcionalidades a utilizadores autenticados;
-    12. O sistema deve permitir que cada educadora de infância registe, edite ou elimine alunos na sua turma.
+    9.  O sistema deve ainda permitir que os administradores façam a gestão dos utilizadores, nomeadamente o registo, edição e eliminação de utilizadores do tipo educadoras;
+    10. O sistema deve apenas apresentar as funcionalidades a utilizadores autenticados;
+    11. O sistema deve permitir que cada educadora de infância registe, edite ou elimine alunos na sua turma.
 
     Requisitos Não Funcionais:
     1.  O sistema deve conter uma base de dados concisa e respeitadora de todas as regras da segunda forma normal;
     2.  O sistema deve conter uma aplicação intuitiva, e uma interface gráfica fácil de usar para todos os utilizadores;
     3.  O sistema deve ser eficiente;
-    4.  O sistema deve adotar o sistema MVC para facilitar eventuais mudanças posteriores.
+    4.  O sistema deve estar preparado para eventuais mudanças de design ou de funcionalidades.
+    5.  Na parte administrativa, o sistema deve permitir visualizar a totalidade dos dados de forma integrada e intuitiva, nomeadamente através de tabelas;
 
 
 Requisitos de sistema:
 
     Requisitos Funcionais:
     1.  
-        1.1 O sistema deve conseguir distinguir os administradores de educadoras de infância pelos nomes de utilizador;
-        1.2 O sistema deve conter informação na base de dados sobre o tipo de utilizador, administrador ou educadora;
-        1.3 Quando o utilizador efetua o login, o sistema deve para além de verificar a password introduzida deve também verificar se o utilizador é educadora ou administrador;
-        1.4 Após o utilizador entrar no sistema, o sistema deve redirecionar o utilizador para a activity que lhe pertence (activity administrativa ou activity das educadoras).
+        1.1 O sistema deve conter informação na base de dados sobre o tipo de utilizador, administrador ou educadora;
+        1.2 Quando o utilizador efetua o login, o sistema deve para além de verificar a password introduzida deve também verificar se o utilizador é educadora ou administrador;
+        1.3 Após o utilizador entrar no sistema, o sistema deve redirecionar o utilizador para a activity que lhe pertence (activity administrativa ou activity das educadoras).
 
     **Numa tabela**
     Função: 
-    Distinção de utilizadores e login
+    Distinção de utilizadores e login.
     
     Entradas e fontes:
     -Username (poderá ser o email) e password
@@ -64,7 +69,7 @@ Requisitos de sistema:
     
     **Numa tabela**
     Função:
-    Vista de administrador
+    Vista de administrador.
 
     Entradas e fontes:
     -ID do utilizador (Para posteriores verificações de segurança)
@@ -100,10 +105,10 @@ Requisitos de sistema:
 
     **Numa tabela**
     Função:
-    Base de dados de uma turma
+    Base de dados de uma turma.
 
     Entradas e Fontes:
-    -Download da base de dados
+    -Base de dados
     -Dados da educadora (como sumários, relatórios e etc);
 
     Saídas e destinos:
@@ -126,7 +131,7 @@ Requisitos de sistema:
 
     **Numa tabela**
     Função:
-    Base de dados global
+    Base de dados global.
 
     Entradas e Fontes:
     -Dados das bases de dados das turmas e utilizadores da app
@@ -135,12 +140,201 @@ Requisitos de sistema:
     -Nenhum
 
     Ação:
-    Quando criado um novo utilizador, o sistema deve 
+    A base de dados global é construída para unir todas as bases de dados do tipo turma com os seus docentes. Sempre um novo docente é criado uma turma estará acoplada com os seus dados assim como a uma base de dados do tipo turma deve ser criada e ligada à lista de turmas por um token (nome da base de dados).
 
     Pré condições e pós condições:
-    A base de dados relacionará os alunos com as atividades realizadas ao longo do dia através dos relatórios diários.
+    A base de dados só deve ser acedida pelos utilizadores do tipo administrador. O sistema deve verificar se o utilizador que pretende aceder à base de dados é do tipo administrador.
 
     Efeitos Colaterais:
-    Se um aluno faltar, o sistema não deve permitir que a educadora elabore um relatório para esse aluno.
+    Se o utilizador que pretender aceder à base de dados (visualizar ou editar) não for administrador então o sistema não deve permitir o acesso.
+
+
+    6.
+        6.1 Os administradores, através da aplicação do sistema devem conseguir aceder e editar todas as tabelas de dados utilizadas no sistema (utilizadores, turmas, a registar) assim como todas as bases de dados do tipo turma da tabela turmas;
+        6.2 Os administradores não devem poder editar as bases de dados do tipo turma assim que estas estejam a ser utilizadas. A utilização da base de dados deve ser controlada com uma flag na tabela de turmas que deve mudar assim que as educadoras acedam à aplicação e a base de dados for descarregada para o seu dispositivo móvel.
+
+    **Numa tabela**
+    Função:
+    Acesso e edição de dados pelos administradores.
+
+    Entradas e Fontes:
+    -Dados das bases de dados e utilizadores da app.
+
+    Saídas e destinos:
+    -Dados da base de dados editados.
+
+    Ação:
+    O administrador acede à aplicação e o sistema apresenta todos os dados necessários na app para o administrador poder aceder e editar como quiser. Quando o administrador editar algo, o sistema deve atualizar automáticamente na base de dados global.
+
+    Pré condições e pós condições:
+    Se algum docente estiver a utilizar a base de dados da turma o sistema deve bloquear a edição e não deve permitir a edição da turma mesmo que o administrador já se encontre na página da mesma.
+
+    Efeitos Colaterais:
+    Se acontecer que um administrador tente editar algo numa turma que esteja a ser utilizada por um docente, o sistema deve apresentar um popup com informação que a operação não irá ser concluída pois estão a utilizar a base de dados.
+
+    7.
+        7.1 Todos os utilizadores não administradores irão, nesta fase inicial da aplicação, ser educadoras. As educadoras poderão sugerir a sua inscrição e mais tarde o administrador pode registar essa inscrição na aplicação;
+        7.2 Todas as educadoras devem ter direito a uma turma onde poderão fazer os registos de todas as crianças:
+        7.3 O nome de utilizador (neste caso o email) deve ser diferente para todos os utilizadores.
+
+    **Numa tabela**
+    Função:
+    Identificação dos diferentes utilizadores do tipo educadora.
+
+    Entradas e Fontes:
+    -Nenhum
+
+    Saídas e destinos:
+    -Nenhum
+
+    Ação:
+    A educadora faz login e o sistema faz download da base de dados da turma a que lhe pertence. A educadora não deve poder editar informações de turmas de outras educadoras. O sistema para fazer login necessita do email do utilizador que será diferente para todos os utilizadores e assim também distinguirá as educadoras.
+
+    Pré condições e pós condições:
+    No registo de uma educadora, o sistema deve verificar se o email do utilizador é diferente dos utilizadores já registados ou que pediram para se registar.
+
+    Efeitos Colaterais:
+    Se ao registar uma educadora o sistema verificar que existe um email igual na base de dados ao que o utilizador está a tentar introduzir o sistema deve apresentar um popup com a informação de que existe um utilizador já com esse email.
+
+
+    8.
+        8.1 Uma educadora poderá registar-se no sistema. O sistema deve então guardar os dados de registo numa tabela expecífica separada da tabela de utilizadores;
+        8.2 O administrador deve poder visualizar esses dados de registo como pedidos de registo e deve poder aceitar os pedidos de registo das educadoras;
+        8.3 Se o administrador aceitar um pedido de registo os dados da tabela específica para pedidos de registo serão passados para a tabela de utilizadores e é criada ao mesmo tempo uma sala (uma base de dados do tipo sala), vazia, que será a sala da docente (estará ligada à docente através da base de dados).
+    
+    **Numa tabela**
+    Função:
+    Registo autónomo de uma educadora.
+
+    Entradas e Fontes:
+    -Dados de registo (nome, email, sexo, morada e password).
+
+    Saídas e destinos:
+    -Nenhum 
+
+    Ação:
+    A educadora faz o registo, o registo fica guardado no sistema como provisório. O administrador vê o pedido de registo.
+    Se o administrador aceitar o pedido. O sistema passa todos os dados para a tabela de utilizadores e cria uma sala ligada a esse utilizador.
+    Se o administrador não aceitar o pedido o pedido é automáticamente eliminado da lista de pedidos.
+
+    Pré condições e pós condições:
+    A educadora tem que fazer o registo para a ação se desenrolar.
+
+    Efeitos Colaterais:
+    Se o administrador não aceitar o pedido a educadora terá que se inscrever novamente.
+
+
+    9.
+        9.1 O sistema deve ter uma ou mais activities da parte administrativa para a gestão dos utilizadores do tipo educadora;
+        9.2 O mesmo deve acontecer para os utilizadores do tipo administrador;
+        9.3 O sistema deve permitir que os administradores adicionem educadores e que possam apagar ou editar os dados destes.
+        
+    **Numa tabela**
+    Função:
+    Registo autónomo de uma educadora.
+
+    Entradas e Fontes:
+    -Dados do utilizador (para verificação do tipo de utilizador)
+
+    Saídas e destinos:
+    -Mudanças na base de dados.
+
+    Informações necessárias:
+    Deve existir uma activity que trata da edição dos dados do utilizador. 
+    O sistema deve ainda ter alguma segurança reforçada nesta zona de administração. Por exemplo pedir a palavra-passe sempre que o administrador pretende eliminar um utilizador.
+
+    Ação:
+    O administrador na zona administrativa irá ter uma ligação para a gestão de utilizadores, essa ligação irá abrir a activity de gestão de utilizadores em que o administrador irá poder editar, adicionar, ou eliminar dados e utilizadores. Se o utilizador escolher editar um dado o sistema deve abrir a activity para editar dados. Quando o utilizador editar os dados pretendidos o sistema deve guardar esses dados na base de dados e fechar a activity. Se o administrador pretender eliminar um utilizador será desplotado um popup que pedirá a password do utilizador e perguntará se o administrador tem a certeza que quer eliminar o utilizador.
+
+    Pré condições e pós condições:
+    Para eliminar um utilizador o administrador tem que validar a eliminação com a sua password.
+
+    Efeitos Colaterais:
+    Se o utilizador for verificado e não for do tipo administrador o sistema deve de redireciona-lo para a página inicial e não deve aplicar as alterações feitas por esse utilizador.
+    Se a validação da eliminação for inválida, ou seja, a palavra passe do administrador for diferente o sistema não deve aplicar as alterações e deve informar o utilizador que por a palavra-passe ser incorreta não foram feitas as alterações.
+
+    10.
+        10.1    O sistema deve assegurar que um utilizador não autenticado não passe da página inicial (página de login) ou da página de registo.
+        
+    **Numa tabela**
+    Função:
+    Bloqueio da aplicação a utilizadores não autenticados
+
+    Entradas e Fontes:
+    -Dados do utilizador (para verificação do utilizador)
+
+    Saídas e destinos:
+    -Activity das educadoras ou activity dos administradores
+
+    Informações necessárias:
+    O sistema não deve guardar quaisquer dados de login do utilizador (assim que a aplicação termina a sessão do utilizador termina também)
+
+    Ação:
+    Um utilizador quando abre a aplicação irá deparar-se com a activity de login para poder efetuar o login na sua conta, se o utilizador não possuir conta terá hipótese ainda de se registar mas o administrador tem de validar o seu registo.
+
+    Pré condições e pós condições:
+    O administrador tem que estar registado na base de dados para poder entrar, sem estar registado não deve conseguir entrar.
+
+    Efeitos Colaterais:
+    Se o utilizador tentar aceder ao sistema de outra forma que não as indicadas na aplicação o sistema deve redirecioná-lo para a página inicial e retirar todas as sessões criadas no dispositivo.
+
+
+    11.
+        11.1    As educadoras de infância, na base de dados destinada à turma correspondente, devem poder eliminar editar ou adicionar alunos e também escrever sumários e marcar faltas;
+        11.2    O sistema deve ter uma activity para apresentar todos os alunos e outra para efetuar edições nos dados dos mesmos;
+        11.3    As educadoras devem poder ainda escrever um sumário por dia e marcar as faltas aos alunos através de links para atividades secundárias;
+        11.4    Quando a educadora sair da aplicação o sistema deve guardar todos os dados da base de dados e habilitar a edição da base de dados da turma.
+
+    **Numa tabela**
+    Função:
+    Gestão de turmas e alunos
+
+    Entradas e Fontes:
+    -Dados introduzidos pela educadora
+
+    Saídas e destinos:
+    -Edição feita pela educadora
+
+    Informações necessárias:
+    A educadora não deve poder editar outras bases de dados.
+    Após a educadora ter escrito o sumário do dia, o sistema deve permitir só que a educadora edite o sumário e que não crie um novo.
+    Deve existir também uma parte na atividade de sumários para que a educadora consiga ver sumários anteriores e editá-los.
+
+    Ação:
+    A educadora faz o login e o sistema deve mostrar-lhe uma página com diferentes botões para que a educadora escolha o que pode fazer, criar um sumário ou então visualizar dados dos alunos. Se a educadora escolher ver dados dos alunos então o sistema deve apresentar uma atividade com uma tabela dos alunos e com um  botão para adicionar um aluno assim como para editar um aluno. Se a educadora escolher criar um sumário o sistema deve abrir uma atividade que lhe permita escrever e guardar o sumário. Dentro desta atividade de escrever um sumário deve existir um link para marcação de faltas. Se a educadora escolher "Assinalar presenças" o sistema deve novamente apresentar os alunos inscritos com uma checkbox de lado para que a educadora possa assinalar os que estão presentes. 
+
+    Pré condições e pós condições:
+    A educadora terá que ter o login feito.
+
+    Efeitos Colaterais:
+    Se a educadora não assinalar presenças e escrever o sumário o sistema deve partir do pressuposto que não houveram alunos na aula e marcar falta a todos os alunos.
+    Se a educadora não escrever o sumário e assinalar presenças o corpo do sumário deve ser "Sem sumário".
+    Se a educadora não escrever sumário nem assinalar presenças o sistema não irá registar esse dia.
+
+
+    Requisitos não Funcionais:
+    1.
+        1.1 A base de dados deve ser bem pensada de forma a que todos os atributos não chave devem ser dependentes de toda a chave primária, isto é, cada atributo não chave não deve ser dependente apenas de parte da chave.
+        1.2 Não devem existir redundâncias nem anomalias.
+
+    2.
+        2.1 O sistema utilizará XML para a apresentação;
+        2.2 O conteúdo da aplicação deve estar espaçado e com bom contraste para permitir que os utilizadores vejam bem todo o texto.
+
+    3.
+        3.1 O sistema deve ser capaz de carregar todos os documentos e fazer todas as atualizações à base de dados de forma rápida e eficiente.
+        3.2 O sistema deve utilizar programação orientada a objetos em algumas situações para que o sistema para além de eficiente seja de fácil entendimento entre o grupo de trabalho.
+
+    4.
+        4.1 O sistema deve adotar o sistema MVC para que as views possam ser trocadas sempre que necessário sem que sejam precisas alterações no controlador.
+        
+    5.
+        5.1 O sistema deve conter um design simplista e ter um grande espaço entre funcionalidades.
+        5.2 O sistema deve estar bem dividido e ser autoexplicativo para que tanto as educadoras como os administradores consigam encontrar tudo o que o sistema oferece.
+        5.3 O sistema deve utilizar, na maior parte das vezes, tabelas para organizar os dados na zona administrativa, pois assim irá ser mais fácil de editar e visualizar os dados.
+
+    
+
+
 
     
