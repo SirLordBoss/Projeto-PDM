@@ -2,6 +2,8 @@
 
 **O relatório final não deve ultrapassar as 20 páginas no corpo e não deve conter páginas em branco**
 
+**Link relatório**: https://www.overleaf.com/2868481639rhvbnhjpqkbf
+
 TO DO:
 
 (Base de dados) -> até ao fim do fds
