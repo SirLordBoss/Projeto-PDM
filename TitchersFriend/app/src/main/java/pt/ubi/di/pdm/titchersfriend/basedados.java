@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //muitas das coisas que aqui estao foram feitas baseadas na tabela do exemplo em que me basei(links do q usei no fim do codigo)
-//FALTA ADAPTAR PARA AS NOSSAS TABELAS MAS FUNCIONA!
+//FALTA ADAPTAR PARA AS NOSSAS TABELAS MAS FUNCIONA
 
 public class basedados {
     myDbHelper sqlhelper;
