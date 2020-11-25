@@ -8,8 +8,6 @@ import android.view.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-
 public class RegisterActivity extends AppCompatActivity {
     Button btnCriar;
     EditText inputpass,inputEmail,inputRepPass,inputUser;
