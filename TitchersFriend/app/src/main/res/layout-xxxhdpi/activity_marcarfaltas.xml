@@ -16,7 +16,7 @@
         android:shadowDx="7"
         android:shadowDy="7"
         android:shadowRadius="1"
-        android:text="@string/gerir_alunos"
+        android:text="@string/marcar_faltas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="48sp" />
 

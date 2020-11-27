@@ -32,24 +32,26 @@
             android:id="@+id/gerirAlunos"
             android:layout_width="150dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
             android:padding="15dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/user_icon"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/gerirAulas"
             android:layout_width="150dp"
             android:layout_height="fill_parent"
             android:layout_marginStart="30dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
             android:padding="20dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/aulas_icon" />
+            app:srcCompat="@drawable/aulas_icon"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
@@ -63,9 +65,9 @@
             android:id="@+id/txtGerirAlunos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:fontFamily="@font/kindergarten"
-            android:text="Gerir Alunos"
+            android:text="@string/gerir_alunos"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp" />
 
@@ -73,10 +75,10 @@
             android:id="@+id/txtGerirAulas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
             android:fontFamily="@font/kindergarten"
-            android:text="Gerir Aulas"
+            android:text="@string/gerir_aulas"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp" />
 
@@ -91,23 +93,25 @@
             android:id="@+id/sumario"
             android:layout_width="150dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
             android:padding="10dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/sumario_icon" />
+            app:srcCompat="@drawable/sumario_icon"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/faltas"
             android:layout_width="150dp"
             android:layout_height="fill_parent"
             android:layout_marginStart="30dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/faltas_icon" />
+            app:srcCompat="@drawable/faltas_icon"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
@@ -121,9 +125,9 @@
             android:id="@+id/txtSumarios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="57dp"
+            android:layout_marginStart="57dp"
             android:fontFamily="@font/kindergarten"
-            android:text="Sumários"
+            android:text="@string/sumarios"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp" />
 
@@ -131,10 +135,10 @@
             android:id="@+id/txtFaltas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="30dp"
             android:fontFamily="@font/kindergarten"
-            android:text="Marcar Faltas"
+            android:text="@string/marcar_faltas"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="26sp" />
 

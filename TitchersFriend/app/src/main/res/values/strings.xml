@@ -10,4 +10,8 @@
     <string name="rep_pass">Repita a Palavra Passe</string>
     <string name="carro">carro</string>
     <string name="flor">flor</string>
+    <string name="gerir_alunos">Gerir Alunos</string>
+    <string name="marcar_faltas">Marcar Faltas</string>
+    <string name="gerir_aulas">Gerir Aulas</string>
+    <string name="sumarios">Sumários</string>
 </resources>
