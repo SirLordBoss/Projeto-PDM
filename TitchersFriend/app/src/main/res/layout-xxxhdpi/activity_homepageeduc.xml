@@ -6,61 +6,50 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100">
+
     <TextView
         android:id="@+id/titulo_criarcnt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="130dp"
         android:fontFamily="@font/kindergarten"
         android:gravity="center"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="48sp" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        app:srcCompat="@drawable/barra_titulo"
-        tools:ignore="ContentDescription" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/gerirAlunos"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="50dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
+            android:padding="15dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/user_icon" />
 
         <ImageButton
             android:id="@+id/gerirAulas"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="fill_parent"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
+            android:padding="20dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/aulas_icon" />
 
     </LinearLayout>
 
@@ -95,39 +84,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/sumario"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="50dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
+            android:padding="10dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/sumario_icon" />
 
         <ImageButton
             android:id="@+id/faltas"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="fill_parent"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/cantos_botoes"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/faltas_icon" />
 
     </LinearLayout>
 
