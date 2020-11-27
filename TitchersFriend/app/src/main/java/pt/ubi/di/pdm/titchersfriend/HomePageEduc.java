@@ -53,7 +53,6 @@ public class HomePageEduc extends AppCompatActivity {
             }
         });
 
-        Intent iCameFromActivity1 = getIntent() ;
     }
 
 }
