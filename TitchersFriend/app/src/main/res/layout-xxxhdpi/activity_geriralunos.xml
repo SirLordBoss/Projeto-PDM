@@ -21,3 +21,4 @@
         android:text="Gerir Alunos"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="48sp" />
+</LinearLayout>
