@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
-    android:weightSum="100">
+    android:weightSum="100"
+    tools:context=".HomePageEduc">
 
     <TextView
         android:id="@+id/titulo_criarcnt"
