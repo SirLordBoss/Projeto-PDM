@@ -16,9 +16,11 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/kindergarten"
-        android:text="Nome"
+        android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="48sp" />
+        android:textSize="48sp"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor,TextFields" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,15 +30,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imgComer"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/comida" />
+            app:srcCompat="@drawable/comida"
+            tools:ignore="ContentDescription" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/cboxComer"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
@@ -44,14 +47,15 @@
             android:button="@null" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgDormir"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/dormir" />
+            app:srcCompat="@drawable/dormir"
+            tools:ignore="ContentDescription" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/cboxDormir"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
@@ -59,14 +63,15 @@
             android:button="@null" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imgWc"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/wc" />
+            app:srcCompat="@drawable/wc"
+            tools:ignore="ContentDescription" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/cboxWc"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
@@ -83,13 +88,14 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgMagoar"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:srcCompat="@drawable/magoar" />
+            app:srcCompat="@drawable/magoar"
+            tools:ignore="ContentDescription" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/cboxMagoar"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
@@ -97,14 +103,15 @@
             android:button="@null" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imgChorar"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="30dp"
-            app:srcCompat="@drawable/chorar" />
+            app:srcCompat="@drawable/chorar"
+            tools:ignore="ContentDescription" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/cboxChorar"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
@@ -130,11 +137,12 @@
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:gravity="top"
-            android:hint="Notas"
+            android:hint="@string/notas"
             android:inputType="textPersonName"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="Autofill,RtlSymmetry" />
     </LinearLayout>
 
     <LinearLayout
@@ -148,13 +156,13 @@
             android:id="@+id/btnSubmeterRel"
             android:layout_width="175dp"
             android:layout_height="match_parent"
-
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/kindergarten"
-            android:text="Submeter"
+            android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36dp" />
+            android:textSize="36sp"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/btnCancelarRel"
@@ -162,9 +170,10 @@
             android:layout_height="match_parent"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/kindergarten"
-            android:text="Cancelar"
+            android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36dp" />
+            android:textSize="36sp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>

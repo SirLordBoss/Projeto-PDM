@@ -14,4 +14,8 @@
     <string name="marcar_faltas">Marcar Faltas</string>
     <string name="gerir_aulas">Gerir Aulas</string>
     <string name="sumarios">Sumários</string>
+    <string name="nome">Nome</string>
+    <string name="notas">Notas</string>
+    <string name="submeter">Submeter</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
