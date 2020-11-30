@@ -28,7 +28,7 @@
             var content = $('#text').val();
             $.ajax({
                 type:'POST',
-                url: 'service/index.php',
+                url: 'service.php',
                 data: "q="+query+"&"+content,
                 success: function(html)
                 {
