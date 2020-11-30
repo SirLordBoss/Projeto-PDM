@@ -32,24 +32,24 @@ public class HomePageEduc extends AppCompatActivity {
         gerirAulas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent A2 = new Intent(contexto,GerirAulas.class);
-                startActivity(A2) ;
+                //Intent A2 = new Intent(contexto,GerirAulas.class);
+                //startActivity(A2) ;
             }
         });
 
         sumario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent A2 = new Intent(contexto,Sumarios.class);
-                startActivity(A2) ;
+                //Intent A2 = new Intent(contexto,Sumarios.class);
+                //startActivity(A2) ;
             }
         });
 
         faltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent A2 = new Intent(contexto,Faltas.class);
-                startActivity(A2) ;
+                //Intent A2 = new Intent(contexto,Faltas.class);
+                //startActivity(A2) ;
             }
         });
 
