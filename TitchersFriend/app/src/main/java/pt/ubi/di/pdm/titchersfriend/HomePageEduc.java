@@ -48,7 +48,7 @@ public class HomePageEduc extends AppCompatActivity {
         faltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent A2 = new Intent(contexto,Faltas.class);
+                Intent A2 = new Intent(contexto,MarcarFaltas.class);
                 startActivity(A2) ;
             }
         });
