@@ -1,4 +1,4 @@
-package com.example.diogo;
+package pt.ubi.di.pdm.titchersfriend;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -104,7 +104,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
     private String send()
     {
         //CONNECT
-        HttpURLConnection con=Conector.connect(urlAddress);
+        HttpURLConnection con=Connector.connect(urlAddress);
 
         if(con==null)
         {
