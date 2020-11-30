@@ -1,77 +1,161 @@
 package com.example.diogo;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Bundle;
-
+import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.EditText;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import org.json.JSONObject;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.ExecutionException;
 
-/*
-1.OUR LAUNCHER ACTIVITY
-2.INITIALIZE SOME UI STUFF
-3.WE START SENDER ON BUTTON CLICK
+/**
+ * 1.SEND DATA FROM EDITTEXT OVER THE NETWORK
+ * 2.DO IT IN BACKGROUND THREAD
+ * 3.READ RESPONSE FROM A SERVER
  */
-public class MainActivity extends AppCompatActivity {
+public class Sender extends AsyncTask<Void,Void,String> {
 
-    int h = -1000;
-    String urlAddress="http://teachersfriend.atwebpages.com/";
-    EditText nameTxt,posTxt, res;
-    Button saveBtn;
+    Context c;
+    String urlAddress;
+    EditText nameTxt,posTxt,teamTxt;
+    String resposta;
 
+    String Query, Extra;
+
+    ProgressDialog pd;
+
+    /*
+            1.OUR CONSTRUCTOR
+    2.RECEIVE CONTEXT,URL ADDRESS AND EDITTEXTS FROM OUR MAINACTIVITY
+    */
+    public Sender(Context c, String urlAddress,EditText...editTexts) {
+        this.c = c;
+        this.urlAddress = urlAddress;
+
+        //INPUT EDITTEXTS
+        this.nameTxt=editTexts[0];
+        this.posTxt=editTexts[1];
+
+
+        //GET TEXTS FROM EDITEXTS
+        Query=nameTxt.getText().toString();
+        Extra=posTxt.getText().toString();
+
+
+    }
+    /*
+   1.SHOW PROGRESS DIALOG WHILE DOWNLOADING DATA
+    */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd=new ProgressDialog(c);
+        pd.setTitle("Envio");
+        pd.setMessage("Enviando..Please wait");
+        pd.show();
+    }
+
+    /*
+    1.WHERE WE SEND DATA TO NETWORK
+    2.RETURNS FOR US A STRING
+     */
+    @Override
+    protected String doInBackground(Void... params) {
+        return this.send();
+    }
+
+    /*
+  1. CALLED WHEN JOB IS OVER
+  2. WE DISMISS OUR PD
+  3.RECEIVE A STRING FROM DOINBACKGROUND
+   */
+    @Override
+    protected void onPostExecute(String response) {
+        super.onPostExecute(response);
+
+        pd.dismiss();
+
+        if(response != null)
+        {
+            //SUCCESS
+            resposta = response;
+
+            Toast.makeText(c,"ssss"+response,Toast.LENGTH_LONG).show();
 
 
-        //INITIALIZE UI FIELDS
-        nameTxt= (EditText) findViewById(R.id.Query);
-        posTxt= (EditText) findViewById(R.id.Extra);
-        res= (EditText) findViewById(R.id.r);
-        saveBtn= (Button) findViewById(R.id.button)    ;
-        Context x =  this;
+        }else
+        {
+            //NO SUCCESS
+            Toast.makeText(c,"Unsuccessful "+response,Toast.LENGTH_LONG).show();
+        }
+    }
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String x = null;
-                try {
-                   x = new Sender(MainActivity.this,urlAddress,nameTxt,posTxt).execute().get();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+    /*
+    SEND DATA OVER THE NETWORK
+    RECEIVE AND RETURN A RESPONSE
+     */
+    private String send()
+    {
+        //CONNECT
+        HttpURLConnection con=Conector.connect(urlAddress);
+
+        if(con==null)
+        {
+            return null;
+        }
+
+        try
+        {
+            OutputStream os=con.getOutputStream();
+
+            //WRITE
+            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
+            bw.write(new DataPackager(Query,Extra).packData());
+
+            bw.flush();
+
+            //RELEASE RES
+            bw.close();
+            os.close();
+
+            //HAS IT BEEN SUCCESSFUL?
+            int responseCode=con.getResponseCode();
+
+            if(responseCode==con.HTTP_OK)
+            {
+                //GET EXACT RESPONSE
+                BufferedReader br=new BufferedReader(new InputStreamReader(con.getInputStream()));
+                StringBuffer response=new StringBuffer();
+
+                String line;
+
+                //READ LINE BY LINE
+                while ((line=br.readLine()) != null)
+                {
+                    response.append(line);
                 }
-                res.setText(x);
+
+                //RELEASE RES
+                br.close();
+                resposta = response.toString();
+                return resposta;
+            }else
+            {
 
             }
-        });
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
