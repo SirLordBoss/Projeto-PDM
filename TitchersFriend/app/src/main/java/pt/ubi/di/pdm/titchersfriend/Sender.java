@@ -1,21 +1,4 @@
-package pt.ubi.di.pdm.titchersfriend;
-
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-
-/**
+**
  * 1.SEND DATA FROM EDITTEXT OVER THE NETWORK
  * 2.DO IT IN BACKGROUND THREAD
  * 3.READ RESPONSE FROM A SERVER
@@ -24,7 +7,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
 
     Context c;
     String urlAddress;
-    EditText nameTxt,posTxt,teamTxt;
+
     String resposta;
 
     String Query, Extra;
@@ -35,18 +18,16 @@ public class Sender extends AsyncTask<Void,Void,String> {
             1.OUR CONSTRUCTOR
     2.RECEIVE CONTEXT,URL ADDRESS AND EDITTEXTS FROM OUR MAINACTIVITY
     */
-    public Sender(Context c, String urlAddress,EditText...editTexts) {
+    public Sender(Context c, String urlAddress,String q, String ext) {
         this.c = c;
         this.urlAddress = urlAddress;
 
         //INPUT EDITTEXTS
-        this.nameTxt=editTexts[0];
-        this.posTxt=editTexts[1];
 
 
         //GET TEXTS FROM EDITEXTS
-        Query=nameTxt.getText().toString();
-        Extra=posTxt.getText().toString();
+        Query=q;
+        Extra=ext;
 
 
     }
@@ -57,9 +38,9 @@ public class Sender extends AsyncTask<Void,Void,String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd=new ProgressDialog(c);
-        pd.setTitle("Envio");
-        pd.setMessage("Enviando..Please wait");
-        pd.show();
+        //pd.setTitle("Envio");
+        //pd.setMessage("Enviando..Please wait");
+        //pd.show();
     }
 
     /*
@@ -87,7 +68,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
             //SUCCESS
             resposta = response;
 
-            Toast.makeText(c,"ssss"+response,Toast.LENGTH_LONG).show();
+            Toast.makeText(c,response,Toast.LENGTH_LONG).show();
 
 
         }else
@@ -103,8 +84,10 @@ public class Sender extends AsyncTask<Void,Void,String> {
      */
     private String send()
     {
+
         //CONNECT
         HttpURLConnection con=Connector.connect(urlAddress);
+
 
         if(con==null)
         {
@@ -126,6 +109,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
             os.close();
 
             //HAS IT BEEN SUCCESSFUL?
+            Log.d("AsdS","boas");
             int responseCode=con.getResponseCode();
 
             if(responseCode==con.HTTP_OK)
