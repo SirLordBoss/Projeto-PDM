@@ -27,6 +27,7 @@ if (!mysqli_set_charset($conn, "utf8")) {
 
 mysqli_select_db($conn,$maindb);
 
+$responseObject;
 //if a user does not exist create one
 
 $firstquery = "SELECT COUNT(u_nome) as cnt FROM users;";
@@ -216,7 +217,9 @@ switch ($_POST['q']){
             }
         }
     break;
-    
+    case 101:
+        
+    break;
 
 }
 
