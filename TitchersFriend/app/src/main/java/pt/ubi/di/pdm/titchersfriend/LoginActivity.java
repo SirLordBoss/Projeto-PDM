@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 String enc = getM5(pass);
 
                 try {
-                     String x = new Sender(LoginActivity.this,"http://192.168.1.143/service.php","100","u="+us+"&p="+enc).execute().get();
+                     String x = new Sender(LoginActivity.this,"http://"inseririp"/service.php","100","u="+us+"&p="+enc).execute().get();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
