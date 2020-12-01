@@ -1,5 +1,6 @@
 package pt.ubi.di.pdm.titchersfriend;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 
 public class LoginActivity extends AppCompatActivity {
-
+    LoginActivity as;
     Button btnLogin;
     EditText inputpass,inputUser;
         public static String getM5(String input) {
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     protected void onCreate(Bundle savedInstanceState) {
+            as = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -57,17 +59,25 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String x ="";
                 String us = inputUser.getText().toString();
                 String pass = inputpass.getText().toString();
                 String enc = getM5(pass);
 
                 try {
-                     String x = new Sender(LoginActivity.this,"http://"inseririp"/service.php","100","u="+us+"&p="+enc).execute().get();
+                    x = new Sender(LoginActivity.this,"http://inseririp/service.php","100","u="+us+"&p="+pass).execute().get();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+                if(x.contains("true")){
+                    //Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
+                    //startActivity(A2) ;
+                }
+                if(x.contains("false")){
+                    Intent A2 = new Intent(as,HomePageEduc.class);//metemos aqui pq enquanto testamos n temos la o login da smp false
+                    startActivity(A2) ;
                 }
 
             }
@@ -77,3 +87,4 @@ public class LoginActivity extends AppCompatActivity {
 
     //metodo para confirmar login
 }
+
