@@ -1,4 +1,21 @@
-**
+package pt.ubi.di.pdm.titchersfriend;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+
+/**
  * 1.SEND DATA FROM EDITTEXT OVER THE NETWORK
  * 2.DO IT IN BACKGROUND THREAD
  * 3.READ RESPONSE FROM A SERVER
@@ -143,3 +160,4 @@ public class Sender extends AsyncTask<Void,Void,String> {
     }
 
 }
+
