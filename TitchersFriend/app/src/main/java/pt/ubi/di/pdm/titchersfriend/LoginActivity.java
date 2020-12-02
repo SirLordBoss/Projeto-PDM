@@ -16,7 +16,6 @@ import java.util.concurrent.ExecutionException;
 
 
 public class LoginActivity extends AppCompatActivity {
-    LoginActivity as;
     Button btnLogin;
     EditText inputpass,inputUser;
         public static String getM5(String input) {
@@ -47,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     protected void onCreate(Bundle savedInstanceState) {
-            as = this;
+     
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -78,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     //startActivity(A2) ;
                 }
                 if(x.contains("false")){
-                    Intent A2 = new Intent(as,HomePageEduc.class);//metemos aqui pq enquanto testamos n temos la o login da smp false
+                    Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);//metemos aqui pq enquanto testamos n temos la o login da smp false
                     startActivity(A2);
                 }
 
