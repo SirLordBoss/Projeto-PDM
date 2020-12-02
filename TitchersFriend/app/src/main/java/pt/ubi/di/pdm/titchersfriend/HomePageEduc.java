@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class HomePageEduc extends AppCompatActivity {
 
     ImageButton gerirAlunos,gerirAulas,sumario,faltas;
-    HomePageEduc contexto;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class HomePageEduc extends AppCompatActivity {
        gerirAlunos.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent A2 = new Intent(contexto,GerirAlunos.class);
+               Intent A2 = new Intent(HomePageEduc.this,GerirAlunos.class);
                startActivity(A2) ;
            }
        });
@@ -32,16 +31,16 @@ public class HomePageEduc extends AppCompatActivity {
         gerirAulas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent A2 = new Intent(contexto,GerirAulas.class);
-                //startActivity(A2) ;
+                Intent A2 = new Intent(HomePageEduc.this,GerirAulas.class);
+                startActivity(A2) ;
             }
         });
 
         sumario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent A2 = new Intent(contexto,Sumarios.class);
-                //startActivity(A2) ;
+                Intent A2 = new Intent(HomePageEduc.this,Sumarios.class);
+                startActivity(A2) ;
             }
         });
 
@@ -49,11 +48,8 @@ public class HomePageEduc extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent A2 = new Intent(contexto,MarcarFaltas.class);
+                Intent A2 = new Intent(HomePageEduc.this,MarcarFaltas.class);
                 startActivity(A2) ;
-
-                //Intent A2 = new Intent(contexto,Faltas.class);
-                //startActivity(A2) ;
             }
         });
 

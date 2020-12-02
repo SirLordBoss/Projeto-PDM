@@ -23,7 +23,13 @@ public class RegisterActivity extends AppCompatActivity {
         inputRepPass = (EditText) findViewById(R.id.inputRepPass);
         inputUser = (EditText) findViewById(R.id.inputUser);
 
-        Intent iCameFromActivity1 = getIntent() ;
+        btnCriar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RegisterActivity.this,HomePageEduc.class);
+                startActivity(i);
+            }
+        });
     }
 
 
