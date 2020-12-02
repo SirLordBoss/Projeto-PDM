@@ -59,17 +59,19 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String x ="";
+                String x ="false";
                 String us = inputUser.getText().toString();
                 String pass = inputpass.getText().toString();
                 String enc = getM5(pass);
 
-                try {
-                    x = new Sender(LoginActivity.this,"http://inseririp/service.php","100","u="+us+"&p="+pass).execute().get();
+               try {
+                    x = new Sender(LoginActivity.this,"http://teachersfriend.ddns.net/service.php","100","u="+us+"&p="+enc).execute().get();
                 } catch (ExecutionException e) {
+
                     e.printStackTrace();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+                 e.printStackTrace();
                 }
                 if(x.contains("true")){
                     //Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
@@ -77,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if(x.contains("false")){
                     Intent A2 = new Intent(as,HomePageEduc.class);//metemos aqui pq enquanto testamos n temos la o login da smp false
-                    startActivity(A2) ;
+                    startActivity(A2);
                 }
 
             }
@@ -87,4 +89,3 @@ public class LoginActivity extends AppCompatActivity {
 
     //metodo para confirmar login
 }
-
