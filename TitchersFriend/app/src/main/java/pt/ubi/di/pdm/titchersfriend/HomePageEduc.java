@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomePageEduc extends AppCompatActivity {
 
-    ImageButton gerirAlunos,gerirAulas,sumario,faltas;
+   ImageButton gerirAlunos,gerirAulas,sumario,faltas;
+
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepageeduc);
 
@@ -50,11 +52,12 @@ public class HomePageEduc extends AppCompatActivity {
 
                 Intent A2 = new Intent(HomePageEduc.this,MarcarFaltas.class);
                 startActivity(A2) ;
+
+
             }
         });
 
     }
 
 }
-
 
