@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString();
                 if(!passr.equals(pass)){
                     Intent A2 = new Intent(RegisterActivity.this,RegisterActivity.class);
-
+                    finish();
                     startActivity(A2) ;
                     Toast.makeText(RegisterActivity.this,"Palavras-passe diferem",Toast.LENGTH_LONG).show();
                 }
