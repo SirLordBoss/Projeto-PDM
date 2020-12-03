@@ -23,4 +23,6 @@
     <string name="morada">Morada</string>
     <string name="email_pais">E-mail dos pais</string>
     <string name="adicionar">Adicionar</string>
+    <string name="voltar">Voltar</string>
+    <string name="aprovacao">A sua conta está à espera de aprovação.</string>
 </resources>
