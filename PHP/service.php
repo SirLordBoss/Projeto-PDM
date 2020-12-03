@@ -27,7 +27,6 @@ if (!mysqli_set_charset($conn, "utf8")) {
 
 mysqli_select_db($conn,$maindb);
 
-$responseObject;
 //if a user does not exist create one
 
 $firstquery = "SELECT COUNT(u_nome) as cnt FROM users;";
@@ -37,28 +36,274 @@ if($result){
         if($row['cnt'] == 0){
             $pwd = 'admin';
             $pwd_hashed = hash('md5',$pwd);
-            $sql = "INSERT INTO users (u_nome,u_email,u_idade,u_morada,u_pwd,u_sexo) VALUES ('admin','admin@email.com','18','Morada provisória','".$pwd_hashed."','1');";
-            $result = mysqli_query($conn,$sql);
-            if($result){
-                $responseObject->success = true;
-                $json = json_encode($responseObject);
-                echo $json;
-                exit();
-            }else{
-                $responseObject->success = false;
-                $json = json_encode($responseObject);
+            mysqli_begin_transaction($conn);
+            try{
+                $sql = "INSERT INTO users (u_nome,u_email,u_idade,u_morada,u_pwd,u_sexo) VALUES ('admin','admin@email.com','18','Morada provisória','".$pwd_hashed."','1');";
+                $result = mysqli_query($conn,$sql);
+                if($result){
+                    $sql = "INSERT INTO admin (u_id) SELECT u_id FROM users WHERE u_nome = 'admin';";
+                    $result = mysqli_query($conn,$sql);
+                    if($result){
+                        $responseObject->success = true;
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
+                    }else{
+                        mysqli_rollback($conn);
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error inserting in admin table";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    
+                }else{
+                    mysqli_rollback($conn);
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Error inserting in users table";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }
+            catch (mysqli_sql_exception $exception) {
+                mysqli_rollback($conn);
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Exception error";
+                $json = json_encode($responseObjectError);
                 echo $json;
                 exit();
             }
+            
         } 
     }
 }
 
 switch ($_POST['q']){
+#101
+    case 101: //adicionar um utilizador (educadora)
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    mysqli_begin_transaction($conn);
+                    try{
+                        $nome = $_POST['un'];
+                        $idade = $_POST['i'];
+                        $morada = $_POST['m'];
+                        $sexo = $_POST['s'];
+                        $email = $_POST['e'];
+                        $pwd = $_POST['pwd'];
+                        $sql = "SELECT COUNT(u_nome) as c FROM users WHERE u_nome = '$nome' ;";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error in query";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+                        if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                            if($row['c'] > 0){
+                                $responseObjectError->success = false;
+                                $responseObjectError->error = "Username taken"; //erro quando o nome de utilizador está já a ser utilizado
+                                $json = json_encode($responseObjectError);
+                                echo $json;
+                                exit();
+                            }
+                        }else{
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error fetching array";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+                        $sql = "INSERT INTO users (u_nome, u_idade,u_morada,u_sexo,u_email,u_pwd) VALUES ('$nome','$idade','$morada','$sexo','$email','$pwd');";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error inserting in users";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+                        $uniqid = uniqid('t_',false);
+                        $sql = "INSERT INTO turmas (t_token,t_utilizada,u_id) VALUES SELECT '$uniqid', 0, u.u_id FROM users as u WHERE u.u_nome = '$nome';";
+                        $result = mysqli_query($conn,$sql);
+                        if($result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error inserting data in turmas";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        $sql = "CREATE DATABASE '$uniqid';";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating database";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        mysqli_select_db($conn, $uniqid);
+
+                        $sql = "CREATE TABLE IF NOT EXISTS educando ( e_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, e_nome VARCHAR(100) NOT NULL, e_idade INT NOT NULL, e_morada VARCHAR(200) NOT NULL, e_sexo INT NOT NULL, e_contacto VARCHAR(10) NOT NULL );";
+                        $result = mysqli_query($conn, $sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating table educando";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+                        
+                        $sql = "CREATE TABLE IF NOT EXISTS atividade( a_sumario VARCHAR(300) NOT NULL, a_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, a_data VARCHAR(200) NOT NULL);";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating table atividade";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        $sql = "CREATE TABLE IF NOT EXISTS alergias( al_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, al_nome VARCHAR(100) NOT NULL);";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating table alergias";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        $sql = "CREATE TABLE IF NOT EXISTS faltas ( e_id INT NOT NULL, a_id INT NOT NULL, PRIMARY KEY (e_id, a_id), FOREIGN KEY (e_id) REFERENCES educando(e_id), FOREIGN KEY (a_id) REFERENCES atividade(a_id));";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating table faltas";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        $sql = "CREATE TABLE IF NOT EXISTS relatorio ( r_comer INT NOT NULL, r_dormir INT NOT NULL, r_coment VARCHAR(500) NOT NULL, r_necessidades INT NOT NULL, r_curativos INT NOT NULL, e_id INT NOT NULL, a_id INT NOT NULL, PRIMARY KEY (e_id, a_id), FOREIGN KEY (e_id) REFERENCES educando(e_id), FOREIGN KEY (a_id) REFERENCES atividade(a_id) );";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating table relatorio";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        $sql = "CREATE TABLE IF NOT EXISTS contem ( al_id INT NOT NULL, e_id INT NOT NULL, PRIMARY KEY (al_id, e_id), FOREIGN KEY (al_id) REFERENCES alergias(al_id), FOREIGN KEY (e_id) REFERENCES educando(e_id) );";
+                        $result = mysqli_query($conn,$sql);
+                        if(!$result){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error creating table contem";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
+                        mysqli_commit($conn);
+                        $responseObject->success = true;
+                        $responseObject->user = $nome; 
+                        $json = json_encode($responseObject);
+                        echo $json;    
+                        exit();                   
+
+                    }catch (mysqli_sql_exception $exception) {
+                        mysqli_rollback($conn);
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Exception error";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql fetch error";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Database query error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
+#050
+    case 50: //Registo
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+
+                    $nome = $_POST['nome'];
+                    $idade = $_POST['idade'];
+                    $morada = $_POST['morada'];
+                    $sexo = $_POST['sexo'];
+                    $email = $_POST['email'];
+                    $pwd = $_POST['pass'];
+                    $sql = "INSERT INTO to_regist (tr_email,tr_sexo,tr_morada,tr_idade,tr_nome,tr_pwd) VALUES ('$email','$sexo','$morada','$idade','$nome','$password')";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Data not inserted";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $responseObject->success = true;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+
+                }else{
+
+                }
+            }else{
+
+            }
+        }else{
+
+        }
+
+    break;
+#100
     case 100: // caso seja para fazer um login (educadoras)
         $username = $_POST['u'];
         $password = $_POST['p'];
-        $sql = "SELECT u_id FROM users WHERE u_nome = '$username' AND u_pwd = '$password';";
+        //só faz login se não for administrador
+        $sql = "SELECT u_id FROM users WHERE u_nome = '$username' AND u_pwd = '$password' AND NOT EXISTS ( SELECT * FROM admin a WHERE u.u_id = a.u_id ) ;";
         $result = mysqli_query($conn,$sql);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -182,17 +427,17 @@ switch ($_POST['q']){
                                 echo $json;
 
                             }else{
-                                $responseObject->success = false;
-                                $responseObject->error = "Username does not contain a class";
-                                $json = json_encode($responseObject);
+                                $responseObjectError->success = false;
+                                $responseObjectError->error = "Username does not contain a class";
+                                $json = json_encode($responseObjectError);
                                 echo $json;
                                 mysqli_rollback($conn);
                                 exit();
                             }
                         }else{
-                            $responseObject->success = false;
-                            $responseObject->error = "Database query error";
-                            $json = json_encode($responseObject);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Database query error";
+                            $json = json_encode($responseObjectError);
                             echo $json;
                             mysqli_rollback($conn);
                             exit();
@@ -202,24 +447,22 @@ switch ($_POST['q']){
                         exit();
                     } catch (mysqli_sql_exception $exception) {
                         mysqli_rollback($conn);
-                        $responseObject->success = false;
-                        $json = json_encode($responseObject);
+                        $responseObjectError->success = false;
+                        $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
                     }
                 }
             }else{
-                $responseObject->success = false;
-                $responseObject->error = "Username/password not match";
-                $json = json_encode($responseObject);
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Username/password not match";
+                $json = json_encode($responseObjectError);
                 echo $json;
                 exit();
             }
         }
     break;
-    case 101:
-        
-    break;
+    
 
 }
 

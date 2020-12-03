@@ -18,7 +18,7 @@ CREATE TABLE users
 
 CREATE TABLE admin
 (
-  u_id INT NOT NULL,
+  u_id INT NOT NULL PRIMARY KEY,
   FOREIGN KEY (u_id) REFERENCES users(u_id)
 );
 
