@@ -25,4 +25,5 @@
     <string name="adicionar">Adicionar</string>
     <string name="voltar">Voltar</string>
     <string name="aprovacao">A sua conta está à espera de aprovação.</string>
+    <string name="novo_aluno">Novo aluno</string>
 </resources>
