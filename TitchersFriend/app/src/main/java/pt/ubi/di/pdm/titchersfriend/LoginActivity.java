@@ -72,19 +72,25 @@ public class LoginActivity extends AppCompatActivity {
 
                  e.printStackTrace();
                 }
+
+                if(x.contains("true")){
+                    Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
+                    startActivity(A2) ;
+                }
+
                 //if(x.contains("true")){
                     //Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
                     //startActivity(A2) ;
                 //}
+
                 if(x.contains("false")){
-                    Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);//metemos aqui pq enquanto testamos n temos la o login da smp false
+                    Intent A2 = new Intent(LoginActivity.this,LoginActivity.class);
+                    finish();
                     startActivity(A2);
                 }
 
             }
         });
     }
-
-
-    //metodo para confirmar login
+    
 }
