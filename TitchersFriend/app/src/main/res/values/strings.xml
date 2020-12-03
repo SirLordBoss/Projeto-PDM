@@ -18,4 +18,9 @@
     <string name="notas">Notas</string>
     <string name="submeter">Submeter</string>
     <string name="cancelar">Cancelar</string>
+    <string name="idade">Idade</string>
+    <string name="sexo">Sexo</string>
+    <string name="morada">Morada</string>
+    <string name="email_pais">E-mail dos pais</string>
+    <string name="adicionar">Adicionar</string>
 </resources>

@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     Button btnCriar;
     EditText inputpass,inputEmail,inputRepPass,inputUser;
+    Spinner dropdown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,13 @@ public class RegisterActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.inputEmail);
         inputRepPass = (EditText) findViewById(R.id.inputRepPass);
         inputUser = (EditText) findViewById(R.id.inputUser);
+        dropdown = (Spinner) findViewById(R.id.inputSexo);
 
         Intent iCameFromActivity1 = getIntent() ;
+
+        String[] items = new String[]{"Masculino", "Feminino"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
 
 
         btnCriar.setOnClickListener(new View.OnClickListener() {
