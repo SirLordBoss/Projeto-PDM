@@ -3,6 +3,7 @@ package pt.ubi.di.pdm.titchersfriend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.*;
 import android.view.*;
 
@@ -14,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 
 public class RegisterActivity extends AppCompatActivity {
+
     public static String getM5(String input) {
         try {
 
@@ -42,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     Button btnCriar;
-    EditText inputpass,inputEmail,inputRepPass,inputUser;
+    EditText inputpass,inputEmail,inputRepPass,inputUser,inputIdade,inputMorada;
     Spinner dropdown;
 
     @Override
@@ -55,9 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.inputEmail);
         inputRepPass = (EditText) findViewById(R.id.inputRepPass);
         inputUser = (EditText) findViewById(R.id.inputUser);
+        inputIdade = (EditText) findViewById(R.id.inputIdade);
+        inputMorada = (EditText) findViewById(R.id.inputMorada);
         dropdown = (Spinner) findViewById(R.id.inputSexo);
 
-        Intent iCameFromActivity1 = getIntent() ;
 
         String[] items = new String[]{"Masculino", "Feminino"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -67,21 +70,60 @@ public class RegisterActivity extends AppCompatActivity {
         btnCriar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String x ="false";
+                String x ="";
                 String us = inputUser.getText().toString();
                 String pass = inputpass.getText().toString();
                 String passr = inputRepPass.getText().toString();
                 String email = inputEmail.getText().toString();
-                if(!passr.equals(pass)){
-                    Intent A2 = new Intent(RegisterActivity.this,RegisterActivity.class);
-                    finish();
-                    startActivity(A2) ;
-                    Toast.makeText(RegisterActivity.this,"Palavras-passe diferem",Toast.LENGTH_LONG).show();
+                String Idade = inputIdade.getText().toString();
+                String Morada = inputMorada.getText().toString();
+                int Sexo = 0;
+
+                //Verificar se os campos estão todos preenchidos
+                if(us.isEmpty() || pass.isEmpty() || passr.isEmpty() || email.isEmpty() || Idade.isEmpty() || Morada.isEmpty()){
+                    Toast.makeText(RegisterActivity.this,"Preencha todos os campos!",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                //checking if all parameters are correct
+                if(us.contains(" ")){
+                    inputUser.setText("");
+                    Toast.makeText(RegisterActivity.this,"Username inválido! Não use espaços.",Toast.LENGTH_SHORT).show();
+                    inputUser.requestFocus();
+                    return;
+                }
+
+                if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+                    inputEmail.setText("");
+                    Toast.makeText(RegisterActivity.this,"Email inválido!",Toast.LENGTH_SHORT).show();
+                    inputEmail.requestFocus();
+                    return;
+                }
+
+                if(!pass.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")){
+                    inputpass.setText("");
+                    inputRepPass.setText("");
+                    Toast.makeText(RegisterActivity.this,"Password inválida! 8 carateres (1 maiuscula e 1 minuscula).",Toast.LENGTH_SHORT).show();
+                    inputpass.requestFocus();
+                    return;
+                }
+
+                //Verificar se as password conferem
+                if(!passr.equals(pass)){
+                    Toast.makeText(RegisterActivity.this,"Palavras-passe diferem",Toast.LENGTH_LONG).show();
+                    inputpass.setText("");
+                    inputRepPass.setText("");
+                    return;
+                }
+
                 String enc = getM5(pass);
 
+                if(dropdown.getSelectedItem().toString().contains("Masculino")){
+                    Sexo = 1;
+                }
+
                 try {
-                    x = new Sender(RegisterActivity.this,"http://teachersfriend.ddns.net/service.php","50","u="+us+"&p="+enc+"&e="+email).execute().get();
+                    x = new Sender(RegisterActivity.this,"http://teachersfriend.ddns.net/service.php","50","nome="+us+"&idade="+Idade+"&morada="+Morada+"&sexo="+Sexo+"&email="+email+"&pass="+enc).execute().get();
                 } catch (ExecutionException e) {
 
                     e.printStackTrace();
@@ -103,9 +145,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
 }
