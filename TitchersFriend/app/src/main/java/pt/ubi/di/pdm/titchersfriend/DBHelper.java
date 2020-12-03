@@ -67,6 +67,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_FALTAS);
         db.execSQL(CREATE_RELATORIO);
         db.execSQL(CREATE_CONTEM);
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL2_T1,"Diogo");
+        cv.put(COL3_T1,1);
+        cv.put(COL4_T1,"Diogo");
+        cv.put(COL5_T1,3);
+        cv.put(COL6_T1,"dIOGO");
+        db.insert(TABLE_NAME1,null,cv);
     }
 
     @Override
