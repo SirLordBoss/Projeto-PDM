@@ -72,10 +72,10 @@ public class LoginActivity extends AppCompatActivity {
 
                  e.printStackTrace();
                 }
-                if(x.contains("true")){
+                //if(x.contains("true")){
                     //Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
                     //startActivity(A2) ;
-                }
+                //}
                 if(x.contains("false")){
                     Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);//metemos aqui pq enquanto testamos n temos la o login da smp false
                     startActivity(A2);
