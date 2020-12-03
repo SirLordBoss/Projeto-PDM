@@ -288,13 +288,25 @@ switch ($_POST['q']){
                     exit();
 
                 }else{
-
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
                 }
             }else{
-
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Error fetching array";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
             }
         }else{
-
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql query error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
         }
 
     break;
