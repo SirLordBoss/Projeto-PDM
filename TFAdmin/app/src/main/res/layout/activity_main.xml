@@ -8,37 +8,63 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/Título"
-        android:layout_width="382dp"
-        android:layout_height="46dp"
+        android:id="@+id/titulo_titchersf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:fontFamily="@font/kindergarten"
+        android:gravity="center_horizontal"
         android:text="@string/titchersfriend"
-        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp"/>
+        android:textSize="50sp"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"/>
+
+    <TextView
+        android:id="@+id/titulo_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kindergarten"
+        android:gravity="center_horizontal"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"
+        android:text="Admin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/btnCriarConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/cantos_botoes"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/style_botao"
         android:fontFamily="@font/kindergarten"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/criar_conta"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp"/>
+        android:textSize="50sp" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/cantos_botoes"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/style_botao"
         android:fontFamily="@font/kindergarten"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp"/>
+        android:textSize="50sp" />
 
 </LinearLayout>
