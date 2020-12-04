@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">TitchersFriend</string>
+    <string name="criar_conta">Criar Conta</string>
+    <string name="login">Login</string>
+    <string name="titchersfriend">TitchersFriend</string>
+    <string name="palavra_passe">Palavra Passe</string>
+    <string name="nome_de_utilizador">Nome de Utilizador</string>
+    <string name="criar">Criar Conta</string>
+    <string name="email">E-mail</string>
+    <string name="rep_pass">Repita a Palavra Passe</string>
+    <string name="carro">carro</string>
+    <string name="flor">flor</string>
+    <string name="gerir_alunos">Gerir Alunos</string>
+    <string name="marcar_faltas">Marcar Faltas</string>
+    <string name="gerir_aulas">Gerir Aulas</string>
+    <string name="sumarios">Sumários</string>
+    <string name="nome">Nome</string>
+    <string name="notas">Notas</string>
+    <string name="submeter">Submeter</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="idade">Idade</string>
+    <string name="sexo">Sexo</string>
+    <string name="morada">Morada</string>
+    <string name="email_pais">E-mail dos pais</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="voltar">Voltar</string>
+    <string name="aprovacao">A sua conta está à espera de aprovação.</string>
+    <string name="novo_aluno">Novo aluno</string>
+    <string name="add_alergia">Adicionar alergia</string>
+    <string name="reg_aluno">Registar Aluno</string>
+    <string name="alergias">Alergias</string>
+    <string name="nova_alergia">Nova Alergia</string>
+    <string name="mais">+</string>
+</resources>

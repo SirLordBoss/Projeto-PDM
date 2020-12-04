@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Título"
+        android:layout_width="382dp"
+        android:layout_height="46dp"
+        android:fontFamily="@font/kindergarten"
+        android:text="@string/titchersfriend"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp"/>
+
+    <Button
+        android:id="@+id/btnCriarConta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="@font/kindergarten"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="@string/criar_conta"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="@font/kindergarten"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="@string/login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp"/>
+
+</LinearLayout>
