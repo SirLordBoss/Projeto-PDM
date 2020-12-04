@@ -32,7 +32,7 @@
         android:shadowDx="7"
         android:shadowDy="7"
         android:shadowRadius="1"
-        android:text="Admin"
+        android:text="@string/admin"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp"
         android:textStyle="italic" />
