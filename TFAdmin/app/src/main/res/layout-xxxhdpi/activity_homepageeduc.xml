@@ -1,0 +1,148 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".HomePageEduc">
+
+    <TextView
+        android:id="@+id/titulo_criarcnt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/kindergarten"
+        android:gravity="center"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/titchersfriend"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="48sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/gerirAlunos"
+            android:layout_width="150dp"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="40dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/cantos_botoes"
+            android:padding="15dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/educ_icon"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/gerirAulas"
+            android:layout_width="150dp"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/cantos_botoes"
+            android:padding="20dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/aulas_icon"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtGerirEduc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/kindergarten"
+            android:text="Educadores"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/txtGerirAulas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/kindergarten"
+            android:text="@string/gerir_aulas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/sumario"
+            android:layout_width="150dp"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="40dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/cantos_botoes"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/sumario_icon"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/faltas"
+            android:layout_width="150dp"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="40dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/cantos_botoes"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/faltas_icon"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtSumarios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="57dp"
+            android:fontFamily="@font/kindergarten"
+            android:text="@string/sumarios"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/txtFaltas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/kindergarten"
+            android:text="@string/marcar_faltas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

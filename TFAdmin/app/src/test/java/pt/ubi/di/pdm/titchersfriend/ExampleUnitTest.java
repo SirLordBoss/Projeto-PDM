@@ -1,4 +1,4 @@
-package pt.ubi.di.pdm.tfadmin;
+package pt.ubi.di.pdm.titchersfriend;
 
 import org.junit.Test;
 
