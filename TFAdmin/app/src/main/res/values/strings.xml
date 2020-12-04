@@ -32,4 +32,8 @@
     <string name="nova_alergia">Nova Alergia</string>
     <string name="mais">+</string>
     <string name="admin">Admin</string>
+    <string name="gerir_sumarios">Sumários</string>
+    <string name="educadores">Educadores</string>
+    <string name="educadores">Educadores</string>
+    <string name="sair">Sair</string>
 </resources>

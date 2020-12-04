@@ -31,4 +31,5 @@
     <string name="alergias">Alergias</string>
     <string name="nova_alergia">Nova Alergia</string>
     <string name="mais">+</string>
+    <string name="sair">Sair</string>
 </resources>

@@ -24,10 +24,25 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="48sp" />
 
+    <TextView
+        android:id="@+id/admin2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kindergarten"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"
+        android:text="@string/admin"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -118,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/kindergarten"
-                android:text="@string/sumarios"
+                android:text="@string/gerir_sumarios"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="28sp" />
         </LinearLayout>
@@ -138,7 +153,7 @@
                 android:background="@drawable/cantos_botoes"
                 android:padding="15dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/faltas_icon"
+                app:srcCompat="@drawable/educ_icon"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -146,10 +161,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/kindergarten"
-                android:text="@string/marcar_faltas"
+                android:text="@string/educadores"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="26sp" />
+                android:textSize="28sp" />
         </LinearLayout>
+
 
     </LinearLayout>
 

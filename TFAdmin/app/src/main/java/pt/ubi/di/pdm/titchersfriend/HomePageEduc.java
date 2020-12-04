@@ -15,7 +15,7 @@ public class HomePageEduc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepageeduc);
+        setContentView(R.layout.activity_homepageadmin);
 
        gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
        gerirAulas = (ImageButton)findViewById(R.id.gerirAulas) ;
