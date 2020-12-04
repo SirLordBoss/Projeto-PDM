@@ -8,7 +8,7 @@
     android:weightSum="100"
     tools:context=".HomePageEduc">
 
-    <EditText
+    <TextView
         android:id="@+id/titulo_criarcnt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
