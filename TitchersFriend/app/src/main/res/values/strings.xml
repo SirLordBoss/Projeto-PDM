@@ -26,7 +26,4 @@
     <string name="voltar">Voltar</string>
     <string name="aprovacao">A sua conta está à espera de aprovação.</string>
     <string name="novo_aluno">Novo aluno</string>
-    <string name="alergias">Alergias</string>
-    <string name="nova_alergia">Nova alergia</string>
-    <string name="mais">+</string>
 </resources>
