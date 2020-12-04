@@ -28,4 +28,7 @@
     <string name="novo_aluno">Novo aluno</string>
     <string name="add_alergia">Adicionar alergia</string>
     <string name="reg_aluno">Registar Aluno</string>
+    <string name="alergias">Alergias</string>
+    <string name="nova_alergia">Nova Alergia</string>
+    <string name="mais">+</string>
 </resources>
