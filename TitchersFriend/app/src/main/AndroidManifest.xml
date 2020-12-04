@@ -24,6 +24,7 @@
         <activity android:name=".GerirAlunos"/>
         <activity android:name=".MarcarFaltas"/>
         <activity android:name=".Sumarios"/>
+        <activity android:name=".Aprovacao"/>
     </application>
 
 </manifest>

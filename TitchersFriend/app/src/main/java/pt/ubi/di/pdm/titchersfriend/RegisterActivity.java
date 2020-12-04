@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(x.contains("true")){
-                    Intent A2 = new Intent(RegisterActivity.this,MainActivity.class);
+                    Intent A2 = new Intent(RegisterActivity.this,Aprovacao.class);
                     startActivity(A2) ;
                     Toast.makeText(RegisterActivity.this,"Sucesso na criação da conta",Toast.LENGTH_LONG).show();
                 }
