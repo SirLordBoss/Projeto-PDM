@@ -1,13 +1,19 @@
 package pt.ubi.di.pdm.titchersfriend;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.widget.*;
 import android.view.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -18,6 +24,8 @@ import java.util.concurrent.ExecutionException;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText inputpass,inputUser;
+    DBHelper dbHelper;
+    SQLiteDatabase oSQLDB;
         public static String getM5(String input) {
             try {
 
@@ -50,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        dbHelper = new DBHelper(this);
+        oSQLDB = dbHelper.getWritableDatabase();
+
         btnLogin = (Button)findViewById(R.id.btnLogin) ;
         inputpass = (EditText) findViewById(R.id.inputPass);
         inputUser = (EditText) findViewById(R.id.inputUser);
@@ -63,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = inputpass.getText().toString();
                 String enc = getM5(pass);
 
-               try {
+                try {
                     x = new Sender(LoginActivity.this,"http://teachersfriend.ddns.net/service.php","100","u="+us+"&p="+enc).execute().get();
                 } catch (ExecutionException e) {
 
@@ -73,24 +84,117 @@ public class LoginActivity extends AppCompatActivity {
                  e.printStackTrace();
                 }
 
-                if(x.contains("true")){
+                JSONObject reader = null;
+                Boolean s = false;
+                try {
+                    reader = new JSONObject(x);
+                    s = reader.getBoolean("success");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(s){
+                    //receber dados
+                    try {
+                        RecebeDados(x);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
                     startActivity(A2) ;
                 }
 
-                //if(x.contains("true")){
-                    //Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
-                    //startActivity(A2) ;
-                //}
-
-                if(x.contains("false")){
-                    Intent A2 = new Intent(LoginActivity.this,LoginActivity.class);
-                    finish();
-                    startActivity(A2);
+                if(!s){
+                    Toast.makeText(LoginActivity.this,"Falha no Login",Toast.LENGTH_SHORT).show();
+                    inputpass.setText("");
+                    inputUser.setText("");
+                    return;
                 }
 
             }
         });
+    }
+
+    public void RecebeDados(String x) throws JSONException {
+        JSONObject reader = new JSONObject(x);
+        ContentValues oCV = new ContentValues();
+        String s = reader.getString("educando");
+
+        String[] arr = s.split(";");
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T1,aux[0]);
+            oCV.put(dbHelper.COL2_T1,aux[1]);
+            oCV.put(dbHelper.COL3_T1,aux[2]);
+            oCV.put(dbHelper.COL4_T1,aux[3]);
+            oCV.put(dbHelper.COL5_T1,aux[4]);
+            oCV.put(dbHelper.COL6_T1,aux[5]);
+            oSQLDB.insert(dbHelper.TABLE_NAME1,null,oCV);
+        }
+
+         s = reader.getString("atividade");
+        arr = s.split(";");
+         oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T2,aux[0]);
+            oCV.put(dbHelper.COL2_T2,aux[1]);
+            oCV.put(dbHelper.COL3_T2,aux[2]);
+            oSQLDB.insert(dbHelper.TABLE_NAME2,null,oCV);
+        }
+
+        s = reader.getString("alergias");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T3,aux[0]);
+            oCV.put(dbHelper.COL2_T3,aux[1]);
+            oSQLDB.insert(dbHelper.TABLE_NAME3,null,oCV);
+        }
+
+        s = reader.getString("faltas");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T4,aux[0]);
+            oCV.put(dbHelper.COL2_T4,aux[1]);
+            oSQLDB.insert(dbHelper.TABLE_NAME4,null,oCV);
+        }
+
+        s = reader.getString("relatorio");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T5,aux[0]);
+            oCV.put(dbHelper.COL2_T5,aux[1]);
+            oCV.put(dbHelper.COL3_T5,aux[2]);
+            oCV.put(dbHelper.COL4_T5,aux[3]);
+            oCV.put(dbHelper.COL5_T5,aux[4]);
+            oCV.put(dbHelper.COL6_T5,aux[5]);
+            oCV.put(dbHelper.COL7_T5,aux[6]);
+            oSQLDB.insert(dbHelper.TABLE_NAME5,null,oCV);
+        }
+
+        s = reader.getString("contem");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T6,aux[0]);
+            oCV.put(dbHelper.COL2_T6,aux[1]);
+            oSQLDB.insert(dbHelper.TABLE_NAME6,null,oCV);
+        }
+
+
     }
     
 }
