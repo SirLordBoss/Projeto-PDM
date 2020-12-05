@@ -34,6 +34,12 @@
     <string name="admin">Admin</string>
     <string name="gerir_sumarios">Sumários</string>
     <string name="educadores">Educadores</string>
-    <string name="educadores">Educadores</string>
     <string name="sair">Sair</string>
+    <string name="registar_aula">Registar Aula</string>
+    <string name="data">Data</string>
+    <string name="sumario">Sumário</string>
+    <string name="gerir_educadores">Gerir Educadores</string>
+    <string name="novo_educador">Novo Educador</string>
+    <string name="novos_educadores">Novos Educadores</string>
+    <string name="aceitar">Aceitar</string>
 </resources>

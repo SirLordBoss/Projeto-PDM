@@ -32,4 +32,6 @@
     <string name="nova_alergia">Nova Alergia</string>
     <string name="mais">+</string>
     <string name="sair">Sair</string>
+    <string name="sumario">Sumário</string>
+    <string name="registar_aula">Registar Aula</string>
 </resources>
