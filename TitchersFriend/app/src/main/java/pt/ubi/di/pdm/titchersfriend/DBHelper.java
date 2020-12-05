@@ -25,8 +25,8 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL5_T1 = "e_sexo";
     protected static final String COL6_T1 = "e_contacto";
 
-    protected static final String COL1_T2 = "a_sumario";
-    protected static final String COL2_T2 = "a_id";
+    protected static final String COL1_T2 = "a_id";
+    protected static final String COL2_T2 = "a_sumario";
     protected static final String COL3_T2 = "a_data";
 
     protected static final String COL1_T3 = "il_id";
@@ -47,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL2_T6= "e_id";
 
     private static final String CREATE_EDUCANDO = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME1+"("+COL1_T1+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL2_T1+" VARCHAR(100) NOT NULL,"+COL3_T1+" INTEGER NOT NULL,"+COL4_T1+" VARCHAR(200) NOT NULL,"+COL5_T1+" INTEGER NOT NULL,"+COL6_T1+" VARCHAR(10) NOT NULL)";
-    private static final String CREATE_ATIVIDADE = "CREATE TABLE IF NOT EXISTS  "+TABLE_NAME2+"("+COL1_T2+" VARCHAR(300) NOT NULL,"+COL2_T2+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL3_T2+" DATE NOT NULL)";
+    private static final String CREATE_ATIVIDADE = "CREATE TABLE IF NOT EXISTS  "+TABLE_NAME2+"("+COL1_T2+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL2_T2+" VARCHAR(300) NOT NULL,"+COL3_T2+" VARCHAR(300) NOT NULL)";
     private static final String CREATE_ALERGIAS = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME3+"("+COL1_T3+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL2_T3+" VARCHAR(100) NOT NULL)";
     private static final String CREATE_FALTAS = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME4+"("+COL1_T4+" INTEGER NOT NULL,"+COL2_T4+" INTEGER NOT NULL, PRIMARY KEY ("+COL1_T4+","+COL2_T4+"),FOREIGN KEY ("+COL1_T4+") REFERENCES educando("+COL1_T4+"),FOREIGN KEY ("+COL2_T4+") REFERENCES atividade("+COL2_T4+"))";
     private static final String CREATE_RELATORIO = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME5+"("+COL1_T5+" INTEGER NOT NULL,"+COL2_T5+" INTEGER NOT NULL,"+COL3_T5+" VARCHAR(500) NOT NULL,"+COL4_T5+" INTEGER NOT NULL,"+COL5_T5+" INTEGER NOT NULL,"+COL6_T5+" INTEGER NOT NULL,"+COL7_T5+" INTEGER NOT NULL,PRIMARY KEY ("+COL6_T5+","+COL7_T5+"),FOREIGN KEY ("+COL6_T5+") REFERENCES educando("+COL6_T5+"),FOREIGN KEY ("+COL7_T5+") REFERENCES atividade("+COL7_T5+"))";
@@ -68,13 +68,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_RELATORIO);
         db.execSQL(CREATE_CONTEM);
 
-        ContentValues cv = new ContentValues();
-        cv.put(COL2_T1,"Diogo");
-        cv.put(COL3_T1,1);
-        cv.put(COL4_T1,"Diogo");
-        cv.put(COL5_T1,3);
-        cv.put(COL6_T1,"dIOGO");
-        db.insert(TABLE_NAME1,null,cv);
     }
 
     @Override

@@ -115,6 +115,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+
     public void RecebeDados(String x) throws JSONException {
         JSONObject reader = new JSONObject(x);
         ContentValues oCV = new ContentValues();
