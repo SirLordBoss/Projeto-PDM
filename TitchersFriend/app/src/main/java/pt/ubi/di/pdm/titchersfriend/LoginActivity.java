@@ -1,200 +1,208 @@
 package pt.ubi.di.pdm.titchersfriend;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.*;
+import android.view.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 
-public class HomePageEduc extends AppCompatActivity {
 
-   ImageButton gerirAlunos,gerirAulas,sumario,faltas;
-    Button exit;
-DBHelper dbHelper;
-SQLiteDatabase base;
-    private void fechando(){
-        String x ="false";
-        String total ="";
-        int count=0;
-        Cursor cursor =base.query(dbHelper.TABLE_NAME1,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
+public class LoginActivity extends AppCompatActivity {
+    Button btnLogin;
+    EditText inputpass,inputUser;
+    DBHelper dbHelper;
+    SQLiteDatabase oSQLDB;
+        public static String getM5(String input) {
+            try {
 
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T1));
-            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T1));
-            String c3 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T1));
-            String c4 =cursor.getString(cursor.getColumnIndex(dbHelper.COL4_T1));
-            String c5 =cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1));
-            String c6 =cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T1));
-            if(count==0)
-                total="user=educadora&"+"ed"+"="+c1+","+c2+","+c3+","+c4+","+c5+","+c6;
-            if(count!=0)
-                total=total+";"+c1+","+c2+","+c3+","+c4+","+c5+","+c6;
-            count++;
+                // Static getInstance method is called with hashing MD5
+                MessageDigest md = MessageDigest.getInstance("MD5");
+
+                // digest() method is called to calculate message digest
+                //  of an input digest() return array of byte
+                byte[] messageDigest = md.digest(input.getBytes());
+
+                // Convert byte array into signum representation
+                BigInteger no = new BigInteger(1, messageDigest);
+
+                // Convert message digest into hex value
+                String hashtext = no.toString(16);
+                while (hashtext.length() < 32) {
+                    hashtext = "0" + hashtext;
+                }
+                return hashtext;
+            }
+
+            // For specifying wrong message digest algorithms
+            catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
         }
-        total = total+"&";
-        count =0;
-        cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
 
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T2));
-            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T2));
-            String c3 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T2));
-            if(count==0)
-                total=total+"at"+"="+c1+","+c2+","+c3;
-            if(count!=0)
-                total=total+";"+c1+","+c2+","+c3;
-            count++;
-        }
-        total = total+"&";
-        count =0;
-        cursor =base.query(dbHelper.TABLE_NAME3,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T3));
-            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T3));
-
-            if(count==0)
-                total=total+"al"+"="+c1+","+c2;
-            if(count!=0)
-                total=total+";"+c1+","+c2;
-            count++;
-        }
-        total = total+"&";
-        count =0;
-        cursor =base.query(dbHelper.TABLE_NAME4,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T4));
-            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T4));
-
-            if(count==0)
-                total=total+"fa"+"="+c1+","+c2;
-            if(count!=0)
-                total=total+";"+c1+","+c2;
-            count++;
-        }
-        total = total+"&";
-        count =0;
-        cursor =base.query(dbHelper.TABLE_NAME5,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T5));
-            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T5));
-            String c3 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T5));
-            String c4 =cursor.getString(cursor.getColumnIndex(dbHelper.COL4_T5));
-            String c5 =cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T5));
-            String c6 =cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T5));
-            String c7 =cursor.getString(cursor.getColumnIndex(dbHelper.COL7_T5));
-            if(count==0)
-                total=total+"rel"+"="+c1+","+c2+","+c3+","+c4+","+c5+","+c6+","+c7;
-            if(count!=0)
-                total=total+";"+c1+","+c2+","+c3+","+c4+","+c5+","+c6+","+c7;
-            count++;
-        }
-        total = total+"&";
-        count =0;
-        cursor =base.query(dbHelper.TABLE_NAME6,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T6));
-            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T6));
-
-            if(count==0)
-                total=total+"cont"+"="+c1+","+c2;
-            if(count!=0)
-                total=total+";"+c1+","+c2;
-            count++;
-        }
-        Log.d("tantacoisa",total);
-        try {
-            x = new Sender(HomePageEduc.this,"http://teachersfriend.ddns.net/service.php","104",total).execute().get();
-        } catch (
-                ExecutionException e) {
-
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-
-            e.printStackTrace();
-        }
-        dbHelper.delete();
-
-    }
     protected void onCreate(Bundle savedInstanceState) {
-
+     
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepageeduc);
+        setContentView(R.layout.activity_login);
+
         dbHelper = new DBHelper(this);
-        base = dbHelper.getWritableDatabase();
-       gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
-       gerirAulas = (ImageButton)findViewById(R.id.gerirAulas) ;
-       sumario = (ImageButton)findViewById(R.id.gerirSumarios) ;
-       faltas = (ImageButton)findViewById(R.id.gerirEduc) ;
-        exit =(Button)findViewById(R.id.btnSair);
-       gerirAlunos.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent A2 = new Intent(HomePageEduc.this,GerirAlunos.class);
-               startActivity(A2) ;
-           }
-       });
+        oSQLDB = dbHelper.getWritableDatabase();
 
-        gerirAulas.setOnClickListener(new View.OnClickListener() {
+        btnLogin = (Button)findViewById(R.id.btnLogin) ;
+        inputpass = (EditText) findViewById(R.id.inputPass);
+        inputUser = (EditText) findViewById(R.id.inputUser);
+
+       // Intent iCameFromActivity1 = getIntent() ;
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent A2 = new Intent(HomePageEduc.this,GerirAulas.class);
-                startActivity(A2) ;
+                String x ="false";
+                String us = inputUser.getText().toString();
+                String pass = inputpass.getText().toString();
+                String enc = getM5(pass);
+
+                try {
+                    x = new Sender(LoginActivity.this,"http://teachersfriend.ddns.net/service.php","100","u="+us+"&p="+enc).execute().get();
+                } catch (ExecutionException e) {
+
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+
+                 e.printStackTrace();
+                }
+
+                JSONObject reader = null;
+                Boolean s = false;
+                try {
+                    reader = new JSONObject(x);
+                    s = reader.getBoolean("success");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(s){
+                    //receber dados
+                    try {
+                        RecebeDados(x);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
+
+                    startActivity(A2) ;
+                }
+
+                if(!s){
+                    Toast.makeText(LoginActivity.this,"Falha no Login",Toast.LENGTH_SHORT).show();
+                    inputpass.setText("");
+                    inputUser.setText("");
+                    return;
+                }
+
             }
         });
-
-        sumario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent A2 = new Intent(HomePageEduc.this,Sumarios.class);
-                startActivity(A2) ;
-            }
-        });
-
-        faltas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent A2 = new Intent(HomePageEduc.this,MarcarFaltas.class);
-                startActivity(A2) ;
-
-
-            }
-        });
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             fechando();
-                System.exit(0);
-            }
-
-        });
-
     }
+
     @Override
-    public void onPause() {
-        ContentValues oCV = new ContentValues();
+    protected void onPause() {
         super.onPause();
-        base.close();
-
-    }
-    @Override
-    public void onResume() {
-
-        super.onResume();
-        base = dbHelper.getWritableDatabase();
+        dbHelper.close();
     }
 
+    public void RecebeDados(String x) throws JSONException {
+        JSONObject reader = new JSONObject(x);
+        ContentValues oCV = new ContentValues();
+        String s = reader.getString("educando");
+
+        String[] arr = s.split(";");
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T1,aux[0]);
+            oCV.put(dbHelper.COL2_T1,aux[1]);
+            oCV.put(dbHelper.COL3_T1,aux[2]);
+            oCV.put(dbHelper.COL4_T1,aux[3]);
+            oCV.put(dbHelper.COL5_T1,aux[4]);
+            oCV.put(dbHelper.COL6_T1,aux[5]);
+            oSQLDB.insert(dbHelper.TABLE_NAME1,null,oCV);
+        }
+
+         s = reader.getString("atividade");
+        arr = s.split(";");
+         oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T2,aux[0]);
+            oCV.put(dbHelper.COL2_T2,aux[1]);
+            oCV.put(dbHelper.COL3_T2,aux[2]);
+            oSQLDB.insert(dbHelper.TABLE_NAME2,null,oCV);
+        }
+
+        s = reader.getString("alergias");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T3,aux[0]);
+            oCV.put(dbHelper.COL2_T3,aux[1]);
+            oSQLDB.insert(dbHelper.TABLE_NAME3,null,oCV);
+        }
+
+        s = reader.getString("faltas");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T4,aux[0]);
+            oCV.put(dbHelper.COL2_T4,aux[1]);
+            oSQLDB.insert(dbHelper.TABLE_NAME4,null,oCV);
+        }
+
+        s = reader.getString("relatorio");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            Log.d("aux",aux[0]+aux[1]+aux[2]+aux[3]+aux[4]+aux[5]+aux[6]);
+            oCV.put(dbHelper.COL1_T5,aux[0]);
+            oCV.put(dbHelper.COL2_T5,aux[1]);
+            oCV.put(dbHelper.COL3_T5,aux[2]);
+            oCV.put(dbHelper.COL4_T5,aux[3]);
+            oCV.put(dbHelper.COL5_T5,aux[4]);
+            oCV.put(dbHelper.COL6_T5,aux[5]);
+            oCV.put(dbHelper.COL7_T5,aux[6]);
+            oSQLDB.insert(dbHelper.TABLE_NAME5,null,oCV);
+        }
+
+        s = reader.getString("contem");
+        arr = s.split(";");
+        oCV.clear();
+
+        for(int i=0;i<arr.length;i++){
+            String[] aux = arr[i].split(",");
+            oCV.put(dbHelper.COL1_T6,aux[0]);
+            oCV.put(dbHelper.COL2_T6,aux[1]);
+            oSQLDB.insert(dbHelper.TABLE_NAME6,null,oCV);
+        }
+
+
+    }
+    
 }
