@@ -9,6 +9,9 @@ import android.view.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -131,12 +134,23 @@ public class RegisterActivity extends AppCompatActivity {
 
                     e.printStackTrace();
                 }
-                if(x.contains("true")){
+
+                JSONObject reader = null;
+                Boolean s = false;
+                try {
+                    reader = new JSONObject(x);
+                    s = reader.getBoolean("success");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                
+                
+                if(s){
                     Intent A2 = new Intent(RegisterActivity.this,Aprovacao.class);
                     startActivity(A2) ;
                     Toast.makeText(RegisterActivity.this,"Sucesso na criação da conta",Toast.LENGTH_LONG).show();
                 }
-                if(x.contains("false")){
+                if(!s){
                     Intent A2 = new Intent(RegisterActivity.this,MainActivity.class);
                     startActivity(A2) ;
                     Toast.makeText(RegisterActivity.this,"Erro na criação da conta",Toast.LENGTH_LONG).show();
