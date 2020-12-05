@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
@@ -7,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:orientation="vertical">
 
         <TextView
@@ -28,9 +29,42 @@
         <LinearLayout
             android:id="@+id/verfaltas"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="350dp"
             android:layout_marginTop="25dp"
             android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center|top"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSubmeterFaltas"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/cantos_botoes"
+                android:fontFamily="sans-serif"
+                android:text="@string/submeter"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="34sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btnCancelarFaltas"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/cantos_botoes"
+                android:fontFamily="sans-serif"
+                android:text="@string/cancelar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="34sp"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
     </LinearLayout>
+
 
 </ScrollView>
