@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
-
+    Context context;
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "MyDB2";
     protected static final String TABLE_NAME1 = "educando";
@@ -56,6 +56,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context) {
 
         super(context, DB_NAME, null, DB_VERSION);
+        this.context=context;
+    }
+      public void delete(){
+        context.deleteDatabase(DB_NAME);
     }
 
 
