@@ -19,7 +19,7 @@ public class GerirAlunos extends AppCompatActivity {
     DBHelper oDBH;
     SQLiteDatabase oSQLDB;
     LinearLayout oLL;
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geriralunos);
@@ -29,11 +29,17 @@ public class GerirAlunos extends AppCompatActivity {
 
         displayAlunos();
     }
+        @Override
+        protected void onPause() {
+            super.onPause();
+            oDBH.close();
+        }
+        @Override
+        public void onResume() {
 
-    protected void onPause() {
-        super.onPause();
-        oDBH.close();
-    }
+            super.onResume();
+            oSQLDB= oDBH.getWritableDatabase();
+        }
 
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
