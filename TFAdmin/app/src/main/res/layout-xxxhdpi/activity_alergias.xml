@@ -30,7 +30,7 @@
         <LinearLayout
             android:id="@+id/listaAlergias"
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_marginTop="25dp"
             android:orientation="vertical" />
 
@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
@@ -57,7 +58,7 @@
                 tools:ignore="Autofill" />
 
             <Button
-                android:id="@+id/btnAddAluno"
+                android:id="@+id/btnAddAlergia"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/cantos_botoes"
@@ -67,6 +68,37 @@
                 android:text="@string/mais"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="48sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center|top"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSubmeterAlergias"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/cantos_botoes"
+                android:fontFamily="sans-serif"
+                android:text="@string/submeter"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="34sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btnCancelarAlergias"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/cantos_botoes"
+                android:fontFamily="sans-serif"
+                android:text="@string/cancelar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="34sp"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 
