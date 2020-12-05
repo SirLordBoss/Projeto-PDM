@@ -44,7 +44,7 @@ public class GerirAlunos extends AppCompatActivity {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
             oLL1.setId(oCursor.getInt(0) * 10 + 2);
 
-            EditText E1 = (EditText) oLL1.findViewById(R.id.nomeAluno);
+            TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
             E1.setId(oCursor.getInt(0)*10+1);
             E1.setText(oCursor.getString(1));
 

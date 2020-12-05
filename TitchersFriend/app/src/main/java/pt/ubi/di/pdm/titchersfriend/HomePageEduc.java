@@ -19,8 +19,8 @@ public class HomePageEduc extends AppCompatActivity {
 
        gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
        gerirAulas = (ImageButton)findViewById(R.id.gerirAulas) ;
-       sumario = (ImageButton)findViewById(R.id.sumario) ;
-       faltas = (ImageButton)findViewById(R.id.faltas) ;
+       sumario = (ImageButton)findViewById(R.id.gerirSumarios) ;
+       faltas = (ImageButton)findViewById(R.id.gerirEduc) ;
 
        gerirAlunos.setOnClickListener(new View.OnClickListener() {
            @Override
