@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
-            android:fontFamily="@font/kindergarten"
+            android:fontFamily="sans-serif"
             android:gravity="center"
             android:shadowColor="@android:color/white"
             android:shadowDx="7"
@@ -23,7 +23,7 @@
             android:shadowRadius="1"
             android:text="@string/gerir_alunos"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="48sp" />
+            android:textSize="44sp" />
 
 
         <LinearLayout
@@ -41,9 +41,9 @@
             android:layout_marginTop="35dp"
             android:layout_marginRight="80dp"
             android:background="@drawable/cantos_botoes"
-            android:fontFamily="@font/kindergarten"
+            android:fontFamily="sans-serif"
             android:text="@string/novo_aluno"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="48sp" />
+            android:textSize="40sp" />
     </LinearLayout>
 </ScrollView>

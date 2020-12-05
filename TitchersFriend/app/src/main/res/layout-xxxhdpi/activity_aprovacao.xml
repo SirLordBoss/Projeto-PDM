@@ -27,7 +27,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginRight="80dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="@font/kindergarten"
+        android:fontFamily="sans-serif"
         android:text="@string/voltar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="48sp" />
