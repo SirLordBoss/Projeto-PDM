@@ -58,7 +58,7 @@
                 tools:ignore="Autofill" />
 
             <Button
-                android:id="@+id/btnAddAluno"
+                android:id="@+id/btnAddAlergia"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/cantos_botoes"
@@ -78,7 +78,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnSubmeterFaltas"
+                android:id="@+id/btnSubmeterAlergias"
                 android:layout_width="175dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="15dp"
@@ -90,7 +90,7 @@
                 tools:ignore="ButtonStyle" />
 
             <Button
-                android:id="@+id/btnCancelarFaltas"
+                android:id="@+id/btnCancelarAlergias"
                 android:layout_width="175dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/cantos_botoes"
