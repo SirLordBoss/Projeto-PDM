@@ -10,11 +10,11 @@
     tools:context=".HomePageEduc">
 
     <TextView
-        android:id="@+id/titulo_criarcnt"
+        android:id="@+id/titulo_homeeduc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:fontFamily="@font/kindergarten"
+        android:layout_marginTop="120dp"
+        android:fontFamily="sans-serif"
         android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="8"
@@ -22,12 +22,12 @@
         android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="48sp" />
+        android:textSize="44sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -52,10 +52,10 @@
                 android:id="@+id/txtGerirAlunos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kindergarten"
+                android:fontFamily="sans-serif"
                 android:text="@string/gerir_alunos"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="28sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,10 +80,10 @@
                 android:id="@+id/txtGerirAulas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kindergarten"
+                android:fontFamily="sans-serif"
                 android:text="@string/gerir_aulas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="28sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
 
@@ -117,10 +117,10 @@
                 android:id="@+id/txtGerirSumarios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kindergarten"
+                android:fontFamily="sans-serif"
                 android:text="@string/sumarios"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="28sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -145,10 +145,10 @@
                 android:id="@+id/txtGerirEduc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kindergarten"
+                android:fontFamily="sans-serif"
                 android:text="@string/marcar_faltas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="26sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -156,12 +156,12 @@
     <Button
         android:id="@+id/btnSair"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="@font/kindergarten"
+        android:fontFamily="sans-serif"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/sair"
