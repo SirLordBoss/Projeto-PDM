@@ -11,11 +11,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/titulo_geriralunos"
+            android:id="@+id/titulo_geriraulas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
-            android:fontFamily="@font/kindergarten"
+            android:fontFamily="sans-serif"
             android:gravity="center"
             android:shadowColor="@android:color/white"
             android:shadowDx="7"
@@ -23,7 +23,7 @@
             android:shadowRadius="1"
             android:text="@string/gerir_aulas"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="48sp" />
+            android:textSize="44sp" />
 
 
         <LinearLayout
@@ -34,14 +34,14 @@
             android:orientation="vertical" />
 
         <Button
-            android:id="@+id/btnAddAluno"
+            android:id="@+id/btnAddAula"
             android:layout_width="262dp"
             android:layout_height="75dp"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="35dp"
             android:layout_marginRight="80dp"
             android:background="@drawable/cantos_botoes"
-            android:fontFamily="@font/kindergarten"
+            android:fontFamily="sans-serif"
             android:text="@string/registar_aula"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="36sp" />

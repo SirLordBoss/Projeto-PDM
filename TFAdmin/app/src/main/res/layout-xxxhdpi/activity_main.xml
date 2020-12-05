@@ -12,21 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:fontFamily="@font/kindergarten"
-        android:text="@string/titchersfriend"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp"
+        android:fontFamily="sans-serif"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
         android:shadowDy="7"
-        android:shadowRadius="1"/>
+        android:shadowRadius="1"
+        android:text="@string/titchersfriend"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="44sp" />
 
     <TextView
         android:id="@+id/admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/kindergarten"
+        android:fontFamily="sans-serif"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
         android:shadowDy="7"
@@ -34,7 +34,7 @@
         android:text="@string/admin"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="italic" />
 
     <Button
@@ -42,15 +42,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="110dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="@font/kindergarten"
+        android:fontFamily="sans-serif"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/criar_conta"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="44sp" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -60,11 +60,11 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="@font/kindergarten"
+        android:fontFamily="sans-serif"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="44sp" />
 
 </LinearLayout>
