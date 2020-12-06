@@ -177,7 +177,7 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
              fechando();
-                System.exit(0);
+             System.exit(0);
             }
 
         });
