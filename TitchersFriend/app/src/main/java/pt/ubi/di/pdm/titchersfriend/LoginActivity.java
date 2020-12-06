@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 String enc = getM5(pass);
 
                 try {
-                    x = new Sender(LoginActivity.this,"http://teachersfriend.ddns.net/service.php","100","u="+us+"&p="+enc).execute().get();
+                    x = new Sender(LoginActivity.this,"100","u="+us+"&p="+enc).execute().get();
                 } catch (ExecutionException e) {
 
                     e.printStackTrace();
