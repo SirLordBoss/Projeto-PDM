@@ -66,8 +66,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         String[] items = new String[]{"Masculino", "Feminino"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterActivity.this, R.layout.spinner_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         dropdown.setAdapter(adapter);
+
 
 
         btnCriar.setOnClickListener(new View.OnClickListener() {

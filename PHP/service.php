@@ -3,10 +3,19 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+//PARA DEBUG
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 $servername ="localhost";
 $dbUsername = "teachersfriend";
 $dbPassword = "userpwd";
 $maindb = "main";
+$mailHost = "smtp.gmail.com";
+$mailUsername = "teachersfriendapp@gmail.com";
+$mailPassword = "teachersfriendPDM2020";
+$mailPort = "587";
 
 $conn = mysqli_connect($servername, $dbUsername, $dbPassword);
 
@@ -33,7 +42,7 @@ mysqli_select_db($conn,$maindb);
 
 //if a user does not exist create one
 
-$firstquery = "SELECT COUNT(u_nome) as cnt FROM users;";
+$firstquery = "SELECT COUNT(u_nome) as cnt FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id );";
 $result = mysqli_query($conn,$firstquery);
 if($result){
     if($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1109,6 +1118,33 @@ switch ($_POST['q']){
         echo $json;
         exit();
     break;
+
+#106 - Enviar um email para o pai do educando
+    case 106:
+        $mailE = $_POST['c'];
+        $u_nome = $_POST['e'];
+        $date = $_POST['d'];
+
+        $sql = "SELECT t.t_token FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id ) WHERE u.u_nome = '$u_nome'";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Query error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Fetching error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $database_name = $row['t_token'];
+        mysqli_select_db($conn,$database_name);
+        $sql = "SELECT * "
+    break;
 #200 - Retornar a tabela dos educadores
     case 200:
         $id = $_POST['id'];
@@ -1127,58 +1163,129 @@ switch ($_POST['q']){
                         }
                         $json = json_encode($responseObject);
                         echo $json;
+                        exit();
                     }
                 }
             }
         }
     break;
-    
+
 #402 - Forgot password 
     case 402:
-        //TODO tratar da parte da verificação do utilizador e da palavra passe
+        //TODO tratar da parte da verificação do utilizador
+        $email = $_POST['G'];
+        
+        $sql = "SELECT u_id, u_nome FROM users WHERE u_email='$email';";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $u_id = $row['u_id'];
+        $u_nome = $row['u_nome'];
+        $bytes = random_bytes(rand(7,21));
+        $newpwd = (bin2hex($bytes))."";
+        $pwd_hashed = hash('md5',$newpwd);
+        mysqli_begin_transaction($conn);
+        try{
+            $sql = "UPDATE users SET u_pwd = '$pwd_hashed' WHERE u_id = '$u_id';";
+            $result = mysqli_query($conn,$sql);
+            if(!$result){
+                mysqli_rollback($conn);
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Query error";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
 
+            require 'PHPMailer/src/Exception.php';
+            require 'PHPMailer/src/PHPMailer.php';
+            require 'PHPMailer/src/SMTP.php';
+
+            $mail = new PHPMailer(TRUE);
+
+            $mail->isSMTP();
+            $mail->Host = $mailHost;
+            $mail->SMTPAuth = "true";
+            $mail->Port = $mailPort;
+            $mail->Username = $mailUsername;
+            $mail->Password = $mailPassword;
+
+            try {
+                $mail->CharSet = 'UTF-8';
+                $mail->Encoding = 'base64';
+                $mail->setFrom($mailUsername);
+
+                /* Add a recipient. */
+                $mail->addAddress($email);
+
+                /* Set the subject. */
+                $mail->Subject = 'Mudança de password em Teachers Friend';
+
+                $mail->isHTML(true);
+                /* Set the mail message body. */
+
+                $mail->Body = '<html><p>Car@ '.$u_nome.',<br> Recentemente pediu que a sua palavra passe fosse mudada no nosso sistema. A sua nova palavra passe será:</p><p style="width:100%;text-align:center;"><b>'.$newpwd.'</b></p><br><p>Recomendamos que mude a palavra passe assim que iniciar novamente a sessão.<br>Cumprimentos.</p></html>';
+
+                /* Finally send the mail. */
+                if(!($mail->send())){
+                    echo "error";
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mail sent error";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+                
+            }
+            catch (Exception $e)
+            {
+                /* PHPMailer exception. */
+                $responseObjectError->success = false;
+                $responseObjectError->error = $e->errorMessage();
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+            catch (\Exception $e)
+            {
+                /* PHP exception (note the backslash to select the global namespace Exception class). */
+                $responseObjectError->success = false;
+                $responseObjectError->error = $e->getMessage();
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+            
+            $mail->smtpClose();
+            mysqli_commit($conn);
+            $responseObject->success = true;
+            $json = json_encode($responseObject);
+            echo $json;
+            exit();
+
+        }catch (mysqli_sql_exception $exception) {
+            mysqli_rollback($conn);
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Exception error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
         
 
-        /* Exception class. */
-        require 'PHPMailer\src\Exception.php';
 
-        /* The main PHPMailer class. */
-        require 'PHPMailer\src\PHPMailer.php';
-
-        /* SMTP class, needed if you want to use SMTP. */
-        require 'PHPMailer\src\SMTP.php';
-
-        $mail = new PHPMailer(TRUE);
-
-        /* Open the try/catch block. */
-        try {
-            /* Set the mail sender. */
-            //texto : relarório de atividade do educando 
-            //Body: A professora enviou-lhe um relatório com informações acerca da atividade do aluno durante o dia 
-            $mail->setFrom('teachersfriend@gmail.com', 'Teachers Friend');
-
-            /* Add a recipient. */
-            $mail->addAddress('palpatine@empire.com', 'Emperor');
-
-            /* Set the subject. */
-            $mail->Subject = 'Force';
-
-            /* Set the mail message body. */
-            $mail->Body = 'There is a great disturbance in the Force.';
-
-            /* Finally send the mail. */
-            $mail->send();
-        }
-        catch (Exception $e)
-        {
-            /* PHPMailer exception. */
-            echo $e->errorMessage();
-        }
-        catch (\Exception $e)
-        {
-            /* PHP exception (note the backslash to select the global namespace Exception class). */
-            echo $e->getMessage();
-        }
 
     break;
 
