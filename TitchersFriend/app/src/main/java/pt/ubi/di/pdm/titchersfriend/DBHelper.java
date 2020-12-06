@@ -17,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String TABLE_NAME4 = "faltas";
     protected static final String TABLE_NAME5 = "relatorio";
     protected static final String TABLE_NAME6 = "contem";
+    protected static final String TABLE_NAME7 = "user";
 
     protected static final String COL1_T1 = "e_id";
     protected static final String COL2_T1 = "e_nome";
@@ -46,13 +47,16 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL1_T6= "al_id";
     protected static final String COL2_T6= "e_id";
 
+    protected static final String COL1_T7= "u_id";
+    protected static final String COL2_T7= "u_name";
+
     private static final String CREATE_EDUCANDO = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME1+"("+COL1_T1+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL2_T1+" VARCHAR(100) NOT NULL,"+COL3_T1+" INTEGER NOT NULL,"+COL4_T1+" VARCHAR(200) NOT NULL,"+COL5_T1+" INTEGER NOT NULL,"+COL6_T1+" VARCHAR(10) NOT NULL)";
     private static final String CREATE_ATIVIDADE = "CREATE TABLE IF NOT EXISTS  "+TABLE_NAME2+"("+COL1_T2+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL2_T2+" VARCHAR(300) NOT NULL,"+COL3_T2+" VARCHAR(300) NOT NULL)";
     private static final String CREATE_ALERGIAS = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME3+"("+COL1_T3+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+COL2_T3+" VARCHAR(100) NOT NULL)";
     private static final String CREATE_FALTAS = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME4+"("+COL1_T4+" INTEGER NOT NULL,"+COL2_T4+" INTEGER NOT NULL, PRIMARY KEY ("+COL1_T4+","+COL2_T4+"),FOREIGN KEY ("+COL1_T4+") REFERENCES educando("+COL1_T4+"),FOREIGN KEY ("+COL2_T4+") REFERENCES atividade("+COL2_T4+"))";
     private static final String CREATE_RELATORIO = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME5+"("+COL1_T5+" INTEGER NOT NULL,"+COL2_T5+" INTEGER NOT NULL,"+COL3_T5+" VARCHAR(500) NOT NULL,"+COL4_T5+" INTEGER NOT NULL,"+COL5_T5+" INTEGER NOT NULL,"+COL6_T5+" INTEGER NOT NULL,"+COL7_T5+" INTEGER NOT NULL,PRIMARY KEY ("+COL6_T5+","+COL7_T5+"),FOREIGN KEY ("+COL6_T5+") REFERENCES educando("+COL6_T5+"),FOREIGN KEY ("+COL7_T5+") REFERENCES atividade("+COL7_T5+"))";
     private static final String CREATE_CONTEM = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME6+"("+COL1_T6+" INTEGER NOT NULL,"+COL2_T6+" INTEGER NOT NULL, PRIMARY KEY ("+COL1_T6+","+COL2_T6+"),FOREIGN KEY ("+COL1_T6+") REFERENCES alergias("+COL1_T6+"),FOREIGN KEY ("+COL2_T6+") REFERENCES educando("+COL2_T6+"))";
-
+    private static final String CREATE_USER = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME7+"("+COL1_T7+" INTEGER NOT NULL PRIMARY KEY,"+COL2_T7+" VARCHAR(100) NOT NULL)";
     public DBHelper(@Nullable Context context) {
 
         super(context, DB_NAME, null, DB_VERSION);
@@ -71,6 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_FALTAS);
         db.execSQL(CREATE_RELATORIO);
         db.execSQL(CREATE_CONTEM);
+        db.execSQL(CREATE_USER);
 
     }
 
@@ -82,6 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE "+TABLE_NAME4+";");
         db.execSQL("DROP TABLE "+TABLE_NAME5+";");
         db.execSQL("DROP TABLE "+TABLE_NAME6+";");
+        db.execSQL("DROP TABLE "+TABLE_NAME7+";");
 
         db.execSQL(CREATE_EDUCANDO);
         db.execSQL(CREATE_ATIVIDADE);
@@ -89,6 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_FALTAS);
         db.execSQL(CREATE_RELATORIO);
         db.execSQL(CREATE_CONTEM);
+        db.execSQL(CREATE_USER);
 
     }
 }
