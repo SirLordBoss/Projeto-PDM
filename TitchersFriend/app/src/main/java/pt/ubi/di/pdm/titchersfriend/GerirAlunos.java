@@ -18,16 +18,26 @@ public class GerirAlunos extends AppCompatActivity {
 
     DBHelper oDBH;
     SQLiteDatabase oSQLDB;
+
     LinearLayout oLL;
+    Button add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geriralunos);
-
+        add = (Button)findViewById(R.id.btnAddAluno);
         oDBH = new DBHelper(this);
         oSQLDB = oDBH.getWritableDatabase();
 
         displayAlunos();
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent A2 = new Intent(GerirAlunos.this,AdicionarAluno.class);
+                finish();
+                startActivity(A2) ;
+            }
+        });
     }
         @Override
         protected void onPause() {
