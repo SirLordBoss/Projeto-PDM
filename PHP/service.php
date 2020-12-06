@@ -605,7 +605,6 @@ switch ($_POST['q']){
             }else{
                 $responseObjectError->success = false;
                 $responseObjectError->error = "Username/password not match2";
-                $responseObjectError->debug = $_POST['u']." ".$_POST['p'];
                 $json = json_encode($responseObjectError);
                 echo $json;
                 exit();
