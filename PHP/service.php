@@ -1,4 +1,8 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 $servername ="localhost";
 $dbUsername = "teachersfriend";
 $dbPassword = "userpwd";
@@ -238,7 +242,11 @@ switch ($_POST['q']){
                         exit();
                     }
                 }else{
-
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
                 }
             }else{
                 $responseObjectError->success = false;
@@ -255,6 +263,109 @@ switch ($_POST['q']){
             exit();
         }
 
+    break;
+#022
+    case 22:
+        $id = $_POST['id'];
+
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    $u_id= $_POST['u_id'];
+                    $username = $_POST['nome'];
+                    $idade = $_POST['idade'];
+                    $morada = $_POST['morada'];
+                    $sexo = $_POST['sexo'];
+                    $email = $_POST['email'];
+
+                    $sql = "UPDATE users SET (u_nome = ,u_idade = ,u_morada = ,u_sexo = ,u_email = ) WHERE u_id = '$u_id'";
+                    $result = mysqli_query($conn,$sql);
+                    if($result){
+                        $responseObject->success = true;
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
+                    }else{
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error in query";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Error fetching array";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Error in query";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
+#023 - Eliminar um utilizador
+    $id = $_POST['id'];
+
+    $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+    $result = mysqli_query($conn,$sql);
+    if($result){
+        if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            if($row['c'] == 1){
+                $u_id= $_POST['u_id'];
+                $username = $_POST['nome'];
+                $idade = $_POST['idade'];
+                $morada = $_POST['morada'];
+                $sexo = $_POST['sexo'];
+                $email = $_POST['email'];
+
+                $sql = "UPDATE users SET (u_nome = ,u_idade = ,u_morada = ,u_sexo = ,u_email = ) WHERE u_id = '$u_id'";
+                $result = mysqli_query($conn,$sql);
+                if($result){
+                    $responseObject->success = true;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Error in query";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "User not admin";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Error fetching array";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    }else{
+        $responseObjectError->success = false;
+        $responseObjectError->error = "Error in query";
+        $json = json_encode($responseObjectError);
+        echo $json;
+        exit();
+    }
     break;
 #050 - Registo
     case 50: //Registo
@@ -325,6 +436,20 @@ switch ($_POST['q']){
                         if($result){
                             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                                 $database_name = $row['t_token'];
+
+                                $sql = "UPDATE turmas SET t_utilizada = 1 WHERE u_id = '$u_id';";
+                                $result = mysqli_query($conn,$sql);
+
+                                if(!$result){
+                                    $responseObjectError->success = false;
+                                    $responseObjectError->error = "Database query error : turmas";
+                                    $responseObjectError->debug = mysqli_error($conn);
+                                    $json = json_encode($responseObjectError);
+                                    echo $json;
+                                    mysqli_rollback($conn);
+                                    exit();
+                                }
+
                                 mysqli_select_db($conn,$database_name);
 
                                 $responseObject->success = true;
@@ -407,7 +532,7 @@ switch ($_POST['q']){
                                 if($result){
                                     $responseObject->relatorio = "";
                                     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-                                        $responseObject->relatorio .= "".$row['e_id'].",".$row['a_id'].",".$row['r_curativos'].",".$row['r_necessidades'].",".$row['r_coment'].",".$row['r_dormir'].",".$row['r_comer'].";";
+                                        $responseObject->relatorio .= "".$row['r_comer'].",".$row['r_dormir'].",".$row['r_coment'].",".$row['r_necessidades'].",".$row['r_curativos'].",".$row['e_id'].",".$row['a_id'].";";
                                     }                                    
                                 }else{
                                     $responseObjectError->success = false;
@@ -960,6 +1085,30 @@ switch ($_POST['q']){
             exit();
         }
     break;
+#105 - Não utilizar mais a base de dados
+    case 105:
+        if ($_POST['cs'] != 1){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Exception error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $nome = $_POST['id'];
+        $sql = "UPDATE turmas SET t_utilizada = '0' WHERE u_id = '$nome';";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Query error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $responseObject->success = true;
+        $json = json_encode($responseObject);
+        echo $json;
+        exit();
+    break;
 #200 - Retornar a tabela dos educadores
     case 200:
         $id = $_POST['id'];
@@ -982,6 +1131,57 @@ switch ($_POST['q']){
                 }
             }
         }
+    break;
+
+    
+    
+#402 - Forgot password 
+    case 402:
+        //TODO tratar da parte da verificação do utilizador e da palavra passe
+
+        
+
+        /* Exception class. */
+        require 'PHPMailer\src\Exception.php';
+
+        /* The main PHPMailer class. */
+        require 'PHPMailer\src\PHPMailer.php';
+
+        /* SMTP class, needed if you want to use SMTP. */
+        require 'PHPMailer\src\SMTP.php';
+
+        $mail = new PHPMailer(TRUE);
+
+        /* Open the try/catch block. */
+        try {
+            /* Set the mail sender. */
+            //texto : relarório de atividade do educando 
+            //Body: A professora enviou-lhe um relatório com informações acerca da atividade do aluno durante o dia 
+            $mail->setFrom('teachersfriend@gmail.com', 'Teachers Friend');
+
+            /* Add a recipient. */
+            $mail->addAddress('palpatine@empire.com', 'Emperor');
+
+            /* Set the subject. */
+            $mail->Subject = 'Force';
+
+            /* Set the mail message body. */
+            $mail->Body = 'There is a great disturbance in the Force.';
+
+            /* Finally send the mail. */
+            $mail->send();
+        }
+        catch (Exception $e)
+        {
+            /* PHPMailer exception. */
+            echo $e->errorMessage();
+        }
+        catch (\Exception $e)
+        {
+            /* PHP exception (note the backslash to select the global namespace Exception class). */
+            echo $e->getMessage();
+        }
+
     break;
 
 }
