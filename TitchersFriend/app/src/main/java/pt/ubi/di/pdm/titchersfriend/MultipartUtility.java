@@ -46,8 +46,7 @@ public class MultipartUtility {
         httpConn.setRequestProperty("User-Agent", "CodeJava Agent");
         httpConn.setRequestProperty("Test", "Bonjour");
         outputStream = httpConn.getOutputStream();
-        writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),
-                true);
+        writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),true);
     }
 
     /**

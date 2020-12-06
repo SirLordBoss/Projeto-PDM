@@ -47,7 +47,9 @@ public class Sender extends AsyncTask<Void,Void,String> {
         this.c = c;
         Query = q;
         Extra = ext;
-        file = new File(filePath);
+        if(filePath!=null) {
+            file = new File(filePath);
+        }
     }
 
     /*
