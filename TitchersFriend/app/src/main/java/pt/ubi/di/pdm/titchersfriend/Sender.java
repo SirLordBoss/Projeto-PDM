@@ -12,12 +12,15 @@ import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 /**
  * 1.SEND DATA FROM EDITTEXT OVER THE NETWORK
@@ -34,25 +37,26 @@ public class Sender extends AsyncTask<Void,Void,String> {
     String Query, Extra;
 
     ProgressDialog pd;
+    File file = null;
 
     /*
             1.OUR CONSTRUCTOR
     2.RECEIVE CONTEXT,URL ADDRESS AND EDITTEXTS FROM OUR MAINACTIVITY
     */
-    public Sender(Context c,String q, String ext) {
+    public Sender(Context c, String q, String ext, String filePath) {
         this.c = c;
-        Query=q;
-        Extra=ext;
-
-
+        Query = q;
+        Extra = ext;
+        file = new File(filePath);
     }
+
     /*
    1.SHOW PROGRESS DIALOG WHILE DOWNLOADING DATA
     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd=new ProgressDialog(c);
+        pd = new ProgressDialog(c);
         //pd.setTitle("Envio");
         //pd.setMessage("Enviando dados...");
         //pd.show();
@@ -64,7 +68,12 @@ public class Sender extends AsyncTask<Void,Void,String> {
      */
     @Override
     protected String doInBackground(Void... params) {
-        return this.send();
+        try {
+            return this.send();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /*
@@ -78,18 +87,16 @@ public class Sender extends AsyncTask<Void,Void,String> {
 
         pd.dismiss();
 
-        if(response != null)
-        {
+        if (response != null) {
             //SUCCESS
             resposta = response;
 
-            Toast.makeText(c,response,Toast.LENGTH_LONG).show();
+            Toast.makeText(c, response, Toast.LENGTH_LONG).show();
 
 
-        }else
-        {
+        } else {
             //NO SUCCESS
-            //Toast.makeText(c,"Unsuccessful "+response ,Toast.LENGTH_LONG).show();
+            Toast.makeText(c, "Unsuccessful " + response, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -97,62 +104,39 @@ public class Sender extends AsyncTask<Void,Void,String> {
     SEND DATA OVER THE NETWORK
     RECEIVE AND RETURN A RESPONSE
      */
-    private String send()
-    {
-
-        //CONNECT
-        HttpURLConnection con=Connector.connect(urlAddress);
-
-
-        if(con==null)
-        {
-            return null;
-        }
-
-        try
-        {
-            OutputStream os=con.getOutputStream();
-
-            //WRITE
-            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
-            bw.write(new DataPackager(Query,Extra).packData());
-
-            bw.flush();
-
-            //RELEASE RES
-            bw.close();
-            os.close();
-
-            //HAS IT BEEN SUCCESSFUL?
-            int responseCode=con.getResponseCode();
-            System.out.println("Code:" + responseCode);
-            if(responseCode== HttpURLConnection.HTTP_OK)
-            {
-
-                //GET EXACT RESPONSE
-                BufferedReader br=new BufferedReader(new InputStreamReader(con.getInputStream()));
-                StringBuilder response=new StringBuilder();
-
-                String line;
-
-                //READ LINE BY LINE
-                while ((line=br.readLine()) != null)
-                {
-                    response.append(line);
-                }
-
-                //RELEASE RES
-                br.close();
-                resposta = response.toString();
-                return resposta;
+    private String send() throws IOException {
+        MultipartUtility multipart = null;
+        multipart = new MultipartUtility();
+        int c =0;
+        String aux="";
+        ArrayList<String> col = new ArrayList<>();
+        ArrayList<String> ex = new ArrayList<>();
+        while( c <Extra.length()) {
+            if (!(Extra.charAt(c) == '&' || Extra.charAt(c) == '=')) {
+                aux = aux + Extra.charAt(c);
             }
+            if (Extra.charAt(c) == '=') {
+                col.add(aux);
+                aux = "";
+            }
+            if (Extra.charAt(c) == '&') {
+                ex.add(aux);
+                aux = "";
+            }
+            if (c == Extra.length() - 1) {
+                ex.add(aux);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            }
+            c++;
         }
-
-        return null;
+        multipart.addFormField("q", Query);
+        for(int i = 0; i <col.size();i++){
+            multipart.addFormField(col.get(i) + "", ex.get(i) + "");
+        }
+        if(file != null){
+            multipart.addFilePart("f",file);
+        }
+        return multipart.finish(); // response from server.
     }
-
 }
 

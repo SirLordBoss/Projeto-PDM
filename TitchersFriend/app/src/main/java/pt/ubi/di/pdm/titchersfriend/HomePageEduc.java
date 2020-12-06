@@ -119,15 +119,9 @@ SQLiteDatabase base;
                 total=total+";"+c1+","+c2;
             count++;
         }
-        Log.d("tantacoisa",total);
         try {
-            x = new Sender(HomePageEduc.this,"104",total).execute().get();
-        } catch (
-                ExecutionException e) {
-
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-
+            x = new Sender(HomePageEduc.this,"104",total,null).execute().get();
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         dbHelper.delete();

@@ -605,7 +605,7 @@ switch ($_POST['q']){
             }else{
                 $responseObjectError->success = false;
                 $responseObjectError->error = "Username/password not match2";
-                $responseObjectError->debug = mysqli_error($conn);
+                $responseObjectError->debug = $_POST['u']." ".$_POST['p'];
                 $json = json_encode($responseObjectError);
                 echo $json;
                 exit();
@@ -1119,7 +1119,7 @@ switch ($_POST['q']){
         exit();
     break;
 
-#106 - Enviar um email para o pai do educando
+#106 - Enviar um email para o pai do educando (ainda por fazer)
     case 106:
         $mailE = $_POST['c'];
         $u_nome = $_POST['e'];
@@ -1293,9 +1293,6 @@ switch ($_POST['q']){
             echo $json;
             exit();
         }
-        
-
-
 
     break;
 

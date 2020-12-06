@@ -72,19 +72,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String x ="false";
+                String x = null;
                 String us = inputUser.getText().toString();
                 String pass = inputpass.getText().toString();
                 String enc = getM5(pass);
 
                 try {
-                    x = new Sender(LoginActivity.this,"100","u="+us+"&p="+enc).execute().get();
-                } catch (ExecutionException e) {
+                    x = new Sender(LoginActivity.this,"100","u="+us+"&p="+enc,null).execute().get();
 
+                } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
-                } catch (InterruptedException e) {
-
-                 e.printStackTrace();
                 }
 
                 JSONObject reader;
