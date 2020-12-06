@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         Refjanela = this ;
 
         oTV = (TextView)findViewById(R.id.Título);
-        btnCriaConta = (Button)findViewById(R.id.btnCriarConta);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

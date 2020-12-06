@@ -1132,8 +1132,6 @@ switch ($_POST['q']){
             }
         }
     break;
-
-    
     
 #402 - Forgot password 
     case 402:
