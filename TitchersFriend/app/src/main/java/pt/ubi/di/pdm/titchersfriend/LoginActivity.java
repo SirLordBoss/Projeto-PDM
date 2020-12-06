@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -75,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 String enc = getM5(pass);
 
                 try {
-                    x = new Sender(LoginActivity.this,"http://teachersfriend.ddns.net/service.php","100","u="+us+"&p="+enc).execute().get();
+                    x = new Sender(LoginActivity.this,"100","u="+us+"&p="+enc).execute().get();
                 } catch (ExecutionException e) {
 
                     e.printStackTrace();
@@ -96,11 +99,14 @@ public class LoginActivity extends AppCompatActivity {
                 if(s){
                     //receber dados
                     try {
-                        RecebeDados(x);
+                        RecebeDados(x, us);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
                     Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
+
                     startActivity(A2) ;
                 }
 
@@ -121,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper.close();
     }
 
-    public void RecebeDados(String x) throws JSONException {
+    public void RecebeDados(String x, String us) throws JSONException {
         JSONObject reader = new JSONObject(x);
         ContentValues oCV = new ContentValues();
         String s = reader.getString("educando");
@@ -179,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
 
         for(int i=0;i<arr.length;i++){
             String[] aux = arr[i].split(",");
+            Log.d("aux",aux[0]+aux[1]+aux[2]+aux[3]+aux[4]+aux[5]+aux[6]);
             oCV.put(dbHelper.COL1_T5,aux[0]);
             oCV.put(dbHelper.COL2_T5,aux[1]);
             oCV.put(dbHelper.COL3_T5,aux[2]);
@@ -199,8 +206,10 @@ public class LoginActivity extends AppCompatActivity {
             oCV.put(dbHelper.COL2_T6,aux[1]);
             oSQLDB.insert(dbHelper.TABLE_NAME6,null,oCV);
         }
-
-
+        oCV.clear();
+        oCV.put(dbHelper.COL1_T7,"111");
+        oCV.put(dbHelper.COL2_T7,us);
+        oSQLDB.insert(dbHelper.TABLE_NAME7,null,oCV);
     }
     
 }
