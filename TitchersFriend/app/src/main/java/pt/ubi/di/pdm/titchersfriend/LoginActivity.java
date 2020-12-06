@@ -87,9 +87,12 @@ public class LoginActivity extends AppCompatActivity {
                  e.printStackTrace();
                 }
 
-                JSONObject reader = null;
+                JSONObject reader;
                 Boolean s = false;
                 try {
+                    if(x==null){
+                        return;
+                    }
                     reader = new JSONObject(x);
                     s = reader.getBoolean("success");
                 } catch (JSONException e) {

@@ -1123,7 +1123,7 @@ switch ($_POST['q']){
     case 106:
         $mailE = $_POST['c'];
         $u_nome = $_POST['e'];
-        $date = $_POST['d'];
+        
 
         $sql = "SELECT t.t_token FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id ) WHERE u.u_nome = '$u_nome'";
         $result = mysqli_query($conn,$sql);
@@ -1143,7 +1143,17 @@ switch ($_POST['q']){
         }
         $database_name = $row['t_token'];
         mysqli_select_db($conn,$database_name);
-        $sql = "SELECT * "
+        $sql = "SELECT COUNT(*) FROM educando e WHERE e.e_contacto = '$email'";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Query error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        //send the email
+        //TODO
     break;
 #200 - Retornar a tabela dos educadores
     case 200:
