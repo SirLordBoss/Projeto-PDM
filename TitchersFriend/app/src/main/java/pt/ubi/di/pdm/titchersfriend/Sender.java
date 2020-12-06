@@ -23,7 +23,7 @@ import java.net.HttpURLConnection;
 public class Sender extends AsyncTask<Void,Void,String> {
 
     Context c;
-    String urlAddress;
+    String urlAddress = "http://teachersfriend.ddns.net/service.php";
 
     String resposta;
 
@@ -35,9 +35,9 @@ public class Sender extends AsyncTask<Void,Void,String> {
             1.OUR CONSTRUCTOR
     2.RECEIVE CONTEXT,URL ADDRESS AND EDITTEXTS FROM OUR MAINACTIVITY
     */
-    public Sender(Context c, String urlAddress,String q, String ext) {
+    public Sender(Context c,String q, String ext) {
         this.c = c;
-        this.urlAddress = urlAddress;
+
 
         //INPUT EDITTEXTS
 
