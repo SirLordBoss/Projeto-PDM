@@ -34,4 +34,9 @@
     <string name="sair">Sair</string>
     <string name="sumario">Sumário</string>
     <string name="registar_aula">Registar Aula</string>
+    <string name="mudar_password">Mudar Password</string>
+    <string name="password_anterior">Password anterior</string>
+    <string name="nova_password">Nova password</string>
+    <string name="rep_novapass">Repita a nova password</string>
+    <string name="conf_rel">Confirmar Relatório</string>
 </resources>

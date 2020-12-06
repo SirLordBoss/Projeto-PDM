@@ -42,7 +42,7 @@
             android:layout_marginRight="80dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="sans-serif"
-            android:text="@string/registar_aula"
+            android:text="@string/sumario"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="36sp" />
     </LinearLayout>

@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".RegisterActivity">
+
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:fontFamily="sans-serif"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"
+        android:text="@string/conf_rel"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center|top"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSubmeterRel"
+            android:layout_width="175dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="sans-serif"
+            android:text="@string/submeter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="34sp"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnCancelarRel"
+            android:layout_width="175dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="sans-serif"
+            android:text="@string/cancelar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="34sp"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>
