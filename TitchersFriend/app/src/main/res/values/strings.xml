@@ -39,4 +39,11 @@
     <string name="nova_password">Nova password</string>
     <string name="rep_novapass">Repita a nova password</string>
     <string name="conf_rel">Confirmar Relatório</string>
+    <string name="comeu_bem">Comeu bem:</string>
+    <string name="dormiu_bem">Dormiu bem:</string>
+    <string name="fez_necessidades">Fez necessidades:</string>
+    <string name="magoou_se">Magoou-se:</string>
+    <string name="chorou">Chorou:</string>
+    <string name="enviar">Enviar</string>
+    <string name="nao_enviar">Não Enviar</string>
 </resources>
