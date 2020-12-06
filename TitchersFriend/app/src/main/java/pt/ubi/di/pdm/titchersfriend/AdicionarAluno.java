@@ -1,6 +1,7 @@
 package pt.ubi.di.pdm.titchersfriend;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AdicionarAluno extends AppCompatActivity {
     Spinner dropdown;
     EditText educando, idade, morada, email;
-    Button registo;
+    Button registo,alergia;
     DBHelper dbHelper;
     SQLiteDatabase oSQLDB;
     int a1;
@@ -27,6 +28,7 @@ public class AdicionarAluno extends AppCompatActivity {
         setContentView(R.layout.activity_addaluno);
         dbHelper = new DBHelper(AdicionarAluno.this);
         oSQLDB= dbHelper.getWritableDatabase();
+        alergia = (Button)findViewById(R.id.btnAddAlergia);
         registo = (Button)findViewById(R.id.btnCriar);
         educando = (EditText)findViewById(R.id.inputUser);
         idade = (EditText)findViewById(R.id.inputIdade);
@@ -77,6 +79,14 @@ public class AdicionarAluno extends AppCompatActivity {
                 idade.setText("");
                 morada.setText("");
                 email.setText("");
+            }
+        });
+
+        alergia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdicionarAluno.this,Alergias.class);
+                startActivity(i);
             }
         });
         /*dropdown = (Spinner) findViewById(R.id.inputAlergia);
