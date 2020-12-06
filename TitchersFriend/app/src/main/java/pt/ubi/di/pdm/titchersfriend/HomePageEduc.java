@@ -24,8 +24,13 @@ SQLiteDatabase base;
     private void fechando(){
         String x ="false";
         String total ="";
+        String user="";
         int count=0;
-        Cursor cursor =base.query(dbHelper.TABLE_NAME1,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor =base.query(dbHelper.TABLE_NAME7,new String[]{"*"},null,null,null,null,null);
+        while (cursor.moveToNext()){
+        user = cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T7));
+        }
+       cursor =base.query(dbHelper.TABLE_NAME1,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
 
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T1));
@@ -35,7 +40,7 @@ SQLiteDatabase base;
             String c5 =cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1));
             String c6 =cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T1));
             if(count==0)
-                total="user=educadora&"+"ed"+"="+c1+","+c2+","+c3+","+c4+","+c5+","+c6;
+                total="user="+user+"&"+"ed"+"="+c1+","+c2+","+c3+","+c4+","+c5+","+c6;
             if(count!=0)
                 total=total+";"+c1+","+c2+","+c3+","+c4+","+c5+","+c6;
             count++;
@@ -116,7 +121,7 @@ SQLiteDatabase base;
         }
         Log.d("tantacoisa",total);
         try {
-            x = new Sender(HomePageEduc.this,"http://teachersfriend.ddns.net/service.php","104",total).execute().get();
+            x = new Sender(HomePageEduc.this,"104",total).execute().get();
         } catch (
                 ExecutionException e) {
 
@@ -132,6 +137,7 @@ SQLiteDatabase base;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepageeduc);
+
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
        gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
@@ -177,7 +183,7 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
              fechando();
-             System.exit(0);
+               // System.exit(0);
             }
 
         });
@@ -185,8 +191,10 @@ SQLiteDatabase base;
     }
     @Override
     public void onPause() {
-        ContentValues oCV = new ContentValues();
+
         super.onPause();
+
+
         base.close();
 
     }

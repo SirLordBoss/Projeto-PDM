@@ -58,6 +58,7 @@ public class Sumarios extends AppCompatActivity {
                     String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T2));
                     if (c1.equals(date)){
                         check = true;
+                        break;
                     }
                 }
                 if (check){

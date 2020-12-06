@@ -27,6 +27,8 @@
         <activity android:name=".MarcarFaltas"/>
         <activity android:name=".Sumarios"/>
         <activity android:name=".Aprovacao"/>
+        <activity android:name=".AdicionarAluno"/>
+        <activity android:name=".Alergias"/>
     </application>
 
 </manifest>
