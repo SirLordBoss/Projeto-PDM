@@ -121,7 +121,7 @@ SQLiteDatabase base;
         }
         Log.d("tantacoisa",total);
         try {
-            x = new Sender(HomePageEduc.this,"http://teachersfriend.ddns.net/service.php","104",total).execute().get();
+            x = new Sender(HomePageEduc.this,"104",total).execute().get();
         } catch (
                 ExecutionException e) {
 
@@ -183,7 +183,7 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
              fechando();
-                //System.exit(0);
+               // System.exit(0);
             }
 
         });
