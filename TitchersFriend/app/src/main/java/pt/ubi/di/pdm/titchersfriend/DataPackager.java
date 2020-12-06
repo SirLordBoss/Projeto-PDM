@@ -32,12 +32,11 @@ public class DataPackager {
     public String packData()
     {
         JSONObject jo=new JSONObject();
-        StringBuffer packedData=new StringBuffer();
+        StringBuilder packedData=new StringBuilder();
         int c =0;
-        boolean antes = true;
         String aux="";
-        ArrayList<String> col = new ArrayList<String>();
-        ArrayList<String> ex = new ArrayList<String>();
+        ArrayList<String> col = new ArrayList<>();
+        ArrayList<String> ex = new ArrayList<>();
         while(c<Extra.length()){
             if(!(Extra.charAt(c) =='&' ||Extra.charAt(c) =='=') ){
                 aux = aux+Extra.charAt(c);
@@ -64,7 +63,7 @@ public class DataPackager {
             }
 
 
-            Boolean firstValue=true;
+            boolean firstValue=true;
 
             Iterator it=jo.keys();
 
@@ -88,9 +87,7 @@ public class DataPackager {
 
             return packedData.toString();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 

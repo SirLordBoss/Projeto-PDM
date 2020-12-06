@@ -1,11 +1,14 @@
 package pt.ubi.di.pdm.titchersfriend;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 1.SEND DATA FROM EDITTEXT OVER THE NETWORK
@@ -23,7 +27,7 @@ import java.net.HttpURLConnection;
 public class Sender extends AsyncTask<Void,Void,String> {
 
     Context c;
-    String urlAddress = "http://teachersfriend.ddns.net/service.php";
+    String urlAddress = "https://teachersfriend.ddns.net/service.php";
 
     String resposta;
 
@@ -37,12 +41,6 @@ public class Sender extends AsyncTask<Void,Void,String> {
     */
     public Sender(Context c,String q, String ext) {
         this.c = c;
-
-
-        //INPUT EDITTEXTS
-
-
-        //GET TEXTS FROM EDITEXTS
         Query=q;
         Extra=ext;
 
@@ -56,7 +54,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
         super.onPreExecute();
         pd=new ProgressDialog(c);
         //pd.setTitle("Envio");
-        //pd.setMessage("Enviando..Please wait");
+        //pd.setMessage("Enviando dados...");
         //pd.show();
     }
 
@@ -91,7 +89,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
         }else
         {
             //NO SUCCESS
-            Toast.makeText(c,"Unsuccessful "+response,Toast.LENGTH_LONG).show();
+            //Toast.makeText(c,"Unsuccessful "+response ,Toast.LENGTH_LONG).show();
         }
     }
 
@@ -116,7 +114,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
             OutputStream os=con.getOutputStream();
 
             //WRITE
-            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
+            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
             bw.write(new DataPackager(Query,Extra).packData());
 
             bw.flush();
@@ -126,14 +124,14 @@ public class Sender extends AsyncTask<Void,Void,String> {
             os.close();
 
             //HAS IT BEEN SUCCESSFUL?
-            Log.d("AsdS","boas");
             int responseCode=con.getResponseCode();
-
-            if(responseCode==con.HTTP_OK)
+            System.out.println("Code:" + responseCode);
+            if(responseCode== HttpURLConnection.HTTP_OK)
             {
+
                 //GET EXACT RESPONSE
                 BufferedReader br=new BufferedReader(new InputStreamReader(con.getInputStream()));
-                StringBuffer response=new StringBuffer();
+                StringBuilder response=new StringBuilder();
 
                 String line;
 
@@ -147,9 +145,6 @@ public class Sender extends AsyncTask<Void,Void,String> {
                 br.close();
                 resposta = response.toString();
                 return resposta;
-            }else
-            {
-
             }
 
         } catch (IOException e) {
