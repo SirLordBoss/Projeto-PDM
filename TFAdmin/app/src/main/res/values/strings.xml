@@ -46,4 +46,16 @@
     <string name="editar_aula">Editar Aula</string>
     <string name="escrever_rel">Escrever Relatório</string>
     <string name="editar_dados">Editar Dados</string>
+    <string name="gerir_admins">Gerir Administradores</string>
+    <string name="novo_admin">Novo Administrador</string>
+    <string name="gerir_turmas">Gerir Turmas</string>
+    <string name="gerir_dados">Gerir Dados</string>
+    <string name="mudar_password">Mudar Password</string>
+    <string name="password_anterior">Password anterior</string>
+    <string name="nova_password">Nova password</string>
+    <string name="rep_novapass">Repetia a nova password</string>
+    <string name="turma">Turma</string>
+    <string name="gerir_faltas">Gerir Faltas</string>
+    <string name="gerir_utilizadores">Gerir Utilizadores</string>
+    <string name="gerir_rels">Gerir Relatórios</string>
 </resources>

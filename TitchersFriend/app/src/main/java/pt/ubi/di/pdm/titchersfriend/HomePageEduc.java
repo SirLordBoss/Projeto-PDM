@@ -1,15 +1,12 @@
 package pt.ubi.di.pdm.titchersfriend;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -136,7 +133,7 @@ SQLiteDatabase base;
         base = dbHelper.getWritableDatabase();
        gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
        gerirAulas = (ImageButton)findViewById(R.id.gerirAulas) ;
-       MudarPassword = (ImageButton)findViewById(R.id.gerirSumarios) ;
+       MudarPassword = (ImageButton)findViewById(R.id.mudarPass) ;
        faltas = (ImageButton)findViewById(R.id.gerirEduc) ;
         exit =(Button)findViewById(R.id.btnSair);
        gerirAlunos.setOnClickListener(new View.OnClickListener() {

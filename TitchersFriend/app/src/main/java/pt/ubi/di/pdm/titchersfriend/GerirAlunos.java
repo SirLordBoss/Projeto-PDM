@@ -18,7 +18,7 @@ public class GerirAlunos extends AppCompatActivity {
 
     DBHelper oDBH;
     SQLiteDatabase oSQLDB;
-
+    Cursor oCursor;
     LinearLayout oLL;
     Button add;
     @Override
@@ -53,30 +53,35 @@ public class GerirAlunos extends AppCompatActivity {
 
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
-        Cursor oCursor = oSQLDB.query(oDBH.TABLE_NAME1, new String[]{"*"}, null, null, null, null, null, null);
+        oCursor = oSQLDB.query(oDBH.TABLE_NAME1, new String[]{"*"}, null, null, null, null, null, null);
 
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 2);
+            oLL1.setId(oCursor.getInt(0) * 10 + 3);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0)*10+1);
+            E1.setId(oCursor.getInt(0) * 10 + 2);
             E1.setText(oCursor.getString(1));
 
+            TextView T2 = (TextView) oLL1.findViewById(R.id.idAluno);
+            T2.setId(oCursor.getInt(0) * 10 + 1);
+            T2.setText(oCursor.getString(0));
 
             ImageButton oB1 = (ImageButton) oLL1.findViewById(R.id.btnVerAluno);
-            oB1.setId(oCursor.getInt(0)*10);
+            oB1.setId(oCursor.getInt(0) * 10);
             oB1.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent profile = new Intent(GerirAlunos.this,RegisterActivity.class);//ignorem o intent, foi so para teste!
-                    startActivity(profile);
-                }
-            });
-            oLL.addView(oLL1);
-            bCarryOn = oCursor.moveToNext();
-        }
+                    public void onClick(View v) {
+                        int id = (v.getId())/10;
+                        Intent profile = new Intent(GerirAlunos.this, PerfAlunoActivity.class);
+                        profile.putExtra("id",String.valueOf(id));
+                        startActivity(profile);
+                    }
+                });
+                oLL.addView(oLL1);
+                bCarryOn = oCursor.moveToNext();
+            }
 
     }
 }
