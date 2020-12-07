@@ -57,4 +57,5 @@
     <string name="turma">Turma</string>
     <string name="gerir_faltas">Gerir Faltas</string>
     <string name="gerir_utilizadores">Gerir Utilizadores</string>
+    <string name="gerir_rels">Gerir Relatórios</string>
 </resources>
