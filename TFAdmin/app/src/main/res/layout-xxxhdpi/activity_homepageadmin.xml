@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".HomePageEduc">
+    tools:context=".HomePageAdmin">
 
     <TextView
         android:id="@+id/titulo_homeadmin"
@@ -47,20 +47,23 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="160dp"
+            android:layout_width="200dp"
             android:layout_height="150dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/gerirAlunos"
+                android:id="@+id/gerirDados"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
-                android:padding="20dp"
+                android:paddingStart="10dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="15dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/user_icon"
+                app:srcCompat="@drawable/users_icon"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -68,15 +71,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="@string/gerir_alunos"
+                android:text="@string/gerir_dados"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="160dp"
+            android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_marginStart="20dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -112,36 +114,35 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="160dp"
+            android:layout_width="200dp"
             android:layout_height="150dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/gerirSumarios"
+                android:id="@+id/mudarPass"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/sumario_icon"
+                app:srcCompat="@drawable/mudarpass_icon"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/txtGerirSumarios"
+                android:id="@+id/txtMudarPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="@string/gerir_sumarios"
+                android:text="@string/mudar_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="160dp"
+            android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_marginStart="20dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -174,7 +175,7 @@
         android:layout_width="200dp"
         android:layout_height="110dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="sans-serif"

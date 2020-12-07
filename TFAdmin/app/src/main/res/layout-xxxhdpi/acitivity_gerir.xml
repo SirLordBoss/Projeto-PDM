@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Gerir">
+
+    <TextView
+        android:id="@+id/titulo_homeadmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/titchersfriend"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="44sp" />
+
+    <TextView
+        android:id="@+id/admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"
+        android:text="@string/admin"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/btnGerirTurmas"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="sans-serif"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="@string/gerir_turmas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnGerirEducs"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="sans-serif"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="@string/gerir_educadores"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnGerirAdmins"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="sans-serif"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="@string/gerir_admins"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp" />
+
+
+</LinearLayout>
