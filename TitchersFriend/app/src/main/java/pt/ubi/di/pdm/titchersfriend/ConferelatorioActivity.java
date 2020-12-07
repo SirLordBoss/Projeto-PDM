@@ -44,7 +44,7 @@ public class ConferelatorioActivity extends Activity {
         Bitmap scaled = Bitmap.createScaledBitmap(bitmap,250,400,false);
         cnvs.drawBitmap(scaled,0,0,myPaint);
         cnvs.drawText(getString(R.string.app_name),40,50,myPaint);
-        
+
         myDocument.finishPage(myPage1);
 
         File f = new File(getApplicationContext().getExternalFilesDir(null),"/lastReport.pdf");
