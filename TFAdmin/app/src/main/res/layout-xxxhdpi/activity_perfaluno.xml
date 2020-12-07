@@ -81,18 +81,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnRelatorio"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/cantos_botoes"
-            android:fontFamily="sans-serif"
-            android:text="@string/escrever_rel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="34sp"
-            tools:ignore="ButtonStyle" />
-
-        <Button
             android:id="@+id/btnCancelarRel"
             android:layout_width="175dp"
             android:layout_height="match_parent"

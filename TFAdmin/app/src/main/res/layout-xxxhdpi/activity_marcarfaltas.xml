@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
-            android:fontFamily="@font/kindergarten"
             android:gravity="center"
             android:shadowColor="@android:color/white"
             android:shadowDx="7"
