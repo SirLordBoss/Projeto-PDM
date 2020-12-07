@@ -26,14 +26,12 @@
     <Button
         android:id="@+id/btnGerirAlunos"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="sans-serif"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
         android:text="@string/gerir_alunos"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp" />
@@ -41,29 +39,38 @@
     <Button
         android:id="@+id/btnGerirAulas"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="sans-serif"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
         android:text="@string/gerir_aulas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnGerirFaltas"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="sans-serif"
+        android:text="@string/gerir_faltas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnAlergias"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="sans-serif"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
         android:text="@string/alergias"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp" />

@@ -55,4 +55,6 @@
     <string name="nova_password">Nova password</string>
     <string name="rep_novapass">Repetia a nova password</string>
     <string name="turma">Turma</string>
+    <string name="gerir_faltas">Gerir Faltas</string>
+    <string name="gerir_utilizadores">Gerir Utilizadores</string>
 </resources>
