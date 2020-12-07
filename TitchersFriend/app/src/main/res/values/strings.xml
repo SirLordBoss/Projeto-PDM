@@ -51,4 +51,5 @@
     <string name="editar_dados">Editar Dados</string>
     <string name="dia">Dia</string>
     <string name="editar_aula">Editar Aula</string>
+    <string name="data">Data</string>
 </resources>
