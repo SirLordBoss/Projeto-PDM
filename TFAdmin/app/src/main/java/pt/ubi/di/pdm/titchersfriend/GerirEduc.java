@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import pt.ubi.di.pdm.titchersfriend.DBHelper;
-import pt.ubi.di.pdm.titchersfriend.R;
-
 public class GerirEducs extends AppCompatActivity {
 
     DBHelper db_helper;

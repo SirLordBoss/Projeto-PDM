@@ -327,11 +327,7 @@ switch ($_POST['q']){
         if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
             if($row['c'] == 1){
                 $u_id= $_POST['u_id'];
-                $username = $_POST['nome'];
-                $idade = $_POST['idade'];
-                $morada = $_POST['morada'];
-                $sexo = $_POST['sexo'];
-                $email = $_POST['email'];
+                //TODO VERIFICAR SE O UTILIZADOR É ADMIN OU EDUCADORA, SE FOR EDUCADORA ENTÂO ELIMINAR OS DADOS DA EDUCADORA, SE FOR ADMIN ENTÂO ELIMINAR NA TABELA ADMIN
 
                 $sql = "DELETE FROM users WHERE u_id = '$u_id'";
                 $result = mysqli_query($conn,$sql);
@@ -1524,34 +1520,6 @@ switch ($_POST['q']){
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                 if($row['c'] == 1){
-                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
-                    $token = $_POST['t'];
-                    $id_u = $_POST['e_id'];
-                    $sql = "SELECT t_utilizada FROM turmas WHERE t_token = '$token' AND t_id = '$id_u'";
-                    $result = mysqli_query($conn,$sql);
-                    if(!$result){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error in turmas";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        exit();
-                    }
-                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Error fetching turmas";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        exit();
-                    }
-                    if($row['t_utilizada'] != 0){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Turma a ser utilizada";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        exit();
-                    }
-                    mysqli_select_db($conn,$token);
-                    $atid = $_POST['atid'];
                     $sql = "SELECT tr_id, tr_email, tr_nome FROM to_regist ";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
@@ -1564,7 +1532,7 @@ switch ($_POST['q']){
                     $responseObject->success = true;
                     $responseObject->table = "";
                     while($row = mysqli_fetch_array($result)){
-                        $responseObject->table .= $row['tr_id'].", ".$row['tr_email'].", ".$row['r_comer'].", ".$row['r_dormir'].", ".$row['r_coment'].", ".$row['r_necessidades'].", ".$row['e_curativos'].";";
+                        $responseObject->table .= $row['tr_id'].",".$row['tr_email'].",".$row['tr_nome'].";";
                     }
                     $json = json_encode($responseObject);
                     echo $json;
@@ -1573,6 +1541,11 @@ switch ($_POST['q']){
                 }
             }
         }
+    break;
+
+#301 - Editar Educando
+    case 301:
+
     break;
 
 #401 - Change password
