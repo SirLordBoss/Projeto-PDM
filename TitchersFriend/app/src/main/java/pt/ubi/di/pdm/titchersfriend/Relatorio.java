@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,9 @@ import java.util.Calendar;
 public class Relatorio extends AppCompatActivity {
     DBHelper dbHelper;
     SQLiteDatabase base;
-    CheckBox comer,dormir,Wc,curativo;
+    CheckBox comer,dormir,Wc,curativo,chorar;
     EditText notas;
+    TextView nome;
     Button submeter,cancelar;
     String s = "";
     String id_at = "";
@@ -57,14 +59,17 @@ public class Relatorio extends AppCompatActivity {
             modo = 1;
         }
 
-
+        nome = (TextView)findViewById(R.id.titulo_homeeduc);
         submeter = (Button) findViewById(R.id.btnSubmeterRel);
         cancelar = (Button) findViewById(R.id.btnCancelarRel);
         comer = (CheckBox)findViewById(R.id.cboxComer);
         dormir = (CheckBox)findViewById(R.id.cboxDormir);
         Wc = (CheckBox)findViewById(R.id.cboxWc);
         curativo = (CheckBox)findViewById(R.id.cboxMagoar);
+        chorar = (CheckBox)findViewById(R.id.cboxChorar);
         notas = (EditText) findViewById(R.id.editTextTextPersonName);
+
+        nome.setText(Cheguei.getStringExtra("nome"));
 
         comer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +131,21 @@ public class Relatorio extends AppCompatActivity {
             }
         });
 
+        chorar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chorar.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    /*comer.setCompoundDrawablesWithIntrinsicBounds(null,d1,null,null);
+                    Toast.makeText(Relatorio.this,"Clicou aqui",Toast.LENGTH_SHORT).show();*/
+                    chorar.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    chorar.setBackground(d1);
+                }
+            }
+        });
+
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +168,15 @@ public class Relatorio extends AppCompatActivity {
                 if(curativo.isChecked()){
                     v4 = 1;
                 }
+
+                if(chorar.isChecked()){
+                    v4 = 2;
+                }
+
+                if(chorar.isChecked()&&curativo.isChecked()){
+                    v4 = 3;
+                }
+
                 s = notas.getText().toString();
 
                 ContentValues oCV = new ContentValues();
