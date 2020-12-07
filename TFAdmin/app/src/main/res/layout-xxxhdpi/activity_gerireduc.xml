@@ -34,7 +34,7 @@
             android:orientation="vertical" />
 
         <Button
-            android:id="@+id/btnAddAluno"
+            android:id="@+id/btnAddEduc"
             android:layout_width="262dp"
             android:layout_height="75dp"
             android:layout_marginLeft="80dp"
