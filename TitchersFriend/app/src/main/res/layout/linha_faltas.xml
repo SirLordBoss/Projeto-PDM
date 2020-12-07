@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     android:background="@drawable/cantos_botoes"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <TextView
@@ -10,7 +11,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
         android:layout_weight="1"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -21,20 +21,13 @@
         android:textSize="32sp"
         tools:ignore="LabelFor" />
 
-    <Button
-        android:id="@+id/btnVerAluno"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:adjustViewBounds="true"
         android:background="@drawable/checkbox"
-        android:paddingStart="5dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="15dp"
-        tools:ignore="ContentDescription" />
+        android:button="@null" />
 
 </LinearLayout>
