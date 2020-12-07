@@ -3,7 +3,6 @@ package pt.ubi.di.pdm.titchersfriend;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -48,8 +48,8 @@ public class Sumarios extends AppCompatActivity {
                 String Totalsum = "";
                 String sum = Esumario.getText().toString();
                 String notas = Enotas.getText().toString();
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                String date = df.format(Calendar.getInstance().getTime());
+                Calendar calendar = Calendar.getInstance();
+                String date = java.text.DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
                 boolean check = false;
 
                 Cursor cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
@@ -77,6 +77,7 @@ public class Sumarios extends AppCompatActivity {
                 oCV.put(dbHelper.COL2_T2,Totalsum);
                 oCV.put(dbHelper.COL3_T2,date);
                 base.insert(dbHelper.TABLE_NAME2,null,oCV);
+                Toast.makeText(Sumarios.this,"Submetido!",Toast.LENGTH_SHORT).show();
             }
         });
 
