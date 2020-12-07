@@ -29,6 +29,7 @@
         <activity android:name=".Aprovacao"/>
         <activity android:name=".AdicionarAluno"/>
         <activity android:name=".Alergias"/>
+        <activity android:name=".MudarPassword"/>
     </application>
 
 </manifest>
