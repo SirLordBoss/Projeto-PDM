@@ -42,4 +42,8 @@
     <string name="novo_educador">Novo Educador</string>
     <string name="novos_educadores">Novos Educadores</string>
     <string name="aceitar">Aceitar</string>
+    <string name="dia">Dia</string>
+    <string name="editar_aula">Editar Aula</string>
+    <string name="escrever_rel">Escrever Relatório</string>
+    <string name="editar_dados">Editar Dados</string>
 </resources>

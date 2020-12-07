@@ -47,4 +47,9 @@
     <string name="chorou">Chorou:</string>
     <string name="enviar">Enviar</string>
     <string name="nao_enviar">Não Enviar</string>
+    <string name="escrever_rel">Escrever Relatório</string>
+    <string name="editar_dados">Editar Dados</string>
+    <string name="dia">Dia</string>
+    <string name="editar_aula">Editar Aula</string>
+    <string name="data">Data</string>
 </resources>

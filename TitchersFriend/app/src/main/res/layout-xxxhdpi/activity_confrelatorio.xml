@@ -10,12 +10,13 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="sans-serif"
         android:shadowColor="@android:color/white"
@@ -25,13 +26,16 @@
         android:text="@string/conf_rel"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="38sp" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif"
         android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -61,7 +65,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/comeu_bem"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/outputComeu"
@@ -71,7 +75,7 @@
                 android:fontFamily="sans-serif"
                 android:paddingStart="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
@@ -94,7 +98,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/dormiu_bem"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/outputDormiu"
@@ -104,7 +108,7 @@
                 android:fontFamily="sans-serif"
                 android:paddingStart="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
@@ -127,7 +131,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/fez_necessidades"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/outputWC"
@@ -137,7 +141,7 @@
                 android:fontFamily="sans-serif"
                 android:paddingStart="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
@@ -160,7 +164,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/magoou_se"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/outputMagoar"
@@ -170,7 +174,7 @@
                 android:fontFamily="sans-serif"
                 android:paddingStart="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
@@ -193,7 +197,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/chorou"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/outputChorou"
@@ -203,7 +207,7 @@
                 android:fontFamily="sans-serif"
                 android:paddingStart="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
         <LinearLayout
@@ -244,7 +248,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 

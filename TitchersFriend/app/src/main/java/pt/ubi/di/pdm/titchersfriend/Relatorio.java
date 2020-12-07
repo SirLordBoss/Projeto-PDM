@@ -29,7 +29,7 @@ public class Relatorio extends AppCompatActivity {
     String s = "";
     String id_at = "";
     String VerRel = "";
-    int v1=0,v2=0,v3=0,v4=0;
+    int v1=0,v2=0,v3=0,v4=0,modo = 0;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,17 @@ public class Relatorio extends AppCompatActivity {
 
         id_at = VerificaAtividade(cD);
         VerRel = VerificaRelatorio("1",cD);
+
         if(id_at.equals("vazio")){
             Toast.makeText(Relatorio.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
         }
+
+        if(VerRel.equals("vazio")){
+            Toast.makeText(Relatorio.this,"Já fez um relatorio para este aluno, O relatorio antigo será substituido!",Toast.LENGTH_SHORT).show();
+            modo = 1;
+        }
+
+
         submeter = (Button) findViewById(R.id.btnSubmeterRel);
         cancelar = (Button) findViewById(R.id.btnCancelarRel);
         comer = (CheckBox)findViewById(R.id.cboxComer);
@@ -53,10 +61,11 @@ public class Relatorio extends AppCompatActivity {
         Wc = (CheckBox)findViewById(R.id.cboxWc);
         curativo = (CheckBox)findViewById(R.id.cboxMagoar);
         notas = (EditText) findViewById(R.id.editTextTextPersonName);
+
         comer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!comer.isChecked()){
+                if(comer.isChecked()){
                     Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
                     /*comer.setCompoundDrawablesWithIntrinsicBounds(null,d1,null,null);
                     Toast.makeText(Relatorio.this,"Clicou aqui",Toast.LENGTH_SHORT).show();*/
@@ -64,6 +73,51 @@ public class Relatorio extends AppCompatActivity {
                 }else{
                     Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
                     comer.setBackground(d1);
+                }
+            }
+        });
+
+        dormir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dormir.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    /*comer.setCompoundDrawablesWithIntrinsicBounds(null,d1,null,null);
+                    Toast.makeText(Relatorio.this,"Clicou aqui",Toast.LENGTH_SHORT).show();*/
+                    dormir.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    dormir.setBackground(d1);
+                }
+            }
+        });
+
+        Wc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Wc.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    /*comer.setCompoundDrawablesWithIntrinsicBounds(null,d1,null,null);
+                    Toast.makeText(Relatorio.this,"Clicou aqui",Toast.LENGTH_SHORT).show();*/
+                    Wc.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    Wc.setBackground(d1);
+                }
+            }
+        });
+
+        curativo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(curativo.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    /*comer.setCompoundDrawablesWithIntrinsicBounds(null,d1,null,null);
+                    Toast.makeText(Relatorio.this,"Clicou aqui",Toast.LENGTH_SHORT).show();*/
+                    curativo.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    curativo.setBackground(d1);
                 }
             }
         });
@@ -77,10 +131,6 @@ public class Relatorio extends AppCompatActivity {
                     return;
                 }
 
-                if(VerRel.equals("vazio")){
-                    Toast.makeText(Relatorio.this,"Já fez um relatorio para este aluno",Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 if(comer.isChecked()){
                     v1 = 1;
@@ -106,7 +156,11 @@ public class Relatorio extends AppCompatActivity {
                 oCV.put(dbHelper.COL6_T5,1);
                 oCV.put(dbHelper.COL7_T5,id_at);
 
-                base.insert(dbHelper.TABLE_NAME5,null,oCV);
+                if(modo == 0)
+                    base.insert(dbHelper.TABLE_NAME5,null,oCV);
+                if(modo == 1)
+                    base.update(dbHelper.TABLE_NAME5,oCV,dbHelper.COL6_T5+"=? AND "+dbHelper.COL7_T5+"=?",new String[]{String.valueOf(1),String.valueOf(id_at)});
+
                 Intent i = new Intent(Relatorio.this,ConferelatorioActivity.class);
                 i.putExtra("comer",v1);
                 i.putExtra("dormir",v2);
@@ -118,6 +172,13 @@ public class Relatorio extends AppCompatActivity {
 
                 //Toast.makeText(Relatorio.this,"Sucesso",Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
