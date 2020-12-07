@@ -19,8 +19,6 @@ $mailPort = "587";
 
 $conn = mysqli_connect($servername, $dbUsername, $dbPassword);
 
-
-
 if (!$conn) {
     $responseObject->success = false;
     $responseObject->error = "Unable to connect to MYSQL";
@@ -40,7 +38,7 @@ if (!mysqli_set_charset($conn, "utf8")) {
 
 mysqli_select_db($conn,$maindb);
 
-//if a user does not exist create one
+//if an admin does not exist create one
 
 $firstquery = "SELECT COUNT(u_nome) as cnt FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id );";
 $result = mysqli_query($conn,$firstquery);
@@ -56,12 +54,7 @@ if($result){
                 if($result){
                     $sql = "INSERT INTO admin (u_id) SELECT u_id FROM users WHERE u_nome = 'admin';";
                     $result = mysqli_query($conn,$sql);
-                    if($result){
-                        $responseObject->success = true;
-                        $json = json_encode($responseObject);
-                        echo $json;
-                        exit();
-                    }else{
+                    if(!$result){
                         mysqli_rollback($conn);
                         $responseObjectError->success = false;
                         $responseObjectError->error = "Error inserting in admin table";
@@ -69,7 +62,6 @@ if($result){
                         echo $json;
                         exit();
                     }
-                    
                 }else{
                     mysqli_rollback($conn);
                     $responseObjectError->success = false;
@@ -93,7 +85,7 @@ if($result){
 }
 
 switch ($_POST['q']){
-#021
+#021 - Adicionar um utilizador já inscrito
     case 21:
         $id1 = $_POST['name'];
         $id = $_POST['id'];
@@ -170,7 +162,7 @@ switch ($_POST['q']){
 
                         mysqli_select_db($conn, $uniqid);
 
-                        $sql = "CREATE TABLE IF NOT EXISTS educando ( e_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, e_nome VARCHAR(100) NOT NULL, e_idade INT NOT NULL, e_morada VARCHAR(200) NOT NULL, e_sexo INT NOT NULL, e_contacto VARCHAR(10) NOT NULL );";
+                        $sql = "CREATE TABLE IF NOT EXISTS educando ( e_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, e_nome VARCHAR(100) NOT NULL, e_idade INT NOT NULL, e_morada VARCHAR(200) NOT NULL, e_sexo INT NOT NULL, e_contacto VARCHAR(200) NOT NULL );";
                         $result = mysqli_query($conn, $sql);
                         if(!$result){
                             mysqli_rollback($conn);
@@ -273,7 +265,7 @@ switch ($_POST['q']){
         }
 
     break;
-#022
+#022 - Editar um utilizador
     case 22:
         $id = $_POST['id'];
 
@@ -462,6 +454,7 @@ switch ($_POST['q']){
                                 mysqli_select_db($conn,$database_name);
 
                                 $responseObject->success = true;
+                                $responseObject->id = $u_id;
                                 $responseObject->educando = "none";
                                 $responseObject->atividade = "none";
                                 $responseObject->alergias = "none";
@@ -693,7 +686,7 @@ switch ($_POST['q']){
 
                         mysqli_select_db($conn, $uniqid);
 
-                        $sql = "CREATE TABLE IF NOT EXISTS educando ( e_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, e_nome VARCHAR(100) NOT NULL, e_idade INT NOT NULL, e_morada VARCHAR(200) NOT NULL, e_sexo INT NOT NULL, e_contacto VARCHAR(10) NOT NULL );";
+                        $sql = "CREATE TABLE IF NOT EXISTS educando ( e_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, e_nome VARCHAR(100) NOT NULL, e_idade INT NOT NULL, e_morada VARCHAR(200) NOT NULL, e_sexo INT NOT NULL, e_contacto VARCHAR(200) NOT NULL );";
                         $result = mysqli_query($conn, $sql);
                         if(!$result){
                             mysqli_rollback($conn);
@@ -1179,6 +1172,26 @@ switch ($_POST['q']){
         }
     break;
 
+#401 - Change password
+    case 401:
+        $id = $_POST['user'];
+        $pwd = $_POST['pwd'];
+        $newpwd = $_POST['pwd2'];
+        $sql = "UPDATE users SET u_pwd = '$newpwd' WHERE u_id = '$id' AND u_pwd = '$pwd'";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $responseObject->success = true;
+        $json = json_encode($responseObject);
+        echo $json;
+        exit();
+    break;
+
 #402 - Forgot password 
     case 402:
         //TODO tratar da parte da verificação do utilizador
@@ -1293,6 +1306,11 @@ switch ($_POST['q']){
             exit();
         }
 
+    break;
+
+# default - sair da página
+    default:
+        exit();
     break;
 
 }

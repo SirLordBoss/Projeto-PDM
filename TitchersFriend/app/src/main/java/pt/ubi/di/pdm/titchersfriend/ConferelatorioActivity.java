@@ -1,6 +1,9 @@
 package pt.ubi.di.pdm.titchersfriend;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
@@ -37,10 +40,14 @@ public class ConferelatorioActivity extends Activity {
         PdfDocument.PageInfo myDocumentInfo = new PdfDocument.PageInfo.Builder(250,400,1).create();
         PdfDocument.Page myPage1 = myDocument.startPage(myDocumentInfo);
         Canvas cnvs = myPage1.getCanvas();
+        Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.fundo);
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmap,250,400,false);
+        cnvs.drawBitmap(scaled,0,0,myPaint);
         cnvs.drawText(getString(R.string.app_name),40,50,myPaint);
+        
         myDocument.finishPage(myPage1);
 
-        File f = new File(Environment.getExternalStorageDirectory(),"/lastReport.pdf");
+        File f = new File(getApplicationContext().getExternalFilesDir(null),"/lastReport.pdf");
         try{
             myDocument.writeTo(new FileOutputStream(f));
         } catch (IOException e) {

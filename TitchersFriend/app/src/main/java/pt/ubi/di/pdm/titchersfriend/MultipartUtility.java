@@ -17,6 +17,7 @@ import java.net.URLConnection;
 public class MultipartUtility {
     //esta classe serve para enviar dados através do post, retirado e corrigido por Tiago Almeida em
     // https://stackoverflow.com/questions/11766878/sending-files-using-post-with-httpurlconnection/33149413#33149413
+    //Basicamente o que esta classe faz é o handling do protocolo que é utilizado para enviar ficheiros e dados por post
     private final String boundary;
     private static final String LINE_FEED = "\r\n";
     private final HttpURLConnection httpConn;
@@ -36,7 +37,6 @@ public class MultipartUtility {
         boundary = "===" + System.currentTimeMillis() + "===";
 
         URL url = new URL(requestURL);
-        Log.e("URL", "URL : " + requestURL.toString());
         httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setUseCaches(false);
         httpConn.setDoOutput(true); // indicates POST method
