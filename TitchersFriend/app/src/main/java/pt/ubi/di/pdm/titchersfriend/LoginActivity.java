@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 String us = inputUser.getText().toString();
                 String pass = inputpass.getText().toString();
                 String enc = getM5(pass);
-
+                Log.d("ENCRIPT",enc);
                 try {
                     x = new Sender(LoginActivity.this,"100","u="+us+"&p="+enc,null).execute().get();
 
@@ -107,7 +107,19 @@ public class LoginActivity extends AppCompatActivity {
 
                     startActivity(A2) ;
                 }else{
-                    Toast.makeText(LoginActivity.this,"Falha no Login",Toast.LENGTH_SHORT).show();
+                    JSONObject erro = null;
+                    String e = "erro";
+                    try {
+                         erro = new JSONObject(x);
+                    } catch (JSONException es) {
+                        es.printStackTrace();
+                    }
+                    try {
+                        e = erro.getString("error");
+                    } catch (JSONException jsonException) {
+                        jsonException.printStackTrace();
+                    }
+                    Toast.makeText(LoginActivity.this,e,Toast.LENGTH_SHORT).show();
                     inputpass.setText("");
                     inputUser.setText("");
                     return;
@@ -126,6 +138,8 @@ public class LoginActivity extends AppCompatActivity {
     public void RecebeDados(String x, String us) throws JSONException {
         JSONObject reader = new JSONObject(x);
         ContentValues oCV = new ContentValues();
+        String id = reader.getString("id");
+
         String s = reader.getString("educando");
 
         String[] arr = s.split(";");
@@ -203,9 +217,10 @@ public class LoginActivity extends AppCompatActivity {
             oSQLDB.insert(dbHelper.TABLE_NAME6,null,oCV);
         }
         oCV.clear();
-        oCV.put(dbHelper.COL1_T7,"111");
+        oCV.put(dbHelper.COL1_T7,id);
         oCV.put(dbHelper.COL2_T7,us);
         oSQLDB.insert(dbHelper.TABLE_NAME7,null,oCV);
     }
     
 }
+
