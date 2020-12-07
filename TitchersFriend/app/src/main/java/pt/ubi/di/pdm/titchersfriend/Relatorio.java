@@ -125,7 +125,7 @@ public class Relatorio extends AppCompatActivity {
 
     public String VerificaRelatorio(String id,String date){
 
-        Cursor cursor =base.query(dbHelper.TABLE_NAME5,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor = base.query(dbHelper.TABLE_NAME5,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T5));
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL7_T5));

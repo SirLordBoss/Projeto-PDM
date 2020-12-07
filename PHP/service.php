@@ -90,7 +90,7 @@ switch ($_POST['q']){
         $id1 = $_POST['name'];
         $id = $_POST['id'];
 
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id1';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id1';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -269,7 +269,7 @@ switch ($_POST['q']){
     case 22:
         $id = $_POST['id'];
 
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -318,9 +318,10 @@ switch ($_POST['q']){
         }
     break;
 #023 - Eliminar um utilizador
+    case 23:
     $id = $_POST['id'];
 
-    $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+    $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
     $result = mysqli_query($conn,$sql);
     if($result){
         if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -332,7 +333,7 @@ switch ($_POST['q']){
                 $sexo = $_POST['sexo'];
                 $email = $_POST['email'];
 
-                $sql = "UPDATE users SET (u_nome = ,u_idade = ,u_morada = ,u_sexo = ,u_email = ) WHERE u_id = '$u_id'";
+                $sql = "DELETE FROM users WHERE u_id = '$u_id'";
                 $result = mysqli_query($conn,$sql);
                 if($result){
                     $responseObject->success = true;
@@ -1149,6 +1150,30 @@ switch ($_POST['q']){
     break;
 #200 - Retornar a tabela dos educadores
     case 200:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    $sql = "SELECT u_id, u_nome, u_idade, u_morada, u_sexo, u_email, t_token FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id );";
+                    $result = mysqli_query($conn,$sql);
+                    if($result){
+                        $responseObject->success = true;
+                        $responseObject->table = "";
+                        while($row = mysqli_fetch_array($result)){
+                            $responseObject->table .= $row['u_id'].",".$row['u_nome'].",".$row['u_idade'].",".$row['u_morada'].",".$row['u_sexo'].",".$row['u_email'].",".$row['t_token'].";";
+                        }
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
+                    }
+                }
+            }
+        }
+    break;
+#201 - Retornar a tabela dos administradores
+    case 201:
         $id = $_POST['id'];
         $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
         $result = mysqli_query($conn,$sql);
