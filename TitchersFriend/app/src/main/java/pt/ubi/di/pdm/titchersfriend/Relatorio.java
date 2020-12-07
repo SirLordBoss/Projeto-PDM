@@ -4,14 +4,17 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -29,11 +32,9 @@ public class Relatorio extends AppCompatActivity {
     int v1=0,v2=0,v3=0,v4=0;
 
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
-
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
@@ -42,7 +43,9 @@ public class Relatorio extends AppCompatActivity {
 
         id_at = VerificaAtividade(cD);
         VerRel = VerificaRelatorio("1",cD);
-
+        if(id_at.equals("vazio")){
+            Toast.makeText(Relatorio.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
+        }
         submeter = (Button) findViewById(R.id.btnSubmeterRel);
         cancelar = (Button) findViewById(R.id.btnCancelarRel);
         comer = (CheckBox)findViewById(R.id.cboxComer);
@@ -50,7 +53,20 @@ public class Relatorio extends AppCompatActivity {
         Wc = (CheckBox)findViewById(R.id.cboxWc);
         curativo = (CheckBox)findViewById(R.id.cboxMagoar);
         notas = (EditText) findViewById(R.id.editTextTextPersonName);
-
+        comer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!comer.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    /*comer.setCompoundDrawablesWithIntrinsicBounds(null,d1,null,null);
+                    Toast.makeText(Relatorio.this,"Clicou aqui",Toast.LENGTH_SHORT).show();*/
+                    comer.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    comer.setBackground(d1);
+                }
+            }
+        });
 
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +107,13 @@ public class Relatorio extends AppCompatActivity {
                 oCV.put(dbHelper.COL7_T5,id_at);
 
                 base.insert(dbHelper.TABLE_NAME5,null,oCV);
-                Intent i = new Intent(Relatorio.class,Confrelatorio.class);
+                Intent i = new Intent(Relatorio.this,ConferelatorioActivity.class);
                 i.putExtra("comer",v1);
                 i.putExtra("dormir",v2);
                 i.putExtra("notas",s);
                 i.putExtra("Wc",v3);
                 i.putExtra("Curativo",v4);
+
                 startActivity(i);
 
                 //Toast.makeText(Relatorio.this,"Sucesso",Toast.LENGTH_SHORT).show();

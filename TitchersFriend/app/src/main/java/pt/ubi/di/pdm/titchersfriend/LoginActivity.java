@@ -103,14 +103,10 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                     Intent A2 = new Intent(LoginActivity.this,HomePageEduc.class);
 
                     startActivity(A2) ;
-                }
-
-                if(!s){
+                }else{
                     Toast.makeText(LoginActivity.this,"Falha no Login",Toast.LENGTH_SHORT).show();
                     inputpass.setText("");
                     inputUser.setText("");

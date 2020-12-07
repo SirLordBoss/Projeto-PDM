@@ -31,6 +31,9 @@
         <activity android:name=".ConferelatorioActivity">
 
         </activity>
+        <activity android:name=".Relatorio">
+
+        </activity>
         <activity android:name=".MudarPassword"/>
     </application>
 

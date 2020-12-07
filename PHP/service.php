@@ -597,14 +597,14 @@ switch ($_POST['q']){
                 }
             }else{
                 $responseObjectError->success = false;
-                $responseObjectError->error = "Username/password not match2";
+                $responseObjectError->error = "Username or password not match";
                 $json = json_encode($responseObjectError);
                 echo $json;
                 exit();
             }
         }else{
             $responseObjectError->success = false;
-            $responseObjectError->error = "Username/password not match";
+            $responseObjectError->error = "Username or password not match";
             $responseObjectError->debug = mysqli_error($conn);
             $json = json_encode($responseObjectError);
             echo $json;
