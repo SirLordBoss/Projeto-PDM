@@ -29,6 +29,7 @@ public class Relatorio extends AppCompatActivity {
     String s = "";
     String id_at = "";
     String VerRel = "";
+    String id = "";
     int v1=0,v2=0,v3=0,v4=0,modo = 0;
 
 
@@ -41,8 +42,11 @@ public class Relatorio extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         String cD = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
 
+        Intent Cheguei = getIntent();
+        id = Cheguei.getStringExtra("id");
+
         id_at = VerificaAtividade(cD);
-        VerRel = VerificaRelatorio("1",cD);
+        VerRel = VerificaRelatorio(id,cD);
 
         if(id_at.equals("vazio")){
             Toast.makeText(Relatorio.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
@@ -153,13 +157,13 @@ public class Relatorio extends AppCompatActivity {
                 oCV.put(dbHelper.COL3_T5,s);
                 oCV.put(dbHelper.COL4_T5,v3);
                 oCV.put(dbHelper.COL5_T5,v4);
-                oCV.put(dbHelper.COL6_T5,1);
+                oCV.put(dbHelper.COL6_T5,id);
                 oCV.put(dbHelper.COL7_T5,id_at);
 
                 if(modo == 0)
                     base.insert(dbHelper.TABLE_NAME5,null,oCV);
                 if(modo == 1)
-                    base.update(dbHelper.TABLE_NAME5,oCV,dbHelper.COL6_T5+"=? AND "+dbHelper.COL7_T5+"=?",new String[]{String.valueOf(1),String.valueOf(id_at)});
+                    base.update(dbHelper.TABLE_NAME5,oCV,dbHelper.COL6_T5+"=? AND "+dbHelper.COL7_T5+"=?",new String[]{String.valueOf(id),String.valueOf(id_at)});
 
                 Intent i = new Intent(Relatorio.this,ConferelatorioActivity.class);
                 i.putExtra("comer",v1);
@@ -167,6 +171,7 @@ public class Relatorio extends AppCompatActivity {
                 i.putExtra("notas",s);
                 i.putExtra("Wc",v3);
                 i.putExtra("Curativo",v4);
+                i.putExtra("id",id);
 
                 startActivity(i);
 
@@ -213,4 +218,5 @@ public class Relatorio extends AppCompatActivity {
     }
 
 }
+
 
