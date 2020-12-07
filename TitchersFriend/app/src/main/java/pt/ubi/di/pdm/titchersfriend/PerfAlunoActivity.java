@@ -62,6 +62,7 @@ public class PerfAlunoActivity extends Activity {
             public void onClick(View v) {
                 Intent a1 = new Intent(PerfAlunoActivity.this,Relatorio.class);
                 a1.putExtra("id",id);
+                a1.putExtra("nome",nome.getText().toString());
                 startActivity(a1);
             }
         });
