@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 public class HomePageEduc extends AppCompatActivity {
 
-   ImageButton gerirAlunos,gerirAulas,sumario,faltas;
+   ImageButton gerirAlunos,gerirAulas,MudarPassword,faltas;
     Button exit;
 DBHelper dbHelper;
 SQLiteDatabase base;
@@ -136,7 +136,7 @@ SQLiteDatabase base;
         base = dbHelper.getWritableDatabase();
        gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
        gerirAulas = (ImageButton)findViewById(R.id.gerirAulas) ;
-       sumario = (ImageButton)findViewById(R.id.gerirSumarios) ;
+       MudarPassword = (ImageButton)findViewById(R.id.gerirSumarios) ;
        faltas = (ImageButton)findViewById(R.id.gerirEduc) ;
         exit =(Button)findViewById(R.id.btnSair);
        gerirAlunos.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +155,10 @@ SQLiteDatabase base;
             }
         });
 
-        sumario.setOnClickListener(new View.OnClickListener() {
+        MudarPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent A2 = new Intent(HomePageEduc.this,Sumarios.class);
+                Intent A2 = new Intent(HomePageEduc.this,MudarPassword.class);
                 startActivity(A2) ;
             }
         });
