@@ -14,20 +14,33 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GerirEducs extends AppCompatActivity {
+public class GerirEduc extends AppCompatActivity {
 
     DBHelper db_helper;
     SQLiteDatabase educ_db;
     LinearLayout visualizer;
+    
+    Button add_educ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geriralunos);
 
+        add_educ = (Button) findViewByID(R.id.btnAddEduc);
+        
         db_helper = new DBHelper(this);
-        educ_db = oDBH.getWritableDatabase();
-
+        educ_db = db_helper.getWritableDatabase();
+        
         displayEduc();
+        
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent adicionar_educ = new Intent(GerirEduc.this,AdicionarEduc.class);
+                finish();
+                startActivity(adicionar_educ);
+            }
+        });
     }
 
     @Override
