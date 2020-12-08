@@ -1,15 +1,10 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100">
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <TextView
             android:id="@+id/titulo_geriralunos"
             android:layout_width="match_parent"
@@ -25,13 +20,18 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="44sp" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:id="@+id/visualizar"
             android:layout_width="fill_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="25dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical" />
+    </ScrollView>
+
 
         <Button
             android:id="@+id/btnAddAluno"
@@ -45,5 +45,4 @@
             android:text="@string/novo_aluno"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp" />
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
