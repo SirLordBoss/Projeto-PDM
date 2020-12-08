@@ -46,6 +46,7 @@ public class MarcarFaltas extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         String cD = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
 
+
         displayAlunos();
 
         id_at = VerificaAtividade(cD);
@@ -178,7 +179,8 @@ public class MarcarFaltas extends AppCompatActivity {
         while (cursor.moveToNext()){
             String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T2));
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T2));
-            if (c1.equals(date)){
+
+            if (c1.contains(date)){
                 return c2;
             }
         }
