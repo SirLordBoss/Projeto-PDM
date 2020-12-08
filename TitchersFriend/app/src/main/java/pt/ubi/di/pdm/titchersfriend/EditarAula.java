@@ -80,4 +80,15 @@ public class EditarAula extends Activity {
 
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        base=dbHelper.getWritableDatabase();
+    }
 }

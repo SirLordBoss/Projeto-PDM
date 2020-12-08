@@ -20,14 +20,14 @@ public class AdicionarAluno extends AppCompatActivity {
     EditText educando, idade, morada, email;
     Button registo,alergia;
     DBHelper dbHelper;
-    SQLiteDatabase oSQLDB;
+    SQLiteDatabase base;
     int a1;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addaluno);
         dbHelper = new DBHelper(AdicionarAluno.this);
-        oSQLDB= dbHelper.getWritableDatabase();
+        base= dbHelper.getWritableDatabase();
         alergia = (Button)findViewById(R.id.btnAddAlergia);
         registo = (Button)findViewById(R.id.btnCriar);
         educando = (EditText)findViewById(R.id.inputUser);
@@ -73,7 +73,7 @@ public class AdicionarAluno extends AppCompatActivity {
                 oCV.put(dbHelper.COL4_T1,mor);
                 oCV.put(dbHelper.COL5_T1,String.valueOf(a1));
                 oCV.put(dbHelper.COL6_T1,em);
-                oSQLDB.insert(dbHelper.TABLE_NAME1,null,oCV);
+                base.insert(dbHelper.TABLE_NAME1,null,oCV);
                 Toast.makeText(AdicionarAluno.this,"Inserido Com Sucesso",Toast.LENGTH_SHORT).show();
                 educando.setText("");
                 idade.setText("");
@@ -96,5 +96,16 @@ public class AdicionarAluno extends AppCompatActivity {
         dropdown.setAdapter(adapter);*/
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        base=dbHelper.getWritableDatabase();
     }
 }

@@ -102,4 +102,16 @@ SQLiteDatabase base;
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        base=dbHelper.getWritableDatabase();
+    }
 }

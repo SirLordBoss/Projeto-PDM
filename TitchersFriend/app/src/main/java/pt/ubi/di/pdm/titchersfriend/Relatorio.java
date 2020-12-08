@@ -259,6 +259,18 @@ public class Relatorio extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        base=dbHelper.getWritableDatabase();
+
+    }
+
     public String VerificaRelatorio(String id,String date){
 
         Cursor cursor = base.query(dbHelper.TABLE_NAME5,new String[]{"*"},null,null,null,null,null);

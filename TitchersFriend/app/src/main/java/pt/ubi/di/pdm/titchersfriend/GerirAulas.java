@@ -45,6 +45,7 @@ public class GerirAulas extends AppCompatActivity {
         super.onPause();
         dbHelper.close();
     }
+
     @Override
     public void onResume() {
         super.onResume();

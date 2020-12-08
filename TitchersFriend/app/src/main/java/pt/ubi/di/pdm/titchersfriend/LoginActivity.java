@@ -135,6 +135,13 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper.close();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        oSQLDB=dbHelper.getWritableDatabase();
+
+    }
+
     public void RecebeDados(String x, String us) throws JSONException {
         JSONObject reader = new JSONObject(x);
         ContentValues oCV = new ContentValues();
