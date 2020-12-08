@@ -278,7 +278,7 @@ public class Relatorio extends AppCompatActivity {
             String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T5));
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL7_T5));
             if (c2.equals(id)){
-                if(c1.equals(VerificaAtividade(date)))
+                if(c1.contains(VerificaAtividade(date)))
                     return "vazio";
             }
         }
@@ -292,7 +292,7 @@ public class Relatorio extends AppCompatActivity {
         while (cursor.moveToNext()){
             String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T2));
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T2));
-            if (c1.equals(date)){
+            if (c1.contains(date)){
                 return c2;
             }
         }
