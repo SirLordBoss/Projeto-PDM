@@ -415,6 +415,32 @@ switch ($_POST['q']){
     exit();
 
     break;
+#99 - Login (administrador)
+    case 99:
+        $username = $_POST['u'];
+        $password = $_POST['p'];
+        //só faz login se não for administrador
+        $sql = "SELECT u.u_id FROM pdm_admin.users u INNER JOIN pdm_admin.admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$username' AND u.u_pwd = '$password'";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                    $u_id = $row['u_id'];
+                    $responseObject->success = true;
+                    $responseObject->id = $u_id;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+                }
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysqli error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
 #100 - Login (educadora)
     case 100: 
         $username = $_POST['u'];
@@ -1110,7 +1136,7 @@ switch ($_POST['q']){
 
 #106 - Enviar um email para o pai do educando (ainda por fazer)
     case 106:
-        $mailE = $_POST['c'];
+        $email = $_POST['c'];
         $u_nome = $_POST['e'];
         
 
@@ -1543,9 +1569,124 @@ switch ($_POST['q']){
         }
     break;
 
-#301 - Editar Educando
+#301 - Editar educando
     case 301:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+                    
+                    $e_id = $_POST['e_id'];
+                    $e_nome = $_POST['e_nome'];
+                    $e_idade = $_POST['e_idade'];
+                    $e_morada = $_POST['e_morada'];
+                    $e_sexo = $_POST['e_sexo'];
+                    $e_contacto = $_POST['e_contacto'];
+                    $sql = "UPDATE educando SET e_nome='$e_nome' AND e_idade='$e_idade' AND e_morada='$e_morada' AND e_sexo='$e_sexo' AND e_contacto='$e_contacto' WHERE e_id ='$e_id';";
+                    $result = mysqli_query($conn,$sql);
+                    if($result){
+                        $responseObject->success = true;
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
+                    }else{
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                }
+            }
+        }
+    break;
 
+#302 - Editar alergia
+    case 302:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+                    
+                    $e_id = $_POST['e_id'];
+                    $e_nome = $_POST['e_nome'];
+                    $e_idade = $_POST['e_idade'];
+                    $e_morada = $_POST['e_morada'];
+                    $e_sexo = $_POST['e_sexo'];
+                    $e_contacto = $_POST['e_contacto'];
+                    $sql = "UPDATE educando SET e_nome='$e_nome' AND e_idade='$e_idade' AND e_morada='$e_morada' AND e_sexo='$e_sexo' AND e_contacto='$e_contacto' WHERE e_id ='$e_id';";
+                    $result = mysqli_query($conn,$sql);
+                    if($result){
+                        $responseObject->success = true;
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
+                    }else{
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                }
+            }
+        }
     break;
 
 #401 - Change password
