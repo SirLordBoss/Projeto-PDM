@@ -100,6 +100,13 @@ public class MarcarFaltas extends AppCompatActivity {
         dbHelper.close();
     }
 
+    protected void onResume() {
+        super.onResume();
+        base = dbHelper.getWritableDatabase();
+        oLL.removeAllViews();
+        displayAlunos();
+    }
+
 
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.verfaltas);

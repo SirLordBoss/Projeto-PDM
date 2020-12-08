@@ -46,9 +46,10 @@ public class GerirAlunos extends AppCompatActivity {
         }
         @Override
         public void onResume() {
-
             super.onResume();
             oSQLDB= oDBH.getWritableDatabase();
+            oLL.removeAllViews();
+            displayAlunos();
         }
 
     public void displayAlunos() {
