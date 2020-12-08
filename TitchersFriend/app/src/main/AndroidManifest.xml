@@ -33,6 +33,8 @@
         <activity android:name=".MudarPassword"/>
         <activity android:name=".PerfAlunoActivity"/>
         <activity android:name=".EditAlunoActivity"/>
+        <activity android:name=".VerAula"/>
+        <activity android:name=".EditarAula"/>
     </application>
 
 </manifest>

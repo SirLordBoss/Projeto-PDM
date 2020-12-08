@@ -72,7 +72,7 @@ public class Sumarios extends AppCompatActivity {
                     return;
                 }
 
-                Totalsum = "Sumario: "+sum+"  //  Notas: "+notas;
+                Totalsum = "Sumario:"+sum+"//Notas:"+notas;
 
                 oCV.put(dbHelper.COL2_T2,Totalsum);
                 oCV.put(dbHelper.COL3_T2,date);
