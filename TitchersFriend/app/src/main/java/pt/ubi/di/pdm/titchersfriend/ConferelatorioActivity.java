@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -23,7 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.util.concurrent.ExecutionException;
 
 
 public class ConferelatorioActivity extends Activity {
@@ -175,7 +176,7 @@ public class ConferelatorioActivity extends Activity {
         lastY += 30;
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Este documento contém o relatório diário do dia "+data+". O sumário para o qual foi o seguinte:");
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80," ");
-        String [] ex = sumario.split(" // {2}");
+        String [] ex = sumario.split("//");
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80, ex[0]);
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80, ex[1]);
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80," ");
@@ -219,6 +220,20 @@ public class ConferelatorioActivity extends Activity {
         }
         myDocument.close();
 
+        c = db.query(DBHelper.TABLE_NAME7,new String[]{DBHelper.COL1_T7},null,null,null,null,null);
+        if(!c.moveToFirst()){
+            Toast.makeText(getApplicationContext(),"Erro, não conseguimos estabelecer a ligação à base de dados",Toast.LENGTH_SHORT);
+            return;
+        }
+        int id = c.getInt(0);
+
+        DBHelper.fechando(db,ConferelatorioActivity.this); //para fazer o update de todos os dados
+        try {
+            String x = new Sender(getApplicationContext(),"106","e="+id+"&c="+contacto+"&d="+data,getApplicationContext().getExternalFilesDir(null)+"/lastReport.pdf").execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Erro ao estabelecer a ligação com a base de dados",Toast.LENGTH_SHORT);
+        }
         db.close();
 
     }

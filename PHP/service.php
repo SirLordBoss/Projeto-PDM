@@ -415,7 +415,7 @@ switch ($_POST['q']){
     exit();
 
     break;
-#99 - Login (administrador)
+#099 - Login (administrador)
     case 99:
         $username = $_POST['u'];
         $password = $_POST['p'];
@@ -1664,13 +1664,65 @@ switch ($_POST['q']){
                     }
                     mysqli_select_db($conn,$row['t_token']);
                     
-                    $e_id = $_POST['e_id'];
-                    $e_nome = $_POST['e_nome'];
-                    $e_idade = $_POST['e_idade'];
-                    $e_morada = $_POST['e_morada'];
-                    $e_sexo = $_POST['e_sexo'];
-                    $e_contacto = $_POST['e_contacto'];
-                    $sql = "UPDATE educando SET e_nome='$e_nome' AND e_idade='$e_idade' AND e_morada='$e_morada' AND e_sexo='$e_sexo' AND e_contacto='$e_contacto' WHERE e_id ='$e_id';";
+                    $a_id = $_POST['a_id'];
+                    $a_nome = $_POST['a_nome'];
+                    $sql = "UPDATE alergia SET a_nome='$a_nome' WHERE a_id ='$a_id';";
+                    $result = mysqli_query($conn,$sql);
+                    if($result){
+                        $responseObject->success = true;
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
+                    }else{
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                }
+            }
+        }
+    break;
+
+#303 - Editar atividade
+    case 303:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+                    
+                    $a_id = $_POST['a_id'];
+                    $a_nome = $_POST['a_nome'];
+                    $sql = "UPDATE atividade SET a_nome='$a_nome' WHERE a_id ='$a_id';";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
