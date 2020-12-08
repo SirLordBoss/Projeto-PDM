@@ -138,8 +138,6 @@ public class MarcarFaltas extends AppCompatActivity {
                         oB1.setBackground(d1);
                         faltas.remove(String.valueOf((v.getId())/10));
                     }
-
-
                 }
             });
 
@@ -151,7 +149,6 @@ public class MarcarFaltas extends AppCompatActivity {
     }
 
     public String VerificaAtividade(String date){
-
         Cursor cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T2));
