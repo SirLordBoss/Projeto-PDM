@@ -178,7 +178,7 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
 
-                Intent A2 = new Intent(HomePageEduc.this,Relatorio.class);
+                Intent A2 = new Intent(HomePageEduc.this,MarcarFaltas.class);
                 startActivity(A2) ;
 
 
