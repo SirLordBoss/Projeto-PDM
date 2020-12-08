@@ -40,13 +40,13 @@
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:gravity="top"
+            android:hint="@string/sumario"
+            android:inputType="textMultiLine"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:hint="@string/sumario"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="24sp"
-            tools:ignore="Autofill,RtlSymmetry"
-            android:inputType="text" />
+            tools:ignore="Autofill,RtlSymmetry" />
 
 
         <EditText
@@ -57,13 +57,13 @@
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:gravity="top"
+            android:hint="@string/notas"
+            android:inputType="textMultiLine"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:hint="@string/notas"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="24sp"
-            tools:ignore="Autofill,RtlSymmetry"
-            android:inputType="text" />
+            tools:ignore="Autofill,RtlSymmetry" />
     </LinearLayout>
 
     <LinearLayout
