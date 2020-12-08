@@ -20,14 +20,14 @@ public class AdicionarAluno extends AppCompatActivity {
     EditText educando, idade, morada, email;
     Button registo,alergia;
     DBHelper dbHelper;
-    SQLiteDatabase base;
+    SQLiteDatabase oSQLDB;
     int a1;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addaluno);
         dbHelper = new DBHelper(AdicionarAluno.this);
-        base= dbHelper.getWritableDatabase();
+        oSQLDB= dbHelper.getWritableDatabase();
         alergia = (Button)findViewById(R.id.btnAddAlergia);
         registo = (Button)findViewById(R.id.btnCriar);
         educando = (EditText)findViewById(R.id.inputUser);
@@ -60,12 +60,12 @@ public class AdicionarAluno extends AppCompatActivity {
                 String id = idade.getText().toString();
                 String mor = morada.getText().toString();
                 String em = email.getText().toString();
-                /*if(!em.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+                if(!em.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
                    email.setText("");
                     Toast.makeText(AdicionarAluno.this,"Email inválido!",Toast.LENGTH_SHORT).show();
                     email.requestFocus();
                     return;
-                }*/
+                }
                 ContentValues oCV = new ContentValues();
                 Log.d("TAG", ed+id+mor+em);
                 oCV.put(dbHelper.COL2_T1,ed);
@@ -73,7 +73,7 @@ public class AdicionarAluno extends AppCompatActivity {
                 oCV.put(dbHelper.COL4_T1,mor);
                 oCV.put(dbHelper.COL5_T1,String.valueOf(a1));
                 oCV.put(dbHelper.COL6_T1,em);
-                base.insert(dbHelper.TABLE_NAME1,null,oCV);
+                oSQLDB.insert(dbHelper.TABLE_NAME1,null,oCV);
                 Toast.makeText(AdicionarAluno.this,"Inserido Com Sucesso",Toast.LENGTH_SHORT).show();
                 educando.setText("");
                 idade.setText("");
@@ -96,16 +96,5 @@ public class AdicionarAluno extends AppCompatActivity {
         dropdown.setAdapter(adapter);*/
 
 
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        dbHelper.close();
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        base=dbHelper.getWritableDatabase();
     }
 }
