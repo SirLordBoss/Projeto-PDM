@@ -31,6 +31,7 @@ public class MarcarFaltas extends AppCompatActivity {
     Button submeter,cancelar;
     String id_at = "";
     ArrayList<String> faltas = new ArrayList<String>();
+    ArrayList<String> pres = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +69,13 @@ public class MarcarFaltas extends AppCompatActivity {
                     String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T4));
                     for(int i=0;i<faltas.size();i++){
                         if (c2.equals(faltas.get(i))&&c1.equals(id_at)){
-                            Toast.makeText(MarcarFaltas.this,"Aluno com id "+faltas.get(i)+" já tem falta marcada!",Toast.LENGTH_SHORT).show();
-                            Toast.makeText(MarcarFaltas.this,"Processo interrompido!",Toast.LENGTH_SHORT).show();
-                            return;
+                            faltas.remove(i);
+                        }
+                    }
+                    for(int i=0;i<pres.size();i++){
+                        if(c2.equals(pres.get(i))&&c1.equals(id_at)){
+                            base.delete(dbHelper.TABLE_NAME4,
+                                    dbHelper.COL1_T4 + "=?", new String[]{c2});
                         }
                     }
                 }
@@ -124,6 +129,11 @@ public class MarcarFaltas extends AppCompatActivity {
 
             final CheckBox oB1 = (CheckBox) oLL1.findViewById(R.id.checkBox);
             oB1.setId(oCursor.getInt(0) * 10);
+            if (VerificaFalta(id_at,oCursor.getString(0))){
+                oB1.setChecked(true);
+                Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                oB1.setBackground(d1);
+            }
 
             oB1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -132,11 +142,13 @@ public class MarcarFaltas extends AppCompatActivity {
                         Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
                         oB1.setBackground(d1);
                         faltas.add(String.valueOf((v.getId())/10));
+                        pres.remove(String.valueOf((v.getId())/10));
 
                     }else{
                         Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
                         oB1.setBackground(d1);
                         faltas.remove(String.valueOf((v.getId())/10));
+                        pres.add(String.valueOf((v.getId())/10));
                     }
                 }
             });
@@ -147,6 +159,19 @@ public class MarcarFaltas extends AppCompatActivity {
         }
 
     }
+
+    public boolean VerificaFalta(String id_at,String id){
+        Cursor cursor =base.query(dbHelper.TABLE_NAME4,new String[]{"*"},null,null,null,null,null);
+        while (cursor.moveToNext()){
+            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T4));
+            String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T4));
+            if(c1.equals(id) && c2.equals(id_at)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public String VerificaAtividade(String date){
         Cursor cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
