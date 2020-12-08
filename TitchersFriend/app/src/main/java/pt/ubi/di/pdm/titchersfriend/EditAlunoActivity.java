@@ -66,6 +66,7 @@ public class EditAlunoActivity extends AppCompatActivity {
 
 
                 base.update(dbHelper.TABLE_NAME1,oCV,dbHelper.COL1_T1+"=?",new String[]{String.valueOf(id)});
+                finish();
             }
         });
 
@@ -76,7 +77,15 @@ public class EditAlunoActivity extends AppCompatActivity {
             }
         });
 
-
-
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        base = dbHelper.getWritableDatabase();
     }
 }

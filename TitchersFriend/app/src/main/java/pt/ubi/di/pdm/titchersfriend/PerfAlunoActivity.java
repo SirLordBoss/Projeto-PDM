@@ -80,6 +80,29 @@ public class PerfAlunoActivity extends Activity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        base = dbHelper.getWritableDatabase();
+        Cursor cursor =base.query(dbHelper.TABLE_NAME1,new String[]{"*"},null,null,null,null,null);
+        while (cursor.moveToNext()) {
+            String c1 = cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T1));
+            if (c1.equals(id)) {
+                nome.setText("Nome: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T1)));
+                idade.setText("Idade: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T1)));
+                sexo.setText("Sexo: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1)));
+                morada.setText("Morada: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL4_T1)));
+                contacto.setText("Contacto: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T1)));
+                break;
+            }
+        }
+    }
+
 
 
 }
