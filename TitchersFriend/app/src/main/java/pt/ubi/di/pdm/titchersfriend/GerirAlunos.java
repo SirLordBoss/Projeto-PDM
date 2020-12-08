@@ -90,8 +90,19 @@ public class GerirAlunos extends AppCompatActivity {
                             "ROWID="+(v.getId())/10,
                             null);
 
+                    oSQLDB.delete(oDBH.TABLE_NAME6,
+                            oDBH.COL2_T6+"=?",new String[]{(String.valueOf((v.getId())/10))});
+
+                    oSQLDB.delete(oDBH.TABLE_NAME4,
+                            oDBH.COL1_T4+"=?",new String[]{(String.valueOf((v.getId())/10))});
+
+                    oSQLDB.delete(oDBH.TABLE_NAME5,
+                            oDBH.COL6_T5+"=?",new String[]{(String.valueOf((v.getId())/10))});
+
+
                     LinearLayout oLL1 =(LinearLayout)findViewById((v.getId())+4);
                     ((LinearLayout)oLL1.getParent()).removeView(oLL1);
+
                 }
             });
 
