@@ -72,7 +72,7 @@ public class Sumarios extends AppCompatActivity {
                     return;
                 }
 
-                Totalsum = "Sumario: "+sum+"  //  Notas: "+notas;
+                Totalsum = "Sumario:"+sum+"//Notas:"+notas;
 
                 oCV.put(dbHelper.COL2_T2,Totalsum);
                 oCV.put(dbHelper.COL3_T2,date);
@@ -89,5 +89,17 @@ public class Sumarios extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.close();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        base=dbHelper.getWritableDatabase();
     }
 }

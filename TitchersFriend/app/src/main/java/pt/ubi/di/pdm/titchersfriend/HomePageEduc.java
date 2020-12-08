@@ -1,12 +1,15 @@
 package pt.ubi.di.pdm.titchersfriend;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +25,7 @@ SQLiteDatabase base;
         String x ="false";
         String total ="";
         String user="";
+        String id = "";
         int count=0;
         Cursor cursor =base.query(dbHelper.TABLE_NAME7,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
@@ -121,6 +125,16 @@ SQLiteDatabase base;
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+        cursor =base.query((dbHelper.TABLE_NAME7),new String[]{"*"},null,null,null,null,null);
+        cursor.moveToFirst();
+        id = cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T7));
+
+        try {
+            x = new Sender(HomePageEduc.this,"105","cs=1&id="+id,null).execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        Log.d("FECHOU",x);
         dbHelper.delete();
 
     }
@@ -164,7 +178,7 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
 
-                Intent A2 = new Intent(HomePageEduc.this,Relatorio.class);
+                Intent A2 = new Intent(HomePageEduc.this,MarcarFaltas.class);
                 startActivity(A2) ;
 
 
@@ -174,7 +188,7 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
              fechando();
-               // System.exit(0);
+               System.exit(0);
             }
 
         });

@@ -46,9 +46,10 @@ public class GerirAlunos extends AppCompatActivity {
         }
         @Override
         public void onResume() {
-
             super.onResume();
             oSQLDB= oDBH.getWritableDatabase();
+            oLL.removeAllViews();
+            displayAlunos();
         }
 
     public void displayAlunos() {
@@ -58,18 +59,18 @@ public class GerirAlunos extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 3);
+            oLL1.setId(oCursor.getInt(0) * 10 + 4);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0) * 10 + 2);
+            E1.setId(oCursor.getInt(0) * 10 + 3);
             E1.setText(oCursor.getString(1));
 
             TextView T2 = (TextView) oLL1.findViewById(R.id.idAluno);
-            T2.setId(oCursor.getInt(0) * 10 + 1);
+            T2.setId(oCursor.getInt(0) * 10 + 2);
             T2.setText(oCursor.getString(0));
 
             ImageButton oB1 = (ImageButton) oLL1.findViewById(R.id.btnVerAluno);
-            oB1.setId(oCursor.getInt(0) * 10);
+            oB1.setId(oCursor.getInt(0) * 10 +1);
             oB1.setOnClickListener(new View.OnClickListener() {
                 @Override
                     public void onClick(View v) {
@@ -79,6 +80,22 @@ public class GerirAlunos extends AppCompatActivity {
                         startActivity(profile);
                     }
                 });
+
+            ImageButton oB2 = (ImageButton) oLL1.findViewById(R.id.btnApagar);
+            oB2.setId(oCursor.getInt(0) * 10);
+            oB2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    oSQLDB.delete(oDBH.TABLE_NAME1,
+                            "ROWID="+(v.getId())/10,
+                            null);
+
+                    LinearLayout oLL1 =(LinearLayout)findViewById((v.getId())+4);
+                    ((LinearLayout)oLL1.getParent()).removeView(oLL1);
+                }
+            });
+
+
                 oLL.addView(oLL1);
                 bCarryOn = oCursor.moveToNext();
             }

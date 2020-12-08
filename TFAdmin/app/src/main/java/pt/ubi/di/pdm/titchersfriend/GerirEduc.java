@@ -24,12 +24,15 @@ public class GerirEducs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geriralunos);
 
+        /*
         db_helper = new DBHelper(this);
         educ_db = oDBH.getWritableDatabase();
 
         displayEduc();
+        */
     }
 
+    /*
     @Override
     protected void onPause() {
         super.onPause();
@@ -69,4 +72,5 @@ public class GerirEducs extends AppCompatActivity {
         }
 
     }
+    */
 }

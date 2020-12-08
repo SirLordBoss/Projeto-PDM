@@ -60,12 +60,12 @@ public class AdicionarAluno extends AppCompatActivity {
                 String id = idade.getText().toString();
                 String mor = morada.getText().toString();
                 String em = email.getText().toString();
-                /*if(!em.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+                if(!em.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
                    email.setText("");
                     Toast.makeText(AdicionarAluno.this,"Email inválido!",Toast.LENGTH_SHORT).show();
                     email.requestFocus();
                     return;
-                }*/
+                }
                 ContentValues oCV = new ContentValues();
                 Log.d("TAG", ed+id+mor+em);
                 oCV.put(dbHelper.COL2_T1,ed);

@@ -28,13 +28,13 @@
         <activity android:name=".Aprovacao"/>
         <activity android:name=".AdicionarAluno"/>
         <activity android:name=".Alergias"/>
-        <activity android:name=".ConferelatorioActivity">
-
-        </activity>
-        <activity android:name=".Relatorio">
-
-        </activity>
+        <activity android:name=".ConferelatorioActivity"/>
+        <activity android:name=".Relatorio"/>
         <activity android:name=".MudarPassword"/>
+        <activity android:name=".PerfAlunoActivity"/>
+        <activity android:name=".EditAlunoActivity"/>
+        <activity android:name=".VerAula"/>
+        <activity android:name=".EditarAula"/>
     </application>
 
 </manifest>
