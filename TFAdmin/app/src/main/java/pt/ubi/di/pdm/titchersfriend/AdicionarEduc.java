@@ -27,11 +27,12 @@ public class AdicionarEduc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addeduc);
         
+        /*
         dbHelper = new DBHelper(AdicionarEduc.this);
         educ_db = dbHelper.getWritableDatabase();
         
         create_button = (Button)findViewById(R.id.btn);
-        
+        */
         //waiting room logic goes here
     }
 }
