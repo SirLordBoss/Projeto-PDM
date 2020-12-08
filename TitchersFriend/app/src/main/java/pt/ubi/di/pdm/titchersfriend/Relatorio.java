@@ -50,14 +50,7 @@ public class Relatorio extends AppCompatActivity {
         id_at = VerificaAtividade(cD);
         VerRel = VerificaRelatorio(id,cD);
 
-        if(id_at.equals("vazio")){
-            Toast.makeText(Relatorio.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
-        }
 
-        if(VerRel.equals("vazio")){
-            Toast.makeText(Relatorio.this,"Já fez um relatorio para este aluno, O relatorio antigo será substituido!",Toast.LENGTH_SHORT).show();
-            modo = 1;
-        }
 
         nome = (TextView)findViewById(R.id.titulo_homeeduc);
         submeter = (Button) findViewById(R.id.btnSubmeterRel);
@@ -68,6 +61,58 @@ public class Relatorio extends AppCompatActivity {
         curativo = (CheckBox)findViewById(R.id.cboxMagoar);
         chorar = (CheckBox)findViewById(R.id.cboxChorar);
         notas = (EditText) findViewById(R.id.editTextTextPersonName);
+
+        if(id_at.equals("vazio")){
+            Toast.makeText(Relatorio.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
+        }
+
+        if(VerRel.equals("vazio")){
+            Toast.makeText(Relatorio.this,"Já fez um relatorio para este aluno, O relatorio antigo será substituido!",Toast.LENGTH_SHORT).show();
+            Cursor cursor = base.query(dbHelper.TABLE_NAME5,new String[]{"*"},null,null,null,null,null);
+            while (cursor.moveToNext()){
+                String c2 =cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T5));
+                String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL7_T5));
+                if (c2.equals(id)){
+                    if(c1.equals(VerificaAtividade(cD))){
+                        notas.setText(cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T5)));
+                        if (cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T5)).equals("1")){
+                            comer.setChecked(true);
+                            Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                            comer.setBackground(d1);
+                        }
+                        if (cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T5)).equals("1")){
+                            dormir.setChecked(true);
+                            Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                            dormir.setBackground(d1);
+                        }
+                        if (cursor.getString(cursor.getColumnIndex(dbHelper.COL4_T5)).equals("1")){
+                            Wc.setChecked(true);
+                            Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                            Wc.setBackground(d1);
+                        }
+                        if (cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T5)).equals("1")){
+                            curativo.setChecked(true);
+                            Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                            curativo.setBackground(d1);
+                        }
+                        if (cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T5)).equals("2")){
+                            chorar.setChecked(true);
+                            Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                            chorar.setBackground(d1);
+                        }
+                        if (cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T5)).equals("3")){
+                            curativo.setChecked(true);
+                            chorar.setChecked(true);
+                            Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                            curativo.setBackground(d1);
+                            chorar.setBackground(d1);
+                        }
+                    }
+
+                }
+            }
+            modo = 1;
+        }
 
         nome.setText(Cheguei.getStringExtra("nome"));
 
