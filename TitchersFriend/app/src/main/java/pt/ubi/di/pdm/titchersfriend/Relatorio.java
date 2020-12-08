@@ -170,11 +170,11 @@ public class Relatorio extends AppCompatActivity {
                 }
 
                 if(chorar.isChecked()){
-                    v4 = 2;
+                    v4 = 10;
                 }
 
                 if(chorar.isChecked()&&curativo.isChecked()){
-                    v4 = 3;
+                    v4 = 11;
                 }
 
                 s = notas.getText().toString();
@@ -195,12 +195,8 @@ public class Relatorio extends AppCompatActivity {
                     base.update(dbHelper.TABLE_NAME5,oCV,dbHelper.COL6_T5+"=? AND "+dbHelper.COL7_T5+"=?",new String[]{String.valueOf(id),String.valueOf(id_at)});
 
                 Intent i = new Intent(Relatorio.this,ConferelatorioActivity.class);
-                i.putExtra("comer",v1);
-                i.putExtra("dormir",v2);
-                i.putExtra("notas",s);
-                i.putExtra("Wc",v3);
-                i.putExtra("Curativo",v4);
                 i.putExtra("id",id);
+                i.putExtra("id_at",id_at);
 
                 startActivity(i);
 

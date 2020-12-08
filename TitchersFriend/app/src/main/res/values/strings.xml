@@ -52,4 +52,6 @@
     <string name="dia">Dia</string>
     <string name="editar_aula">Editar Aula</string>
     <string name="data">Data</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 </resources>
