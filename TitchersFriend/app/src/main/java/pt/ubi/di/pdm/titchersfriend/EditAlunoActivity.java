@@ -44,7 +44,13 @@ public class EditAlunoActivity extends AppCompatActivity {
             if (c1.equals(id)){
                 nome.setText(cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T1)));
                 idade.setText(cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T1)));
-                sexo.setText(cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1)));
+
+                String Ssexo = cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1));
+                if(Ssexo.equals("1"))
+                    sexo.setText("Sexo: Masculino");
+                else
+                    sexo.setText("Sexo: Feminino");
+
                 morada.setText(cursor.getString(cursor.getColumnIndex(dbHelper.COL4_T1)));
                 contacto.setText(cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T1)));
                 break;
