@@ -53,7 +53,13 @@ public class PerfAlunoActivity extends Activity {
 
         nome.setText("Nome: "+Snome);
         idade.setText("Idade: "+Sidade);
-        sexo.setText("Sexo: "+Ssexo);
+
+        if(Ssexo.equals("1"))
+            sexo.setText("Sexo: Masculino");
+        else
+            sexo.setText("Sexo: Feminino");
+
+
         morada.setText("Morada: "+Smorada);
         contacto.setText("Contacto: "+Scontacto);
 
@@ -95,7 +101,14 @@ public class PerfAlunoActivity extends Activity {
             if (c1.equals(id)) {
                 nome.setText("Nome: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL2_T1)));
                 idade.setText("Idade: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T1)));
-                sexo.setText("Sexo: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1)));
+
+                Ssexo = cursor.getString(cursor.getColumnIndex(dbHelper.COL5_T1));
+                if(Ssexo.equals("1"))
+                    sexo.setText("Sexo: Masculino");
+                else
+                    sexo.setText("Sexo: Feminino");
+
+
                 morada.setText("Morada: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL4_T1)));
                 contacto.setText("Contacto: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL6_T1)));
                 break;
