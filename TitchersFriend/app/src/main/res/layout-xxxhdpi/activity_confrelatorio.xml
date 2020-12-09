@@ -25,15 +25,14 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="sans-serif"
-                android:shadowColor="@android:color/white"
+                android:fontFamily="@font/sweet_purple"
                 android:shadowDx="7"
                 android:shadowDy="7"
                 android:shadowRadius="1"
                 android:text="@string/conf_rel"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="38sp" />
+                android:textSize="50sp" />
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
@@ -42,7 +41,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/nome"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
