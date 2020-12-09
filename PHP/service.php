@@ -420,7 +420,7 @@ switch ($_POST['q']){
         $username = $_POST['u'];
         $password = $_POST['p'];
         //só faz login se não for administrador
-        $sql = "SELECT u.u_id FROM pdm_admin.users u INNER JOIN pdm_admin.admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$username' AND u.u_pwd = '$password'";
+        $sql = "SELECT u.u_id FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$username' AND u.u_pwd = '$password'";
         $result = mysqli_query($conn,$sql);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -1134,13 +1134,16 @@ switch ($_POST['q']){
         exit();
     break;
 
-#106 - Enviar um email para o pai do educando (ainda por fazer)
+#106 - Enviar um email para o pai do educando 
     case 106:
         $email = $_POST['c'];
         $u_nome = $_POST['e'];
+        $data = $_POST['d'];
+        $pdf = $_FILES['f'];
+
         
 
-        $sql = "SELECT t.t_token FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id ) WHERE u.u_nome = '$u_nome'";
+        $sql = "SELECT t.t_token, u_email,u_sexo FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id ) WHERE u.u_id = '$u_nome'";
         $result = mysqli_query($conn,$sql);
         if(!$result){
             $responseObjectError->success = false;
@@ -1157,8 +1160,10 @@ switch ($_POST['q']){
             exit();
         }
         $database_name = $row['t_token'];
+        $emaile = $row['u_email']; 
+        $sexoe = $row['u_sexo'];
         mysqli_select_db($conn,$database_name);
-        $sql = "SELECT COUNT(*) FROM educando e WHERE e.e_contacto = '$email'";
+        $sql = "SELECT count(*) as c, e_nome, e_sexo FROM educando e INNER JOIN relatorio r ON ( e.e_id = r.e_id  ) INNER JOIN atividade a ON ( r.a_id = a.a_id  ) WHERE e.e_contacto = '$email' AND a.a_data = '$data'";
         $result = mysqli_query($conn,$sql);
         if(!$result){
             $responseObjectError->success = false;
@@ -1167,18 +1172,128 @@ switch ($_POST['q']){
             echo $json;
             exit();
         }
+        if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Fetching error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        if(!($row['c'] > 0)){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Result not found";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $nome = $row['e_nome'];
+        $sexo = $row['e_sexo'];
+
+        
         //send the email
-        //TODO
+        try{
+            require 'PHPMailer/src/Exception.php';
+            require 'PHPMailer/src/PHPMailer.php';
+            require 'PHPMailer/src/SMTP.php';
+
+            $mail = new PHPMailer(TRUE);
+
+            $mail->isSMTP();
+            $mail->Host = $mailHost;
+            $mail->SMTPAuth = "true";
+            $mail->Port = $mailPort;
+            $mail->Username = $mailUsername;
+            $mail->Password = $mailPassword;
+
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = 'base64';
+            $mail->setFrom($mailUsername);
+
+            /* Add a recipient. */
+            $mail->addAddress($email);
+            $mail->addBCC($emaile);
+
+            /* Set the subject. */
+            if($sexo){
+                $mail->Subject = 'Relatório do aluno '.$nome;
+            }else{
+                $mail->Subject = 'Relatório da aluna '.$nome;
+            }
+            
+
+            $mail->isHTML(true);
+            /* Set the mail message body. */
+            if($sexo){
+                $mail->Body = '<html><p>Caro/a encarregado/a de educação do aluno '.$nome.',<br> Em anexo segue o relatório do dia '.$data.' em PDF. Se existir alguma dúvida poderá contactar'; 
+                if($sexoe){
+                    $mail->Body .= 'o educador para o email <a href="mailto:'.$emaile.'">'.$emaile.'</a>.</p></html>';
+                }else{
+                    $mail->Body .= 'a educadora para o email <a href="mailto:'.$emaile.'">'.$emaile.'</a>.</p></html>';
+                }
+            }else{
+                $mail->Body = '<html><p>Caro/a encarregado/a de educação da aluna '.$nome.',<br> Em anexo segue o relatório do dia '.$data.' em PDF. Se existir alguma dúvida poderá contactar'; 
+                if($sexoe){
+                    $mail->Body .= 'o educador para o email <a href="mailto:'.$emaile.'">'.$emaile.'</a>.</p></html>';
+                }else{
+                    $mail->Body .= 'a educadora para o email <a href="mailto:'.$emaile.'">'.$emaile.'</a>.</p></html>';
+                }
+            }
+            
+            /* Set the attachment */
+            if(($pdf['error'] != UPLOAD_ERR_OK)){
+                $responseObjectError->success = false;
+                $responseObjectError->error = "File sent error";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+            $dest = "/var/www/html/uploads/".$nome."_".basename($pdf['name']);
+            if(!move_uploaded_file($pdf['tmp_name'],$dest)){
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Could not upload the file";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+
+            $mail->addAttachment($dest, $nome."_".basename($pdf['name']));   
+
+            /* Finally send the mail. */
+            if(!($mail->send())){
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mail sent error";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }catch (Exception $e){
+            $responseObjectError->success = false;
+            $responseObjectError->error = $e->errorMessage();
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }catch (\Exception $e){
+            $responseObjectError->success = false;
+            $responseObjectError->error = $e->getMessage();
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+        $responseObject->success = true;
+        $json = json_encode($responseObject);
+        echo $json;
+        exit();
+        
     break;
 #200 - Retornar a tabela dos educadores
     case 200:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                 if($row['c'] == 1){
-                    $sql = "SELECT u_id, u_nome, u_idade, u_morada, u_sexo, u_email, t_token, t_utilizada FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id );";
+                    $sql = "SELECT u.u_id, u_nome, u_idade, u_morada, u_sexo, u_email, t_token, t_utilizada FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id );";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
@@ -1191,25 +1306,44 @@ switch ($_POST['q']){
                         exit();
                     }else{
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error";
+                        $responseObjectError->error = "Mysql error 3";
+                        $responseObjectError->debug = mysqli_errno($conn).mysqli_error($conn);
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
                     }
+                }else{
+                    $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 2";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
                 }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 1";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
             }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
         }
     break;
 
 #201 - Retornar a tabela dos administradores
     case 201:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                 if($row['c'] == 1){
-                    $sql = "SELECT u_id, u_nome, u_idade, u_morada, u_sexo, u_email FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id );";
+                    $sql = "SELECT u.u_id, u_nome, u_idade, u_morada, u_sexo, u_email FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id );";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
@@ -1235,7 +1369,7 @@ switch ($_POST['q']){
 #202 - Retornar a tabela dos educandos
     case 202:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1294,7 +1428,7 @@ switch ($_POST['q']){
 #203 - Retornar as tabelas das alergias
     case 203:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1352,7 +1486,7 @@ switch ($_POST['q']){
 #204 - Retornar tabela de atividades
     case 203:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1411,7 +1545,7 @@ switch ($_POST['q']){
 #205 - Retornar faltas num dia
     case 203:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1474,15 +1608,33 @@ switch ($_POST['q']){
                     echo $json;
                     exit();
                     
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mysql error";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
                 }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
             }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
         }
     break;
 
 #206 - retornar tabela de relatórios de uma atividade
     case 206:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1533,15 +1685,33 @@ switch ($_POST['q']){
                     echo $json;
                     exit();
                     
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mysql error 3";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
                 }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 2";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
             }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error 1";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
         }
     break;
 
 #207 - Retornar uma tabela dos inscritos
     case 207:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1564,8 +1734,26 @@ switch ($_POST['q']){
                     echo $json;
                     exit();
                     
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mysql error";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
                 }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
             }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
         }
     break;
 
@@ -1721,8 +1909,8 @@ switch ($_POST['q']){
                     mysqli_select_db($conn,$row['t_token']);
                     
                     $a_id = $_POST['a_id'];
-                    $a_nome = $_POST['a_nome'];
-                    $sql = "UPDATE atividade SET a_nome='$a_nome' WHERE a_id ='$a_id';";
+                    $a_sumario = $_POST['sum'];
+                    $sql = "UPDATE atividade SET a_sumario='$a_sumario' WHERE a_id ='$a_id';";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
@@ -1740,6 +1928,8 @@ switch ($_POST['q']){
             }
         }
     break;
+
+#304 - 
 
 #401 - Change password
     case 401:
@@ -1831,7 +2021,6 @@ switch ($_POST['q']){
 
                 /* Finally send the mail. */
                 if(!($mail->send())){
-                    echo "error";
                     $responseObjectError->success = false;
                     $responseObjectError->error = "Mail sent error";
                     $json = json_encode($responseObjectError);

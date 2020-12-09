@@ -1,7 +1,7 @@
 package pt.ubi.di.pdm.titchersfriend;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,25 +10,30 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.fonts.Font;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
-import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.res.ResourcesCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 
 public class ConferelatorioActivity extends Activity {
-    Button btn;
+    Button btn,btn2;
     int com,dor,wc,cur,id,id_at;
     String not = "";
     DBHelper dbHelper;
@@ -43,8 +48,14 @@ public class ConferelatorioActivity extends Activity {
         id_at = Integer.parseInt(i.getStringExtra("id_at"));
 
         dbHelper = new DBHelper(this);
-        db = dbHelper.getWritableDatabase();
-        Cursor c = db.query(DBHelper.TABLE_NAME5,new String[]{DBHelper.COL1_T5,DBHelper.COL2_T5,DBHelper.COL3_T5,DBHelper.COL4_T5,DBHelper.COL5_T5},DBHelper.COL6_T5+"=? AND "+DBHelper.COL7_T5+"=?",new String[]{String.valueOf(id),String.valueOf(id_at)},null,null,null);
+        db = dbHelper.getReadableDatabase();
+        String nome = null;
+        Cursor c = db.query(DBHelper.TABLE_NAME1,new String[]{DBHelper.COL2_T1},DBHelper.COL1_T1+"=?",new String[]{String.valueOf(id)},null,null,null);
+        if (c.moveToFirst()){
+            nome = c.getString(0);
+        }
+        c.close();
+        c = db.query(DBHelper.TABLE_NAME5,new String[]{DBHelper.COL1_T5,DBHelper.COL2_T5,DBHelper.COL3_T5,DBHelper.COL4_T5,DBHelper.COL5_T5},DBHelper.COL6_T5+"=? AND "+DBHelper.COL7_T5+"=?",new String[]{String.valueOf(id),String.valueOf(id_at)},null,null,null);
         if (c.moveToFirst()){
             com = c.getInt(0);
             dor = c.getInt(1);
@@ -55,11 +66,51 @@ public class ConferelatorioActivity extends Activity {
         c.close();
         db.close();
 
+        ((TextView) findViewById(R.id.textView3)).setText(nome);
+
+        if(com == 1)
+            ((TextView)(findViewById(R.id.outputComeu))).setText(getString(R.string.sim));
+        else
+            ((TextView)(findViewById(R.id.outputComeu))).setText(getString(R.string.nao));
+        if(dor == 1)
+            ((TextView)(findViewById(R.id.outputDormiu))).setText(getString(R.string.sim));
+        else
+            ((TextView)(findViewById(R.id.outputDormiu))).setText(getString(R.string.nao));
+        if(wc == 1)
+            ((TextView)(findViewById(R.id.outputWC))).setText(getString(R.string.sim));
+        else
+            ((TextView)(findViewById(R.id.outputWC))).setText(getString(R.string.nao));
+        if(cur/10 == 1)
+            ((TextView)(findViewById(R.id.outputChorou))).setText(getString(R.string.sim));
+        else
+            ((TextView)(findViewById(R.id.outputChorou))).setText(getString(R.string.nao));
+
+        if (cur%10 == 1)
+            ((TextView)(findViewById(R.id.outputMagoar))).setText(getString(R.string.sim));
+        else
+            ((TextView)(findViewById(R.id.outputMagoar))).setText(getString(R.string.nao));
+
+        ((TextView)(findViewById(R.id.outputComentario))).setText(not);
+
         btn = (Button)findViewById(R.id.btnSubmeterRel);
+        final ConferelatorioActivity ref = this;
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Tentativa de meter uma progress bar a funcionar falhou
+                //Log.d("TAG","antes");
                 createAndSendPDF();
+                //Log.d("TAG","depois");
+                finish();
+            }
+        });
+
+        btn2 = (Button) findViewById(R.id.btnCancelarRel);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -130,8 +181,6 @@ public class ConferelatorioActivity extends Activity {
         int sheetHeight = 842;
         int sheetWidth = 595;
         float lastY = 90;
-        dbHelper = new DBHelper(this);
-        db = dbHelper.getWritableDatabase();
 
         PdfDocument myDocument = new PdfDocument();
         Paint myPaint = new Paint();
@@ -157,11 +206,13 @@ public class ConferelatorioActivity extends Activity {
         String contacto = null;
         String sumario = " ";
         String data = null;
+        int sexo = 0;
 
-        Cursor c = db.query(DBHelper.TABLE_NAME1,new String[]{DBHelper.COL2_T1,DBHelper.COL6_T1},DBHelper.COL1_T1+"=?",new String[]{String.valueOf(id)},null,null,null);
+        Cursor c = db.query(DBHelper.TABLE_NAME1,new String[]{DBHelper.COL2_T1,DBHelper.COL6_T1,DBHelper.COL5_T1},DBHelper.COL1_T1+"=?",new String[]{String.valueOf(id)},null,null,null);
         if (c.moveToFirst()){
             nome = c.getString(0);
             contacto = c.getString(1);
+            sexo = c.getInt(2);
         }
         c.close();
         c = db.query(DBHelper.TABLE_NAME2,new String[]{DBHelper.COL2_T2,DBHelper.COL3_T2},DBHelper.COL1_T2+"=?",new String[]{String.valueOf(id_at)},null,null,null);
@@ -172,16 +223,25 @@ public class ConferelatorioActivity extends Activity {
         c.close();
 
         lastY = 160;
-        lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Caro encarregado de educação do aluno "+nome+",");
+        if(sexo == 1){
+            lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Car@ encarregad@ de educação do aluno "+nome+",");
+        }else{
+            lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Car@ encarregad@ de educação da aluna "+nome+",");
+        }
         lastY += 30;
-        lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Este documento contém o relatório diário do dia "+data+". O sumário para o qual foi o seguinte:");
+        lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Este documento contém o relatório diário do dia "+data+".");
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80," ");
         String [] ex = sumario.split("//");
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80, ex[0]);
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80, ex[1]);
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80," ");
-        lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Neste dia o menino:");
+        if(sexo == 1){
+            lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Neste dia o menino:");
+        }else{
+            lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,"Neste dia a menina:");
+        }
         lastY +=TEXT_PARAGRAPH;
+
         float saveY = lastY;
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY, sheetWidth-80,getString(R.string.comeu_bem));
         lastY +=TEXT_PARAGRAPH;
@@ -226,15 +286,44 @@ public class ConferelatorioActivity extends Activity {
             return;
         }
         int id = c.getInt(0);
-
+        String x = null;
         DBHelper.fechando(db,ConferelatorioActivity.this); //para fazer o update de todos os dados
+        c.close();
         try {
-            String x = new Sender(getApplicationContext(),"106","e="+id+"&c="+contacto+"&d="+data,getApplicationContext().getExternalFilesDir(null)+"/lastReport.pdf").execute().get();
+            x = new Sender(ConferelatorioActivity.this,"106","e="+id+"&c="+contacto+"&d="+data,getApplicationContext().getExternalFilesDir(null)+"/lastReport.pdf").execute().get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Erro ao estabelecer a ligação com a base de dados",Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(),"Erro ao estabelecer a ligação com a base de dados",Toast.LENGTH_SHORT).show();
         }
-        db.close();
+        if(x== null){
+            Toast.makeText(getApplicationContext(),"Erro na aplicação",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            JSONObject reader = new JSONObject(x);
+            if(reader.getBoolean("success")){
+                Toast.makeText(getApplicationContext(),"Enviado",Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(),reader.getString("error"),Toast.LENGTH_SHORT).show();
+            }
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Ocorreu um erro na aplicação",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        db.close();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        db = dbHelper.getReadableDatabase();
     }
 }

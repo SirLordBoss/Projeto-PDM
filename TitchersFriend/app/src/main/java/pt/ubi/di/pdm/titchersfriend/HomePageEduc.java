@@ -73,6 +73,16 @@ SQLiteDatabase base;
             @Override
             public void onClick(View v) {
                 DBHelper.fechando(base,HomePageEduc.this);
+                int id = 0;
+                Cursor cursor =base.query(DBHelper.TABLE_NAME7,new String[]{"*"},null,null,null,null,null);
+                if (cursor.moveToFirst()){
+                    id = cursor.getInt(cursor.getColumnIndex(DBHelper.COL1_T7));
+                }
+                try {
+                    String x = new Sender(HomePageEduc.this,"105","cs=1&id="+id,null).execute().get();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
                 dbHelper.delete();
                 System.exit(0);
             }

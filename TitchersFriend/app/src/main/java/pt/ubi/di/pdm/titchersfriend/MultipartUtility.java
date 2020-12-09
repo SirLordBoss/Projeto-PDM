@@ -75,6 +75,7 @@ public class MultipartUtility {
      */
     public void addFilePart(String fieldName, File uploadFile)
             throws IOException {
+        Log.d("FILENAME",uploadFile.getName());
         String fileName = uploadFile.getName();
         writer.append("--").append(boundary).append(LINE_FEED);
         writer.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"; filename=\"").append(fileName).append("\"")

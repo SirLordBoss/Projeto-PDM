@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.nio.charset.StandardCharsets;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -31,11 +33,8 @@ public class Sender extends AsyncTask<Void,Void,String> {
 
     Context c;
     String urlAddress = "https://teachersfriend.ddns.net/service.php";
-
     String resposta;
-
     String Query, Extra;
-
     ProgressDialog pd;
     File file = null;
 
@@ -58,10 +57,9 @@ public class Sender extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
         pd = new ProgressDialog(c);
-        //pd.setTitle("Envio");
-        //pd.setMessage("Enviando dados...");
-        //pd.show();
+        pd.show();
     }
 
     /*
@@ -86,16 +84,10 @@ public class Sender extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String response) {
         super.onPostExecute(response);
-
-        pd.dismiss();
-
         if (response != null) {
             //SUCCESS
             resposta = response;
-
-            Toast.makeText(c, response, Toast.LENGTH_LONG).show();
-
-
+            //Toast.makeText(c, response, Toast.LENGTH_LONG).show();
         } else {
             //NO SUCCESS
             Toast.makeText(c, "Unsuccessful " + response, Toast.LENGTH_LONG).show();
@@ -136,8 +128,12 @@ public class Sender extends AsyncTask<Void,Void,String> {
             multipart.addFormField(col.get(i) + "", ex.get(i) + "");
         }
         if(file != null){
-            multipart.addFilePart("f",file);
+            multipart.addFilePart("f", file);
+            Log.d("FILE",file.getName());
+        }else{
+            Log.d("FILE","nulo");
         }
+        pd.dismiss();
         return multipart.finish(); // response from server.
     }
 }
