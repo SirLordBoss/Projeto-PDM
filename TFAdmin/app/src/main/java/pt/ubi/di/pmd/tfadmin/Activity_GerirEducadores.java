@@ -1,20 +1,22 @@
-package pt.ubi.di.pdm.tfadmin;
+package pt.ubi.di.pmd.tfadmin;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GerirEduc extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
+public class Activity_GerirEducadores extends AppCompatActivity {
 
     //DBHelper db_helper;
     //SQLiteDatabase educ_db;
@@ -36,7 +38,7 @@ public class GerirEduc extends AppCompatActivity {
         displayEduc();
         //db_helper.close();
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -45,7 +47,7 @@ public class GerirEduc extends AppCompatActivity {
     }
 
     public void displayEduc() {
-        visualizer = (LinearLayout) findViewById(R.id.visualizar_educ);
+        visualizer = (LinearLayout) findViewById(R.id.visualizar);
 
         String x = "false";
 
@@ -56,7 +58,7 @@ public class GerirEduc extends AppCompatActivity {
         Log.v("DEBUG", "this is the id obtained in GerirEduc: " + id);
 
         try{
-            x = new Sender(GerirEduc.this, "200", "id=" + id, null).execute().get();
+            x = new Sender(Activity_GerirEducadores.this, "200", "id=" + id, null).execute().get();
             Log.v("DEBUG", "obtido sender no GerirEduc: " + x + ". That was it");
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -104,7 +106,7 @@ public class GerirEduc extends AppCompatActivity {
                 jsonException.printStackTrace();
             }
 
-            Toast.makeText(GerirEduc.this, e, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Activity_GerirEducadores.this, e, Toast.LENGTH_SHORT).show();
             return;
         }
         /*
@@ -147,11 +149,11 @@ public class GerirEduc extends AppCompatActivity {
             LinearLayout new_educ = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar_educ, null);
             new_educ.setId(Integer.parseInt(aux[0]) * 10 + 3);
 
-            TextView nome_educ = (TextView) new_educ.findViewById(R.id.nomeEduc);
+            TextView nome_educ = (TextView) new_educ.findViewById(R.id.nomeAluno);
             nome_educ.setId(Integer.parseInt(aux[0]) * 10 + 2);
             nome_educ.setText(aux[1]);
 
-            ImageButton oB1 = (ImageButton) new_educ.findViewById(R.id.btnVerEduc);
+            ImageButton oB1 = (ImageButton) new_educ.findViewById(R.id.btnVerAluno);
             oB1.setId(Integer.parseInt(aux[0]) * 10 + 1);
             oB1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -174,3 +176,4 @@ public class GerirEduc extends AppCompatActivity {
 
     }
 }
+
