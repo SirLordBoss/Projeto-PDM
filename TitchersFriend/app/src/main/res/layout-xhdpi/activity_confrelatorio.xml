@@ -1,273 +1,308 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
     android:orientation="vertical"
-    android:weightSum="100"
     tools:context=".RegisterActivity">
-    <LinearLayout
-        android:layout_width="fill_parent"
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/sweet_purple"
-            android:shadowColor="@android:color/white"
-            android:shadowDx="7"
-            android:shadowDy="7"
-            android:shadowRadius="1"
-            android:text="@string/conf_rel"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="90sp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/sweet_purple"
-            android:text="@string/nome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="80sp" />
+        android:background="@drawable/fundo"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/sweet_purple"
+                android:shadowDx="7"
+                android:shadowDy="7"
+                android:shadowRadius="1"
+                android:text="@string/conf_rel"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/sweet_purple"
+                android:text="@string/nome"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txtComeu"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/sweet_purple"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif"
                     android:text="@string/comeu_bem"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="30sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/outputComeu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/sweet_purple"
+                    android:fontFamily="sans-serif"
                     android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp"
-                    tools:ignore="RtlSymmetry" />
+                    android:textSize="30sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center|top"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/txtDormiu"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/sweet_purple"
-                    android:text="@string/dormiu_bem"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
-
-                <TextView
-                    android:id="@+id/outputDormiu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/sweet_purple"
-                    android:paddingStart="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp"
-                    tools:ignore="RtlSymmetry" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txtWC"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/fez_necessidades"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="30sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/outputWC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp"
-                    tools:ignore="RtlSymmetry" />
+                    android:textSize="30sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtDormiu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/sweet_purple"
+                    android:text="@string/dormiu_bem"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="25sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/outputDormiu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sweet_purple"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="25sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txtMagoar"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/magoou_se"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="30sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/outputMagoar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp"
-                    tools:ignore="RtlSymmetry" />
+                    android:textSize="30sp"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txtChorou"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/chorou"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="30sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/outputChorou"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp"
-                    tools:ignore="RtlSymmetry" />
+                    android:textSize="30sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtComentario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/comentario"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="72sp" />
+                    android:textSize="36sp" />
 
                 <TextView
                     android:id="@+id/outputComentario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginBottom="30dp"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="72sp"
+                    android:textSize="35sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <Button
+                    android:id="@+id/btnSubmeterRel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/cantos_botoes"
+                    android:fontFamily="@font/sweet_purple"
+                    android:padding="10dp"
+                    android:text="@string/enviar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="34sp"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/btnCancelarRel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cantos_botoes"
+                    android:fontFamily="@font/sweet_purple"
+                    android:padding="10dp"
+                    android:text="@string/nao_enviar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="34sp"
+                    tools:ignore="ButtonStyle" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- Tentativa falhada de meter aqui uma progress bar a funcionar
         <LinearLayout
+            android:id="@+id/progress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:gravity="center|top"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnSubmeterRel"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#CCFFFFFF"
+            android:visibility="invisible"
+            >
+            <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/cantos_botoes"
-                android:fontFamily="@font/sweet_purple"
-                android:padding="20dp"
-                android:text="@string/enviar"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="80sp"
-                tools:ignore="ButtonStyle" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>-->
 
-            <Button
-                android:id="@+id/btnCancelarRel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/cantos_botoes"
-                android:fontFamily="@font/sweet_purple"
-                android:padding="20dp"
-                android:text="@string/nao_enviar"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="80sp"
-                tools:ignore="ButtonStyle" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
