@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/kindergarten"
         android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="8"
@@ -20,7 +20,7 @@
         android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
     <EditText
         android:id="@+id/inputUser"
@@ -30,13 +30,13 @@
         android:layout_marginTop="95dp"
         android:layout_marginRight="50dp"
         android:ems="10"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:hint="@string/nome_de_utilizador"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp"
+        android:textSize="36sp"
         tools:ignore="Autofill" />
 
     <EditText
@@ -46,13 +46,13 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="35dp"
         android:layout_marginRight="50dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:hint="@string/palavra_passe"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp"
+        android:textSize="36sp"
         tools:ignore="Autofill" />
 
     <Button
@@ -63,8 +63,8 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="80dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="46sp" />
 </LinearLayout>

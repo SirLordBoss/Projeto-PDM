@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="8"
@@ -21,7 +21,7 @@
         android:shadowRadius="1"
         android:text="@string/gerir_utilizadores"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
     <Button
         android:id="@+id/btnGerirEducs"
@@ -31,12 +31,12 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/gerir_educadores"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp" />
+        android:textSize="36sp" />
 
     <Button
         android:id="@+id/btnGerirAdmins"
@@ -46,12 +46,12 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/gerir_admins"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp" />
+        android:textSize="36sp" />
 
 
 </LinearLayout>
