@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/kindergarten"
         android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="8"
@@ -22,7 +22,7 @@
         android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,10 +52,10 @@
                 android:id="@+id/txtGerirAlunos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_alunos"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="32sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -79,10 +79,10 @@
                 android:id="@+id/txtGerirAulas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_aulas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="32sp" />
         </LinearLayout>
 
 
@@ -116,10 +116,10 @@
                 android:id="@+id/txtMudarPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/mudar_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="32sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,10 +143,10 @@
                 android:id="@+id/txtGerirEduc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/marcar_faltas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="32sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -159,11 +159,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/sair"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="46sp" />
 
 </LinearLayout>

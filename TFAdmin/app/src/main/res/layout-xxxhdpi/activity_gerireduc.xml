@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/sweet_purple"
             android:gravity="center"
             android:shadowColor="@android:color/white"
             android:shadowDx="7"
@@ -23,7 +23,7 @@
             android:shadowRadius="1"
             android:text="@string/gerir_educadores"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="48sp" />
+            android:textSize="50sp" />
 
 
         <LinearLayout
@@ -33,17 +33,35 @@
             android:layout_marginTop="25dp"
             android:orientation="vertical" />
 
-        <Button
-            android:id="@+id/btnAddEduc"
-            android:layout_width="262dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="80dp"
-            android:background="@drawable/cantos_botoes"
-            android:fontFamily="sans-serif"
-            android:text="@string/novo_educador"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="30sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center|top"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnEspera"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/cantos_botoes"
+                android:fontFamily="@font/sweet_purple"
+                android:padding="10dp"
+                android:text="@string/em_espera"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="40sp" />
+
+            <Button
+                android:id="@+id/btnAddEduc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/cantos_botoes"
+                android:fontFamily="@font/sweet_purple"
+                android:padding="10dp"
+                android:text="@string/novo_educador"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="40sp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/kindergarten"
         android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="8"
@@ -22,13 +22,13 @@
         android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
     <TextView
         android:id="@+id/admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/kindergarten"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
         android:shadowDy="7"
@@ -36,7 +36,7 @@
         android:text="@string/admin"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="italic" />
 
     <LinearLayout
@@ -48,7 +48,7 @@
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -70,15 +70,15 @@
                 android:id="@+id/txtGerirAlunos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_utilizadores"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -97,10 +97,10 @@
                 android:id="@+id/txtGerirAulas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_dados"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
 
@@ -115,7 +115,7 @@
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -134,15 +134,15 @@
                 android:id="@+id/txtMudarPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/mudar_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -161,10 +161,10 @@
                 android:id="@+id/txtGerirEduc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/sweet_purple"
                 android:text="@string/sair"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="25sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
 
