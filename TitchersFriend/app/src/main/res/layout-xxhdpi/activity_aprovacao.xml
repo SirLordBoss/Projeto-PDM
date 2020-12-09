@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Aprovacao">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/aprovacao"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="48sp" />
+
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="262dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/voltar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="54sp" />
+
+</LinearLayout>

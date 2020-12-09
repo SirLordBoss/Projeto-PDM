@@ -59,8 +59,6 @@
                 android:id="@+id/txtComeu"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/comeu_bem"
@@ -92,8 +90,6 @@
                 android:id="@+id/txtDormiu"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/dormiu_bem"
@@ -125,8 +121,6 @@
                 android:id="@+id/txtWC"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/fez_necessidades"
@@ -158,8 +152,6 @@
                 android:id="@+id/txtMagoar"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/magoou_se"
@@ -191,8 +183,6 @@
                 android:id="@+id/txtChorou"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/chorou"
@@ -210,11 +200,12 @@
                 android:textSize="30sp"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:gravity="center|top"
             android:orientation="vertical">
@@ -248,7 +239,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
