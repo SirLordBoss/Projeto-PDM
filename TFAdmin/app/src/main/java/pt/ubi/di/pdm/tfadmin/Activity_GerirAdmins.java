@@ -1,4 +1,4 @@
-package pt.ubi.di.pmd.tfadmin;
+package pt.ubi.di.pdm.tfadmin;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.ExecutionException;
+
 
 public class Activity_GerirAdmins extends AppCompatActivity {
 

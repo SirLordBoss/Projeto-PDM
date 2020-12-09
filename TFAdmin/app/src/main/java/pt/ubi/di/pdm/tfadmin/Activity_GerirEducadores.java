@@ -1,4 +1,4 @@
-package pt.ubi.di.pmd.tfadmin;
+package pt.ubi.di.pdm.tfadmin;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
+
 
 public class Activity_GerirEducadores extends AppCompatActivity {
 
