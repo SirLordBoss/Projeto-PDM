@@ -101,6 +101,119 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER);
 
     }
+    public static void fechando(SQLiteDatabase base, Context c) {
+        String x = "false";
+        String total = "";
+        String user = "";
+        String id = "";
+        int count = 0;
+        Cursor cursor = base.query(TABLE_NAME7, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            user = cursor.getString(cursor.getColumnIndex(COL2_T7));
+        }
+        cursor = base.query(TABLE_NAME1, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
 
+            String c1 = cursor.getString(cursor.getColumnIndex(COL1_T1));
+            String c2 = cursor.getString(cursor.getColumnIndex(COL2_T1));
+            String c3 = cursor.getString(cursor.getColumnIndex(COL3_T1));
+            String c4 = cursor.getString(cursor.getColumnIndex(COL4_T1));
+            String c5 = cursor.getString(cursor.getColumnIndex(COL5_T1));
+            String c6 = cursor.getString(cursor.getColumnIndex(COL6_T1));
+            if (count == 0)
+                total = "user=" + user + "&" + "ed" + "=" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
+            if (count != 0)
+                total = total + ";" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
+            count++;
+        }
+        total = total + "&";
+        count = 0;
+        cursor = base.query(TABLE_NAME2, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            String c1 = cursor.getString(cursor.getColumnIndex(COL2_T2));
+            String c2 = cursor.getString(cursor.getColumnIndex(COL1_T2));
+            String c3 = cursor.getString(cursor.getColumnIndex(COL3_T2));
+            if (count == 0)
+                total = total + "at" + "=" + c1 + "," + c2 + "," + c3;
+            if (count != 0)
+                total = total + ";" + c1 + "," + c2 + "," + c3;
+            count++;
+        }
+        total = total + "&";
+        count = 0;
+        cursor = base.query(TABLE_NAME3, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            String c1 = cursor.getString(cursor.getColumnIndex(COL1_T3));
+            String c2 = cursor.getString(cursor.getColumnIndex(COL2_T3));
+
+            if (count == 0)
+                total = total + "al" + "=" + c1 + "," + c2;
+            if (count != 0)
+                total = total + ";" + c1 + "," + c2;
+            count++;
+        }
+        total = total + "&";
+        count = 0;
+        cursor = base.query(TABLE_NAME4, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            String c1 = cursor.getString(cursor.getColumnIndex(COL1_T4));
+            String c2 = cursor.getString(cursor.getColumnIndex(COL2_T4));
+
+            if (count == 0)
+                total = total + "fa" + "=" + c1 + "," + c2;
+            if (count != 0)
+                total = total + ";" + c1 + "," + c2;
+            count++;
+        }
+        total = total + "&";
+        count = 0;
+        cursor = base.query(TABLE_NAME5, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            String c1 = cursor.getString(cursor.getColumnIndex(COL1_T5));
+            String c2 = cursor.getString(cursor.getColumnIndex(COL2_T5));
+            String c3 = cursor.getString(cursor.getColumnIndex(COL3_T5));
+            String c4 = cursor.getString(cursor.getColumnIndex(COL4_T5));
+            String c5 = cursor.getString(cursor.getColumnIndex(COL5_T5));
+            String c6 = cursor.getString(cursor.getColumnIndex(COL6_T5));
+            String c7 = cursor.getString(cursor.getColumnIndex(COL7_T5));
+            if (count == 0)
+                total = total + "rel" + "=" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6 + "," + c7;
+            if (count != 0)
+                total = total + ";" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6 + "," + c7;
+            count++;
+        }
+        total = total + "&";
+        count = 0;
+        cursor = base.query(TABLE_NAME6, new String[]{"*"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+
+            String c1 = cursor.getString(cursor.getColumnIndex(COL1_T6));
+            String c2 = cursor.getString(cursor.getColumnIndex(COL2_T6));
+
+            if (count == 0)
+                total = total + "cont" + "=" + c1 + "," + c2;
+            if (count != 0)
+                total = total + ";" + c1 + "," + c2;
+            count++;
+        }
+        try {
+            x = new Sender(c, "104", total, null).execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        cursor = base.query((TABLE_NAME7), new String[]{"*"}, null, null, null, null, null);
+        cursor.moveToFirst();
+        id = cursor.getString(cursor.getColumnIndex(COL1_T7));
+
+        try {
+            x = new Sender(c, "105", "cs=1&id=" + id, null).execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
