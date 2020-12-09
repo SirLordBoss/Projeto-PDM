@@ -1,4 +1,4 @@
-package pt.ubi.di.pmd.tfadmin;
+package pt.ubi.di.pdm.tfadmin;
 
 public class Activity_MudarPass {
 }

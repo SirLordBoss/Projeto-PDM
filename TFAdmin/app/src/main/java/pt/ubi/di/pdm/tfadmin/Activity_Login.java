@@ -1,4 +1,4 @@
-package pt.ubi.di.pmd.tfadmin;
+package pt.ubi.di.pdm.tfadmin;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +19,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
+
+
 
 public class Activity_Login extends AppCompatActivity {
     Button btnLogin;
