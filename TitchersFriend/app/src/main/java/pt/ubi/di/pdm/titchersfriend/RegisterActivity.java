@@ -3,7 +3,6 @@ package pt.ubi.di.pdm.titchersfriend;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.*;
 import android.view.*;
 
@@ -53,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_criarconta);
+        setContentView(R.layout.activity_adduser);
 
         btnCriar = (Button)findViewById(R.id.btnCriar) ;
         inputpass = (EditText) findViewById(R.id.inputPass);
