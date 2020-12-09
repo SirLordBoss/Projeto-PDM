@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "pt.ubi.di.pmd.tfadmin"
+        applicationId "pt.ubi.di.pdm.tfadmin"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
