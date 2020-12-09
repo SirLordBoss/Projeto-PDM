@@ -1,0 +1,10 @@
+este ficheiro mostra como enviar um post para o php e obter a resposta como string com as novas classes,
+como parametros o urladress e o endereço do server do php, o nameTXT e um editText q conteria a string da query e o postTxt é um editext q conteria o extra
+é possivel adaptar para que em vez de enviar em edittext mandar diretamente strings mas depois ve se qual sera o mais util.
+try {
+                String  x = new Sender(MainActivity.this,urlAddress,nameTxt,posTxt).execute().get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
