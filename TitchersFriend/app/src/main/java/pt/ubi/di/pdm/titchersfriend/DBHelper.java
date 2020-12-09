@@ -33,8 +33,8 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL2_T2 = "a_sumario";
     protected static final String COL3_T2 = "a_data";
 
-    protected static final String COL1_T3 = "il_id";
-    protected static final String COL2_T3 = "il_nome";
+    protected static final String COL1_T3 = "al_id";
+    protected static final String COL2_T3 = "al_nome";
 
     protected static final String COL1_T4 = "e_id";
     protected static final String COL2_T4 = "a_id";
@@ -102,9 +102,5 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public static void fechando(SQLiteDatabase base, Context c){
 
-
-
-    }
 }
