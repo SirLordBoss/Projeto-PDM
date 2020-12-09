@@ -311,7 +311,6 @@ public class ConferelatorioActivity extends Activity {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),"Ocorreu um erro na aplicação",Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
