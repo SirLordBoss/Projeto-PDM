@@ -17,13 +17,13 @@
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:ems="10"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:importantForAutofill="no"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/data"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
+        android:textSize="40sp"
         tools:ignore="LabelFor" />
 
     <ImageButton

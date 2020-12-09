@@ -16,10 +16,10 @@
         android:layout_marginTop="120dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/txtIdade"
@@ -29,10 +29,10 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:text="@string/idade"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp" />
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/txtSexo"
@@ -42,10 +42,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:text="@string/sexo"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp" />
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/txtMorada"
@@ -55,10 +55,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:text="@string/morada"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp" />
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/txtContacto"
@@ -68,10 +68,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:text="@string/email_pais"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp" />
+        android:textSize="36sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -86,10 +86,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/sweet_purple"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:text="@string/escrever_rel"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="34sp"
+            android:textSize="40sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -97,10 +99,12 @@
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/cantos_botoes"
-            android:fontFamily="sans-serif"
-            android:text="@string/editar_dados"
+            android:fontFamily="@font/sweet_purple"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/editar_dados_espacos"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="34sp"
+            android:textSize="40sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/kindergarten"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
         android:shadowDy="7"
@@ -20,7 +20,7 @@
         android:text="@string/titchersfriend"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
     <Button
         android:id="@+id/btnCriarConta"
@@ -30,12 +30,12 @@
         android:layout_marginTop="110dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/criar_conta"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -45,11 +45,11 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="44sp" />
+        android:textSize="50sp" />
 
 </LinearLayout>
