@@ -1,13 +1,19 @@
-package pt.ubi.di.pdm.titchersfriend;
+package pt.ubi.di.pdm.tfadmin;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.*;
 import android.view.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
