@@ -58,19 +58,20 @@
 
                 <TextView
                     android:id="@+id/txtComeu"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/comeu_bem"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="75sp" />
-
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
                 <TextView
                     android:id="@+id/outputComeu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -89,19 +90,20 @@
 
                 <TextView
                     android:id="@+id/txtDormiu"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/dormiu_bem"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="75sp" />
-
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
                 <TextView
                     android:id="@+id/outputDormiu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -120,19 +122,20 @@
 
                 <TextView
                     android:id="@+id/txtWC"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/fez_necessidades"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="75sp" />
-
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
                 <TextView
                     android:id="@+id/outputWC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -151,19 +154,20 @@
 
                 <TextView
                     android:id="@+id/txtMagoar"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/magoou_se"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="75sp" />
-
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
                 <TextView
                     android:id="@+id/outputMagoar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -182,19 +186,20 @@
 
                 <TextView
                     android:id="@+id/txtChorou"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/chorou"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="75sp" />
-
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
                 <TextView
                     android:id="@+id/outputChorou"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
