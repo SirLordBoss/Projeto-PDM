@@ -55,21 +55,21 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
         tk = cursor.getString(0);
         cursor.close();
         int aux = dbHelper.updateRelatorio(base,id,e_id,tk,at_id);
-        //oLL.removeAllViews();
-        //displayRelatorios();
-    }
 
-    /*public void displayRelatorios() {
+        displayRelatorios();
+    }
+    public void displayRelatorios() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
+        oLL.removeAllViews();
         oCursor = base.query(DBHelper.TRELATORIO, new String[]{"*"}, null, null, null, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
-            LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_aulas, null);
+            LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
             oLL1.setId(oCursor.getInt(0) * 10 + 1);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
             E1.setId(oCursor.getInt(0) * 10 );
-            E1.setText(oCursor.getString(2));
+            E1.setText(oCursor.getString(1));
 
 
 
@@ -78,7 +78,7 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
             bCarryOn = oCursor.moveToNext();
         }
 
-    }*/
+    }
 
 
 }

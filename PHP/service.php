@@ -1699,14 +1699,12 @@ switch ($_POST['q']){
                         exit();
                     }
                     mysqli_select_db($conn,$row['t_token']);
-                    $atid = $_POST['at_id'];
-                    $sql = "SELECT e.e_nome, r.e_id, r.r_comer, r.r_dormir, r.r_coment, r.r_necessidades, r.r_curativos
-                    FROM educando e 
-                        INNER JOIN relatorio r ON ( e.e_id = r.e_id  )  
-                    WHERE e.a_id = ( 
-                        SELECT a.a_id 
-                        FROM atividade a 
-                            a.a_data = '$atid' LIMIT 1) ";
+                    $atid = $_POST['d'];
+                    $sql = "SELECT r.r_comer, r.r_dormir, r.r_coment, r.r_necessidades, r.r_curativos, e.e_nome, e.e_id
+                    FROM atividade a 
+                        INNER JOIN relatorio r ON ( a.a_id = r.a_id  )  
+                            INNER JOIN educando e ON ( r.e_id = e.e_id  )  
+                    WHERE a.a_id = '$atid' ";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
