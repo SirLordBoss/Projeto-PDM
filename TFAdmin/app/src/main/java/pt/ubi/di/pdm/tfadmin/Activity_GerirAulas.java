@@ -39,7 +39,7 @@ public class Activity_GerirAulas extends AppCompatActivity {
         i = Cheguei.getStringExtra("id");
         e_id = Integer.parseInt(i);
 
-
+        displayAulas();
     }
 
     protected void onResume() {
@@ -50,6 +50,7 @@ public class Activity_GerirAulas extends AppCompatActivity {
         tk = cursor.getString(0);
         cursor.close();
         int aux = dbHelper.updateAtividade(base,id,e_id,tk);
+        oLL.removeAllViews();
         displayAulas();
     }
 
@@ -60,11 +61,25 @@ public class Activity_GerirAulas extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_aulas, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 2);
+            oLL1.setId(oCursor.getInt(0) * 10 + 3);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0) * 10 + 1);
+            E1.setId(oCursor.getInt(0) * 10 + 2);
             E1.setText(oCursor.getString(2));
+
+
+            ImageButton oB2 = (ImageButton)oLL1.findViewById(R.id.btnRelatorio);
+            oB2.setId(oCursor.getInt(0) * 10 +1 );
+            oB2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int id = (v.getId())/10;
+                    Intent aula = new Intent(Activity_GerirAulas.this, Activity_GerirRelatorios.class);
+                    aula.putExtra("id",String.valueOf(id));
+                    aula.putExtra("id_ed",String.valueOf(e_id));
+                    startActivity(aula);
+                }
+            });
 
 
             ImageButton oB1 = (ImageButton) oLL1.findViewById(R.id.btnVerAula);
@@ -72,10 +87,10 @@ public class Activity_GerirAulas extends AppCompatActivity {
             oB1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*int id = (v.getId())/10;
+                    int id = (v.getId())/10;
                     Intent aula = new Intent(Activity_GerirAulas.this, Activity_VerAula.class);
                     aula.putExtra("id",String.valueOf(id));
-                    startActivity(aula);*/
+                    startActivity(aula);
                 }
             });
             oLL.addView(oLL1);
