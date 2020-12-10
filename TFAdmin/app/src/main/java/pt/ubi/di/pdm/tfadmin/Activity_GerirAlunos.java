@@ -18,7 +18,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
     DBHelper dbHelper;
     SQLiteDatabase base;
     LinearLayout oLL;
-    Cursor oCursor,cursor2;
+    Cursor oCursor;
     String tk,i;
     int e_id,id;
 
@@ -49,17 +49,16 @@ public class Activity_GerirAlunos extends AppCompatActivity {
             }
         }
         cursor.close();
-        Log.d("tag","3");
 
-        dbHelper = new DBHelper(this);
-        base = dbHelper.getWritableDatabase();
-
-        displayAlunos();
     }
 
     protected void onResume() {
         super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+
         dbHelper.updateEducando(base,id,e_id,tk);
+        displayAlunos();
     }
 
     public void displayAlunos() {
@@ -85,7 +84,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(Activity_GerirAlunos.this,Activity_PerfAluno.class);
-                    i.putExtra("id",(v.getId())/10);
+                    i.putExtra("id",String.valueOf((v.getId())/10));
                     startActivity(i);
                 }
             });
