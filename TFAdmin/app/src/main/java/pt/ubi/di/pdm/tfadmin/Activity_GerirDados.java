@@ -35,13 +35,6 @@ public class Activity_GerirDados extends AppCompatActivity {
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         u = shp.getInt("id",999);
 
-
-        if (dbHelper.updateEducador(base,u) == 0 || dbHelper.updateEducador(base,u) == -1){
-            Toast.makeText(Activity_GerirDados.this,"Erro",Toast.LENGTH_SHORT).show();
-        }
-
-        displayEducadoras();
-
     }
 
     protected void onResume() {
@@ -50,12 +43,14 @@ public class Activity_GerirDados extends AppCompatActivity {
         if (dbHelper.updateEducador(base,u) == 0 || dbHelper.updateEducador(base,u) == -1){
             Toast.makeText(Activity_GerirDados.this,"Erro",Toast.LENGTH_SHORT).show();
         }
+        displayEducadoras();
 
     }
 
     public void displayEducadoras() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
-        oCursor = base.query(dbHelper.TEDUCADOR, new String[]{"*"}, null, null, null, null, null, null);
+        oLL.removeAllViewsInLayout();
+        oCursor = base.query(DBHelper.TEDUCADOR, new String[]{"*"}, null, null, null, null, null, null);
 
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {

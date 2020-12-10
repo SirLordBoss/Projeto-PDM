@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    private Context c;
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "AdminDB";
     protected static final String TADMIN = "admin";
@@ -90,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * */
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        c = context;
     }
 
     @Override
@@ -139,7 +141,7 @@ public class DBHelper extends SQLiteOpenHelper {
     *        0 : Erro da base de dados interna<br>
     *        1 : Tudo ok<br>
     */
-    public static int updateEducador(Context c, SQLiteDatabase db, int id){
+    public int updateEducador( SQLiteDatabase db, int id){
         String s;
         try {
             s = new Sender(c,"200", "id="+id,null).execute().get();
@@ -192,7 +194,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *        0 : Erro da base de dados interna<br>
      *        1 : Tudo ok<br>
      */
-    public static int updateAdmin(Context c, SQLiteDatabase db, int id){
+    public int updateAdmin( SQLiteDatabase db, int id){
         String s;
         try {
             s = new Sender(c,"201", "id="+id,null).execute().get();
@@ -246,7 +248,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *             0 : Erro da base de dados interna<br>
      *             1 : Tudo ok<br>
      */
-    public static int updateEducando(Context c, SQLiteDatabase db, int id,int e_id,int t_token){
+    public int updateEducando(SQLiteDatabase db, int id,int e_id,String t_token){
         String s;
         try {
             s = new Sender(c,"202", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
@@ -300,7 +302,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *             0 : Erro da base de dados interna<br>
      *             1 : Tudo ok<br>
      */
-    public static int updateAlergia(Context c, SQLiteDatabase db, int id,int e_id,int t_token){
+    public int updateAlergia( SQLiteDatabase db, int id,int e_id,String t_token){
         String s;
         try {
             s = new Sender(c,"203", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
@@ -354,7 +356,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      *
      */
-    public static int updateAtividade(Context c, SQLiteDatabase db, int id,int e_id,int t_token){
+    public int updateAtividade( SQLiteDatabase db, int id,int e_id,String t_token){
         String s;
         try {
             s = new Sender(c,"204", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
@@ -406,7 +408,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public static int updateFalta(Context c, SQLiteDatabase db, int id,int e_id,int t_token,String dia){
+    public int updateFalta(SQLiteDatabase db, int id,int e_id,String t_token,String dia){
         String s;
         try {
             s = new Sender(c,"205", "id="+id+"&e_id="+e_id+"&t="+t_token+"d="+dia,null).execute().get();
@@ -457,7 +459,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public static int updateRelatorio(Context c, SQLiteDatabase db, int id,int e_id,int t_token,int at_id){
+    public int updateRelatorio( SQLiteDatabase db, int id,int e_id,String t_token,int at_id){
         String s;
         try {
             s = new Sender(c,"206", "id="+id+"&e_id="+e_id+"&t="+t_token+"d="+at_id,null).execute().get();
