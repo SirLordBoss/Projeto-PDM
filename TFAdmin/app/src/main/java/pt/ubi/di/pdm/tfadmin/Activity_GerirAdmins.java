@@ -25,8 +25,7 @@ public class Activity_GerirAdmins extends AppCompatActivity {
         setContentView(R.layout.activity_geriradmins);
 
         add_admin = (Button) findViewById(R.id.btnAddAdmin);
-        //TODO descomentar isto
-        //db_helper = new DBHelper(this);
+        db_helper = new DBHelper(this);
         admin_db = db_helper.getWritableDatabase();
 
         displayAdmin();
@@ -58,9 +57,7 @@ public class Activity_GerirAdmins extends AppCompatActivity {
 
         try{
             x = new Sender(Activity_GerirAdmins.this, "201", "id=1", null).execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
