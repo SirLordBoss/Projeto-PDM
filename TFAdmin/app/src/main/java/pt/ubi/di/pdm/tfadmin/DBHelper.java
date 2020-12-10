@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -59,18 +60,20 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String CREATE_TATIVIDADE = "CREATE TABLE IF NOT EXISTS "+TATIVIDADE+ "("+COL1_TATIVIDADE+" INTEGER NOT NULL,"+COL2_TATIVIDADE+" VARCHAR(300) NOT NULL,"+COL3_TATIVIDADE+" VARCHAR(20) NOT NULL);";
 
     protected static final String TFALTA = "falta";
+    protected static final String COL0_TFALTA = "e_id";
     protected static final String COL1_TFALTA = "e_nome";
     protected static final String COL2_TFALTA = "is_falta";
-    protected static final String CREATE_TFALTA = "CREATE TABLE IF NOT EXISTS "+TFALTA+ "("+COL1_TFALTA+" VARCHAR(200) NOT NULL,"+COL2_TFALTA+" INTEGER NOT NULL);";
+    protected static final String CREATE_TFALTA = "CREATE TABLE IF NOT EXISTS "+TFALTA+ "("+COL0_TFALTA+" INTEGER NOT NULL,"+COL1_TFALTA+" VARCHAR(200) NOT NULL,"+COL2_TFALTA+" INTEGER NOT NULL);";
 
     protected static final String TRELATORIO = "relatorio";
+    protected static final String COL0_TRELATORIO = "e_id";
     protected static final String COL1_TRELATORIO = "e_nome";
     protected static final String COL2_TRELATORIO = "r_comer";
     protected static final String COL3_TRELATORIO = "r_dormir";
     protected static final String COL4_TRELATORIO = "r_coment";
     protected static final String COL5_TRELATORIO = "r_necessidades";
     protected static final String COL6_TRELATORIO = "r_curativos";
-    protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TATIVIDADE+ "("+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL,"+COL6_TRELATORIO+" INTEGER NOT NULL);";
+    protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TRELATORIO+ "("+COL0_TRELATORIO+" INTEGER NOT NULL,"+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL,"+COL6_TRELATORIO+" INTEGER NOT NULL);";
 
     protected static final String TINSCRITO = "admin";
     protected static final String COL1_TINSCRITO = "u_id";
@@ -120,6 +123,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TRELATORIO);
         db.execSQL(CREATE_TFALTA);
         db.execSQL(CREATE_TINSCRITO);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db,newVersion,oldVersion);
     }
 
     /**
@@ -401,7 +409,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int updateFalta(SQLiteDatabase db, int id,int e_id,String t_token,String dia){
         String s;
         try {
-            s = new Sender(c,"205", "id="+id+"&e_id="+e_id+"&t="+t_token+"d="+dia,null).execute().get();
+            s = new Sender(c,"205", "id="+id+"&e_id="+e_id+"&t="+t_token+"&d="+dia,null).execute().get();
             if(s == null){
                 return -1;
             }
@@ -451,29 +459,36 @@ public class DBHelper extends SQLiteOpenHelper {
     public int updateRelatorio( SQLiteDatabase db, int id,int e_id,String t_token,int at_id){
         String s;
         try {
-            s = new Sender(c,"206", "id="+id+"&e_id="+e_id+"&t="+t_token+"d="+at_id,null).execute().get();
+            s = new Sender(c,"206", "id="+id+"&e_id="+e_id+"&t="+t_token+"&d="+at_id,null).execute().get();
             if(s == null){
                 return -1;
             }
+            System.out.printf(s);
+
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
                 return 0;
             }
 
-            db.execSQL("DROP TABLE "+TRELATORIO);
+            db.execSQL("DROP TABLE IF EXISTS "+TRELATORIO);
             db.execSQL(CREATE_TRELATORIO);
             String table = o.getString("table");
+
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TRELATORIO, col[0]);
-                cv.put(COL2_TRELATORIO, Integer.valueOf(col[1]));
-                cv.put(COL3_TRELATORIO, Integer.valueOf(col[2]));
-                cv.put(COL4_TRELATORIO, col[3]);
-                cv.put(COL5_TRELATORIO, Integer.valueOf(col[4]));
-                cv.put(COL6_TRELATORIO, Integer.valueOf(col[5]));
+                cv.put(COL0_TRELATORIO, col[0]);
+                cv.put(COL1_TRELATORIO, col[1]);
+                cv.put(COL2_TRELATORIO, Integer.valueOf(col[2]));
+                cv.put(COL3_TRELATORIO, Integer.valueOf(col[3]));
+                cv.put(COL4_TRELATORIO, col[4]);
+                cv.put(COL5_TRELATORIO, Integer.valueOf(col[5]));
+                cv.put(COL6_TRELATORIO, Integer.valueOf(col[6]));
                 if (db.insert(TRELATORIO, null, cv) == -1)
                     return 0;
                 cv.clear();

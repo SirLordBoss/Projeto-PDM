@@ -44,13 +44,11 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
         Log.d("tag","1");
         i2 = Cheguei.getStringExtra("e_id");
         e_id = Integer.parseInt(i2);
-
-        Log.d("tag","1");
         //displayRelatorios();
 
     }
 
-    /*protected void onResume() {
+    protected void onResume() {
         super.onResume();
         Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{DBHelper.COL7_TEDUCADOR},DBHelper.COL1_TEDUCADOR+"=?",new String[]{String.valueOf(e_id)},null,null,null);
         cursor.moveToFirst();
@@ -61,7 +59,7 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
         //displayRelatorios();
     }
 
-    public void displayRelatorios() {
+    /*public void displayRelatorios() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
         oCursor = base.query(DBHelper.TRELATORIO, new String[]{"*"}, null, null, null, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();

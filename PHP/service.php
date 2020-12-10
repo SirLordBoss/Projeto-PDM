@@ -1611,7 +1611,7 @@ switch ($_POST['q']){
                     mysqli_select_db($conn,$row['t_token']);
 
                     $data = $_POST['d'];
-                    $sql = "SELECT e.e_nome FROM faltas f INNER JOIN educando e ON ( f.e_id = e.e_id  ) INNER JOIN atividade a ON ( f.a_id = a.a_id  ) WHERE a.a_data = '$data';";
+                    $sql = "SELECT e.e_nome,e_id FROM faltas f INNER JOIN educando e ON ( f.e_id = e.e_id  ) INNER JOIN atividade a ON ( f.a_id = a.a_id  ) WHERE a.a_data = '$data';";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -1623,7 +1623,7 @@ switch ($_POST['q']){
                     $responseObject->success = true;
                     $responseObject->table = "";
                     while($row = mysqli_fetch_array($result)){
-                        $responseObject->table .= $row['e_nome'].",1;";
+                        $responseObject->table .= $row['e_id'].",".$row['e_nome'].",1;";
                     }
                     $sql = "SELECT e.e_nome FROM educando e WHERE  NOT EXISTS ( SELECT 1 FROM faltas f1 INNER JOIN atividade a1 ON ( f1.a_id = a1.a_id  ) WHERE e.e_id = f1.e_id AND a1.a_data = '$data');";
                     $result = mysqli_query($conn,$sql);
@@ -1635,7 +1635,7 @@ switch ($_POST['q']){
                         exit();
                     }
                     while($row = mysqli_fetch_array($result)){
-                        $responseObject->table .= $row['e_nome'].",0;";
+                        $responseObject->table .= $row['e_id'].",".$row['e_nome'].",0;";
                     }
                     $json = json_encode($responseObject);
                     echo $json;
@@ -1699,12 +1699,18 @@ switch ($_POST['q']){
                         exit();
                     }
                     mysqli_select_db($conn,$row['t_token']);
-                    $atid = $_POST['atid'];
-                    $sql = "SELECT e.e_nome, r.r_comer, r.r_dormir, r.r_coment, r.r_necessidades, r.r_curativos FROM pdm_turmas.relatorio r INNER JOIN pdm_turmas.atividade a ON ( r.a_id = a.a_id  ) INNER JOIN pdm_turmas.educando e ON ( r.e_id = e.e_id  ) WHERE a.a_id = '$atid'";
+                    $atid = $_POST['at_id'];
+                    $sql = "SELECT e.e_nome, r.e_id, r.r_comer, r.r_dormir, r.r_coment, r.r_necessidades, r.r_curativos
+                    FROM educando e 
+                        INNER JOIN relatorio r ON ( e.e_id = r.e_id  )  
+                    WHERE e.a_id = ( 
+                        SELECT a.a_id 
+                        FROM atividade a 
+                            a.a_data = '$atid' LIMIT 1) ";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error";
+                        $responseObjectError->error = mysqli_error($conn)+"";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
@@ -1712,7 +1718,7 @@ switch ($_POST['q']){
                     $responseObject->success = true;
                     $responseObject->table = "";
                     while($row = mysqli_fetch_array($result)){
-                        $responseObject->table .= $row['e_nome'].",".$row['r_comer'].",".$row['r_dormir'].",".$row['r_coment'].",".$row['r_necessidades'].",".$row['e_curativos'].";";
+                        $responseObject->table .= $row['e_id'].",".$row['e_nome'].",".$row['r_comer'].",".$row['r_dormir'].",".$row['r_coment'].",".$row['r_necessidades'].",".$row['r_curativos'].";";
                     }
                     $json = json_encode($responseObject);
                     echo $json;
@@ -2014,10 +2020,30 @@ switch ($_POST['q']){
                         echo $json;
                         exit();
                     }
+
+                    mysqli_begin_transaction($conn);
+
                     $tabela = $_POST['table'];
                     $tline = explode(";",$tabela);
+                    $a_id = $row['a_id'];
+                    $sql = "DELETE FROM faltas WHERE a_id = '$a_id'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        mysqli_rollback($conn);
+                        exit();
+                    }
                     foreach ($tline as &$line) {
-                        
+                        $col = explode(",", $line);
+                        if($col[2] == 1){
+                            $col[0] = 
+                            $sql = "INSERT INTO faltas (a_id,e_id) VALUES ('$','')";
+                            
+                        }
+
                     }
 
                     $sql = "UPDATE atividade SET a_sumario='$a_sumario' WHERE a_id ='$a_id';";
