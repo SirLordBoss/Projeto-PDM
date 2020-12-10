@@ -40,7 +40,8 @@ public class Activity_GerirDados extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (dbHelper.updateEducador(base,u) == 0 || dbHelper.updateEducador(base,u) == -1){
+        aux = dbHelper.updateEducador(base,u);
+        if ( aux == 0 || aux == -1){
             Toast.makeText(Activity_GerirDados.this,"Erro",Toast.LENGTH_SHORT).show();
         }
         displayEducadoras();
