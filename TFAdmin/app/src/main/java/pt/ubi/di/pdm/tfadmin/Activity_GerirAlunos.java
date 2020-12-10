@@ -50,6 +50,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         }
         Log.d("tag",String.valueOf(e_id));
         Log.d("tag",tk);
+        Log.d("tag",String.valueOf(id));
 
 
         dbHelper = new DBHelper(this);
@@ -86,7 +87,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(Activity_GerirAlunos.this,Activity_PerfAluno.class);
-                    i.putExtra("id",(v.getId())/10);
+                    i.putExtra("id",String.valueOf((v.getId())/10));
                     startActivity(i);
                 }
             });
