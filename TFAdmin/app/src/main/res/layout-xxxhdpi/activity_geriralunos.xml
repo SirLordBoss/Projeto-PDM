@@ -1,22 +1,25 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
-    android:weightSum="100"
     tools:context=".Activity_GerirAlunos">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/titulo_geriralunos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/sweet_purple"
             android:gravity="center"
             android:shadowColor="@android:color/white"
@@ -31,21 +34,23 @@
         <LinearLayout
             android:id="@+id/visualizar"
             android:layout_width="fill_parent"
-            android:layout_height="350dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:orientation="vertical" />
-
-        <Button
-            android:id="@+id/btnAddAluno"
-            android:layout_width="262dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="80dp"
-            android:background="@drawable/cantos_botoes"
-            android:fontFamily="@font/sweet_purple"
-            android:text="@string/novo_aluno"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp" />
     </LinearLayout>
-</ScrollView>
+
+    <Button
+        android:id="@+id/btnAddAluno"
+        android:layout_width="262dp"
+        android:layout_height="75dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/novo_aluno"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="40sp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

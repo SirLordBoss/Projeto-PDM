@@ -1498,7 +1498,7 @@ switch ($_POST['q']){
         }
     break;
 #204 - Retornar tabela de atividades
-    case 203:
+    case 204:
         $id = $_POST['id'];
         $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
@@ -1539,25 +1539,43 @@ switch ($_POST['q']){
                         $responseObject->success = true;
                         $responseObject->table = "";
                         while($row = mysqli_fetch_array($result)){
-                            $responseObject->table .= $row['al_id'].",".$row['al_nome'].";";
+                            $responseObject->table .= $row['a_id'].",".$row['a_sumario'].",".$row['a_data'].";";
                         }
                         $json = json_encode($responseObject);
                         echo $json;
                         exit();
                     }else{
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error";
+                        $responseObjectError->error = "Mysql error 4";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
                     }
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mysql error 3";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
                 }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 2";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
             }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
         }
     break;
 
 #205 - Retornar faltas num dia
-    case 203:
+    case 205:
         $id = $_POST['id'];
         $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);

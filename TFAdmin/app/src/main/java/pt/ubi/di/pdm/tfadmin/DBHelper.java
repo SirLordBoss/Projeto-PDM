@@ -146,7 +146,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
             db.execSQL("DROP TABLE "+TEDUCADOR);
             db.execSQL(CREATE_TEDUCADOR);
@@ -198,7 +198,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
 
             db.execSQL("DROP TABLE "+TADMIN);
@@ -251,7 +251,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
 
             db.execSQL("DROP TABLE "+TEDUCANDO);
@@ -304,7 +304,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
 
             db.execSQL("DROP TABLE "+TALERGIA);
@@ -357,7 +357,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
 
             db.execSQL("DROP TABLE "+TATIVIDADE);
@@ -408,7 +408,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
 
             db.execSQL("DROP TABLE "+TFALTA);
@@ -458,7 +458,7 @@ public class DBHelper extends SQLiteOpenHelper {
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 1;
+                return 0;
             }
 
             db.execSQL("DROP TABLE "+TRELATORIO);

@@ -40,27 +40,17 @@ public class Activity_GerirAulas extends AppCompatActivity {
         e_id = Integer.parseInt(i);
 
 
-        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCADOR));
-            if (c1.equals(i)){
-                tk = cursor.getString(cursor.getColumnIndex(DBHelper.COL7_TEDUCADOR));
-                break;
-            }
-        }
-
-        displayAulas();
     }
 
     protected void onResume() {
         super.onResume();
+        dbHelper.updateEducador(base,id);
+        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{DBHelper.COL7_TEDUCADOR},DBHelper.COL1_TEDUCADOR+"=?",new String[]{String.valueOf(e_id)},null,null,null);
+        cursor.moveToFirst();
+        tk = cursor.getString(0);
+        cursor.close();
         int aux = dbHelper.updateAtividade(base,id,e_id,tk);
-        if(aux == -1){
-            Log.d("tag","aqio");
-        }
-        if(aux == 0)
-            Log.d("tag",":)");
-
+        displayAulas();
     }
 
 
