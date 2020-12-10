@@ -70,14 +70,14 @@ public class Activity_GerirAulas extends AppCompatActivity {
 
 
             ImageButton oB2 = (ImageButton)oLL1.findViewById(R.id.btnRelatorio);
-            oB2.setId(oCursor.getInt(0) * 10 +1 );
+            oB2.setId(oCursor.getInt(0) * 10 +1);
             oB2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int id = (v.getId())/10;
                     Intent aula = new Intent(Activity_GerirAulas.this, Activity_GerirRelatorios.class);
                     aula.putExtra("id",String.valueOf(id));
-                    aula.putExtra("id_ed",String.valueOf(e_id));
+                    aula.putExtra("e_id",String.valueOf(e_id));
                     startActivity(aula);
                 }
             });
