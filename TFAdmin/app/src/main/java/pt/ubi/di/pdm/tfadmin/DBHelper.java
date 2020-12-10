@@ -6,19 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private Context c;
+    private final Context c;
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "AdminDB";
     protected static final String TADMIN = "admin";
@@ -89,7 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param context contexto da aplicação
      *
      * */
-    public DBHelper(@Nullable Context context) {
+    public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         c = context;
     }
@@ -132,7 +128,6 @@ public class DBHelper extends SQLiteOpenHelper {
     *<br><br>
     * Esta  função serve para conseguirmos fazer update na tabela educador, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os educadores
     *
-    * @param c contexto em que a aplicação está
     * @param db base de dados
     * @param id  id do administrador que pede os dados
     *
@@ -185,7 +180,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela administradores, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os administradores
      *
-     * @param c contexto em que a aplicação está
      * @param db base de dados
      * @param id id do administrador que pede os dados
      *
@@ -237,7 +231,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela educando, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os educandos de uma certa turma
      *
-     * @param c contexto em que a aplicação está
      * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
@@ -291,7 +284,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela alergias, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre as alergias dos educandos de uma certa turma
      *
-     * @param c contexto em que a aplicação está
      * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
@@ -343,7 +335,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela atividade, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das atividades de uma dada turma
      *
-     * @param c contexto em que a aplicação está
      * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
@@ -395,7 +386,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela falta, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das faltas de uma dada turma num determinado dia
      *
-     * @param c contexto em que a aplicação está
      * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
@@ -446,7 +436,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela relatorio, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados dos relatorios de uma dada turma numa determinada atividade
      *
-     * @param c contexto em que a aplicação está
      * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
