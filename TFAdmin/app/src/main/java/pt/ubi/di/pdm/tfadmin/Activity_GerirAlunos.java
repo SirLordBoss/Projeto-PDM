@@ -40,33 +40,30 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         id = shp.getInt("id",999);
 
 
-        Cursor cursor = base.query(dbHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_TEDUCADOR));
-            if (c1.equals(i)){
-                tk = cursor.getString(cursor.getColumnIndex(dbHelper.COL7_TEDUCADOR));
+            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCADOR));
+            if (c1.equals(e_id)){
+                tk = cursor.getString(cursor.getColumnIndex(DBHelper.COL7_TEDUCADOR));
                 break;
             }
         }
-        Log.d("tag",String.valueOf(e_id));
-        Log.d("tag",tk);
-        Log.d("tag",String.valueOf(id));
+        cursor.close();
 
-
-        dbHelper = new DBHelper(this);
-        base = dbHelper.getWritableDatabase();
-
-        displayAlunos();
     }
 
     protected void onResume() {
         super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+
         dbHelper.updateEducando(base,id,e_id,tk);
+        displayAlunos();
     }
 
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
-        oCursor = base.query(dbHelper.TEDUCANDO, new String[]{"*"}, null, null, null, null, null, null);
+        oCursor = base.query(DBHelper.TEDUCANDO, new String[]{"*"}, null, null, null, null, null, null);
 
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {

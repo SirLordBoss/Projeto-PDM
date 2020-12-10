@@ -40,11 +40,11 @@ public class Activity_GerirAulas extends AppCompatActivity {
         e_id = Integer.parseInt(i);
 
 
-        Cursor cursor = base.query(dbHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_TEDUCADOR));
+            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCADOR));
             if (c1.equals(i)){
-                tk = cursor.getString(cursor.getColumnIndex(dbHelper.COL7_TEDUCADOR));
+                tk = cursor.getString(cursor.getColumnIndex(DBHelper.COL7_TEDUCADOR));
                 break;
             }
         }
@@ -66,7 +66,7 @@ public class Activity_GerirAulas extends AppCompatActivity {
 
     public void displayAulas() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
-        oCursor = base.query(dbHelper.TATIVIDADE, new String[]{"*"}, null, null, null, null, null, null);
+        oCursor = base.query(DBHelper.TATIVIDADE, new String[]{"*"}, null, null, null, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_aulas, null);

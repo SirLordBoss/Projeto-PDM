@@ -36,20 +36,20 @@ public class Activity_PerfAluno extends AppCompatActivity {
         rel = (Button) findViewById(R.id.btnRelatorio);
         edit = (Button) findViewById(R.id.btnCancelarRel);
 
-        Cursor cursor =base.query(dbHelper.TEDUCANDO,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor =base.query(DBHelper.TEDUCANDO,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_TEDUCANDO));
+            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCANDO));
             if (c1.equals(id_aluno)){
-                nome.setText("Nome: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL2_TEDUCANDO)));
-                idade.setText("Idade: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL3_TEDUCANDO)));
+                nome.setText("Nome: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL2_TEDUCANDO)));
+                idade.setText("Idade: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL3_TEDUCANDO)));
 
-                if(cursor.getString(cursor.getColumnIndex(dbHelper.COL5_TEDUCANDO)).equals("1"))
+                if(cursor.getString(cursor.getColumnIndex(DBHelper.COL5_TEDUCANDO)).equals("1"))
                     sexo.setText("Sexo: Masculino");
                 else
                     sexo.setText("Sexo: Feminino");
 
-                morada.setText("morada: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL4_TEDUCANDO)));
-                contacto.setText("contacto: "+cursor.getString(cursor.getColumnIndex(dbHelper.COL6_TEDUCANDO)));
+                morada.setText("morada: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL4_TEDUCANDO)));
+                contacto.setText("contacto: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL6_TEDUCANDO)));
                 break;
             }
         }
