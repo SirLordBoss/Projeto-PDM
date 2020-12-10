@@ -2,6 +2,7 @@ package pt.ubi.di.pdm.tfadmin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +18,7 @@ public class Activity_GerirTurma extends AppCompatActivity {
 
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
+        Log.d("tag",id);
 
         GerirAlunos = (Button)findViewById(R.id.btnGerirAlunos);
         GerirAulas = (Button)findViewById(R.id.btnGerirAulas);

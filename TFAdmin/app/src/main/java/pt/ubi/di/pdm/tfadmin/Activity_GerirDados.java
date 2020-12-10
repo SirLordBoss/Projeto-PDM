@@ -72,7 +72,7 @@ public class Activity_GerirDados extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(Activity_GerirDados.this,Activity_GerirTurma.class);
-                    i.putExtra("id",(v.getId())/10);
+                    i.putExtra("id",String.valueOf((v.getId())/10));
                     startActivity(i);
                 }
             });

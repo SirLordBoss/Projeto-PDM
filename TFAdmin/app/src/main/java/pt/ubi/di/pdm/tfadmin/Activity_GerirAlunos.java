@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,18 +19,26 @@ public class Activity_GerirAlunos extends AppCompatActivity {
     SQLiteDatabase base;
     LinearLayout oLL;
     Cursor oCursor,cursor2;
-    String tk;
+    String tk,i;
     int e_id,id;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geriralunos);
 
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+
+
         Intent Cheguei = getIntent();
-        e_id = Integer.parseInt(Cheguei.getStringExtra("id"));
+
+        i = Cheguei.getStringExtra("id");
+
+        e_id = Integer.parseInt(i);
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         id = shp.getInt("id",999);
+
 
         Cursor cursor = base.query(dbHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
@@ -40,6 +49,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
             }
         }
 
+        Log.d("tag","3");
 
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
@@ -49,7 +59,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
-        dbHelper.updateEducando(this,base,id,e_id,tk);
+        dbHelper.updateEducando(base,id,e_id,tk);
     }
 
     public void displayAlunos() {

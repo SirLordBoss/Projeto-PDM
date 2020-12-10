@@ -22,6 +22,7 @@
         <activity android:name=".Activity_GerirAlunos"/>
         <activity android:name=".Activity_GerirFaltas"/>
         <activity android:name=".Activity_Alergias"/>
+        <activity android:name=".Activity_PerfAluno"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
