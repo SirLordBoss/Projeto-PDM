@@ -57,6 +57,7 @@ public class Activity_GerirAulas extends AppCompatActivity {
 
     public void displayAulas() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
+        oLL.removeAllViewsInLayout();
         oCursor = base.query(DBHelper.TATIVIDADE, new String[]{"*"}, null, null, null, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
