@@ -370,7 +370,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 cv.put(COL1_TATIVIDADE, Integer.valueOf(col[0]));
                 cv.put(COL2_TATIVIDADE, col[1]);
                 cv.put(COL3_TATIVIDADE, col[2]);
-                if (db.insert(TALERGIA, null, cv) == -1)
+                if (db.insert(TATIVIDADE, null, cv) == -1)
                     return 0;
                 cv.clear();
             }

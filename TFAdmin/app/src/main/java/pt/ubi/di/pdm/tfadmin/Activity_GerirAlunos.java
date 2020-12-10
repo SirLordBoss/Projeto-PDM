@@ -40,15 +40,15 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         id = shp.getInt("id",999);
 
 
-        Cursor cursor = base.query(dbHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_TEDUCADOR));
+            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCADOR));
             if (c1.equals(e_id)){
-                tk = cursor.getString(cursor.getColumnIndex(dbHelper.COL7_TEDUCADOR));
+                tk = cursor.getString(cursor.getColumnIndex(DBHelper.COL7_TEDUCADOR));
                 break;
             }
         }
-
+        cursor.close();
         Log.d("tag","3");
 
         dbHelper = new DBHelper(this);
@@ -64,7 +64,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
 
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
-        oCursor = base.query(dbHelper.TEDUCANDO, new String[]{"*"}, null, null, null, null, null, null);
+        oCursor = base.query(DBHelper.TEDUCANDO, new String[]{"*"}, null, null, null, null, null, null);
 
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
