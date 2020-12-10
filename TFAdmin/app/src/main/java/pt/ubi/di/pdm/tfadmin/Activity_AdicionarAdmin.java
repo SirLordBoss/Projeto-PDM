@@ -1,4 +1,6 @@
 package pt.ubi.di.pdm.tfadmin;
 
-public class Activity_AdicionarAdmin {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Activity_AdicionarAdmin extends AppCompatActivity {
 }

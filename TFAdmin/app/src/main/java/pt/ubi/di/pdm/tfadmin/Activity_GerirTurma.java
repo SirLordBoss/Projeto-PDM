@@ -1,4 +1,6 @@
 package pt.ubi.di.pdm.tfadmin;
 
-public class Activity_GerirTurma {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Activity_GerirTurma extends AppCompatActivity {
 }

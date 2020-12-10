@@ -1,4 +1,6 @@
 package pt.ubi.di.pdm.tfadmin;
 
-public class Activity_GerirAulas {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Activity_GerirAulas extends AppCompatActivity {
 }
