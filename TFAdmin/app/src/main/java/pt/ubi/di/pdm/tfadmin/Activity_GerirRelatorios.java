@@ -36,7 +36,7 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
         i = Cheguei.getStringExtra("id");
         at_id = Integer.parseInt(i);
 
-        i2 = Cheguei.getStringExtra("id");
+        i2 = Cheguei.getStringExtra("id_ed");
         e_id = Integer.parseInt(i2);
 
         //displayRelatorios();
