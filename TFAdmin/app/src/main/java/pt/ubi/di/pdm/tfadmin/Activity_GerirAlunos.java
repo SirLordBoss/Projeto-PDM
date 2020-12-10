@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,15 +41,6 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         id = shp.getInt("id",999);
 
 
-        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCADOR));
-            if (c1.equals(e_id)){
-                tk = cursor.getString(cursor.getColumnIndex(DBHelper.COL7_TEDUCADOR));
-                break;
-            }
-        }
-        cursor.close();
 
     }
 
@@ -56,7 +48,11 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         super.onResume();
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
-
+        dbHelper.updateEducador(base,id);
+        Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{DBHelper.COL7_TEDUCADOR},DBHelper.COL1_TEDUCADOR+"=?",new String[]{String.valueOf(e_id)},null,null,null);
+        cursor.moveToFirst();
+        tk = cursor.getString(0);
+        cursor.close();
         dbHelper.updateEducando(base,id,e_id,tk);
         displayAlunos();
     }
