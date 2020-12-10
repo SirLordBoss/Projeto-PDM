@@ -75,12 +75,12 @@ public class Sender extends AsyncTask<Void,Void,String> {
             //SUCCESS
             resposta = response;
 
-            Toast.makeText(c, response, Toast.LENGTH_LONG).show();
+            //Toast.makeText(c, response, Toast.LENGTH_LONG).show();
 
 
         } else {
             //NO SUCCESS
-            Toast.makeText(c, "Unsuccessful " + response, Toast.LENGTH_LONG).show();
+            //Toast.makeText(c, "Unsuccessful " + response, Toast.LENGTH_LONG).show();
         }
     }
 
