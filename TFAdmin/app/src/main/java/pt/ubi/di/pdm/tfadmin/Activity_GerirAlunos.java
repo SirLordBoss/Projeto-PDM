@@ -18,7 +18,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
     DBHelper dbHelper;
     SQLiteDatabase base;
     LinearLayout oLL;
-    Cursor oCursor,cursor2;
+    Cursor oCursor;
     String tk,i;
     int e_id,id;
 
@@ -43,13 +43,14 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         Cursor cursor = base.query(dbHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_TEDUCADOR));
-            if (c1.equals(e_id)){
+            if (c1.equals(i)){
                 tk = cursor.getString(cursor.getColumnIndex(dbHelper.COL7_TEDUCADOR));
                 break;
             }
         }
+        Log.d("tag",String.valueOf(e_id));
+        Log.d("tag",tk);
 
-        Log.d("tag","3");
 
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
