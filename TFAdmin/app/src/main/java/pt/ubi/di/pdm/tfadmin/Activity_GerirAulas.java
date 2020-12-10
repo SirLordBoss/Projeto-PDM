@@ -31,10 +31,6 @@ public class Activity_GerirAulas extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
-        int aux = dbHelper.updateAtividade(base,id,e_id,tk);
-        if(aux == -1 || aux == 0){
-            Log.d("tag","aqio");
-        }
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         id = shp.getInt("id",999);
@@ -53,15 +49,18 @@ public class Activity_GerirAulas extends AppCompatActivity {
             }
         }
 
-        //displayAulas();
+        displayAulas();
     }
 
     protected void onResume() {
         super.onResume();
         int aux = dbHelper.updateAtividade(base,id,e_id,tk);
-        if(aux == -1 || aux == 0){
+        if(aux == -1){
             Log.d("tag","aqio");
         }
+        if(aux == 0)
+            Log.d("tag",":)");
+
     }
 
 
