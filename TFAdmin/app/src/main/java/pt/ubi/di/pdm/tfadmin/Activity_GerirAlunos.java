@@ -59,6 +59,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
 
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
+        oLL.removeAllViewsInLayout();
         oCursor = base.query(DBHelper.TEDUCANDO, new String[]{"*"}, null, null, null, null, null, null);
 
         boolean bCarryOn = oCursor.moveToFirst();
