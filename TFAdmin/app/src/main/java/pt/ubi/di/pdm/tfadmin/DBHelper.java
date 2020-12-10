@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -75,6 +76,13 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL6_TRELATORIO = "r_curativos";
     protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TATIVIDADE+ "("+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL"+COL6_TRELATORIO+" INTEGER NOT NULL);";
 
+    /**
+     *
+     * Construtor da classe DBHelper
+     *
+     * @param context contexto da aplicação
+     *
+     * */
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         c = context;
@@ -95,8 +103,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //#200
-    /*
-    * função updateEducador para meter no método onResume
+    /**
+    *
+    * Função updateEducador para meter no método onResume
     *
     * @param id  id do administrador que pede os dados
     */
@@ -139,8 +148,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //#201
-    /*
-     * função updateAdmin para meter no método onResume
+    /**
+     *
+     * Função updateAdmin para meter no método onResume
      *
      * @param id  id do administrador que pede os dados
      */
@@ -181,8 +191,9 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
     //#202
-    /*
-     * função updateEducando para meter no método onResume
+    /**
+     *
+     * Função updateEducando para meter no método onResume
      *
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
@@ -225,5 +236,92 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
+    /**
+     *
+     * Função updateAlergia para meter no método onResume
+     *
+     * @param id  id do administrador que pede os dados
+     * @param e_id id do educador a que a turma pertence
+     * @param t_token token da turma a que o educando pertence
+     *
+     */
+    public static int updateAlergia(SQLiteDatabase db, int id,int e_id,int t_token){ //-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
+        String s = null;
+        try {
+            s = new Sender(c,"203", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 1;
+            }
+
+            db.execSQL("DROP TABLE "+TALERGIA);
+            db.execSQL(CREATE_TALERGIA);
+            String table = o.getString("table");
+            String[] lines = table.split(";");
+            for (String line : lines) {
+                String[] col = line.split(",");
+                ContentValues cv = new ContentValues();
+                cv.put(COL1_TALERGIA, col[0]);
+                cv.put(COL2_TALERGIA, col[1]);
+                cv.put(COL3_TALERGIA, col[2]);
+                if (db.insert(TALERGIA, null, cv) == -1)
+                    return 0;
+                cv.clear();
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /**
+     *
+     * Função updateAtividade para meter no método onResume
+     *
+     * @param id  id do administrador que pede os dados
+     * @param e_id id do educador a que a turma pertence
+     * @param t_token token da turma a que o educando pertence
+     *
+     */
+    public static int updateAtividade(SQLiteDatabase db, int id,int e_id,int t_token){ //-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
+        String s = null;
+        try {
+            s = new Sender(c,"204", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 1;
+            }
+
+            db.execSQL("DROP TABLE "+TALERGIA);
+            db.execSQL(CREATE_TALERGIA);
+            String table = o.getString("table");
+            String[] lines = table.split(";");
+            for (String line : lines) {
+                String[] col = line.split(",");
+                ContentValues cv = new ContentValues();
+                cv.put(COL1_TALERGIA, col[0]);
+                cv.put(COL2_TALERGIA, col[1]);
+                cv.put(COL3_TALERGIA, col[2]);
+                if (db.insert(TALERGIA, null, cv) == -1)
+                    return 0;
+                cv.clear();
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
 
 }

@@ -28,7 +28,7 @@ public class MultipartUtility {
      * This constructor initializes a new HTTP POST request with content type
      * is set to multipart/form-data
      *
-     * @throws IOException
+     * @throws IOException atira uma exceção para fora
      */
     public MultipartUtility() throws IOException {
 
