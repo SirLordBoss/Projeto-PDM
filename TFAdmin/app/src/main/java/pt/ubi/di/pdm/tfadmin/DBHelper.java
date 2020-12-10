@@ -18,7 +18,6 @@ import java.util.concurrent.ExecutionException;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static Context c;
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "AdminDB";
     protected static final String TADMIN = "admin";
@@ -74,7 +73,13 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL4_TRELATORIO = "r_coment";
     protected static final String COL5_TRELATORIO = "r_necessidades";
     protected static final String COL6_TRELATORIO = "r_curativos";
-    protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TATIVIDADE+ "("+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL"+COL6_TRELATORIO+" INTEGER NOT NULL);";
+    protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TATIVIDADE+ "("+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL,"+COL6_TRELATORIO+" INTEGER NOT NULL);";
+
+    protected static final String TINSCRITO = "admin";
+    protected static final String COL1_TINSCRITO = "u_id";
+    protected static final String COL2_TINSCRITO = "u_nome";
+    protected static final String COL3_TINSCRITO = "u_email";
+    protected static final String CREATE_TINSCRITO = "CREATE TABLE IF NOT EXISTS "+TINSCRITO+ "("+COL1_TINSCRITO+" INTEGER NOT NULL,"+COL2_TINSCRITO+" VARCHAR(200) NOT NULL,"+COL3_TINSCRITO+" VARACHAR(200) NOT NULL);";
 
     /**
      *
@@ -85,7 +90,6 @@ public class DBHelper extends SQLiteOpenHelper {
      * */
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        c = context;
     }
 
     @Override
@@ -94,23 +98,49 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TEDUCADOR);
         db.execSQL(CREATE_TEDUCANDO);
         db.execSQL(CREATE_TALERGIA);
+        db.execSQL(CREATE_TATIVIDADE);
+        db.execSQL(CREATE_TRELATORIO);
+        db.execSQL(CREATE_TFALTA);
+        db.execSQL(CREATE_TINSCRITO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE "+TADMIN);
-        db.execSQL("DROP TABLE "+TEDUCADOR);
+        db.execSQL("DROP TABLE IF EXISTS " +TADMIN);
+        db.execSQL("DROP TABLE IF EXISTS "+TEDUCADOR);
+        db.execSQL("DROP TABLE IF EXISTS "+TEDUCANDO);
+        db.execSQL("DROP TABLE IF EXISTS "+TALERGIA);
+        db.execSQL("DROP TABLE IF EXISTS "+TATIVIDADE);
+        db.execSQL("DROP TABLE IF EXISTS "+TRELATORIO);
+        db.execSQL("DROP TABLE IF EXISTS "+TFALTA);
+        db.execSQL("DROP TABLE IF EXISTS "+TINSCRITO);
+        db.execSQL(CREATE_TADMIN);
+        db.execSQL(CREATE_TEDUCADOR);
+        db.execSQL(CREATE_TEDUCANDO);
+        db.execSQL(CREATE_TALERGIA);
+        db.execSQL(CREATE_TATIVIDADE);
+        db.execSQL(CREATE_TRELATORIO);
+        db.execSQL(CREATE_TFALTA);
+        db.execSQL(CREATE_TINSCRITO);
     }
 
-    //#200
     /**
     *
-    * Função updateEducador para meter no método onResume
+    * Query 200 - Função updateEducador para meter no método onResume
+    *<br><br>
+    * Esta  função serve para conseguirmos fazer update na tabela educador, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os educadores
     *
+    * @param c contexto em que a aplicação está
+    * @param db base de dados
     * @param id  id do administrador que pede os dados
+    *
+    * @return <br>
+    *       -1 : Sem comunicação (fazer display de um warning para o utilizador)<br>
+    *        0 : Erro da base de dados interna<br>
+    *        1 : Tudo ok<br>
     */
-    public static int updateEducador(SQLiteDatabase db, int id){//-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
-        String s = null;
+    public static int updateEducador(Context c, SQLiteDatabase db, int id){
+        String s;
         try {
             s = new Sender(c,"200", "id="+id,null).execute().get();
             if(s == null){
@@ -128,14 +158,14 @@ public class DBHelper extends SQLiteOpenHelper {
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TEDUCADOR, col[0]);
+                cv.put(COL1_TEDUCADOR, Integer.valueOf(col[0]));
                 cv.put(COL2_TEDUCADOR, col[1]);
-                cv.put(COL3_TEDUCADOR, col[2]);
+                cv.put(COL3_TEDUCADOR, Integer.valueOf(col[2]));
                 cv.put(COL4_TEDUCADOR, col[3]);
-                cv.put(COL5_TEDUCADOR, col[4]);
+                cv.put(COL5_TEDUCADOR, Integer.valueOf(col[4]));
                 cv.put(COL6_TEDUCADOR, col[5]);
                 cv.put(COL7_TEDUCADOR, col[6]);
-                cv.put(COL8_TEDUCADOR, col[7]);
+                cv.put(COL8_TEDUCADOR, Integer.valueOf(col[7]));
                 if (db.insert(TEDUCADOR, null, cv) == -1)
                     return 0;
                 cv.clear();
@@ -147,15 +177,23 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    //#201
     /**
      *
-     * Função updateAdmin para meter no método onResume
+     * Query 201 - Função updateAdmin para meter no método onResume
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela administradores, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os administradores
      *
-     * @param id  id do administrador que pede os dados
+     * @param c contexto em que a aplicação está
+     * @param db base de dados
+     * @param id id do administrador que pede os dados
+     *
+     * @return <br>
+     *       -1 : Sem comunicação (fazer display de um warning para o utilizador)<br>
+     *        0 : Erro da base de dados interna<br>
+     *        1 : Tudo ok<br>
      */
-    public static int updateAdmin(SQLiteDatabase db, int id){ //-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
-        String s = null;
+    public static int updateAdmin(Context c, SQLiteDatabase db, int id){
+        String s;
         try {
             s = new Sender(c,"201", "id="+id,null).execute().get();
             if(s == null){
@@ -174,11 +212,11 @@ public class DBHelper extends SQLiteOpenHelper {
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TADMIN, col[0]);
+                cv.put(COL1_TADMIN, Integer.valueOf(col[0]));
                 cv.put(COL2_TADMIN, col[1]);
-                cv.put(COL3_TADMIN, col[2]);
+                cv.put(COL3_TADMIN, Integer.valueOf(col[2]));
                 cv.put(COL4_TADMIN, col[3]);
-                cv.put(COL5_TADMIN, col[4]);
+                cv.put(COL5_TADMIN, Integer.valueOf(col[4]));
                 cv.put(COL6_TADMIN, col[5]);
                 if (db.insert(TADMIN, null, cv) == -1)
                     return 0;
@@ -190,18 +228,26 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-    //#202
+
     /**
      *
-     * Função updateEducando para meter no método onResume
+     * Query 202 - Função updateEducando para meter no método onResume
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela educando, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os educandos de uma certa turma
      *
+     * @param c contexto em que a aplicação está
+     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
      * @param t_token token da turma a que o educando pertence
      *
+     *@return <br>
+     *            -1 : Sem comunicação (fazer display de um warning para o utilizador)<br>
+     *             0 : Erro da base de dados interna<br>
+     *             1 : Tudo ok<br>
      */
-    public static int updateEducando(SQLiteDatabase db, int id,int e_id,int t_token){ //-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
-        String s = null;
+    public static int updateEducando(Context c, SQLiteDatabase db, int id,int e_id,int t_token){
+        String s;
         try {
             s = new Sender(c,"202", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
             if(s == null){
@@ -220,11 +266,11 @@ public class DBHelper extends SQLiteOpenHelper {
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TEDUCANDO, col[0]);
+                cv.put(COL1_TEDUCANDO, Integer.valueOf(col[0]));
                 cv.put(COL2_TEDUCANDO, col[1]);
-                cv.put(COL3_TEDUCANDO, col[2]);
+                cv.put(COL3_TEDUCANDO, Integer.valueOf(col[2]));
                 cv.put(COL4_TEDUCANDO, col[3]);
-                cv.put(COL5_TEDUCANDO, col[4]);
+                cv.put(COL5_TEDUCANDO, Integer.valueOf(col[4]));
                 cv.put(COL6_TEDUCANDO, col[5]);
                 if (db.insert(TEDUCANDO, null, cv) == -1)
                     return 0;
@@ -239,15 +285,23 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /**
      *
-     * Função updateAlergia para meter no método onResume
+     * Query 203 - Função updateAlergia para meter no método onResume
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela alergias, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre as alergias dos educandos de uma certa turma
      *
+     * @param c contexto em que a aplicação está
+     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
      * @param t_token token da turma a que o educando pertence
      *
+     * @return <br>
+     *            -1 : Sem comunicação (fazer display de um warning para o utilizador)<br>
+     *             0 : Erro da base de dados interna<br>
+     *             1 : Tudo ok<br>
      */
-    public static int updateAlergia(SQLiteDatabase db, int id,int e_id,int t_token){ //-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
-        String s = null;
+    public static int updateAlergia(Context c, SQLiteDatabase db, int id,int e_id,int t_token){
+        String s;
         try {
             s = new Sender(c,"203", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
             if(s == null){
@@ -266,8 +320,8 @@ public class DBHelper extends SQLiteOpenHelper {
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TALERGIA, col[0]);
-                cv.put(COL2_TALERGIA, col[1]);
+                cv.put(COL1_TALERGIA, Integer.valueOf(col[0]));
+                cv.put(COL2_TALERGIA, Integer.valueOf(col[1]));
                 cv.put(COL3_TALERGIA, col[2]);
                 if (db.insert(TALERGIA, null, cv) == -1)
                     return 0;
@@ -282,15 +336,26 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /**
      *
-     * Função updateAtividade para meter no método onResume
+     * Query 204 - Função updateAtividade para meter no método onResume
      *
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela atividade, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das atividades de uma dada turma
+     *
+     * @param c contexto em que a aplicação está
+     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param e_id id do educador a que a turma pertence
      * @param t_token token da turma a que o educando pertence
      *
+     * @return <br>
+     *       -1 : Sem comunicação (fazer display de um warning para o utilizador)<br>
+     *        0 : Erro da base de dados interna<br>
+     *        1 : Tudo ok<br>
+     *
+     *
      */
-    public static int updateAtividade(SQLiteDatabase db, int id,int e_id,int t_token){ //-1 : Sem comunicação   0 : Erro da base de dados   1 : Tudo ok
-        String s = null;
+    public static int updateAtividade(Context c, SQLiteDatabase db, int id,int e_id,int t_token){
+        String s;
         try {
             s = new Sender(c,"204", "id="+id+"&e_id="+e_id+"&t="+t_token,null).execute().get();
             if(s == null){
@@ -302,16 +367,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 return 1;
             }
 
-            db.execSQL("DROP TABLE "+TALERGIA);
-            db.execSQL(CREATE_TALERGIA);
+            db.execSQL("DROP TABLE "+TATIVIDADE);
+            db.execSQL(CREATE_TATIVIDADE);
             String table = o.getString("table");
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TALERGIA, col[0]);
-                cv.put(COL2_TALERGIA, col[1]);
-                cv.put(COL3_TALERGIA, col[2]);
+                cv.put(COL1_TATIVIDADE, Integer.valueOf(col[0]));
+                cv.put(COL2_TATIVIDADE, col[1]);
+                cv.put(COL3_TATIVIDADE, col[2]);
                 if (db.insert(TALERGIA, null, cv) == -1)
                     return 0;
                 cv.clear();
@@ -322,6 +387,112 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-    
+    /**
+     *
+     * Query 205 - Função updateFalta para meter no método onResume
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela falta, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das faltas de uma dada turma num determinado dia
+     *
+     * @param c contexto em que a aplicação está
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param e_id id do educador a que a turma pertence
+     * @param t_token token da turma a que o educando pertence
+     * @param dia dia em formato dd/mm/aa (formato normal do dia na tabela atividade) em que foram dadas as faltas
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public static int updateFalta(Context c, SQLiteDatabase db, int id,int e_id,int t_token,String dia){
+        String s;
+        try {
+            s = new Sender(c,"205", "id="+id+"&e_id="+e_id+"&t="+t_token+"d="+dia,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 1;
+            }
+
+            db.execSQL("DROP TABLE "+TFALTA);
+            db.execSQL(CREATE_TFALTA);
+            String table = o.getString("table");
+            String[] lines = table.split(";");
+            for (String line : lines) {
+                String[] col = line.split(",");
+                ContentValues cv = new ContentValues();
+                cv.put(COL1_TFALTA, col[0]);
+                cv.put(COL2_TFALTA, Integer.valueOf(col[1]));
+                if (db.insert(TFALTA, null, cv) == -1)
+                    return 0;
+                cv.clear();
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    /**
+     *
+     *Query 206 - Função updateRelatorio para meter no método onResume
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela relatorio, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados dos relatorios de uma dada turma numa determinada atividade
+     *
+     * @param c contexto em que a aplicação está
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param e_id id do educador a que a turma pertence
+     * @param t_token token da turma a que o educando pertence
+     * @param at_id id da atividade escolhida
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public static int updateRelatorio(Context c, SQLiteDatabase db, int id,int e_id,int t_token,int at_id){
+        String s;
+        try {
+            s = new Sender(c,"206", "id="+id+"&e_id="+e_id+"&t="+t_token+"d="+at_id,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 1;
+            }
+
+            db.execSQL("DROP TABLE "+TRELATORIO);
+            db.execSQL(CREATE_TRELATORIO);
+            String table = o.getString("table");
+            String[] lines = table.split(";");
+            for (String line : lines) {
+                String[] col = line.split(",");
+                ContentValues cv = new ContentValues();
+                cv.put(COL1_TRELATORIO, col[0]);
+                cv.put(COL2_TRELATORIO, Integer.valueOf(col[1]));
+                cv.put(COL3_TRELATORIO, Integer.valueOf(col[2]));
+                cv.put(COL4_TRELATORIO, col[3]);
+                cv.put(COL5_TRELATORIO, Integer.valueOf(col[4]));
+                cv.put(COL6_TRELATORIO, Integer.valueOf(col[5]));
+                if (db.insert(TRELATORIO, null, cv) == -1)
+                    return 0;
+                cv.clear();
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 
 }
