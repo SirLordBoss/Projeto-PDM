@@ -129,6 +129,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db,newVersion,oldVersion);
     }
+    public void delete(){c.deleteDatabase(DB_NAME);}
 
     /** Query 200 - Função updateEducador para meter no método onResume
     *
@@ -495,10 +496,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-       public void delete(){
 
-      c.deleteDatabase(DB_NAME);
-    }
 
     /** Query 22 - Função editUser
      *
