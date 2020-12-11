@@ -57,7 +57,6 @@ public class Activity_Alergias extends AppCompatActivity {
         tk = cursor.getString(0);
         cursor.close();
 
-        Log.d("tag",tk);
 
         int aux = dbHelper.updateAlergia(base,id,e_id,tk);
 
