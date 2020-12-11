@@ -55,7 +55,7 @@ public class Activity_GerirTurma extends AppCompatActivity {
         Alergias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Activity_GerirTurma.this,Activity_GerirAlunos.class);
+                Intent i = new Intent(Activity_GerirTurma.this,Activity_Alergias.class);
                 i.putExtra("id",id);
                 startActivity(i);
             }
