@@ -30,7 +30,6 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
-
         Intent Cheguei = getIntent();
 
         i = Cheguei.getStringExtra("id");
@@ -39,8 +38,6 @@ public class Activity_GerirAlunos extends AppCompatActivity {
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         id = shp.getInt("id",999);
-
-
 
     }
 

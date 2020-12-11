@@ -14,29 +14,30 @@ public class Activity_PerfAluno extends AppCompatActivity {
 
     DBHelper dbHelper;
     SQLiteDatabase base;
-    TextView nome,idade,sexo,morada,contacto;
+    TextView nome, idade, sexo, morada, contacto;
     Button rel,edit;
     String id_aluno;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfaluno);
+
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
         Intent Cheguei = getIntent();
         id_aluno = Cheguei.getStringExtra("id");
 
-        nome = (TextView)findViewById(R.id.txtNome);
-        idade = (TextView)findViewById(R.id.txtIdade);
-        sexo = (TextView)findViewById(R.id.txtSexo);
-        morada = (TextView)findViewById(R.id.txtMorada);
-        contacto = (TextView)findViewById(R.id.txtContacto);
+        nome = (TextView) findViewById(R.id.txtNome);
+        idade = (TextView) findViewById(R.id.txtIdade);
+        sexo = (TextView) findViewById(R.id.txtSexo);
+        morada = (TextView) findViewById(R.id.txtMorada);
+        contacto = (TextView) findViewById(R.id.txtContacto);
 
         rel = (Button) findViewById(R.id.btnRelatorio);
         edit = (Button) findViewById(R.id.btnCancelarRel);
 
-        Cursor cursor =base.query(DBHelper.TEDUCANDO,new String[]{"*"},null,null,null,null,null);
+        Cursor cursor =base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCANDO));
             if (c1.equals(id_aluno)){
