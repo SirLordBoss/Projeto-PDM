@@ -65,37 +65,57 @@ public class Activity_Relatorio extends AppCompatActivity {
         notas.setText(cursor.getString(4));
 
         if(cursor.getString(2).equals("1")){
+            v1 = 1;
             comer.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             comer.setBackground(d1);
         }
         if(cursor.getString(3).equals("1")){
+            v2 = 1;
             dormir.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             dormir.setBackground(d1);
         }
         if(cursor.getString(5).equals("1")){
+            v3 = 1;
             Wc.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             Wc.setBackground(d1);
         }
         if(cursor.getString(6).equals("1")){
+            v4 = 1;
             curativo.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             curativo.setBackground(d1);
         }
         if(cursor.getString(6).equals("2")){
-           chorar.setChecked(true);
+           v4 = 2;
+            chorar.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
            chorar.setBackground(d1);
         }
         if(cursor.getString(6).equals("3")){
+            v4 = 3;
             curativo.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             curativo.setBackground(d1);
             chorar.setChecked(true);
             chorar.setBackground(d1);
         }
+
+        submeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 }
