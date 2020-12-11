@@ -47,7 +47,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         ano =(Spinner)findViewById(R.id.inputAno);
         pesquisa = (Button)findViewById(R.id.button);
 
-        String[] itemsDia = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+        String[] itemsDia = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsDia);
         dia.setAdapter(adapter);
 
@@ -55,9 +55,13 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsMes);
         mes.setAdapter(adapter2);
 
-        String[] itemsAno = new String[]{"2020","2021"};
+        String[] itemsAno = new String[]{"20","21"};
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsAno);
         ano.setAdapter(adapter3);
+
+        Log.d("tag",String.valueOf(id));
+        Log.d("tag",String.valueOf(e_id));
+        Log.d("tag",tk);
 
         pesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
