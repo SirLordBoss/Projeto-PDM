@@ -1468,28 +1468,31 @@ switch ($_POST['q']){
                         exit();
                     }
                     
-                    if(mysqli_select_db($conn,$row['t_token'])){
+                    if(!mysqli_select_db($conn,$row['t_token'])){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Error selecting database ".$row['t_token'];
+                        $responseObjectError->error = "Error selecting database ".mysqli_error($conn);
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
                     }
                     
-                    $sql = "SELECT al_id,al_nome FROM alergias;";
+                    $sql = "SELECT a1.al_id, a1.al_nome, c.e_id
+                    FROM alergias a1 
+                        LEFT OUTER JOIN contem c ON ( a1.al_id = c.al_id  )  
+                        GROUP BY a1.al_id, a1.al_nome, c.e_id";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
                         $responseObject->table = "";
                         while($row = mysqli_fetch_array($result)){
-                            $responseObject->table .= $row['al_id'].",".$row['al_nome'].";";
+                            $responseObject->table .= $row['e_id'].",".$row['al_id'].",".$row['al_nome'].";";
                         }
                         $json = json_encode($responseObject);
                         echo $json;
                         exit();
                     }else{
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error";
+                        $responseObjectError->error = "Mysql error".mysqli_error($conn);
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();

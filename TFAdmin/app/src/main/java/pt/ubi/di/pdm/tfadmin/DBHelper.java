@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 public class DBHelper extends SQLiteOpenHelper {
 
     private final Context c;
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "AdminDB";
     protected static final String TADMIN = "admin";
     protected static final String COL1_TADMIN = "u_id";
@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL1_TALERGIA = "e_id";
     protected static final String COL2_TALERGIA = "al_id";
     protected static final String COL3_TALERGIA = "al_nome";
-    protected static final String CREATE_TALERGIA = "CREATE TABLE IF NOT EXISTS "+TALERGIA+ "("+COL1_TALERGIA+" INTEGER NOT NULL,"+COL2_TALERGIA+" INTEGER NOT NULL,"+COL3_TALERGIA+" VARCHAR(200) NOT NULL);";
+    protected static final String CREATE_TALERGIA = "CREATE TABLE IF NOT EXISTS "+TALERGIA+ "("+COL1_TALERGIA+" INTEGER,"+COL2_TALERGIA+" INTEGER NOT NULL,"+COL3_TALERGIA+" VARCHAR(200) NOT NULL);";
 
     protected static final String TATIVIDADE = "atividade";
     protected static final String COL1_TATIVIDADE = "a_id";
@@ -318,7 +318,9 @@ public class DBHelper extends SQLiteOpenHelper {
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TALERGIA, Integer.valueOf(col[0]));
+                if(!col[0].equals("")){
+                    cv.put(COL1_TALERGIA, Integer.valueOf(col[0]));
+                }
                 cv.put(COL2_TALERGIA, Integer.valueOf(col[1]));
                 cv.put(COL3_TALERGIA, col[2]);
                 if (db.insert(TALERGIA, null, cv) == -1)

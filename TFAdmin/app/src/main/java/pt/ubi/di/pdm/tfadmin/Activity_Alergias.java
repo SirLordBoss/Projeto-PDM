@@ -57,7 +57,7 @@ public class Activity_Alergias extends AppCompatActivity {
         tk = cursor.getString(0);
         cursor.close();
 
-
+        Log.d("TOKEN",tk);
         int aux = dbHelper.updateAlergia(base,id,e_id,tk);
 
         Log.d("tag","3");
@@ -67,7 +67,7 @@ public class Activity_Alergias extends AppCompatActivity {
     public void displayAlergias(){
         oLL = (LinearLayout) findViewById(R.id.listaAlergias);
         oLL.removeAllViews();
-        oCursor = base.query(DBHelper.TALERGIA, new String[]{"*"}, null, null, null, null, null, null);
+        oCursor = base.query(DBHelper.TALERGIA, new String[]{DBHelper.COL3_TALERGIA,DBHelper.COL2_TALERGIA}, null, null, DBHelper.COL3_TALERGIA, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
@@ -75,7 +75,7 @@ public class Activity_Alergias extends AppCompatActivity {
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
             E1.setId(oCursor.getInt(0) * 10 );
-            E1.setText(oCursor.getString(1));
+            E1.setText(oCursor.getString(0));
 
             ImageButton B1 = (ImageButton) oLL1.findViewById(R.id.btnApagar);
             B1.setId(oCursor.getInt(0) * 10 +1);
