@@ -4,23 +4,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class Activity_GerirFaltas extends AppCompatActivity {
 
     DBHelper dbHelper;
     SQLiteDatabase base;
+    Cursor oCursor;
+    LinearLayout oLL;
     Spinner dia,mes,ano;
     String data = "",i,tk;
     int id,e_id;
-    Button pesquisa;
+    Button pesquisa,submeter,cancelar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerirfaltas);
@@ -46,6 +54,9 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         mes =(Spinner)findViewById(R.id.inputMes);
         ano =(Spinner)findViewById(R.id.inputAno);
         pesquisa = (Button)findViewById(R.id.button);
+        submeter = (Button)findViewById(R.id.btnSubmeter);
+        cancelar = (Button)findViewById(R.id.btnCancelar);
+
 
         String[] itemsDia = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsDia);
@@ -70,9 +81,65 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 Log.d("tag",data);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
+                displayRelatorios();
+            }
+        });
+
+        submeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    public void displayRelatorios() {
+        oLL = (LinearLayout) findViewById(R.id.visualizar);
+        oLL.removeAllViews();
+        oCursor = base.query(DBHelper.TFALTA, new String[]{"*"}, null, null, null, null, null, null);
+        boolean bCarryOn = oCursor.moveToFirst();
+        while (bCarryOn) {
+            LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_faltas, null);
+            oLL1.setId(oCursor.getInt(0) * 10 + 2);
+
+            TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
+            E1.setId(oCursor.getInt(0) * 10 );
+            E1.setText(oCursor.getString(1));
+
+            CheckBox B1 = (CheckBox) oLL1.findViewById(R.id.checkBox);
+            B1.setId(oCursor.getInt(0)*10+1);
+
+            if(oCursor.getString(2).equals("1")) {
+                B1.setChecked(true);
+                Drawable d1 = ResourcesCompat.getDrawable(getResources(), R.drawable.checkmark, null);
+                B1.setBackground(d1);
+            }
+
+            B1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(B1.isChecked()){
+                        Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                        B1.setBackground(d1);
+                    }else{
+                        Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                        B1.setBackground(d1);
+                    }
+                }
+            });
+
+
+            oLL.addView(oLL1);
+            bCarryOn = oCursor.moveToNext();
+        }
 
     }
 
