@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,23 +41,20 @@ public class Activity_PerfAluno extends AppCompatActivity {
         rel = (Button) findViewById(R.id.btnRelatorio);
         edit = (Button) findViewById(R.id.btnCancelarRel);
 
-        Cursor cursor =base.query(DBHelper.TEDUCADOR,new String[]{"*"},null,null,null,null,null);
-        while (cursor.moveToNext()){
-            String c1 =cursor.getString(cursor.getColumnIndex(DBHelper.COL1_TEDUCANDO));
-            if (c1.equals(id_aluno)){
-                nome.setText("Nome: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL2_TEDUCANDO)));
-                idade.setText("Idade: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL3_TEDUCANDO)));
 
-                if(cursor.getString(cursor.getColumnIndex(DBHelper.COL5_TEDUCANDO)).equals("1"))
-                    sexo.setText("Sexo: Masculino");
-                else
-                    sexo.setText("Sexo: Feminino");
+        Cursor cursor = base.query(DBHelper.TEDUCANDO,new String[]{"*"},DBHelper.COL1_TEDUCANDO+"=?",new String[]{id_aluno},null,null,null);
+        cursor.moveToNext();
 
-                morada.setText("morada: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL4_TEDUCANDO)));
-                contacto.setText("contacto: "+cursor.getString(cursor.getColumnIndex(DBHelper.COL6_TEDUCANDO)));
-                break;
-            }
-        }
+        nome.setText(cursor.getString(1));
+        idade.setText(cursor.getString(2));
+
+        if (cursor.getString(4).equals("1"))
+            sexo.setText("Sexo: Masculino");
+        else
+            sexo.setText("Sexo: Feminino");
+
+        morada.setText(cursor.getString(3));
+        contacto.setText(cursor.getString(5));
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

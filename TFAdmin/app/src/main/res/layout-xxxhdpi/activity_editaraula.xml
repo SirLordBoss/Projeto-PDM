@@ -5,7 +5,7 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".EditarAula">
+    tools:context=".Activity_EditarAula">
 
     <LinearLayout
         android:layout_width="match_parent"

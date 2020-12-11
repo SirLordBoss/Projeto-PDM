@@ -91,6 +91,7 @@ public class Activity_GerirAulas extends AppCompatActivity {
                     int id = (v.getId())/10;
                     Intent aula = new Intent(Activity_GerirAulas.this, Activity_VerAula.class);
                     aula.putExtra("id",String.valueOf(id));
+                    aula.putExtra("e_id",String.valueOf(e_id));
                     startActivity(aula);
                 }
             });
