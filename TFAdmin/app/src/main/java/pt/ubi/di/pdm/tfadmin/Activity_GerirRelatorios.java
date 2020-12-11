@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -65,13 +66,22 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 1);
+            oLL1.setId(oCursor.getInt(0) * 10 + 2);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
             E1.setId(oCursor.getInt(0) * 10 );
             E1.setText(oCursor.getString(1));
 
-
+            ImageButton B1 = (ImageButton)oLL1.findViewById(R.id.btnVerAluno);
+            B1.setId(oCursor.getInt(0)*10+1);
+            B1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent relatorio = new Intent(Activity_GerirRelatorios.this,Activity_Relatorio.class);
+                    relatorio.putExtra("id",String.valueOf((v.getId())/10));
+                    startActivity(relatorio);
+                }
+            });
 
 
             oLL.addView(oLL1);
