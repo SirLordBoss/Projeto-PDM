@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ public class Activity_PerfAluno extends AppCompatActivity {
     SQLiteDatabase base;
     TextView nome,idade,sexo,morada,contacto;
     Button rel,edit;
-    String id_aluno;
+    String id_aluno,id_educadora;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,8 @@ public class Activity_PerfAluno extends AppCompatActivity {
 
         Intent Cheguei = getIntent();
         id_aluno = Cheguei.getStringExtra("id");
+        id_educadora = Cheguei.getStringExtra("id_educadora");
+
 
         nome = (TextView)findViewById(R.id.txtNome);
         idade = (TextView)findViewById(R.id.txtIdade);
@@ -54,5 +57,14 @@ public class Activity_PerfAluno extends AppCompatActivity {
             }
         }
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent e = new Intent(Activity_PerfAluno.this,Activity_EditarAluno.class);
+                e.putExtra("id",id_aluno);
+                e.putExtra("id_educadora",id_educadora);
+                startActivity(e);
+            }
+        });
     }
 }

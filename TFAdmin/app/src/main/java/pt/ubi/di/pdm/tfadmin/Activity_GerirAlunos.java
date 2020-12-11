@@ -80,9 +80,10 @@ public class Activity_GerirAlunos extends AppCompatActivity {
             B1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(Activity_GerirAlunos.this,Activity_PerfAluno.class);
-                    i.putExtra("id",String.valueOf((v.getId())/10));
-                    startActivity(i);
+                    Intent ia = new Intent(Activity_GerirAlunos.this,Activity_PerfAluno.class);
+                    ia.putExtra("id",String.valueOf((v.getId())/10));
+                    ia.putExtra("id_educadora",i);
+                    startActivity(ia);
                 }
             });
 

@@ -54,8 +54,8 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         mes =(Spinner)findViewById(R.id.inputMes);
         ano =(Spinner)findViewById(R.id.inputAno);
         pesquisa = (Button)findViewById(R.id.button);
-        submeter = (Button)findViewById(R.id.btnSubmeter);
-        cancelar = (Button)findViewById(R.id.btnCancelar);
+        submeter = (Button)findViewById(R.id.btnSubmeterRel);
+        cancelar = (Button)findViewById(R.id.btnCancelarRel);
 
 
         String[] itemsDia = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
@@ -81,7 +81,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 Log.d("tag",data);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
-                displayRelatorios();
+                //displayRelatorios();
             }
         });
 
