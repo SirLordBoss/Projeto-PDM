@@ -1444,7 +1444,7 @@ switch ($_POST['q']){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $token = $_POST['t'];
                     $id_u = $_POST['e_id'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_token = '$token' AND U_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_token = '$token' AND u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -1467,9 +1467,10 @@ switch ($_POST['q']){
                         echo $json;
                         exit();
                     }
+                    
                     if(mysqli_select_db($conn,$row['t_token'])){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Error selecting database";
+                        $responseObjectError->error = "Error selecting database ".$row['t_token'];
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
@@ -1608,18 +1609,35 @@ switch ($_POST['q']){
                         echo $json;
                         exit();
                     }
+                    
                     mysqli_select_db($conn,$row['t_token']);
-
                     $data = $_POST['d'];
-                    $sql = "SELECT e.e_id, e.e_nome
-                    FROM atividade a 
-                        INNER JOIN faltas f ON ( a.a_id = f.a_id  )  
-                            INNER JOIN educando e ON ( f.e_id = e.e_id  )  
-                    WHERE a.a_data = '$data';";
+                    $sql = "SELECT a_id FROM atividade WHERE a_data = '$data'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error 4 - ".$data ;
+                        $responseObjectError->error = "Mysql error 5";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching activity";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $a_id = $row['a_id'];
+                    $sql = "SELECT e.e_id, e.e_nome, a_id
+                    FROM atividade a 
+                        INNER JOIN faltas f ON ( a.a_id = f.a_id  )  
+                            INNER JOIN educando e ON ( f.e_id = e.e_id  )  
+                    WHERE a.a_id = '$a_id';";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 4";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
@@ -1629,7 +1647,7 @@ switch ($_POST['q']){
                     while($row = mysqli_fetch_array($result)){
                         $responseObject->table .= $row['e_id'].",".$row['e_nome'].",1;";
                     }
-                    $sql = "SELECT e.e_nome FROM educando e WHERE  NOT EXISTS ( SELECT 1 FROM faltas f1 INNER JOIN atividade a1 ON ( f1.a_id = a1.a_id  ) WHERE e.e_id = f1.e_id AND a1.a_data = '$data');";
+                    $sql = "SELECT e.e_nome FROM educando e WHERE  NOT EXISTS ( SELECT 1 FROM faltas f1 INNER JOIN atividade a1 ON ( f1.a_id = a1.a_id  ) WHERE e.e_id = f1.e_id AND a1.a_id = '$a_id');";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2103,7 +2121,7 @@ switch ($_POST['q']){
                         $sql = "INSERT INTO faltas (a_id,e_id) VALUES ('$a_id','$e_id')";
                         if(!mysqli_query($conn,$sql)){
                             $responseObjectError->success = false;
-                            $responseObjectError->error = "Mysql error";
+                            $responseObjectError->error = "Mysql error 4";
                             $json = json_encode($responseObjectError);
                             echo $json;
                             mysqli_rollback($conn);
