@@ -130,9 +130,8 @@ public class DBHelper extends SQLiteOpenHelper {
         onUpgrade(db,newVersion,oldVersion);
     }
 
-    /**
+    /** Query 200 - Função updateEducador para meter no método onResume
     *
-    * Query 200 - Função updateEducador para meter no método onResume
     *<br><br>
     * Esta  função serve para conseguirmos fazer update na tabela educador, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os educadores
     *
@@ -182,9 +181,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
+    /** Query 201 - Função updateAdmin para meter no método onResume
      *
-     * Query 201 - Função updateAdmin para meter no método onResume
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela administradores, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os administradores
      *
@@ -233,9 +231,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     *
-     * Query 202 - Função updateEducando para meter no método onResume
+    /** Query 202 - Função updateEducando para meter no método onResume
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela educando, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre os educandos de uma certa turma
      *
@@ -286,9 +282,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
+    /** Query 203 - Função updateAlergia para meter no método onResume
      *
-     * Query 203 - Função updateAlergia para meter no método onResume
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela alergias, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das sobre as alergias dos educandos de uma certa turma
      *
@@ -336,9 +331,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     *
-     * Query 204 - Função updateAtividade para meter no método onResume
+    /** Query 204 - Função updateAtividade para meter no método onResume
      *
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela atividade, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das atividades de uma dada turma
@@ -388,9 +381,9 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-    /**
+
+    /** Query 205 - Função updateFalta para meter no método onResume
      *
-     * Query 205 - Função updateFalta para meter no método onResume
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela falta, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados das faltas de uma dada turma num determinado dia
      *
@@ -421,13 +414,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
             db.execSQL("DROP TABLE "+TFALTA);
             db.execSQL(CREATE_TFALTA);
+            if(s.equals("")){
+                return 1;
+            }
             String table = o.getString("table");
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
                 ContentValues cv = new ContentValues();
-                cv.put(COL1_TFALTA, col[0]);
-                cv.put(COL2_TFALTA, Integer.valueOf(col[1]));
+                cv.put(COL0_TFALTA, Integer.valueOf(col[0]));
+                cv.put(COL1_TFALTA, col[1]);
+                cv.put(COL2_TFALTA, Integer.valueOf(col[2]));
                 if (db.insert(TFALTA, null, cv) == -1)
                     return 0;
                 cv.clear();
@@ -438,9 +435,9 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-    /**
+
+    /** Query 206 - Função updateRelatorio para meter no método onResume
      *
-     *Query 206 - Função updateRelatorio para meter no método onResume
      *<br><br>
      * Esta  função serve para conseguirmos fazer update na tabela relatorio, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados dos relatorios de uma dada turma numa determinada atividade
      *
@@ -463,7 +460,6 @@ public class DBHelper extends SQLiteOpenHelper {
             if(s == null){
                 return -1;
             }
-            System.out.printf(s);
 
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
@@ -500,5 +496,202 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 22 - Função editUser
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar um utilizador, esta função vai enviar os dados de um utilizador para a base de dados externa para editar tanto Administradores como Educandos
+     *
+     * @param db base de dados
+     * @param id  id do administrador que edita os dados
+     * @param u_id id do utilizador a editar
+     * @param u_nome nome do utilizador a editar
+     * @param u_idade idade do utilizador a editar
+     * @param u_morada morada do utilizador a editar
+     * @param u_sexo sexo do utilizador a editar
+     * @param u_email email do utilizador a editar
+     *
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editUser( SQLiteDatabase db, int id,int u_id,String u_nome,int u_idade,String u_morada, int u_sexo, String u_email){
+        String s;
+        try {
+            s = new Sender(c,"22", "id="+id+"&u_id="+u_id+"&nome="+u_nome+"&idade="+u_idade+"&morada="+u_morada+"&sexo="+u_sexo+"&email="+u_email,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    /** Query 301 - Função editEducando
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar um educando, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de um certo educando
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param e_id id do educando a editar
+     * @param e_nome nome do educando a editar
+     * @param e_idade idade do educando a editar
+     * @param e_morada morada do educando a editar
+     * @param e_sexo sexo do educando a editar
+     * @param e_contacto contacto do encarregado de educação do educando a editar
+     * @param e_alergias lista de ids das alergias do educando a editar
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editEducando( SQLiteDatabase db, int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
+        String s, alergias=" ";
+        try {
+            for (int alergia: e_alergias) {
+                alergias = ""+alergia+",";
+            }
+            alergias = alergias.substring(0,alergias.length()-1);
+            s = new Sender(c,"301", "id="+id+"&ide="+ed_id+"&e_id="+e_id+"&e_nome="+e_nome+"&e_morada="+e_morada+"&e_idade="+e_idade+"&e_sexo="+e_sexo+"&e_contacto="+e_contacto+"&e_alergias="+alergias,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 302 - Função editAlergia
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da alergia a editar
+     * @param a_nome nome da alergia a editar
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editAlergia( SQLiteDatabase db, int id,int ed_id,int a_id,String a_nome){
+        String s;
+        try {
+            s = new Sender(c,"302", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&a_nome="+a_nome,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 303 - Função editAtividade
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da atividade a editar
+     * @param sum sumário da atividade a editar
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editAtividade( SQLiteDatabase db, int id, int ed_id, int a_id, String sum){
+        String s;
+        try {
+            s = new Sender(c,"303", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&sum="+sum,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 304 - Função editFalta
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar as faltas, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de faltas de um dia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da atividade a editar
+     * @param sum sumário da atividade a editar
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, String sum){
+        String s;
+        try {
+            s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&sum="+sum,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
 }
