@@ -1470,7 +1470,7 @@ switch ($_POST['q']){
                     
                     if(!mysqli_select_db($conn,$row['t_token'])){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Error selecting database ".mysqli_error($conn);
+                        $responseObjectError->error = "Error selecting database";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
@@ -1492,7 +1492,7 @@ switch ($_POST['q']){
                         exit();
                     }else{
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error".mysqli_error($conn);
+                        $responseObjectError->error = "Mysql error";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
