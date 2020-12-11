@@ -495,6 +495,10 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+       public void delete(){
+
+      c.deleteDatabase(DB_NAME);
+    }
 
     /** Query 22 - Função editUser
      *

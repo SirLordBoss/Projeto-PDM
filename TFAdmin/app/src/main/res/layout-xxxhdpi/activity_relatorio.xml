@@ -6,7 +6,7 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Relatorio">
+    tools:context=".Activity_Relatorio">
 
     <TextView
         android:id="@+id/titulo_homeeduc"

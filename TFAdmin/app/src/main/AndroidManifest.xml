@@ -25,6 +25,7 @@
         <activity android:name=".Activity_PerfAluno"/>
         <activity android:name=".Activity_VerAula"/>
         <activity android:name=".Activity_GerirRelatorios"/>
+        <activity android:name=".Activity_Relatorio"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

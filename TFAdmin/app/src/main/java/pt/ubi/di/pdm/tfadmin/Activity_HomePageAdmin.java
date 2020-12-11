@@ -49,9 +49,10 @@ public class Activity_HomePageAdmin extends AppCompatActivity {
         gerir_educ_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("DEBUG", "starting the intent");
-                Intent gerir_educ = new Intent(Activity_HomePageAdmin.this, Activity_GerirEducadores.class);
-                startActivity(gerir_educ);
+               Activity_HomePageAdmin.this.getSharedPreferences("important_variables", 0).edit().clear().commit();
+               DBHelper dbHelper = new DBHelper(Activity_HomePageAdmin.this);
+               dbHelper.delete();
+               System.exit(0);
             }
         });
     }
