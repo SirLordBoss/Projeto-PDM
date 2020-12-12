@@ -95,7 +95,7 @@ public class Activity_GerirAdmins extends AppCompatActivity {
             btn_apagar_admin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    db_helper.deleteUser(admin_db, id, (v.getId()/10));
+                    db_helper.deleteUser( id, (v.getId()/10));
                     Log.v("DEBUG", "id (5):" + id + ", user a apagar: " + (v.getId()/10));
                     LinearLayout user_to_delete = findViewById(v.getId() + 4);
                     ((LinearLayout) user_to_delete.getParent()).removeView(user_to_delete);
