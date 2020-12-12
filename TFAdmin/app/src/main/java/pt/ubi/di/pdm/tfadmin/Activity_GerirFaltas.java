@@ -102,7 +102,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             public void onClick(View v) {
                 int[] falt2 = {};
                 falt2 = falt.stream().mapToInt(Integer::intValue).toArray();
-                dbHelper.editFalta(base,id,e_id,at_id,falt2);
+                dbHelper.editFalta(id,e_id,at_id,falt2);
             }
         });
 

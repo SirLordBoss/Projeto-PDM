@@ -64,7 +64,7 @@ public class Activity_EditarAula extends AppCompatActivity {
                 int val1 = Integer.parseInt(ed_id);
                 int val2 = Integer.parseInt(id_at);
                 Log.d("tag","2");
-                dbHelper.editAtividade(base,admin_id,val1,val2,sum);
+                dbHelper.editAtividade(admin_id,val1,val2,sum);
                 Log.d("tag","3");
             }
         });
