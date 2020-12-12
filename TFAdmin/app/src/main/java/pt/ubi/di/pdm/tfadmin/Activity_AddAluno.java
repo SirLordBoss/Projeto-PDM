@@ -34,7 +34,7 @@ public class Activity_AddAluno extends AppCompatActivity {
     ArrayList<Integer> aler = new ArrayList<>();
 
 
-    int a1,id,ed_id;
+    int a1,admin_id,ed_id;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,7 +52,7 @@ public class Activity_AddAluno extends AppCompatActivity {
         dropdown = (Spinner) findViewById(R.id.inputSexo);
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
-        id = shp.getInt("id",999);
+        admin_id = shp.getInt("id",999);
 
         ed_id = Integer.parseInt(getIntent().getStringExtra("ed_id"));
 
@@ -95,7 +95,11 @@ public class Activity_AddAluno extends AppCompatActivity {
                 int[] aler2 = {};
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
-                dbHelper.addEducando(id,ed_id,ed,id,mor,a1,em,aler);
+                for(int i=0;i<myList.size();i++){
+                    Log.d("tag",myList.get(i));
+                }
+
+                dbHelper.addEducando(admin_id,ed_id,ed,Integer.parseInt(id),mor,a1,em,aler2);
                 finish();
                 }
             });
@@ -104,7 +108,7 @@ public class Activity_AddAluno extends AppCompatActivity {
         alergia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Activity_AddAluno.this,Activity_Alergias.class);
+                Intent i = new Intent(Activity_AddAluno.this,Activity_AddAlergiaAluno.class);
                 startActivityForResult(i, 2);
             }
         });
