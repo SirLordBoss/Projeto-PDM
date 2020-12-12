@@ -5,7 +5,7 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity_MudarPass">
 
 
     <TextView
@@ -81,7 +81,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSubmeterRel"
+            android:id="@+id/btnSubmeter"
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="15dp"
@@ -93,7 +93,7 @@
             tools:ignore="ButtonStyle" />
 
         <Button
-            android:id="@+id/btnCancelarRel"
+            android:id="@+id/btnCancelar"
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/cantos_botoes"

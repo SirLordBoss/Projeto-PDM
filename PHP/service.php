@@ -311,18 +311,89 @@ switch ($_POST['q']){
                 $u_id= $_POST['u_id'];
                 //TODO VERIFICAR SE O UTILIZADOR É ADMIN OU EDUCADORA, SE FOR EDUCADORA ENTÂO ELIMINAR OS DADOS DA EDUCADORA, SE FOR ADMIN ENTÂO ELIMINAR NA TABELA ADMIN
 
+                mysqli_begin_transaction($conn);
+                $sql = "SELECT count(u_id) as c FROM admin WHERE u_id = '$u_id' ";
+                $result = mysqli_query($conn,$sql);
+                if($result){
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Error in query 1";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+                if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Error fetching";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+                $isAdmin = $row['c'];
+                if($isAdmin == 1){
+                    $sql = "DELETE FROM admin WHERE u_id = '$u_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error in query 0";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        mysqli_rollback($conn);
+                        exit();
+                    }
+                }else if ($isAdmin == 0){
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$u_id'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error in query 2";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        mysqli_rollback($conn);
+                        exit();
+                    }
+
+                    if($row['t_utilizada'] == 1){
+                        $responseObject->warning = "A turma estava a ser utilizada";
+                    }
+                    $token = $row['t_token'];
+                    $sql = "DROP DATABASE $token";
+                    if(mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error in query 3";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        mysqli_rollback($conn);
+                        exit();
+                    }
+
+                    $sql = "DELETE FROM turmas WHERE u_id = '$u_id'";
+                    if(mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error in query 4";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        mysqli_rollback($conn);
+                        exit();
+                    }
+
+                }else{
+                    mysqli_rollback($conn);
+                    exit();
+                }
+
                 $sql = "DELETE FROM users WHERE u_id = '$u_id'";
                 $result = mysqli_query($conn,$sql);
                 if($result){
                     $responseObject->success = true;
                     $json = json_encode($responseObject);
                     echo $json;
+                    mysqli_commit($conn);
                     exit();
                 }else{
                     $responseObjectError->success = false;
-                    $responseObjectError->error = "Error in query";
+                    $responseObjectError->error = "Error in query 5";
                     $json = json_encode($responseObjectError);
                     echo $json;
+                    mysqli_rollback($conn);
                     exit();
                 }
             }else{

@@ -797,7 +797,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int editRelatorio( SQLiteDatabase db, int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
         String s;
         try {
-            s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&d="+a_id+"&e_id="+e_id+"&comer="+comer+"&dormir="+dormir+"&coment="+coment+"&nec="+necessidades+"&cur="+curativo,null).execute().get();
+            s = new Sender(c,"305", "id="+id+"&ide="+ed_id+"&d="+a_id+"&e_id="+e_id+"&comer="+comer+"&dormir="+dormir+"&coment="+coment+"&nec="+necessidades+"&cur="+curativo,null).execute().get();
             if(s == null){
                 return -1;
             }
@@ -807,41 +807,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
                 return 0;
             }
-            return 1;
-        } catch (ExecutionException | InterruptedException | JSONException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    /** Query 23 - Função deleteUser
-    *
-    *<br><br>
-     *     Esta função serve para eliminar um utilizador, quer seja admin ou educador
-     *      @param db base de dados
-     *      @param id  id do administrador que executa a operação
-     *      @param u_id id do utilizador a apagar
-     *
-     *      @return inteiro
-     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
-     *      0 : Erro da base de dados interna
-     *      1 : Tudo ok
-     *
-    */
-    public int deleteUser(SQLiteDatabase db, int id, int u_id){
-        String s;
-        try{
-            s = new Sender(c, "21", "id=" + id + "&u_id=" + u_id, null).execute().get();
-            if(s == null){
-                return -1;
-            }
-
-            JSONObject o = new JSONObject(s);
-            if(!o.getBoolean("success")){
-                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 0;
-            }
-
             return 1;
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();
@@ -1092,6 +1057,41 @@ public class DBHelper extends SQLiteOpenHelper {
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
                 return 0;
             }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 23 - Função deleteUser
+     *
+     *<br><br>
+     *     Esta função serve para eliminar um utilizador, quer seja admin ou educador
+     *      @param db base de dados
+     *      @param id  id do administrador que executa a operação
+     *      @param u_id id do utilizador a apagar
+     *
+     *      @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *      0 : Erro da base de dados interna
+     *      1 : Tudo ok
+     *
+     */
+    public int deleteUser(SQLiteDatabase db, int id, int u_id){
+        String s;
+        try{
+            s = new Sender(c, "23", "id=" + id + "&u_id=" + u_id, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
             return 1;
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();
