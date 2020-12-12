@@ -81,9 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL3_TINSCRITO = "u_email";
     protected static final String CREATE_TINSCRITO = "CREATE TABLE IF NOT EXISTS "+TINSCRITO+ "("+COL1_TINSCRITO+" INTEGER NOT NULL,"+COL2_TINSCRITO+" VARCHAR(200) NOT NULL,"+COL3_TINSCRITO+" VARACHAR(200) NOT NULL);";
 
-    /**
-     *
-     * Construtor da classe DBHelper
+    /** Construtor da classe DBHelper
      *
      * @param context contexto da aplicação
      *
@@ -809,6 +807,13 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
+    /** Query 021 - Função adicionar inscritos no educador
+     *
+     * @param id  id do administrador que pede os dados
+     * @param i_id  id do educador a que a turma pertence
+     *
+     * */
     public int addInscritoToEducador(int id, int i_id){
 
         String s;
@@ -949,6 +954,17 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 102 - Adicionar um administrador
+     *
+     * @param id id do administrador a usar a aplicação
+     * @param nome nome do administrador a adicionar
+     * @param idade idade do administrador a adicionar
+     * @param morada morada do administrador a adicionar
+     * @param sexo sexo do administrador a adicionar
+     * @param email email do administrador a adicionar
+     * @param pwd password do adminstrador a adicionar
+     *
+     * */
     public int addAdmin(int id, String nome, int idade, String morada, int sexo, String email, String pwd){
         String s;
         try{
