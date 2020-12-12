@@ -807,40 +807,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-    /** Query 21 - Função addEducador por editar
-     *
-     *<br><br>
-     *     Esta função serve para adicionar um educador que já se tenha inscrito
-     *      @param id  id do administrador que executa a operação
-     *      @param u_id  id do inscrito a adicionar
-     *
-     *      @return inteiro
-     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
-     *      0 : Erro da base de dados interna
-     *      1 : Tudo ok
-     *
-    */
-    public int deleteUser(SQLiteDatabase db, int id, int u_id){
-        String s;
-        try{
-            s = new Sender(c, "23", "id=" + id + "&u_id=" + u_id, null).execute().get();
-            if(s == null){
-                return -1;
-            }
-
-            JSONObject o = new JSONObject(s);
-            if(!o.getBoolean("success")){
-                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
-                return 0;
-            }
-
-            return 1;
-        } catch (ExecutionException | InterruptedException | JSONException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
     public int addInscritoToEducador(int id, int i_id){
 
         String s;
@@ -1120,7 +1086,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
      */
-    public int deleteUser( int id, int u_id){
+    public int deleteUser(int id, int u_id){
         String s;
         try{
             s = new Sender(c, "23", "id=" + id + "&u_id=" + u_id, null).execute().get();
