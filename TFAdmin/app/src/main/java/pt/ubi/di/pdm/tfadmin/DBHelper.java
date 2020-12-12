@@ -818,9 +818,9 @@ public class DBHelper extends SQLiteOpenHelper {
     *
     *<br><br>
      *     Esta função serve para eliminar um utilizador, quer seja admin ou educador
-     *     @param db base de dados
-     *     @param id  id do administrador que executa a operação
-     *
+     *      @param db base de dados
+     *      @param id  id do administrador que executa a operação
+     *      @param u_id id do utilizador a apagar
      *
      *      @return inteiro
      *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
@@ -828,10 +828,10 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
     */
-    public int deleteUser(SQLiteDatabase db, int id){
+    public int deleteUser(SQLiteDatabase db, int id, int u_id){
         String s;
         try{
-            s = new Sender(c, "21", "id=" + id, null).execute().get();
+            s = new Sender(c, "21", "id=" + id + "&u_id=" + u_id, null).execute().get();
             if(s == null){
                 return -1;
             }
