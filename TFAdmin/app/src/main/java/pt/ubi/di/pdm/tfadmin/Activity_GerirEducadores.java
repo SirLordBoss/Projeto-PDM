@@ -106,6 +106,7 @@ public class Activity_GerirEducadores extends AppCompatActivity {
             btn_apagar_educ.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    db_helper.deleteEducador(educ_db, id, (v.getId()/10));
                     //logica de apagar educ aqui
                 }
             });

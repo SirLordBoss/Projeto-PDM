@@ -814,13 +814,13 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /** Query 21 - Função addInscrito
+    /** Query 23 - Função deleteUser
     *
     *<br><br>
-     *     Esta função serve para adicionar um utilizador inscrito aos educadores
+     *     Esta função serve para eliminar um utilizador, quer seja admin ou educador
      *     @param db base de dados
-     *     @param id  id do administrador que pede os dados
-     *     @param i_id  id do utilizador inscrito que se pretende adicionar aos educadores
+     *     @param id  id do administrador que executa a operação
+     *
      *
      *      @return inteiro
      *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
@@ -828,6 +828,27 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
     */
+    public int deleteUser(SQLiteDatabase db, int id){
+        String s;
+        try{
+            s = new Sender(c, "21", "id=" + id, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     public int addInscritoToEducador(SQLiteDatabase db, int id, int i_id){
         String s;
         try{

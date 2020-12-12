@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -52,7 +53,7 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
         visualizer = (LinearLayout) findViewById(R.id.visualizar);
         visualizer.removeAllViewsInLayout();
 
-        Cursor oCursor = inscritos_db.query(DBHelper.COL1_TINSCRITO, new String[]{"*"}, null, null, null, null, null, null);
+        Cursor oCursor = inscritos_db.query(DBHelper.TINSCRITO, new String[]{"*"}, null, null, null, null, null, null);
 
         Boolean bCarryOn = oCursor.moveToFirst();
         while(bCarryOn){
@@ -72,7 +73,10 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
             btn_aprovar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     db_helper.addInscritoToEducador(inscritos_db, id, ((v.getId() - 1)/10));
+                    Log.v("DEBUG", "id admin (5): " + id + ", id_inscrito (7): " + ((v.getId() - 1)/10));
+                    displayInscritos();
                     //i.putExtra("id", String.valueOf((v.getId() - 1)/10));
                     //startActivity(i);
                 }
