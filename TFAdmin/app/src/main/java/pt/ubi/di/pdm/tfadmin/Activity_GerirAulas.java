@@ -70,15 +70,15 @@ public class Activity_GerirAulas extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_aulas, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 3);
+            oLL1.setId(oCursor.getInt(0) * 10 + 4);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0) * 10 + 2);
+            E1.setId(oCursor.getInt(0) * 10 + 3);
             E1.setText(oCursor.getString(2));
 
 
             ImageButton oB2 = (ImageButton)oLL1.findViewById(R.id.btnRelatorio);
-            oB2.setId(oCursor.getInt(0) * 10 +1);
+            oB2.setId(oCursor.getInt(0) * 10 +2);
             oB2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -92,7 +92,7 @@ public class Activity_GerirAulas extends AppCompatActivity {
 
 
             ImageButton oB1 = (ImageButton) oLL1.findViewById(R.id.btnVerAula);
-            oB1.setId(oCursor.getInt(0) * 10);
+            oB1.setId(oCursor.getInt(0) * 10+1);
             oB1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,6 +101,18 @@ public class Activity_GerirAulas extends AppCompatActivity {
                     aula.putExtra("id",String.valueOf(id));
                     aula.putExtra("e_id",String.valueOf(e_id));
                     startActivity(aula);
+                }
+            });
+
+            ImageButton oB3 = (ImageButton) oLL1.findViewById(R.id.btnApagar);
+            oB3.setId(oCursor.getInt(0) * 10);
+            oB3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("tag",String.valueOf((v.getId())/10));
+                   dbHelper.deleteAtividade(id,e_id,(v.getId())/10);
+                    LinearLayout oLL1 =(LinearLayout)findViewById((v.getId())+4);
+                    ((LinearLayout)oLL1.getParent()).removeView(oLL1);
                 }
             });
             oLL.addView(oLL1);

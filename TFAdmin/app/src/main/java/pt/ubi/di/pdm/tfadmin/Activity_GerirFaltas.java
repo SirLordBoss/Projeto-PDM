@@ -107,9 +107,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             public void onClick(View v) {
                 int[] falt2 = {};
                 falt2 = falt.stream().mapToInt(Integer::intValue).toArray();
-                Log.d("tag",String.valueOf(id));
-                Log.d("tag",String.valueOf(e_id));
-                Log.d("tag",String.valueOf(at_id));
+
                 dbHelper.editFalta(id,e_id,at_id,falt2);
             }
         });
@@ -149,7 +147,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             E1.setId(oCursor.getInt(0) * 10 );
             E1.setText(oCursor.getString(1));
 
-            CheckBox B1 = oLL1.findViewById(R.id.checkBox);
+            final CheckBox B1 = oLL1.findViewById(R.id.checkBox);
             B1.setId(oCursor.getInt(0)*10+1);
 
             if(oCursor.getString(2).equals("1")) {
@@ -169,7 +167,8 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                     }else{
                         Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
                         B1.setBackground(d1);
-                        falt.remove((v.getId())/10);
+
+                        falt.remove(Integer.valueOf((v.getId())/10));
                     }
                 }
             });
