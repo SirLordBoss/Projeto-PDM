@@ -186,7 +186,7 @@ public class Activity_Relatorio extends AppCompatActivity {
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.editFalta(base,admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
+                dbHelper.editRelatorio(base,admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
                 finish();
 
             }
