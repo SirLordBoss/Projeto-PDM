@@ -75,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL6_TRELATORIO = "r_curativos";
     protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TRELATORIO+ "("+COL0_TRELATORIO+" INTEGER NOT NULL,"+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL,"+COL6_TRELATORIO+" INTEGER NOT NULL);";
 
-    protected static final String TINSCRITO = "admin";
+    protected static final String TINSCRITO = "inscrito";
     protected static final String COL1_TINSCRITO = "u_id";
     protected static final String COL2_TINSCRITO = "u_nome";
     protected static final String COL3_TINSCRITO = "u_email";
@@ -159,6 +159,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TEDUCADOR);
             db.execSQL(CREATE_TEDUCADOR);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -211,6 +214,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TADMIN);
             db.execSQL(CREATE_TADMIN);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -262,6 +268,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TEDUCANDO);
             db.execSQL(CREATE_TEDUCANDO);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -314,6 +323,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TALERGIA);
             db.execSQL(CREATE_TALERGIA);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -367,6 +379,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TATIVIDADE);
             db.execSQL(CREATE_TATIVIDADE);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -409,14 +424,16 @@ public class DBHelper extends SQLiteOpenHelper {
             if(s == null){
                 return -1;
             }
+            db.execSQL("DROP TABLE "+TFALTA);
+            db.execSQL(CREATE_TFALTA);
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+
                 return 0;
             }
 
-            db.execSQL("DROP TABLE "+TFALTA);
-            db.execSQL(CREATE_TFALTA);
+
             if(s.equals("")){
                 return 1;
             }
@@ -473,7 +490,6 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS "+TRELATORIO);
             db.execSQL(CREATE_TRELATORIO);
             String table = o.getString("table");
-
             if(table.isEmpty()){
                 return 1;
             }
@@ -553,7 +569,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-
     /** Query 22 - Função editUser
      *
      *<br><br>
@@ -595,6 +610,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
     /** Query 301 - Função editEducando
      *
      *<br><br>
@@ -752,6 +768,48 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 304 - Função editRelatorio
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar as faltas, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de faltas de um dia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da atividade a editar
+     * @param e_id id do educando a editar
+     * @param comer se o menino comeu bem
+     * @param dormir se o menino dormiu
+     * @param coment comentário do relatório
+     * @param necessidades se o menino/a fez necessidades
+     * @param curativo se o menino/a se aleijou ou não
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
+        String s;
+        try {
+            s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&d="+a_id+"&e_id="+e_id+"&comer="+comer+"&dormir="+dormir+"&coment="+coment+"&nec="+necessidades+"&cur="+curativo,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     /** Query 21 - Função addInscrito
     *
     *<br><br>
@@ -766,7 +824,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
     */
-
     public int addInscritoToEducador(SQLiteDatabase db, int id, int i_id){
         String s;
         try{
@@ -807,7 +864,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
      */
-
     public int addEducador(SQLiteDatabase db, int id, String nome, int idade, String morada, int sexo, String email, String pwd){
         String s;
         try{
@@ -828,4 +884,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
+
 }

@@ -81,7 +81,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 Log.d("tag",data);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
-                displayRelatorios();
+                displayFaltas();
             }
         });
 
@@ -101,7 +101,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
 
     }
 
-    public void displayRelatorios() {
+    public void displayFaltas() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
         oLL.removeAllViews();
         oCursor = base.query(DBHelper.TFALTA, new String[]{"*"}, null, null, null, null, null, null);
