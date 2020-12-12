@@ -169,23 +169,23 @@ public class Activity_Relatorio extends AppCompatActivity {
             }
         });
 
-        if (comer.isChecked())
-            v1 = 1;
-        if(dormir.isChecked())
-            v2=1;
-        if (Wc.isChecked())
-            v3 = 1;
-
-        if (curativo.isChecked())
-            v4 = 1;
-        if (chorar.isChecked())
-            v4 = 2;
-        if (chorar.isChecked()&&curativo.isChecked())
-            v4 = 3;
 
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (comer.isChecked())
+                    v1 = 1;
+                if(dormir.isChecked())
+                    v2=1;
+                if (Wc.isChecked())
+                    v3 = 1;
+
+                if (curativo.isChecked())
+                    v4 = 1;
+                if (chorar.isChecked())
+                    v4 = 2;
+                if (chorar.isChecked()&&curativo.isChecked())
+                    v4 = 3;
                 dbHelper.editRelatorio(admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
                 finish();
 

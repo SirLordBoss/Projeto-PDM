@@ -54,6 +54,12 @@ public class Activity_GerirAulas extends AppCompatActivity {
         displayAulas();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+
 
     public void displayAulas() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);

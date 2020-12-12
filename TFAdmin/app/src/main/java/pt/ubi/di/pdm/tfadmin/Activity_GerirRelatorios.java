@@ -59,6 +59,13 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
 
         displayRelatorios();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+
     public void displayRelatorios() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
         oLL.removeAllViews();

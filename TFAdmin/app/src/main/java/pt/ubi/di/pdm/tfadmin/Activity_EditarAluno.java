@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -94,10 +95,24 @@ public class Activity_EditarAluno extends AppCompatActivity {
                 cursor.close();
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
-                dbHelper.editEducando(admin_id,id_educ,id_al,n,i,m,s,c,aler2);
+                int aux;
+                aux = dbHelper.editEducando(admin_id,id_educ,id_al,n,i,m,s,c,aler2);
+
+                if (aux == 1)
+                    Toast.makeText(Activity_EditarAluno.this,"Sucesso",Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Activity_EditarAluno.this,"Erro",Toast.LENGTH_SHORT).show();
+
+                dbHelper.close();
+                finish();
             }
         });
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
     }
 
 

@@ -119,6 +119,12 @@ public class Activity_GerirFaltas extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+
     public void displayFaltas() {
         oLL = findViewById(R.id.visualizar);
         oLL.removeAllViews();
