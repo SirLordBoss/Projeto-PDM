@@ -54,6 +54,12 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         displayAlunos();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
         oLL.removeAllViewsInLayout();

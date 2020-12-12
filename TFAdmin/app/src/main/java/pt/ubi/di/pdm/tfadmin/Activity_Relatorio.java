@@ -200,4 +200,9 @@ public class Activity_Relatorio extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
 }

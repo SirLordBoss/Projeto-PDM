@@ -71,4 +71,10 @@ public class Activity_EditarAula extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
 }

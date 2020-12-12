@@ -61,7 +61,7 @@ public class Activity_VerAula extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        dbHelper.close();
+        base.close();
     }
     @Override
     public void onResume() {

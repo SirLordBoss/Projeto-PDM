@@ -66,4 +66,9 @@ public class Activity_PerfAluno extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
 }

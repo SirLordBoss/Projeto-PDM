@@ -48,6 +48,12 @@ public class Activity_GerirDados extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+
     public void displayEducadoras() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
         oLL.removeAllViewsInLayout();
