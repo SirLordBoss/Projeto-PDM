@@ -97,7 +97,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     mysqli_begin_transaction($conn);
                     try{
-                        $sql = "INSERT INTO users (u_nome,u_morada,u_sexo,u_email,u_pwd) SELECT tr_nome,tr_morada,tr_sexo,tr_email,tr_pwd FROM to_regist WHERE tr_id = '$id'";
+                        $sql = "INSERT INTO users (u_nome,u_morada,u_idade,u_sexo,u_email,u_pwd) SELECT tr_nome,tr_morada,tr_idade,tr_sexo,tr_email,tr_pwd FROM to_regist WHERE tr_id = '$id'";
                         $result = mysqli_query($conn,$sql);
                         if(!$result){
                             mysqli_rollback($conn);
@@ -107,38 +107,9 @@ switch ($_POST['q']){
                             echo $json;
                             exit();
                         }
-                        $sql = "SELECT tr_nome FROM to_regist WHERE tr_id = '$id'";
-                        $result = mysqli_query($conn,$sql);
-                        if(!$result){
-                            mysqli_rollback($conn);
-                            $responseObjectError->success = false;
-                            $responseObjectError->error = "Error selecting in to_regist";
-                            $json = json_encode($responseObjectError);
-                            echo $json;
-                            exit();
-                        }
-                        if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
-                            mysqli_rollback($conn);
-                            $responseObjectError->success = false;
-                            $responseObjectError->error = "Error fetching array";
-                            $json = json_encode($responseObjectError);
-                            echo $json;
-                            exit();
-                        }
-                        $nome = $row['tr_nome'];
-                        $sql = "DELETE FROM to_regist WHERE tr_id = '$id'";
-                        $result = mysqli_query($conn,$sql);
-                        if(!$result){
-                            mysqli_rollback($conn);
-                            $responseObjectError->success = false;
-                            $responseObjectError->error = "Deleting in to_regist";
-                            $json = json_encode($responseObjectError);
-                            echo $json;
-                            exit();
-                        }
-                        
+                        $u_id = mysqli_insert_id($conn);
                         $uniqid = uniqid('t_',false);
-                        $sql = "INSERT INTO turmas (t_token,t_utilizada,u_id) VALUES ('$uniqid',0, (SELECT u.u_id FROM users AS u WHERE u.u_nome = '$nome' LIMIT 1) );";
+                        $sql = "INSERT INTO turmas (t_token,t_utilizada,u_id) VALUES ('$uniqid',0, (SELECT u.u_id FROM users AS u WHERE u.u_id = '$u_id' LIMIT 1) );";
                         $result = mysqli_query($conn,$sql);
                         if(!$result){
                             mysqli_rollback($conn);
@@ -251,7 +222,7 @@ switch ($_POST['q']){
                 }
             }else{
                 $responseObjectError->success = false;
-                $responseObjectError->error = "Error fetching array";
+                $responseObjectError->error = "Error fetching array 2";
                 $json = json_encode($responseObjectError);
                 echo $json;
                 exit();

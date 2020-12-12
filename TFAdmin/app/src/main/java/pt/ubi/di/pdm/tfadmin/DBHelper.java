@@ -755,6 +755,48 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 304 - Função editRelatorio
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos editar as faltas, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de faltas de um dia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da atividade a editar
+     * @param e_id id do educando a editar
+     * @param comer se o menino comeu bem
+     * @param dormir se o menino dormiu
+     * @param coment comentário do relatório
+     * @param necessidades se o menino/a fez necessidades
+     * @param curativo se o menino/a se aleijou ou não
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
+        String s;
+        try {
+            s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&d="+a_id+"&e_id="+e_id+"&comer="+comer+"&dormir="+dormir+"&coment="+coment+"&nec="+necessidades+"&cur="+curativo,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     /** Query 21 - Função addInscrito
     *
     *<br><br>
@@ -829,4 +871,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
+
 }
