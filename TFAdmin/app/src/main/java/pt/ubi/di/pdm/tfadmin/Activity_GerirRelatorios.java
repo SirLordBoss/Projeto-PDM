@@ -79,6 +79,8 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent relatorio = new Intent(Activity_GerirRelatorios.this,Activity_Relatorio.class);
                     relatorio.putExtra("id",String.valueOf((v.getId())/10));
+                    relatorio.putExtra("at_id",String.valueOf(at_id));
+                    relatorio.putExtra("ed_id",String.valueOf(e_id));
                     startActivity(relatorio);
                 }
             });

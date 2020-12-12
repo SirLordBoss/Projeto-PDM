@@ -2,10 +2,12 @@ package pt.ubi.di.pdm.tfadmin;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,9 +30,9 @@ public class Activity_Relatorio extends AppCompatActivity {
     TextView nome;
     Button submeter, cancelar;
     String s = "";
-    String id_at = "";
     String VerRel = "";
     String id = "";
+    int admin_id,ed_id,at_id;
     int v1 = 0, v2 = 0, v3 = 0, v4 = 0, modo = 0;
 
 
@@ -46,6 +48,13 @@ public class Activity_Relatorio extends AppCompatActivity {
 
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
+        ed_id = Integer.parseInt(Cheguei.getStringExtra("ed_id"));
+        at_id = Integer.parseInt(Cheguei.getStringExtra("at_id"));
+
+
+        Log.d("tag","1");
+        SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
+        admin_id = shp.getInt("id",999);
 
         nome = (TextView) findViewById(R.id.titulo_homeeduc);
         submeter = (Button) findViewById(R.id.btnSubmeterRel);
@@ -65,37 +74,31 @@ public class Activity_Relatorio extends AppCompatActivity {
         notas.setText(cursor.getString(4));
 
         if(cursor.getString(2).equals("1")){
-            v1 = 1;
             comer.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             comer.setBackground(d1);
         }
         if(cursor.getString(3).equals("1")){
-            v2 = 1;
             dormir.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             dormir.setBackground(d1);
         }
         if(cursor.getString(5).equals("1")){
-            v3 = 1;
             Wc.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             Wc.setBackground(d1);
         }
         if(cursor.getString(6).equals("1")){
-            v4 = 1;
             curativo.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             curativo.setBackground(d1);
         }
         if(cursor.getString(6).equals("2")){
-           v4 = 2;
             chorar.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
            chorar.setBackground(d1);
         }
         if(cursor.getString(6).equals("3")){
-            v4 = 3;
             curativo.setChecked(true);
             Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
             curativo.setBackground(d1);
@@ -103,9 +106,88 @@ public class Activity_Relatorio extends AppCompatActivity {
             chorar.setBackground(d1);
         }
 
+        comer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comer.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    comer.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    comer.setBackground(d1);
+                }
+            }
+        });
+
+        dormir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dormir.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    dormir.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    dormir.setBackground(d1);
+                }
+            }
+        });
+        Wc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Wc.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    Wc.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    Wc.setBackground(d1);
+                }
+            }
+        });
+        curativo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (curativo.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    curativo.setBackground(d1);
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    curativo.setBackground(d1);
+                }
+            }
+        });
+        chorar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chorar.isChecked()){
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
+                    chorar.setBackground(d1);
+
+                }else{
+                    Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
+                    chorar.setBackground(d1);
+                }
+            }
+        });
+
+        if (comer.isChecked())
+            v1 = 1;
+        if(dormir.isChecked())
+            v2=1;
+        if (Wc.isChecked())
+            v3 = 1;
+
+        if (curativo.isChecked())
+            v4 = 1;
+        if (chorar.isChecked())
+            v4 = 2;
+        if (chorar.isChecked()&&curativo.isChecked())
+            v4 = 3;
+
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dbHelper.editFalta(base,admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
+                finish();
 
             }
         });
