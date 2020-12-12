@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+
+import java.util.ArrayList;
 
 public class Activity_GerirFaltas extends AppCompatActivity {
 
@@ -27,8 +31,10 @@ public class Activity_GerirFaltas extends AppCompatActivity {
     LinearLayout oLL;
     Spinner dia,mes,ano;
     String data = "",i,tk;
-    int id,e_id;
+    int id,e_id,at_id;
     Button pesquisa,submeter,cancelar;
+    ArrayList<Integer> falt = new ArrayList<Integer>();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerirfaltas);
@@ -74,11 +80,16 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         Log.d("tag",String.valueOf(e_id));
         Log.d("tag",tk);
 
+
+
         pesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 data = dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/" + ano.getSelectedItem().toString();
                 Log.d("tag",data);
+                Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{"*"},DBHelper.COL3_TATIVIDADE+"=?",new String[]{data},null,null,null);
+                cursor2.moveToFirst();
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
@@ -86,9 +97,12 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         });
 
         submeter.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-
+                int[] falt2 = {};
+                falt2 = falt.stream().mapToInt(Integer::intValue).toArray();
+                dbHelper.editFalta(base,id,e_id,at_id,falt2);
             }
         });
 
@@ -121,6 +135,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 B1.setChecked(true);
                 Drawable d1 = ResourcesCompat.getDrawable(getResources(), R.drawable.checkmark, null);
                 B1.setBackground(d1);
+                falt.add(Integer.parseInt(oCursor.getString(0)));
             }
 
             B1.setOnClickListener(new View.OnClickListener() {
@@ -129,9 +144,11 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                     if(B1.isChecked()){
                         Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
                         B1.setBackground(d1);
+                        falt.add((v.getId())/10);
                     }else{
                         Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkbox,null);
                         B1.setBackground(d1);
+                        falt.remove((v.getId())/10);
                     }
                 }
             });

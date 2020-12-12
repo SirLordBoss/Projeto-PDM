@@ -68,7 +68,7 @@ public class Activity_EditarAluno extends AppCompatActivity {
 
         morada.setText(cursor.getString(3));
         contacto.setText(cursor.getString(5));
-
+        cursor.close();
         submeter.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -91,10 +91,10 @@ public class Activity_EditarAluno extends AppCompatActivity {
                 while (cursor.moveToNext()){
                    aler.add(Integer.parseInt(cursor.getString(1)));
                 }
-
+                cursor.close();
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
-                dbHelper.editEducando(base,admin_id,id_educ,id_al,n,i,m,s,c,aler2);
+                dbHelper.editEducando(admin_id,id_educ,id_al,n,i,m,s,c,aler2);
             }
         });
 

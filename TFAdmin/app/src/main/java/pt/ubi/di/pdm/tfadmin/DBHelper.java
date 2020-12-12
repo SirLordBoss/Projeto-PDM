@@ -854,11 +854,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public int addInscritoToEducador(SQLiteDatabase db, int id, int i_id){
-=======
-     */
     public int addInscritoToEducador(int id, int i_id){
->>>>>>> f9df3be2d5aa7faf166f1f2469db48e8692c9f09
+
         String s;
         try{
             s = new Sender(c, "21", "name=" + id + "&id=" + i_id, null).execute().get();

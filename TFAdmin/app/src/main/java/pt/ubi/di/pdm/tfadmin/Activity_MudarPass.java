@@ -60,9 +60,9 @@ public class Activity_MudarPass extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(Activity_MudarPass.this);
 
-                int i = dbHelper.changePassword()
+                //int i = dbHelper.changePassword();
 
-                if()
+
 
             }
         });
