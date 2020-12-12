@@ -33,7 +33,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addaluno);
+        setContentView(R.layout.activity_adduser);
 
         db_helper = new DBHelper(this);
         educ_db = db_helper.getWritableDatabase();

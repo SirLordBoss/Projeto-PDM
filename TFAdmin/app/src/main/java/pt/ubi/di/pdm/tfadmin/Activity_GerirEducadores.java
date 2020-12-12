@@ -107,7 +107,9 @@ public class Activity_GerirEducadores extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     db_helper.deleteUser(educ_db, id, (v.getId()/10));
-                    //logica de apagar educ aqui
+                    Log.v("DEBUG", "id (5):" + id + ", user a apagar: " + (v.getId()/10));
+                    LinearLayout user_to_delete = findViewById(v.getId() + 4);
+                    ((LinearLayout) user_to_delete.getParent()).removeView(user_to_delete);
                 }
             });
 

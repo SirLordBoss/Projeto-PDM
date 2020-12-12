@@ -831,7 +831,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int deleteUser(SQLiteDatabase db, int id, int u_id){
         String s;
         try{
-            s = new Sender(c, "21", "id=" + id + "&u_id=" + u_id, null).execute().get();
+            s = new Sender(c, "23", "id=" + id + "&u_id=" + u_id, null).execute().get();
             if(s == null){
                 return -1;
             }
