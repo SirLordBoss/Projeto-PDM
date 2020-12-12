@@ -895,7 +895,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int addEducando( int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
+    public int addEducando( int id,int ed_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
         String s, alergias=" ";
         try {
             for (int alergia: e_alergias) {

@@ -95,7 +95,7 @@ public class Activity_AddAluno extends AppCompatActivity {
                 int[] aler2 = {};
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
-                //dbHelper.addEducando(id,ed_id,ed,id,mor,a1,em,aler);
+                dbHelper.addEducando(id,ed_id,ed,id,mor,a1,em,aler);
                 finish();
                 }
             });
