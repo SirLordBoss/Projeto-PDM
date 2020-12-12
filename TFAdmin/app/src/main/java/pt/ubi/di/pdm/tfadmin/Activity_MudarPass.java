@@ -58,7 +58,11 @@ public class Activity_MudarPass extends AppCompatActivity {
         btn_submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(Activity_MudarPass.this);
 
+                int i = dbHelper.changePassword()
+
+                if()
 
             }
         });

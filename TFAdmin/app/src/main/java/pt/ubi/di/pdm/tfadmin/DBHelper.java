@@ -590,7 +590,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editUser( SQLiteDatabase db, int id,int u_id,String u_nome,int u_idade,String u_morada, int u_sexo, String u_email){
+    public int editUser( int id,int u_id,String u_nome,int u_idade,String u_morada, int u_sexo, String u_email){
         String s;
         try {
             s = new Sender(c,"22", "id="+id+"&u_id="+u_id+"&nome="+u_nome+"&idade="+u_idade+"&morada="+u_morada+"&sexo="+u_sexo+"&email="+u_email,null).execute().get();
@@ -633,7 +633,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editEducando( SQLiteDatabase db, int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
+    public int editEducando( int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
         String s, alergias=" ";
         try {
             for (int alergia: e_alergias) {
@@ -674,7 +674,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editAlergia( SQLiteDatabase db, int id,int ed_id,int a_id,String a_nome){
+    public int editAlergia( int id,int ed_id,int a_id,String a_nome){
         String s;
         try {
             s = new Sender(c,"302", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&a_nome="+a_nome,null).execute().get();
@@ -711,7 +711,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editAtividade( SQLiteDatabase db, int id, int ed_id, int a_id, String sum){
+    public int editAtividade( int id, int ed_id, int a_id, String sum){
         String s;
         try {
             s = new Sender(c,"303", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&sum="+sum,null).execute().get();
@@ -748,7 +748,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, int[] faltas){
+    public int editFalta( int id, int ed_id, int a_id, int[] faltas){
         String s,falta ="";
         try {
             for (int faltas2: faltas) {
@@ -794,7 +794,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editRelatorio( SQLiteDatabase db, int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
+    public int editRelatorio(int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
         String s;
         try {
             s = new Sender(c,"305", "id="+id+"&ide="+ed_id+"&d="+a_id+"&e_id="+e_id+"&comer="+comer+"&dormir="+dormir+"&coment="+coment+"&nec="+necessidades+"&cur="+curativo,null).execute().get();
@@ -813,8 +813,26 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-
-    public int addInscritoToEducador(SQLiteDatabase db, int id, int i_id){
+    /** Query 21 - Função addEducador por editar
+     *
+     *<br><br>
+     *     Esta função serve para adicionar um educador manualmente
+     *      @param db base de dados
+     *      @param id  id do administrador que executa a operação
+     *      @param nome nome do educador a ser adicionado
+     *      @param idade idade do educador a adicionar
+     *      @param morada morada do educador a adicionar
+     *      @param sexo sexo do educador a adicionar
+     *      @param email email do educador a adicionar
+     *      @param pwd password do educador a adicionar
+     *
+     *      @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *      0 : Erro da base de dados interna
+     *      1 : Tudo ok
+     *
+     */
+    public int addInscritoToEducador(int id, int i_id){
         String s;
         try{
             s = new Sender(c, "21", "name=" + id + "&id=" + i_id, null).execute().get();
@@ -854,7 +872,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
      */
-    public int addEducador(SQLiteDatabase db, int id, String nome, int idade, String morada, int sexo, String email, String pwd){
+    public int addEducador(int id, String nome, int idade, String morada, int sexo, String email, String pwd){
         String s;
         try{
             s = new Sender(c, "101", "id=" + id + "&un=" + nome + "&i=" + idade + "&m=" + morada + "&s=" + sexo + "&e=" + email + "&pwd=" + pwd, null).execute().get();
@@ -896,7 +914,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int addEducando( SQLiteDatabase db, int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
+    public int addEducando( int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
         String s, alergias=" ";
         try {
             for (int alergia: e_alergias) {
@@ -936,7 +954,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int addAlergia( SQLiteDatabase db, int id,int ed_id,String a_nome){
+    public int addAlergia( int id,int ed_id,String a_nome){
         String s;
         try {
             s = new Sender(c,"502", "id="+id+"&ide="+ed_id+"&a_nome="+a_nome,null).execute().get();
@@ -972,7 +990,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int deleteEducando( SQLiteDatabase db, int id,int ed_id,int e_id){
+    public int deleteEducando(int id,int ed_id,int e_id){
         String s;
         try {
             s = new Sender(c,"505", "id="+id+"&ide="+ed_id+"&e_id="+e_id,null).execute().get();
@@ -1008,7 +1026,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int deleteAlergia( SQLiteDatabase db, int id,int ed_id,int a_id){
+    public int deleteAlergia(int id,int ed_id,int a_id){
         String s;
         try {
             s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&e_id="+a_id,null).execute().get();
@@ -1044,7 +1062,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int deleteAtividade( SQLiteDatabase db, int id,int ed_id,int a_id){
+    public int deleteAtividade( int id,int ed_id,int a_id){
         String s;
         try {
             s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&e_id="+a_id,null).execute().get();
@@ -1078,7 +1096,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
      */
-    public int deleteUser(SQLiteDatabase db, int id, int u_id){
+    public int deleteUser( int id, int u_id){
         String s;
         try{
             s = new Sender(c, "23", "id=" + id + "&u_id=" + u_id, null).execute().get();
@@ -1116,7 +1134,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int deleteRelatorio( SQLiteDatabase db, int id,int ed_id,int e_id,int a_id){
+    public int deleteRelatorio( int id,int ed_id,int e_id,int a_id){
         String s;
         try {
             s = new Sender(c,"308", "id="+id+"&ide="+ed_id+"&e_id="+e_id+"&a_id="+a_id,null).execute().get();
@@ -1152,7 +1170,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int changePassword( SQLiteDatabase db, int id,String new_pwd,String old_pwd){
+    public int changePassword( int id,String new_pwd,String old_pwd){
         String s;
         try {
             s = new Sender(c,"401", "id="+id+"&pwd2="+new_pwd+"&pwd="+old_pwd,null).execute().get();
