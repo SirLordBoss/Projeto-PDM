@@ -934,5 +934,220 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 502 - Função addAlergia
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_nome nome da alergia a adicionar
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int addAlergia( SQLiteDatabase db, int id,int ed_id,String a_nome){
+        String s;
+        try {
+            s = new Sender(c,"502", "id="+id+"&ide="+ed_id+"&a_nome="+a_nome,null).execute().get();
+            if(s == null){
+                return -1;
+            }
 
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 505 - Função deleteEducando
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param e_id id do educando
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int deleteEducando( SQLiteDatabase db, int id,int ed_id,int e_id){
+        String s;
+        try {
+            s = new Sender(c,"505", "id="+id+"&ide="+ed_id+"&e_id="+e_id,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 506 - Função deleteAlergia
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da alergia
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int deleteAlergia( SQLiteDatabase db, int id,int ed_id,int a_id){
+        String s;
+        try {
+            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&e_id="+a_id,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 407 - Função deleteAtividade
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param a_id id da atividade
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int deleteAtividade( SQLiteDatabase db, int id,int ed_id,int a_id){
+        String s;
+        try {
+            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&e_id="+a_id,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 308 - Função deleteRelatorio
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id id do educador a que a turma pertence
+     * @param a_id id da alergia
+     * @param e_id id do educando
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int deleteRelatorio( SQLiteDatabase db, int id,int ed_id,int e_id,int a_id){
+        String s;
+        try {
+            s = new Sender(c,"308", "id="+id+"&ide="+ed_id+"&e_id="+e_id+"&a_id="+a_id,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 401 - Função changePassword
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param new_pwd password nova do utilizador
+     * @param old_pwd password antiga do utilizador
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int changePassword( SQLiteDatabase db, int id,String new_pwd,String old_pwd){
+        String s;
+        try {
+            s = new Sender(c,"401", "id="+id+"&pwd2="+new_pwd+"&pwd="+old_pwd,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }
