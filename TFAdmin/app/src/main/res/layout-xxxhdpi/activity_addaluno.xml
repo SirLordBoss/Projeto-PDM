@@ -5,7 +5,7 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity_AdicionarEducadores">
 
     <EditText
         android:id="@+id/inputUser"

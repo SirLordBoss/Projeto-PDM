@@ -25,7 +25,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="50sp" />
 
-
         <LinearLayout
             android:id="@+id/visualizar"
             android:layout_width="fill_parent"

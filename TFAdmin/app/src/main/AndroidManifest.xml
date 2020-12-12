@@ -8,6 +8,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFAdmin">
+        <activity android:name=".Activity_AdicionarEducadores" />
+        <activity android:name=".Activity_WaitingRoomEduc" />
         <activity android:name=".Activity_PerfEduc" />
         <activity android:name=".Activity_PerfAdmin" />
         <activity android:name=".Activity_AdicionarAdmin"/>

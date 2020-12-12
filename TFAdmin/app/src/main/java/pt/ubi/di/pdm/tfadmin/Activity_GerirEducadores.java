@@ -80,24 +80,33 @@ public class Activity_GerirEducadores extends AppCompatActivity {
         Boolean bCarryOn = oCursor.moveToFirst();
         while(bCarryOn){
             LinearLayout new_educ = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar_educ, null);
-            new_educ.setId(oCursor.getInt(0) * 10 + 3);
+            new_educ.setId(oCursor.getInt(0) * 10 + 4);
 
             TextView nome_educ = (TextView) new_educ.findViewById(R.id.nomeAluno);
-            nome_educ.setId(oCursor.getInt(0) * 10 + 2);
+            nome_educ.setId(oCursor.getInt(0) * 10 + 3);
             nome_educ.setText(oCursor.getString(1));
 
             TextView id_educ = (TextView) new_educ.findViewById(R.id.idAluno);
-            id_educ.setId(oCursor.getInt(0) * 10 + 1);
+            id_educ.setId(oCursor.getInt(0) * 10 + 2);
             id_educ.setText(oCursor.getString(0));
 
             ImageButton btn_educ = (ImageButton) new_educ.findViewById(R.id.btnVerAluno);
-            btn_educ.setId(oCursor.getInt(0) * 10);
+            btn_educ.setId(oCursor.getInt(0) * 10 + 1);
             btn_educ.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(Activity_GerirEducadores.this, Activity_PerfEduc.class);
-                    i.putExtra("id", String.valueOf((v.getId())/10));
+                    i.putExtra("id", String.valueOf((v.getId() - 1)/10));
                     startActivity(i);
+                }
+            });
+
+            ImageButton btn_apagar_educ = (ImageButton) new_educ.findViewById(R.id.btnApagar);
+            btn_apagar_educ.setId(oCursor.getInt(0) * 10);
+            btn_apagar_educ.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //logica de apagar educ aqui
                 }
             });
 
@@ -106,4 +115,3 @@ public class Activity_GerirEducadores extends AppCompatActivity {
         }
     }
 }
-

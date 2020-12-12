@@ -499,6 +499,60 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 206 - Função updateInscritos para meter no método onResume
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos fazer update na tabela dos inscritos, esta função vai buscar os dados à base de dados externa e mete-os todos na tabela interna para que possamos utiliza-los para fazer o display e obter dados dos inscritos para diversas atividades
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int updateInscritos(SQLiteDatabase db, int id){
+        String s;
+        try{
+            s = new Sender(c, "207", "id="+id, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            db.execSQL("DROP TABLE IF EXISTS " + TINSCRITO);
+            db.execSQL(CREATE_TINSCRITO);
+            String table = o.getString("table");
+
+            if(table.isEmpty()){
+                return 1;
+            }
+
+            String[] lines = table.split(";");
+            for (String line : lines) {
+                String[] col = line.split(",");
+                ContentValues cv = new ContentValues();
+                cv.put(COL1_TINSCRITO, Integer.valueOf(col[0]));
+                cv.put(COL2_TINSCRITO, col[1]);
+                cv.put(COL3_TINSCRITO, col[2]);
+                if (db.insert(TINSCRITO, null, cv) == -1)
+                    return 0;
+                cv.clear();
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 
     /** Query 22 - Função editUser
      *
@@ -698,4 +752,80 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 21 - Função addInscrito
+    *
+    *<br><br>
+     *     Esta função serve para adicionar um utilizador inscrito aos educadores
+     *     @param db base de dados
+     *     @param id  id do administrador que pede os dados
+     *     @param i_id  id do utilizador inscrito que se pretende adicionar aos educadores
+     *
+     *      @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *      0 : Erro da base de dados interna
+     *      1 : Tudo ok
+     *
+    */
+
+    public int addInscritoToEducador(SQLiteDatabase db, int id, int i_id){
+        String s;
+        try{
+            s = new Sender(c, "21", "name=" + id + "&id=" + i_id, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 101 - Função addEducador
+     *
+     *<br><br>
+     *     Esta função serve para adicionar um educador manualmente
+     *      @param db base de dados
+     *      @param id  id do administrador que executa a operação
+     *      @param nome nome do educador a ser adicionado
+     *      @param idade idade do educador a adicionar
+     *      @param morada morada do educador a adicionar
+     *      @param sexo sexo do educador a adicionar
+     *      @param email email do educador a adicionar
+     *      @param pwd password do educador a adicionar
+     *
+     *      @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *      0 : Erro da base de dados interna
+     *      1 : Tudo ok
+     *
+     */
+
+    public int addEducador(SQLiteDatabase db, int id, String nome, int idade, String morada, int sexo, String email, String pwd){
+        String s;
+        try{
+            s = new Sender(c, "101", "id=" + id + "&un=" + nome + "&i=" + idade + "&m=" + morada + "&s=" + sexo + "&e=" + email + "&pwd=" + pwd, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }
