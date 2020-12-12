@@ -74,7 +74,7 @@ public class Activity_Login extends AppCompatActivity {
                 try {
                     Log.v("DEBUG", "before sender");
                     x = new Sender(Activity_Login.this, "99", "u=" + us + "&p=" + enc, null).execute().get();
-                    Log.v("DEBUG", "got sender");
+                    Log.v("DEBUG", "got sender: " + x + "<-- that was it");
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
@@ -83,13 +83,23 @@ public class Activity_Login extends AppCompatActivity {
                 Boolean s = false;
 
                 try {
-                    if (x == null) {
+                    if (x == null || x == "") {
+                        Log.v("DEBUG", "returned null");
                         return;
                     }
                     reader = new JSONObject(x);
-                    s = reader.getBoolean("success");
+                    if(reader.has("success")){
+                        s = reader.getBoolean("success");
+                        Log.v("DEBUG", "crashes here, at success: " + s);
+                    } else{
+                        Toast.makeText(Activity_Login.this, "Credenciais inválidas, tente novamente", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
+                    Toast.makeText(Activity_Login.this, "Credenciais inválidas, tente novamente", Toast.LENGTH_SHORT).show();
+                    inputpass.setText("");
+                    inputUser.setText("");
                     e.printStackTrace();
+                    return;
                 }
 
                 if (s) {
