@@ -794,7 +794,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
+    public int editRelatorio( SQLiteDatabase db, int id, int ed_id, int a_id, int e_id, int comer,int dormir,String coment,int necessidades,int curativo){
         String s;
         try {
             s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&d="+a_id+"&e_id="+e_id+"&comer="+comer+"&dormir="+dormir+"&coment="+coment+"&nec="+necessidades+"&cur="+curativo,null).execute().get();
