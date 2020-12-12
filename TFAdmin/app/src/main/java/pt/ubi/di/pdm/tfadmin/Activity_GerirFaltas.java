@@ -90,6 +90,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 Log.d("tag",data);
                 Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{"*"},DBHelper.COL3_TATIVIDADE+"=?",new String[]{data},null,null,null);
                 cursor2.moveToFirst();
+                at_id = cursor2.getInt(0);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
@@ -102,6 +103,9 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             public void onClick(View v) {
                 int[] falt2 = {};
                 falt2 = falt.stream().mapToInt(Integer::intValue).toArray();
+                Log.d("tag",String.valueOf(id));
+                Log.d("tag",String.valueOf(e_id));
+                Log.d("tag",String.valueOf(at_id));
                 dbHelper.editFalta(id,e_id,at_id,falt2);
             }
         });
