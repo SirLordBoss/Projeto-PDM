@@ -75,10 +75,10 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 2);
+            oLL1.setId(oCursor.getInt(0) * 10 + 3);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0) * 10 );
+            E1.setId(oCursor.getInt(0) * 10 +2);
             E1.setText(oCursor.getString(1));
 
             ImageButton B1 = (ImageButton)oLL1.findViewById(R.id.btnVerAluno);
@@ -91,6 +91,17 @@ public class Activity_GerirRelatorios extends AppCompatActivity {
                     relatorio.putExtra("at_id",String.valueOf(at_id));
                     relatorio.putExtra("ed_id",String.valueOf(e_id));
                     startActivity(relatorio);
+                }
+            });
+
+            ImageButton B2 = (ImageButton)oLL1.findViewById(R.id.btnApagar);
+            B2.setId(oCursor.getInt(0)*10);
+            B2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dbHelper.deleteRelatorio(id,e_id,(v.getId())/10,at_id);
+                    LinearLayout oLL1 =(LinearLayout)findViewById((v.getId())+3);
+                    ((LinearLayout)oLL1.getParent()).removeView(oLL1);
                 }
             });
 
