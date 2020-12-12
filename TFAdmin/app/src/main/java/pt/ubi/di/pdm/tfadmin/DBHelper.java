@@ -749,7 +749,9 @@ public class DBHelper extends SQLiteOpenHelper {
             for (int faltas2: faltas) {
                 falta += ""+faltas2+",";
             }
-            falta = falta.substring(0,falta.length()-1);
+            if(falta.length()>1){
+                falta = falta.substring(0,falta.length()-1);
+            }
             s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&table="+falta,null).execute().get();
             if(s == null){
                 return -1;

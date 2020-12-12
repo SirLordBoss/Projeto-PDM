@@ -88,10 +88,14 @@ public class Activity_GerirFaltas extends AppCompatActivity {
 
                 data = dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/" + ano.getSelectedItem().toString();
                 Log.d("tag",data);
-                Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{"*"},DBHelper.COL3_TATIVIDADE+"=?",new String[]{data},null,null,null);
-                cursor2.moveToFirst();
-                at_id = cursor2.getInt(0);
-
+                Cursor cursor2 = base.rawQuery("SELECT "+DBHelper.COL1_TATIVIDADE+" FROM "+DBHelper.TATIVIDADE+" WHERE "+DBHelper.COL3_TATIVIDADE+"='"+data+"';",null);
+                //Porque este query não funciona da forma esperada tivemos que usar o query acima - Tiago Almeida
+                // Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{DBHelper.COL1_TATIVIDADE},DBHelper.COL3_TATIVIDADE+"= ?",new String[]{data},null,null,null);
+                if(cursor2.moveToFirst() && cursor2.getCount()>=1){
+                    at_id = cursor2.getInt(0);
+                    cursor2.close();
+                }
+                Log.d("tag",String.valueOf(at_id));
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
             }
@@ -156,12 +160,10 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                     }
                 }
             });
-
-
             oLL.addView(oLL1);
             bCarryOn = oCursor.moveToNext();
         }
-
+        oCursor.close();
     }
 
 

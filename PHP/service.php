@@ -309,12 +309,12 @@ switch ($_POST['q']){
         if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
             if($row['c'] == 1){
                 $u_id= $_POST['u_id'];
-                //TODO VERIFICAR SE O UTILIZADOR É ADMIN OU EDUCADORA, SE FOR EDUCADORA ENTÂO ELIMINAR OS DADOS DA EDUCADORA, SE FOR ADMIN ENTÂO ELIMINAR NA TABELA ADMIN
+                //VERIFICAR SE O UTILIZADOR É ADMIN OU EDUCADORA, SE FOR EDUCADORA ENTÂO ELIMINAR OS DADOS DA EDUCADORA, SE FOR ADMIN ENTÂO ELIMINAR NA TABELA ADMIN
 
                 mysqli_begin_transaction($conn);
                 $sql = "SELECT count(u_id) as c FROM admin WHERE u_id = '$u_id' ";
                 $result = mysqli_query($conn,$sql);
-                if($result){
+                if(!$result){
                     $responseObjectError->success = false;
                     $responseObjectError->error = "Error in query 1";
                     $json = json_encode($responseObjectError);
@@ -350,15 +350,23 @@ switch ($_POST['q']){
                         mysqli_rollback($conn);
                         exit();
                     }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error in query 6";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        mysqli_rollback($conn);
+                        exit();
+                    }
 
                     if($row['t_utilizada'] == 1){
                         $responseObject->warning = "A turma estava a ser utilizada";
                     }
                     $token = $row['t_token'];
                     $sql = "DROP DATABASE $token";
-                    if(mysqli_query($conn,$sql)){
+                    if(!mysqli_query($conn,$sql)){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Error in query 3";
+                        $responseObjectError->error = "Error in query 3 ".$token;
                         $json = json_encode($responseObjectError);
                         echo $json;
                         mysqli_rollback($conn);
@@ -366,7 +374,7 @@ switch ($_POST['q']){
                     }
 
                     $sql = "DELETE FROM turmas WHERE u_id = '$u_id'";
-                    if(mysqli_query($conn,$sql)){
+                    if(!mysqli_query($conn,$sql)){
                         $responseObjectError->success = false;
                         $responseObjectError->error = "Error in query 4";
                         $json = json_encode($responseObjectError);
@@ -690,7 +698,7 @@ switch ($_POST['q']){
 #101 - Adicionar um utilizador (educadora)
     case 101: 
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -868,7 +876,7 @@ switch ($_POST['q']){
 #102 - Adicionar um utilizador (administrador)
     case 102:
         $id = $_POST['id'];
-        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_nome = '$id';";
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
         if($result){
             if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -915,7 +923,7 @@ switch ($_POST['q']){
                             echo $json;
                             exit();
                         }
-                        $sql = "INSERT INTO admin (SELECT u.u_id FROM users WHERE u_nome = '$nome' LIMIT 1);";
+                        $sql = "INSERT INTO admin (SELECT u_id FROM users WHERE u_nome = '$nome' LIMIT 1);";
                         $result = mysqli_query($conn,$sql);
                         if(!$result){
                             mysqli_rollback($conn);
@@ -925,6 +933,11 @@ switch ($_POST['q']){
                             echo $json;
                             exit();
                         }
+                        mysqli_commit($conn);
+                        $responseObject->success = true;
+                        $json = json_encode($responseObject);
+                        echo $json;
+                        exit();
                     }catch(mysqli_sql_exception $exception){
                         mysqli_rollback($conn);
                         $responseObjectError->success = false;
@@ -2114,7 +2127,6 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $data = $_POST['d'];
                     $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
@@ -2140,50 +2152,41 @@ switch ($_POST['q']){
                     }
                     mysqli_select_db($conn,$row['t_token']);
 
-                    $sql = "SELECT a_id FROM atividade WHERE a_data= '$data'";
-                    $result = mysqli_query($conn,$sql);
-                    if(!$result){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        exit();
-                    }
-                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Fetching error";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        exit();
-                    }
-
                     mysqli_begin_transaction($conn);
 
                     $tabela = $_POST['table'];
                     $tline = explode(",",$tabela);
-                    $a_id = $row['a_id'];
+                    $a_id = $_POST['a_id'];
                     $sql = "DELETE FROM faltas WHERE a_id = '$a_id'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error 4";
+                        $responseObjectError->error = "Mysql error 45";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         mysqli_rollback($conn);
                         exit();
                     }
-                    foreach ($tline as &$line) {
-                        $e_id = $line; 
-                        $sql = "INSERT INTO faltas (a_id,e_id) VALUES ('$a_id','$e_id')";
-                        if(!mysqli_query($conn,$sql)){
-                            $responseObjectError->success = false;
-                            $responseObjectError->error = "Mysql error 4";
-                            $json = json_encode($responseObjectError);
-                            echo $json;
-                            mysqli_rollback($conn);
-                            exit();
+                    if(!empty($tline)){
+                        foreach ($tline as &$line) {
+                            $e_id = $line; 
+                            $sql = "INSERT INTO faltas (a_id,e_id) VALUES ('$a_id','$e_id')";
+                            if(!mysqli_query($conn,$sql)){
+                                $responseObjectError->success = false;
+                                $responseObjectError->error = "Mysql error 4 ".$e_id;
+                                $json = json_encode($responseObjectError);
+                                echo $json;
+                                mysqli_rollback($conn);
+                                exit();
+                            }
                         }
                     }
+
+                    $responseObject->success = true;
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    mysqli_commit($conn);
+                    exit();
                 }else{
                     $responseObjectError->success = false;
                     $responseObjectError->error = "Mysql error 3";
@@ -2642,6 +2645,7 @@ switch ($_POST['q']){
                         $responseObjectError->error = "Mysql error 3";
                         $json = json_encode($responseObjectError);
                         echo $json;
+                        mysqli_rollback($conn);
                         exit();
                     }
                     $sql = "DELETE FROM faltas WHERE e_id = '$e_id'";
@@ -2650,6 +2654,7 @@ switch ($_POST['q']){
                         $responseObjectError->error = "Mysql error 4";
                         $json = json_encode($responseObjectError);
                         echo $json;
+                        mysqli_rollback($conn);
                         exit();
                     }
                     $sql = "DELETE FROM relatorio WHERE e_id = '$e_id'";
@@ -2658,6 +2663,7 @@ switch ($_POST['q']){
                         $responseObjectError->error = "Mysql error 5";
                         $json = json_encode($responseObjectError);
                         echo $json;
+                        mysqli_rollback($conn);
                         exit();
                     }
                     $sql = "DELETE FROM educando WHERE e_id = '$e_id'";
@@ -2666,6 +2672,7 @@ switch ($_POST['q']){
                         $responseObjectError->error = "Mysql error 6";
                         $json = json_encode($responseObjectError);
                         echo $json;
+                        mysqli_rollback($conn);
                         exit();
                     }
                     mysqli_commit($conn);
