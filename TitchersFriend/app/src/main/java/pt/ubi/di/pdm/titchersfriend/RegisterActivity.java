@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                 int Sexo = 0;
 
                 //Verificar se os campos estão todos preenchidos
-                if(us.isEmpty() || pass.isEmpty() || passr.isEmpty() || email.isEmpty() || Idade.isEmpty() || Morada.isEmpty()){
+                if(us.isEmpty() || pass.isEmpty() || email.isEmpty() || Idade.isEmpty() || Morada.isEmpty()){
                     Toast.makeText(RegisterActivity.this,"Preencha todos os campos!",Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -108,19 +108,19 @@ public class RegisterActivity extends AppCompatActivity {
                 //Verifica se a password cumpre os requesitos
                 if(!pass.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")){
                     inputpass.setText("");
-                    inputRepPass.setText("");
+
                     Toast.makeText(RegisterActivity.this,"Password inválida! 8 carateres (1 maiuscula e 1 minuscula).",Toast.LENGTH_SHORT).show();
                     inputpass.requestFocus();
                     return;
                 }
 
                 //Verificar se as password conferem
-                if(!passr.equals(pass)){
+                /*if(!passr.equals(pass)){
                     Toast.makeText(RegisterActivity.this,"Palavras-passe diferem",Toast.LENGTH_LONG).show();
                     inputpass.setText("");
                     inputRepPass.setText("");
                     return;
-                }
+                }*/
 
                 //Passa a password para Hash
                 String enc = getM5(pass);
@@ -152,12 +152,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent A2 = new Intent(RegisterActivity.this,Aprovacao.class);
                     startActivity(A2) ;
                     Toast.makeText(RegisterActivity.this,"Sucesso na criação da conta",Toast.LENGTH_LONG).show();
-                }
-                //Se false...
-                if(!s){
-                    Intent A2 = new Intent(RegisterActivity.this,MainActivity.class);
-                    startActivity(A2) ;
-                    Toast.makeText(RegisterActivity.this,"Erro na criação da conta",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(RegisterActivity.this, "Erro na criação da conta, o seu nome de utilizador pode ser igual a um já utilizado, tente novamente",Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
             }
