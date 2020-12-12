@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class Activity_GerirAlunos extends AppCompatActivity {
     Cursor oCursor;
     String tk,i;
     int e_id,id;
+    Button add;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,16 @@ public class Activity_GerirAlunos extends AppCompatActivity {
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         id = shp.getInt("id",999);
+
+        add = (Button)findViewById(R.id.btnAddAluno);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addA = new Intent(Activity_GerirAlunos.this,Activity_AddAluno.class);
+                addA.putExtra("ed_id",i);
+                startActivity(addA);
+            }
+        });
 
     }
 

@@ -31,6 +31,8 @@
         <activity android:name=".Activity_Relatorio"/>
         <activity android:name=".Activity_EditarAluno"/>
         <activity android:name=".Activity_EditarAula"/>
+        <activity android:name=".Activity_AddAlergiaAluno"/>
+        <activity android:name=".Activity_AddAluno"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
