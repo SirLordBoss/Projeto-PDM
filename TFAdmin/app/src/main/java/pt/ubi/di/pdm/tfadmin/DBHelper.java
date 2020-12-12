@@ -812,15 +812,37 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      *     Esta função serve para adicionar um educador que já se tenha inscrito
      *      @param id  id do administrador que executa a operação
-     *      @param i_id  id do inscrito a adicionar
+     *      @param u_id  id do inscrito a adicionar
      *
      *      @return inteiro
      *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
      *      0 : Erro da base de dados interna
      *      1 : Tudo ok
      *
-     */
+    */
+    public int deleteUser(SQLiteDatabase db, int id, int u_id){
+        String s;
+        try{
+            s = new Sender(c, "23", "id=" + id + "&u_id=" + u_id, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     public int addInscritoToEducador(int id, int i_id){
+
         String s;
         try{
             s = new Sender(c, "21", "name=" + id + "&id=" + i_id, null).execute().get();
@@ -952,6 +974,27 @@ public class DBHelper extends SQLiteOpenHelper {
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
                 return 0;
             }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int addAdmin(int id, String nome, int idade, String morada, int sexo, String email, String pwd){
+        String s;
+        try{
+            s = new Sender(c, "102", "id=" + id + "&un=" + nome + "&i=" + idade + "&m=" + morada + "&s=" + sexo + "&e=" + email + "&pwd=" + pwd, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
             return 1;
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();

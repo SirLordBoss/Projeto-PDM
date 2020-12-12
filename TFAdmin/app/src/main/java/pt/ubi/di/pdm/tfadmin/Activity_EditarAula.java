@@ -39,10 +39,10 @@ public class Activity_EditarAula extends AppCompatActivity {
         ed_id = Cheguei.getStringExtra("ed_id");
 
 
-        data = (TextView) findViewById(R.id.dia_aula);
-        sumario = (EditText) findViewById(R.id.inputSumario);
-        notas = (EditText) findViewById(R.id.inputNotas);
-        submeter = (Button)findViewById(R.id.btnSubmeterRel);
+        data = findViewById(R.id.dia_aula);
+        sumario = findViewById(R.id.inputSumario);
+        notas = findViewById(R.id.inputNotas);
+        submeter = findViewById(R.id.btnSubmeterRel);
 
         Cursor cursor = base.query(DBHelper.TATIVIDADE,new String[]{"*"},DBHelper.COL1_TATIVIDADE+"=?",new String[]{id_at},null,null,null);
         cursor.moveToFirst();
@@ -64,7 +64,7 @@ public class Activity_EditarAula extends AppCompatActivity {
                 int val1 = Integer.parseInt(ed_id);
                 int val2 = Integer.parseInt(id_at);
                 Log.d("tag","2");
-                dbHelper.editAtividade(base,admin_id,val1,val2,sum);
+                dbHelper.editAtividade(admin_id,val1,val2,sum);
                 Log.d("tag","3");
             }
         });

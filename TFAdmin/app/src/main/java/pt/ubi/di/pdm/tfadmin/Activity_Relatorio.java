@@ -56,15 +56,15 @@ public class Activity_Relatorio extends AppCompatActivity {
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
 
-        nome = (TextView) findViewById(R.id.titulo_homeeduc);
-        submeter = (Button) findViewById(R.id.btnSubmeterRel);
-        cancelar = (Button) findViewById(R.id.btnCancelarRel);
-        comer = (CheckBox) findViewById(R.id.cboxComer);
-        dormir = (CheckBox) findViewById(R.id.cboxDormir);
-        Wc = (CheckBox) findViewById(R.id.cboxWc);
-        curativo = (CheckBox) findViewById(R.id.cboxMagoar);
-        chorar = (CheckBox) findViewById(R.id.cboxChorar);
-        notas = (EditText) findViewById(R.id.editTextTextPersonName);
+        nome = findViewById(R.id.titulo_homeeduc);
+        submeter = findViewById(R.id.btnSubmeterRel);
+        cancelar = findViewById(R.id.btnCancelarRel);
+        comer = findViewById(R.id.cboxComer);
+        dormir = findViewById(R.id.cboxDormir);
+        Wc = findViewById(R.id.cboxWc);
+        curativo = findViewById(R.id.cboxMagoar);
+        chorar = findViewById(R.id.cboxChorar);
+        notas = findViewById(R.id.editTextTextPersonName);
 
         Cursor cursor = base.query(DBHelper.TRELATORIO,new String[]{"*"},DBHelper.COL0_TRELATORIO+"=?",new String[]{id},null,null,null);
         cursor.moveToFirst();
@@ -186,7 +186,7 @@ public class Activity_Relatorio extends AppCompatActivity {
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.editRelatorio(base,admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
+                dbHelper.editRelatorio(admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
                 finish();
 
             }

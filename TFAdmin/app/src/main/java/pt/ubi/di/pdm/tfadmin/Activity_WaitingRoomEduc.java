@@ -74,7 +74,7 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    db_helper.addInscritoToEducador(inscritos_db, id, ((v.getId() - 1)/10));
+                    db_helper.addInscritoToEducador( id, ((v.getId() - 1)/10));
                     Log.v("DEBUG", "id admin (5): " + id + ", id_inscrito (7): " + ((v.getId() - 1)/10));
                     displayInscritos();
                     //i.putExtra("id", String.valueOf((v.getId() - 1)/10));

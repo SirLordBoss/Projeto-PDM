@@ -42,14 +42,14 @@ public class Activity_EditarAluno extends AppCompatActivity {
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
 
-        nome = (EditText) findViewById(R.id.editNome);
-        idade = (EditText) findViewById(R.id.editIdade);
-        sexo = (Spinner) findViewById(R.id.editSexo);
-        morada = (EditText) findViewById(R.id.editMorada);
-        contacto = (EditText) findViewById(R.id.editContacto);
+        nome = findViewById(R.id.editNome);
+        idade = findViewById(R.id.editIdade);
+        sexo = findViewById(R.id.editSexo);
+        morada = findViewById(R.id.editMorada);
+        contacto = findViewById(R.id.editContacto);
 
-        submeter = (Button) findViewById(R.id.btnRelatorio);
-        cancelar = (Button) findViewById(R.id.btnCancelarRel);
+        submeter = findViewById(R.id.btnRelatorio);
+        cancelar = findViewById(R.id.btnCancelarRel);
 
         String[] items = new String[]{"Sexo: Feminino", "Sexo: Masculino"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_EditarAluno.this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -68,7 +68,7 @@ public class Activity_EditarAluno extends AppCompatActivity {
 
         morada.setText(cursor.getString(3));
         contacto.setText(cursor.getString(5));
-
+        cursor.close();
         submeter.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -91,10 +91,10 @@ public class Activity_EditarAluno extends AppCompatActivity {
                 while (cursor.moveToNext()){
                    aler.add(Integer.parseInt(cursor.getString(1)));
                 }
-
+                cursor.close();
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
-                dbHelper.editEducando(base,admin_id,id_educ,id_al,n,i,m,s,c,aler2);
+                dbHelper.editEducando(admin_id,id_educ,id_al,n,i,m,s,c,aler2);
             }
         });
 

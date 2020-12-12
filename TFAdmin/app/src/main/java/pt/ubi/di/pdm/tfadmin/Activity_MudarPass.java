@@ -112,6 +112,7 @@ public class Activity_MudarPass extends AppCompatActivity {
                     Toast.makeText(Activity_MudarPass.this,"Erro na comunicação dos dados",Toast.LENGTH_SHORT).show();
                 }
 
+
             }
         });
 

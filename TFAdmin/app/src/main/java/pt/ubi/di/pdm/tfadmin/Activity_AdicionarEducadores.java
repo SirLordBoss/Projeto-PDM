@@ -33,7 +33,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addaluno);
+        setContentView(R.layout.activity_adduser);
 
         db_helper = new DBHelper(this);
         educ_db = db_helper.getWritableDatabase();
@@ -41,14 +41,14 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
         SharedPreferences oSP = getApplicationContext().getSharedPreferences("important_variables", 0);
         id = oSP.getInt("id", 999);
 
-        registo = (Button) findViewById(R.id.btnCriar);
+        registo = findViewById(R.id.btnCriar);
 
-        educador = (EditText) findViewById(R.id.inputUser);
-        idade_educ = (EditText) findViewById(R.id.inputIdade);
-        morada = (EditText) findViewById(R.id.inputMorada);
-        email = (EditText) findViewById((R.id.inputEmail));
+        educador = findViewById(R.id.inputUser);
+        idade_educ = findViewById(R.id.inputIdade);
+        morada = findViewById(R.id.inputMorada);
+        email = findViewById((R.id.inputEmail));
 
-        dropdown = (Spinner) findViewById(R.id.inputSexo);
+        dropdown = findViewById(R.id.inputSexo);
 
         sexList.add("");
         String[] items = new String[]{"Feminino", "Masculino"};
@@ -83,7 +83,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
-                if(db_helper.addEducador(educ_db, id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
+                if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
                     Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(Activity_AdicionarEducadores.this, "erro!", Toast.LENGTH_SHORT).show();
