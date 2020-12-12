@@ -205,4 +205,10 @@ public class Activity_Relatorio extends AppCompatActivity {
         super.onPause();
         base.close();
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+    }
 }

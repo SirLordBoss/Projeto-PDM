@@ -66,6 +66,7 @@ public class Activity_VerAula extends AppCompatActivity{
     @Override
     public void onResume() {
         super.onResume();
-        base=dbHelper.getWritableDatabase();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
     }
 }

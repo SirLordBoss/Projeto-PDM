@@ -114,6 +114,12 @@ public class Activity_EditarAluno extends AppCompatActivity {
         super.onPause();
         base.close();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+    }
 
 
 }

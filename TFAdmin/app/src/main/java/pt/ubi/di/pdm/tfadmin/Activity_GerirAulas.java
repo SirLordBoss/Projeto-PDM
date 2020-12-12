@@ -44,6 +44,8 @@ public class Activity_GerirAulas extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
         dbHelper.updateEducador(base,id);
         Cursor cursor = base.query(DBHelper.TEDUCADOR,new String[]{DBHelper.COL7_TEDUCADOR},DBHelper.COL1_TEDUCADOR+"=?",new String[]{String.valueOf(e_id)},null,null,null);
         cursor.moveToFirst();

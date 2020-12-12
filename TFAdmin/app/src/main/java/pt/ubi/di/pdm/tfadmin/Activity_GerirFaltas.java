@@ -125,6 +125,13 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         base.close();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+    }
+
     public void displayFaltas() {
         oLL = findViewById(R.id.visualizar);
         oLL.removeAllViews();

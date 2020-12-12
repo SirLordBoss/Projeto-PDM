@@ -68,18 +68,18 @@ public class Activity_GerirAlunos extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 3);
+            oLL1.setId(oCursor.getInt(0) * 10 + 4);
 
             TextView T1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            T1.setId(oCursor.getInt(0) * 10 + 2);
+            T1.setId(oCursor.getInt(0) * 10 + 3);
             T1.setText(oCursor.getString(1));
 
             TextView T2 = (TextView) oLL1.findViewById(R.id.idAluno);
-            T2.setId(oCursor.getInt(0) * 10 + 1);
+            T2.setId(oCursor.getInt(0) * 10 + 2);
             T2.setText(oCursor.getString(0));
 
             ImageButton B1 = (ImageButton)oLL1.findViewById(R.id.btnVerAluno);
-            B1.setId(oCursor.getInt(0) * 10);
+            B1.setId(oCursor.getInt(0) * 10+1);
             B1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -87,6 +87,17 @@ public class Activity_GerirAlunos extends AppCompatActivity {
                     ia.putExtra("id",String.valueOf((v.getId())/10));
                     ia.putExtra("id_educadora",i);
                     startActivity(ia);
+                }
+            });
+
+            ImageButton B2 = (ImageButton)oLL1.findViewById(R.id.btnApagar);
+            B2.setId(oCursor.getInt(0) * 10);
+            B2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dbHelper.deleteEducando(id,e_id,(v.getId())/10);
+                    LinearLayout oLL1 =(LinearLayout)findViewById((v.getId())+4);
+                    ((LinearLayout)oLL1.getParent()).removeView(oLL1);
                 }
             });
 
