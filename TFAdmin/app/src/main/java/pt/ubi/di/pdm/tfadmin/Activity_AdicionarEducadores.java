@@ -3,6 +3,7 @@ package pt.ubi.di.pdm.tfadmin;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -83,8 +84,14 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
+<<<<<<< HEAD
+                Log.v("DEBUG", "parametros: id=" + id + ", nome=" + educador_nome + ", idade=" + idade + ", morada=" + mor + ", sexo=" + sexo + ", email=" + em);
+
+                if(db_helper.addEducador(id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
+=======
                 if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
 
+>>>>>>> bf02150e580a7bef5ea1463e9454704af06e83bc
                     Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(Activity_AdicionarEducadores.this, "erro!", Toast.LENGTH_SHORT).show();

@@ -71,4 +71,17 @@ public class Activity_EditarAula extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
 }

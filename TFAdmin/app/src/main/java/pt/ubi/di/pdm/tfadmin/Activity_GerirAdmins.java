@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -68,24 +69,36 @@ public class Activity_GerirAdmins extends AppCompatActivity {
         Boolean bCarryOn = oCursor.moveToFirst();
         while(bCarryOn){
             LinearLayout new_admin = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar_educ, null);
-            new_admin.setId(oCursor.getInt(0) * 10 + 3);
+            new_admin.setId(oCursor.getInt(0) * 10 + 4);
 
             TextView nome_admin = (TextView) new_admin.findViewById(R.id.nomeAluno);
-            nome_admin.setId(oCursor.getInt(0) * 10 + 2);
+            nome_admin.setId(oCursor.getInt(0) * 10 + 3);
             nome_admin.setText(oCursor.getString(1));
 
             TextView id_admin = (TextView) new_admin.findViewById(R.id.idAluno);
-            id_admin.setId(oCursor.getInt(0) * 10 + 1);
+            id_admin.setId(oCursor.getInt(0) * 10 + 2);
             id_admin.setText(oCursor.getString(0));
 
-            ImageButton btn_admin = (ImageButton) new_admin.findViewById(R.id.btnVerAluno);
-            btn_admin.setId(oCursor.getInt(0) * 10);
-            btn_admin.setOnClickListener(new View.OnClickListener() {
+            ImageButton btn_ver_admin = (ImageButton) new_admin.findViewById(R.id.btnVerAluno);
+            btn_ver_admin.setId(oCursor.getInt(0) * 10 + 1);
+            btn_ver_admin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(Activity_GerirAdmins.this, Activity_PerfAdmin.class);
-                    i.putExtra("id", String.valueOf((v.getId())/10));
+                    i.putExtra("id", String.valueOf((v.getId() - 1)/10));
                     startActivity(i);
+                }
+            });
+
+            ImageButton btn_apagar_admin = (ImageButton) new_admin.findViewById(R.id.btnApagar);
+            btn_apagar_admin.setId(oCursor.getInt(0) * 10);
+            btn_apagar_admin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    db_helper.deleteUser( id, (v.getId()/10));
+                    Log.v("DEBUG", "id (5):" + id + ", user a apagar: " + (v.getId()/10));
+                    LinearLayout user_to_delete = findViewById(v.getId() + 4);
+                    ((LinearLayout) user_to_delete.getParent()).removeView(user_to_delete);
                 }
             });
 

@@ -962,7 +962,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
                 return 0;
             }
-
             return 1;
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();

@@ -66,4 +66,15 @@ public class Activity_PerfAluno extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+    }
 }

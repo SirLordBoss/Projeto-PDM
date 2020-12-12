@@ -40,12 +40,21 @@ public class Activity_GerirDados extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+
         aux = dbHelper.updateEducador(base,u);
         if ( aux == 0 || aux == -1){
             Toast.makeText(Activity_GerirDados.this,"Erro",Toast.LENGTH_SHORT).show();
         }
         displayEducadoras();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
     }
 
     public void displayEducadoras() {

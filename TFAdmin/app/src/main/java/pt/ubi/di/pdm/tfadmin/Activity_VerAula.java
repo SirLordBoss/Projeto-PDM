@@ -61,11 +61,12 @@ public class Activity_VerAula extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        dbHelper.close();
+        base.close();
     }
     @Override
     public void onResume() {
         super.onResume();
-        base=dbHelper.getWritableDatabase();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
     }
 }
