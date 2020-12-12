@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/nome"
@@ -36,15 +36,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
         tools:ignore="Autofill" />
-
-    <Spinner
-        android:id="@+id/editSexo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
-        android:spinnerMode="dropdown" />
 
     <EditText
         android:id="@+id/editMorada"
@@ -70,8 +61,42 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/email_pais"
+        android:hint="@string/email"
         android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/palavra_passe"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/inputRepPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/rep_pass"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
         tools:ignore="Autofill" />
@@ -79,7 +104,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
