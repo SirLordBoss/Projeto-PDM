@@ -56,12 +56,12 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         tk = cursor.getString(0);
         cursor.close();
 
-        dia =(Spinner)findViewById(R.id.inputDia);
-        mes =(Spinner)findViewById(R.id.inputMes);
-        ano =(Spinner)findViewById(R.id.inputAno);
-        pesquisa = (Button)findViewById(R.id.button);
-        submeter = (Button)findViewById(R.id.btnSubmeterRel);
-        cancelar = (Button)findViewById(R.id.btnCancelarRel);
+        dia = findViewById(R.id.inputDia);
+        mes = findViewById(R.id.inputMes);
+        ano = findViewById(R.id.inputAno);
+        pesquisa = findViewById(R.id.button);
+        submeter = findViewById(R.id.btnSubmeterRel);
+        cancelar = findViewById(R.id.btnCancelarRel);
 
 
         String[] itemsDia = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
@@ -90,6 +90,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 Log.d("tag",data);
                 Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{"*"},DBHelper.COL3_TATIVIDADE+"=?",new String[]{data},null,null,null);
                 cursor2.moveToFirst();
+                at_id = cursor2.getInt(0);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
@@ -102,6 +103,9 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             public void onClick(View v) {
                 int[] falt2 = {};
                 falt2 = falt.stream().mapToInt(Integer::intValue).toArray();
+                Log.d("tag",String.valueOf(id));
+                Log.d("tag",String.valueOf(e_id));
+                Log.d("tag",String.valueOf(at_id));
                 dbHelper.editFalta(id,e_id,at_id,falt2);
             }
         });
@@ -115,8 +119,21 @@ public class Activity_GerirFaltas extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
+    }
+
     public void displayFaltas() {
-        oLL = (LinearLayout) findViewById(R.id.visualizar);
+        oLL = findViewById(R.id.visualizar);
         oLL.removeAllViews();
         oCursor = base.query(DBHelper.TFALTA, new String[]{"*"}, null, null, null, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
@@ -124,11 +141,11 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_faltas, null);
             oLL1.setId(oCursor.getInt(0) * 10 + 2);
 
-            TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
+            TextView E1 = oLL1.findViewById(R.id.nomeAluno);
             E1.setId(oCursor.getInt(0) * 10 );
             E1.setText(oCursor.getString(1));
 
-            CheckBox B1 = (CheckBox) oLL1.findViewById(R.id.checkBox);
+            CheckBox B1 = oLL1.findViewById(R.id.checkBox);
             B1.setId(oCursor.getInt(0)*10+1);
 
             if(oCursor.getString(2).equals("1")) {

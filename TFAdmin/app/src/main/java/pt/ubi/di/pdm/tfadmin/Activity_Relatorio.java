@@ -56,15 +56,15 @@ public class Activity_Relatorio extends AppCompatActivity {
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
 
-        nome = (TextView) findViewById(R.id.titulo_homeeduc);
-        submeter = (Button) findViewById(R.id.btnSubmeterRel);
-        cancelar = (Button) findViewById(R.id.btnCancelarRel);
-        comer = (CheckBox) findViewById(R.id.cboxComer);
-        dormir = (CheckBox) findViewById(R.id.cboxDormir);
-        Wc = (CheckBox) findViewById(R.id.cboxWc);
-        curativo = (CheckBox) findViewById(R.id.cboxMagoar);
-        chorar = (CheckBox) findViewById(R.id.cboxChorar);
-        notas = (EditText) findViewById(R.id.editTextTextPersonName);
+        nome = findViewById(R.id.titulo_homeeduc);
+        submeter = findViewById(R.id.btnSubmeterRel);
+        cancelar = findViewById(R.id.btnCancelarRel);
+        comer = findViewById(R.id.cboxComer);
+        dormir = findViewById(R.id.cboxDormir);
+        Wc = findViewById(R.id.cboxWc);
+        curativo = findViewById(R.id.cboxMagoar);
+        chorar = findViewById(R.id.cboxChorar);
+        notas = findViewById(R.id.editTextTextPersonName);
 
         Cursor cursor = base.query(DBHelper.TRELATORIO,new String[]{"*"},DBHelper.COL0_TRELATORIO+"=?",new String[]{id},null,null,null);
         cursor.moveToFirst();
@@ -169,23 +169,23 @@ public class Activity_Relatorio extends AppCompatActivity {
             }
         });
 
-        if (comer.isChecked())
-            v1 = 1;
-        if(dormir.isChecked())
-            v2=1;
-        if (Wc.isChecked())
-            v3 = 1;
-
-        if (curativo.isChecked())
-            v4 = 1;
-        if (chorar.isChecked())
-            v4 = 2;
-        if (chorar.isChecked()&&curativo.isChecked())
-            v4 = 3;
 
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (comer.isChecked())
+                    v1 = 1;
+                if(dormir.isChecked())
+                    v2=1;
+                if (Wc.isChecked())
+                    v3 = 1;
+
+                if (curativo.isChecked())
+                    v4 = 1;
+                if (chorar.isChecked())
+                    v4 = 2;
+                if (chorar.isChecked()&&curativo.isChecked())
+                    v4 = 3;
                 dbHelper.editRelatorio(admin_id,ed_id,at_id,Integer.parseInt(id),v1,v2,notas.getText().toString(),v3,v4);
                 finish();
 
@@ -199,5 +199,16 @@ public class Activity_Relatorio extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        base.close();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        dbHelper = new DBHelper(this);
+        base = dbHelper.getWritableDatabase();
     }
 }

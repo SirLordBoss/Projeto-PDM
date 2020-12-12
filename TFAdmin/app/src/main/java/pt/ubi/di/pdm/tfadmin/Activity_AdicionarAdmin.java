@@ -71,14 +71,14 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
         SharedPreferences oSP = getApplicationContext().getSharedPreferences("important_variables", 0);
         id = oSP.getInt("id", 999);
 
-        registo = (Button) findViewById(R.id.btnCriar);
+        registo = findViewById(R.id.btnCriar);
 
-        nome_admin = (EditText) findViewById(R.id.inputUser);
-        idade_admin = (EditText) findViewById(R.id.inputIdade);
-        morada_admin = (EditText) findViewById(R.id.inputMorada);
-        email_admin = (EditText) findViewById((R.id.inputEmail));
+        nome_admin = findViewById(R.id.inputUser);
+        idade_admin = findViewById(R.id.inputIdade);
+        morada_admin = findViewById(R.id.inputMorada);
+        email_admin = findViewById((R.id.inputEmail));
 
-        dropdown = (Spinner) findViewById(R.id.inputSexo);
+        dropdown = findViewById(R.id.inputSexo);
 
         sexList.add("");
         String[] items = new String[]{"Feminino", "Masculino"};

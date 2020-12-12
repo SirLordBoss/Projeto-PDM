@@ -72,7 +72,7 @@ public class Activity_GerirEducadores extends AppCompatActivity {
     }
 
     public void displayEducadores() {
-        visualizer = (LinearLayout) findViewById(R.id.visualizar);
+        visualizer = findViewById(R.id.visualizar);
         visualizer.removeAllViewsInLayout();
 
         Cursor oCursor = educ_db.query(DBHelper.TEDUCADOR, new String[]{"*"}, null, null, null, null, null, null);
@@ -82,15 +82,15 @@ public class Activity_GerirEducadores extends AppCompatActivity {
             LinearLayout new_educ = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar_educ, null);
             new_educ.setId(oCursor.getInt(0) * 10 + 4);
 
-            TextView nome_educ = (TextView) new_educ.findViewById(R.id.nomeAluno);
+            TextView nome_educ = new_educ.findViewById(R.id.nomeAluno);
             nome_educ.setId(oCursor.getInt(0) * 10 + 3);
             nome_educ.setText(oCursor.getString(1));
 
-            TextView id_educ = (TextView) new_educ.findViewById(R.id.idAluno);
+            TextView id_educ = new_educ.findViewById(R.id.idAluno);
             id_educ.setId(oCursor.getInt(0) * 10 + 2);
             id_educ.setText(oCursor.getString(0));
 
-            ImageButton btn_educ = (ImageButton) new_educ.findViewById(R.id.btnVerAluno);
+            ImageButton btn_educ = new_educ.findViewById(R.id.btnVerAluno);
             btn_educ.setId(oCursor.getInt(0) * 10 + 1);
             btn_educ.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,12 +101,12 @@ public class Activity_GerirEducadores extends AppCompatActivity {
                 }
             });
 
-            ImageButton btn_apagar_educ = (ImageButton) new_educ.findViewById(R.id.btnApagar);
+            ImageButton btn_apagar_educ = new_educ.findViewById(R.id.btnApagar);
             btn_apagar_educ.setId(oCursor.getInt(0) * 10);
             btn_apagar_educ.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    db_helper.deleteUser(educ_db, id, (v.getId()/10));
+                    db_helper.deleteUser( id, (v.getId()/10));
                     Log.v("DEBUG", "id (5):" + id + ", user a apagar: " + (v.getId()/10));
                     LinearLayout user_to_delete = findViewById(v.getId() + 4);
                     ((LinearLayout) user_to_delete.getParent()).removeView(user_to_delete);
