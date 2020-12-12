@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -62,6 +63,7 @@ public class Activity_AddAlergiaAluno extends AppCompatActivity {
                 }
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",subm.toString());
+                Log.d("tag",subm.get(0));
                 setResult(Activity.RESULT_OK,returnIntent);
                 Toast.makeText(Activity_AddAlergiaAluno.this,"Adicionado com sucesso",Toast.LENGTH_SHORT).show();
                 finish();
