@@ -889,7 +889,7 @@ switch ($_POST['q']){
                         $sexo = $_POST['s'];
                         $email = $_POST['e'];
                         $pwd = $_POST['pwd'];
-                        $sql = "SELECT COUNT(u_nome) as c, COUNT(tr_nome) as ctr FROM users as u, to_regist as tr WHERE u_nome = '$nome' OR tr_nome = '$nome';";
+                        $sql = "SELECT COUNT(u.u_nome) as c, COUNT(tr.tr_nome) as ctr FROM users as u, to_regist as tr WHERE u.u_nome = '$nome' OR tr.tr_nome = '$nome';";
                         $result = mysqli_query($conn,$sql);
                         if(!$result){
                             $responseObjectError->success = false;
@@ -2916,14 +2916,6 @@ switch ($_POST['q']){
                     if(!mysqli_query($conn,$sql)){
                         $responseObjectError->success = false;
                         $responseObjectError->error = "Mysql error 3";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        exit();
-                    }
-                    $sql = "DELETE FROM atividade WHERE a_id = '$a_id'";
-                    if(!mysqli_query($conn,$sql)){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error 4";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
