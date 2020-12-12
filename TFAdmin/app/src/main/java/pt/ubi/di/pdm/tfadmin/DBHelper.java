@@ -997,6 +997,27 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public int addAdmin(int id, String nome, int idade, String morada, int sexo, String email, String pwd){
+        String s;
+        try{
+            s = new Sender(c, "102", "id=" + id + "&un=" + nome + "&i=" + idade + "&m=" + morada + "&s=" + sexo + "&e=" + email + "&pwd=" + pwd, null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     /** Query 505 - Função deleteEducando
      *
      *<br><br>

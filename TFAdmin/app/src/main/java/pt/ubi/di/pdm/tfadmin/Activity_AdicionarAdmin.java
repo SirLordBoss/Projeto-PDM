@@ -85,7 +85,7 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
 
                 String pwd = "pwd";
 
-                if(db_helper.addAdmin(admin_db, id, nome, idade, mor, sexo, em, "pwd") == 1){
+                if(db_helper.addAdmin(id, nome, idade, mor, sexo, em, "pwd") == 1){
                     Toast.makeText(Activity_AdicionarAdmin.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(Activity_AdicionarAdmin.this, "erro!", Toast.LENGTH_SHORT).show();
