@@ -75,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
     protected static final String COL6_TRELATORIO = "r_curativos";
     protected static final String CREATE_TRELATORIO = "CREATE TABLE IF NOT EXISTS "+TRELATORIO+ "("+COL0_TRELATORIO+" INTEGER NOT NULL,"+COL1_TRELATORIO+" VARCHAR(200) NOT NULL,"+COL2_TRELATORIO+" INTEGER NOT NULL,"+COL3_TRELATORIO+" INTEGER NOT NULL,"+COL4_TRELATORIO+" VARCHAR(300) NOT NULL,"+COL5_TRELATORIO+" VARCHAR(20) NOT NULL,"+COL6_TRELATORIO+" INTEGER NOT NULL);";
 
-    protected static final String TINSCRITO = "admin";
+    protected static final String TINSCRITO = "inscrito";
     protected static final String COL1_TINSCRITO = "u_id";
     protected static final String COL2_TINSCRITO = "u_nome";
     protected static final String COL3_TINSCRITO = "u_email";
@@ -409,14 +409,16 @@ public class DBHelper extends SQLiteOpenHelper {
             if(s == null){
                 return -1;
             }
+            db.execSQL("DROP TABLE "+TFALTA);
+            db.execSQL(CREATE_TFALTA);
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+
                 return 0;
             }
 
-            db.execSQL("DROP TABLE "+TFALTA);
-            db.execSQL(CREATE_TFALTA);
+
             if(s.equals("")){
                 return 1;
             }
@@ -595,6 +597,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
     /** Query 301 - Função editEducando
      *
      *<br><br>
@@ -766,7 +769,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
     */
-
     public int addInscritoToEducador(SQLiteDatabase db, int id, int i_id){
         String s;
         try{
@@ -807,7 +809,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *      1 : Tudo ok
      *
      */
-
     public int addEducador(SQLiteDatabase db, int id, String nome, int idade, String morada, int sexo, String email, String pwd){
         String s;
         try{

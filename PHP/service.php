@@ -1632,15 +1632,11 @@ switch ($_POST['q']){
                         exit();
                     }
                     $a_id = $row['a_id'];
-                    $sql = "SELECT e.e_id, e.e_nome, a_id
-                    FROM atividade a 
-                        INNER JOIN faltas f ON ( a.a_id = f.a_id  )  
-                            INNER JOIN educando e ON ( f.e_id = e.e_id  )  
-                    WHERE a.a_id = '$a_id';";
+                    $sql = "SELECT e.e_id, e.e_nome, a.a_id FROM atividade a INNER JOIN faltas f ON ( a.a_id = f.a_id  ) INNER JOIN educando e ON ( f.e_id = e.e_id  ) WHERE a.a_id = '$a_id';";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error 4";
+                        $responseObjectError->error = "Mysql error 4 ".$a_id;
                         $json = json_encode($responseObjectError);
                         echo $json;
                         exit();
@@ -1650,7 +1646,7 @@ switch ($_POST['q']){
                     while($row = mysqli_fetch_array($result)){
                         $responseObject->table .= $row['e_id'].",".$row['e_nome'].",1;";
                     }
-                    $sql = "SELECT e.e_nome FROM educando e WHERE  NOT EXISTS ( SELECT 1 FROM faltas f1 INNER JOIN atividade a1 ON ( f1.a_id = a1.a_id  ) WHERE e.e_id = f1.e_id AND a1.a_id = '$a_id');";
+                    $sql = "SELECT e.e_id, e.e_nome FROM educando e WHERE  NOT EXISTS ( SELECT 1 FROM faltas f1 INNER JOIN atividade a1 ON ( f1.a_id = a1.a_id  ) WHERE e.e_id = f1.e_id AND a1.a_id = '$a_id');";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
