@@ -59,7 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnCriar = (Button)findViewById(R.id.btnCriar) ;
         inputpass = (EditText) findViewById(R.id.inputPass);
         inputEmail = (EditText) findViewById(R.id.inputEmail);
-        inputRepPass = (EditText) findViewById(R.id.inputRepPass);
         inputUser = (EditText) findViewById(R.id.inputUser);
         inputIdade = (EditText) findViewById(R.id.inputIdade);
         inputMorada = (EditText) findViewById(R.id.inputMorada);
@@ -79,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String x ="";
                 String us = inputUser.getText().toString();
                 String pass = inputpass.getText().toString();
-                String passr = inputRepPass.getText().toString();
                 String email = inputEmail.getText().toString();
                 String Idade = inputIdade.getText().toString();
                 String Morada = inputMorada.getText().toString();

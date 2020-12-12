@@ -2832,6 +2832,7 @@ switch ($_POST['q']){
                         $responseObjectError->error = "Mysql error 3";
                         $json = json_encode($responseObjectError);
                         echo $json;
+                        mysqli_rollback($conn);
                         exit();
                     }
                     $sql = "DELETE FROM atividade WHERE a_id = '$a_id'";
@@ -2840,6 +2841,7 @@ switch ($_POST['q']){
                         $responseObjectError->error = "Mysql error 4";
                         $json = json_encode($responseObjectError);
                         echo $json;
+                        mysqli_rollback($conn);
                         exit();
                     }
                     
