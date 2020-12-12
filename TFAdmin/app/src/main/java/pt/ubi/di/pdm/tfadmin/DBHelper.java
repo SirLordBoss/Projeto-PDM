@@ -574,7 +574,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos editar um utilizador, esta função vai enviar os dados de um utilizador para a base de dados externa para editar tanto Administradores como Educandos
      *
-     * @param db base de dados
      * @param id  id do administrador que edita os dados
      * @param u_id id do utilizador a editar
      * @param u_nome nome do utilizador a editar
@@ -616,7 +615,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos editar um educando, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de um certo educando
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param e_id id do educando a editar
@@ -662,7 +660,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos editar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de uma alergia
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_id id da alergia a editar
@@ -697,9 +694,8 @@ public class DBHelper extends SQLiteOpenHelper {
     /** Query 303 - Função editAtividade
      *
      *<br><br>
-     * Esta  função serve para conseguirmos editar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de uma alergia
+     * Esta  função serve para conseguirmos editar uma atividade, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de uma atividade (neste caso o sumário)
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_id id da atividade a editar
@@ -736,7 +732,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos editar as faltas, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de faltas de um dia
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_id id da atividade a marcar faltas
@@ -777,7 +772,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos editar as faltas, esta função vai enviar os dados à base de dados externa para que possamos editar os dados de faltas de um dia
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_id id da atividade a editar
@@ -816,15 +810,9 @@ public class DBHelper extends SQLiteOpenHelper {
     /** Query 21 - Função addEducador por editar
      *
      *<br><br>
-     *     Esta função serve para adicionar um educador manualmente
-     *      @param db base de dados
+     *     Esta função serve para adicionar um educador que já se tenha inscrito
      *      @param id  id do administrador que executa a operação
-     *      @param nome nome do educador a ser adicionado
-     *      @param idade idade do educador a adicionar
-     *      @param morada morada do educador a adicionar
-     *      @param sexo sexo do educador a adicionar
-     *      @param email email do educador a adicionar
-     *      @param pwd password do educador a adicionar
+     *      @param i_id  id do inscrito a adicionar
      *
      *      @return inteiro
      *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
@@ -857,7 +845,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      *<br><br>
      *     Esta função serve para adicionar um educador manualmente
-     *      @param db base de dados
      *      @param id  id do administrador que executa a operação
      *      @param nome nome do educador a ser adicionado
      *      @param idade idade do educador a adicionar
@@ -898,7 +885,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos adicionar um educando, esta função vai enviar os dados à base de dados externa para que possamos adicionar um educando
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param e_nome nome do educando a editar
@@ -943,7 +929,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_nome nome da alergia a adicionar
@@ -977,9 +962,8 @@ public class DBHelper extends SQLiteOpenHelper {
     /** Query 505 - Função deleteEducando
      *
      *<br><br>
-     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     * Esta  função serve para conseguirmos apagar um educando (aluno), esta função vai enviar os dados à base de dados externa para que possamos apagar um educando
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param e_id id do educando
@@ -1013,9 +997,8 @@ public class DBHelper extends SQLiteOpenHelper {
     /** Query 506 - Função deleteAlergia
      *
      *<br><br>
-     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     * Esta  função serve para conseguirmos apagar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos apagar uma alergia
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_id id da alergia
@@ -1049,9 +1032,8 @@ public class DBHelper extends SQLiteOpenHelper {
     /** Query 407 - Função deleteAtividade
      *
      *<br><br>
-     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     * Esta  função serve para conseguirmos apagar uma atividade, esta função vai enviar os dados à base de dados externa para que possamos apagar aulas dentro de uma turma
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
      * @param a_id id da atividade
@@ -1086,7 +1068,6 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      *<br><br>
      *     Esta função serve para eliminar um utilizador, quer seja admin ou educador
-     *      @param db base de dados
      *      @param id  id do administrador que executa a operação
      *      @param u_id id do utilizador a apagar
      *
@@ -1120,9 +1101,8 @@ public class DBHelper extends SQLiteOpenHelper {
     /** Query 308 - Função deleteRelatorio
      *
      *<br><br>
-     * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
+     * Esta  função serve para conseguirmos eliminar um relatório, esta função vai enviar os dados à base de dados externa para que possamos eliminar um relatório
      *
-     * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id id do educador a que a turma pertence
      * @param a_id id da alergia
@@ -1159,8 +1139,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *<br><br>
      * Esta  função serve para conseguirmos adicionar uma alergia, esta função vai enviar os dados à base de dados externa para que possamos adicionar uma alergia
      *
-     * @param db base de dados
-     * @param id  id do administrador que pede os dados
+     * @param id  id do utilizador
      * @param new_pwd password nova do utilizador
      * @param old_pwd password antiga do utilizador
      *
