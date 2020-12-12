@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -86,6 +87,10 @@ public class Activity_EditarAluno extends AppCompatActivity {
                     aler[aux2] = Integer.parseInt(cursor.getString(1));
                     aux2++;
                 }
+
+                Log.d("tag",String.valueOf(admin_id));
+                Log.d("tag",String.valueOf(id_educ));
+                Log.d("tag",String.valueOf(id_al));
 
                 dbHelper.editEducando(base,admin_id,id_educ,id_al,n,i,m,s,c,aler);
             }

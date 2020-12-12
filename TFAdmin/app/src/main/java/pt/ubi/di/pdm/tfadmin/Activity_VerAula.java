@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class Activity_VerAula extends AppCompatActivity{
 
         Intent Cheguei = getIntent();
         id_at = Cheguei.getStringExtra("id");
-        ed_id = Cheguei.getStringExtra("ed_id");
+        ed_id = Cheguei.getStringExtra("e_id");
 
         data = (TextView)findViewById(R.id.dia_aula);
         sumario = (TextView)findViewById(R.id.inputSumario);

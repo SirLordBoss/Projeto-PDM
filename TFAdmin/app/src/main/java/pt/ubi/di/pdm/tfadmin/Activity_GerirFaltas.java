@@ -81,7 +81,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 Log.d("tag",data);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
-                //displayRelatorios();
+                displayRelatorios();
             }
         });
 
