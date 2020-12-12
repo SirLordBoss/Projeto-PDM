@@ -739,8 +739,8 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param db base de dados
      * @param id  id do administrador que pede os dados
      * @param ed_id  id do educador a que a turma pertence
-     * @param a_id id da atividade a editar
-     * @param sum sumário da atividade a editar
+     * @param a_id id da atividade a marcar faltas
+     * @param faltas id dos educandos que tiveram falta
      *
      * @return inteiro
      *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
@@ -748,10 +748,14 @@ public class DBHelper extends SQLiteOpenHelper {
      *       1 : Tudo ok
      *
      */
-    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, String sum){
-        String s;
+    public int editFalta( SQLiteDatabase db, int id, int ed_id, int a_id, int[] faltas){
+        String s,falta ="";
         try {
-            s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&sum="+sum,null).execute().get();
+            for (int faltas2: faltas) {
+                falta += ""+faltas2+",";
+            }
+            falta = falta.substring(0,falta.length()-1);
+            s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&table="+falta,null).execute().get();
             if(s == null){
                 return -1;
             }
@@ -878,6 +882,51 @@ public class DBHelper extends SQLiteOpenHelper {
                 return 0;
             }
 
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /** Query 501 - Função addEducando
+     *
+     *<br><br>
+     * Esta  função serve para conseguirmos adicionar um educando, esta função vai enviar os dados à base de dados externa para que possamos adicionar um educando
+     *
+     * @param db base de dados
+     * @param id  id do administrador que pede os dados
+     * @param ed_id  id do educador a que a turma pertence
+     * @param e_nome nome do educando a editar
+     * @param e_idade idade do educando a editar
+     * @param e_morada morada do educando a editar
+     * @param e_sexo sexo do educando a editar
+     * @param e_contacto contacto do encarregado de educação do educando a editar
+     * @param e_alergias lista de ids das alergias do educando a editar
+     *
+     * @return inteiro
+     *      -1 : Sem comunicação (fazer display de um warning para o utilizador)
+     *       0 : Erro da base de dados interna
+     *       1 : Tudo ok
+     *
+     */
+    public int addEducando( SQLiteDatabase db, int id,int ed_id,int e_id,String e_nome,int e_idade, String e_morada,int e_sexo,String e_contacto, int [] e_alergias){
+        String s, alergias=" ";
+        try {
+            for (int alergia: e_alergias) {
+                alergias += ""+alergia+",";
+            }
+            alergias = alergias.substring(0,alergias.length()-1);
+            s = new Sender(c,"501", "id="+id+"&ide="+ed_id+"&e_id="+e_id+"&e_nome="+e_nome+"&e_morada="+e_morada+"&e_idade="+e_idade+"&e_sexo="+e_sexo+"&e_contacto="+e_contacto+"&e_alergias="+alergias,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
             return 1;
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();

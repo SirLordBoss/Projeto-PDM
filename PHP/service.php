@@ -1807,7 +1807,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -1839,7 +1839,7 @@ switch ($_POST['q']){
                     $e_sexo = $_POST['e_sexo'];
                     $e_contacto = $_POST['e_contacto'];
                     mysqli_begin_transaction($conn);
-                    $sql = "UPDATE educando SET e_nome='$e_nome' AND e_idade='$e_idade' AND e_morada='$e_morada' AND e_sexo='$e_sexo' AND e_contacto='$e_contacto' WHERE e_id ='$e_id';";
+                    $sql = "UPDATE educando SET e_nome='$e_nome', e_idade='$e_idade', e_morada='$e_morada', e_sexo='$e_sexo',e_contacto='$e_contacto' WHERE e_id ='$e_id';";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -1851,6 +1851,7 @@ switch ($_POST['q']){
                     }
                     $alergias = $_POST['e_alergias'];
                     $aline = explode(",",$alergias);
+
                     $sql = "DELETE FROM contem WHERE e_id = '$e_id';";
                     if(!mysqli_query($conn,$sql)){
                         $responseObjectError->success = false;
@@ -1860,17 +1861,20 @@ switch ($_POST['q']){
                         mysqli_rollback($conn);
                         exit();
                     }
-                    foreach ($aline as &$line){
-                        $sql = "INSERT INTO contem (e_id,a_id) VALUES ('$e_id','$line')";
-                        if(!mysqli_query($conn,$sql)){
-                            $responseObjectError->success = false;
-                            $responseObjectError->error = "Mysql error inside foreach";
-                            $json = json_encode($responseObjectError);
-                            echo $json;
-                            mysqli_rollback($conn);
-                            exit();
+                    if(empty($alergias)){
+                        foreach ($aline as &$line){
+                            $sql = "INSERT INTO contem (e_id,a_id) VALUES ('$e_id','$line')";
+                            if(!mysqli_query($conn,$sql)){
+                                $responseObjectError->success = false;
+                                $responseObjectError->error = "Mysql error inside foreach ".$alergias;
+                                $json = json_encode($responseObjectError);
+                                echo $json;
+                                mysqli_rollback($conn);
+                                exit();
+                            }
                         }
                     }
+                    
                     mysqli_commit($conn);
                     $responseObject->success = true;
                     $json = json_encode($responseObject);
@@ -1891,7 +1895,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -1965,7 +1969,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2040,7 +2044,7 @@ switch ($_POST['q']){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
                     $data = $_POST['d'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2143,7 +2147,7 @@ switch ($_POST['q']){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
                     $data = $_POST['d'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2392,7 +2396,7 @@ switch ($_POST['q']){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
                     $data = $_POST['d'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2495,7 +2499,7 @@ switch ($_POST['q']){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
                     $data = $_POST['d'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2567,7 +2571,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2666,7 +2670,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2750,7 +2754,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
@@ -2835,7 +2839,7 @@ switch ($_POST['q']){
                 if($row['c'] == 1){
                     //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
                     $id_u = $_POST['ide'];
-                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE u_id = '$id_u'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
