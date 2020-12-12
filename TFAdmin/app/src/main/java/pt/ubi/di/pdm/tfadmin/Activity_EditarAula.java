@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,15 +26,18 @@ public class Activity_EditarAula extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editaraula);
 
+
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
 
+
         Intent Cheguei = getIntent();
-        id_at = Cheguei.getStringExtra("id");
+        id_at = Cheguei.getStringExtra("id_at");
         ed_id = Cheguei.getStringExtra("ed_id");
+
 
         data = (TextView) findViewById(R.id.dia_aula);
         sumario = (EditText) findViewById(R.id.inputSumario);
@@ -54,8 +58,14 @@ public class Activity_EditarAula extends AppCompatActivity {
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("tag","1");
                 String sum = sumario.getText().toString()+"//"+notas.getText().toString();
-                dbHelper.editAtividade(base,admin_id,Integer.parseInt(ed_id),Integer.parseInt(id_at),sum);
+                Log.d("tag",sum);
+                int val1 = Integer.parseInt(ed_id);
+                int val2 = Integer.parseInt(id_at);
+                Log.d("tag","2");
+                dbHelper.editAtividade(base,admin_id,val1,val2,sum);
+                Log.d("tag","3");
             }
         });
 

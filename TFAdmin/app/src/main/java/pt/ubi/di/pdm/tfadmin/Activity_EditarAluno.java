@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +14,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class Activity_EditarAluno extends AppCompatActivity {
     DBHelper dbHelper;
@@ -65,6 +70,7 @@ public class Activity_EditarAluno extends AppCompatActivity {
         contacto.setText(cursor.getString(5));
 
         submeter.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 String n = nome.getText().toString();
@@ -75,19 +81,20 @@ public class Activity_EditarAluno extends AppCompatActivity {
 
 
                 Cursor cursor = base.query(DBHelper.TALERGIA,new String[]{"*"},DBHelper.COL1_TALERGIA+"=?",new String[]{id_aluno},null,null,null);
-                int aux = 0;
-                while (cursor.moveToNext()){
-                    aux++;
-                }
-                int[] aler = new int[aux];
+
+                ArrayList<Integer> aler = new ArrayList<Integer>();
+
+                int[] aler2 = {};
                 cursor.moveToFirst();
-                int aux2=0;
+
+
                 while (cursor.moveToNext()){
-                    aler[aux2] = Integer.parseInt(cursor.getString(1));
-                    aux2++;
+                   aler.add(Integer.parseInt(cursor.getString(1)));
                 }
 
-                dbHelper.editEducando(base,admin_id,id_educ,id_al,n,i,m,s,c,aler);
+                aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
+
+                dbHelper.editEducando(base,admin_id,id_educ,id_al,n,i,m,s,c,aler2);
             }
         });
 

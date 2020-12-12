@@ -78,6 +78,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 data = dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/" + ano.getSelectedItem().toString();
+                Log.d("tag",data);
 
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
@@ -96,13 +97,13 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }
-        });/**/
+        });
 
     }
 
     public void displayFaltas() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
-        oLL.removeAllViewsInLayout();
+        oLL.removeAllViews();
         oCursor = base.query(DBHelper.TFALTA, new String[]{"*"}, null, null, null, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
@@ -116,7 +117,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             CheckBox B1 = (CheckBox) oLL1.findViewById(R.id.checkBox);
             B1.setId(oCursor.getInt(0)*10+1);
 
-            if(oCursor.getInt(2) == 1) {
+            if(oCursor.getString(2).equals("1")) {
                 B1.setChecked(true);
                 Drawable d1 = ResourcesCompat.getDrawable(getResources(), R.drawable.checkmark, null);
                 B1.setBackground(d1);
