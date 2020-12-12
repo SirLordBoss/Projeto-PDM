@@ -99,7 +99,7 @@ public class Activity_Login extends AppCompatActivity {
                         SharedPreferences oSP = getSharedPreferences("important_variables", 0);
                         SharedPreferences.Editor oEditor = oSP.edit();
                         oEditor.putInt("id", Integer.parseInt(reader.getString("id")));
-                        oEditor.commit();
+                        oEditor.apply();
                         Log.v("DEBUG", "id set in Login: " + oSP.getInt("id", 999));
                         //RecebeDados(x, us);
                     } catch (JSONException e) {
@@ -161,93 +161,5 @@ public class Activity_Login extends AppCompatActivity {
         super.onResume();
     }
 
-    /*
-    public void RecebeDados(String x, String us) throws JSONException {
-        JSONObject reader = new JSONObject(x);
-        ContentValues oCV = new ContentValues();
-        String id = reader.getString("id");
 
-        String s = reader.getString("educando");
-
-        String[] arr = s.split(";");
-
-        for(int i=0;i<arr.length;i++){
-            String[] aux = arr[i].split(",");
-            oCV.put(dbHelper.COL1_T1,aux[0]);
-            oCV.put(dbHelper.COL2_T1,aux[1]);
-            oCV.put(dbHelper.COL3_T1,aux[2]);
-            oCV.put(dbHelper.COL4_T1,aux[3]);
-            oCV.put(dbHelper.COL5_T1,aux[4]);
-            oCV.put(dbHelper.COL6_T1,aux[5]);
-            global_db.insert(dbHelper.TABLE_NAME1,null,oCV);
-        }
-
-        s = reader.getString("atividade");
-        arr = s.split(";");
-        oCV.clear();
-
-        for(int i=0;i<arr.length;i++){
-            String[] aux = arr[i].split(",");
-            oCV.put(dbHelper.COL1_T2,aux[0]);
-            oCV.put(dbHelper.COL2_T2,aux[1]);
-            oCV.put(dbHelper.COL3_T2,aux[2]);
-            global_db.insert(dbHelper.TABLE_NAME2,null,oCV);
-        }
-
-        s = reader.getString("alergias");
-        arr = s.split(";");
-        oCV.clear();
-
-        for(int i=0;i<arr.length;i++){
-            String[] aux = arr[i].split(",");
-            oCV.put(dbHelper.COL1_T3,aux[0]);
-            oCV.put(dbHelper.COL2_T3,aux[1]);
-            global_db.insert(dbHelper.TABLE_NAME3,null,oCV);
-        }
-
-        s = reader.getString("faltas");
-        arr = s.split(";");
-        oCV.clear();
-
-        for(int i=0;i<arr.length;i++){
-            String[] aux = arr[i].split(",");
-            oCV.put(dbHelper.COL1_T4,aux[0]);
-            oCV.put(dbHelper.COL2_T4,aux[1]);
-            global_db.insert(dbHelper.TABLE_NAME4,null,oCV);
-        }
-
-        s = reader.getString("relatorio");
-        arr = s.split(";");
-        oCV.clear();
-
-        for(int i=0;i<arr.length;i++){
-            String[] aux = arr[i].split(",");
-            Log.d("aux",aux[0]+aux[1]+aux[2]+aux[3]+aux[4]+aux[5]+aux[6]);
-            oCV.put(dbHelper.COL1_T5,aux[0]);
-            oCV.put(dbHelper.COL2_T5,aux[1]);
-            oCV.put(dbHelper.COL3_T5,aux[2]);
-            oCV.put(dbHelper.COL4_T5,aux[3]);
-            oCV.put(dbHelper.COL5_T5,aux[4]);
-            oCV.put(dbHelper.COL6_T5,aux[5]);
-            oCV.put(dbHelper.COL7_T5,aux[6]);
-            global_db.insert(dbHelper.TABLE_NAME5,null,oCV);
-        }
-
-        s = reader.getString("contem");
-        arr = s.split(";");
-        oCV.clear();
-
-        for(int i=0;i<arr.length;i++){
-            String[] aux = arr[i].split(",");
-            oCV.put(dbHelper.COL1_T6,aux[0]);
-            oCV.put(dbHelper.COL2_T6,aux[1]);
-            global_db.insert(dbHelper.TABLE_NAME6,null,oCV);
-        }
-
-        oCV.clear();
-        oCV.put(dbHelper.COL1_T7,id);
-        oCV.put(dbHelper.COL2_T7,us);
-        global_db.insert(dbHelper.TABLE_NAME7,null,oCV);
-    }
-    */
 }
