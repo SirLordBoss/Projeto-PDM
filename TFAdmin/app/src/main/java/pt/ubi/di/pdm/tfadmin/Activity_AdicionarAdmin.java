@@ -27,7 +27,7 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
 
     int id, aux, sexo_dropdown_selection;
 
-    EditText nome_admin, idade_admin, morada_admin, email_admin;
+    EditText nome_admin, idade_admin, morada_admin, email_admin, password_admin;
 
     Spinner dropdown;
 
@@ -78,6 +78,8 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
         morada_admin = findViewById(R.id.inputMorada);
         email_admin = findViewById((R.id.inputEmail));
 
+        password_admin = findViewById(R.id.inputPassword);
+
         dropdown = findViewById(R.id.inputSexo);
 
         sexList.add("");
@@ -113,11 +115,11 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
-                String pwd = "pwd";
+                String pwd = getM5(password_admin.getText().toString());
 
                 Log.v("DEBUG", "parametros: id=" + id + ", nome=" + nome + ", idade=" + idade + ", morada=" + mor + ", sexo=" + sexo + ", email=" + em);
 
-                if(db_helper.addAdmin(id, nome, idade, mor, sexo, em, getM5("pwd")) == 1){
+                if(db_helper.addAdmin(id, nome, idade, mor, sexo, em, pwd) == 1){
                     Toast.makeText(Activity_AdicionarAdmin.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(Activity_AdicionarAdmin.this, "erro!", Toast.LENGTH_SHORT).show();
