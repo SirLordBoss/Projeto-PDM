@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/cantos_botoes"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:layout_margin="2dp"
-    android:layout_marginStart="7dp"
-    android:layout_marginEnd="7dp"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_margin="2dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/cantos_botoes">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +59,6 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center">
-
             <ImageButton
                 android:id="@+id/btnVerAluno"
                 android:layout_width="50dp"
@@ -65,8 +67,12 @@
                 android:layout_marginEnd="10dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
+                android:paddingStart="5dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="15dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/visto_icon"
+                app:srcCompat="@drawable/eye"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -78,7 +84,8 @@
                 android:background="@android:color/transparent"
                 android:padding="4dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/x_icon"
+                app:srcCompat="@drawable/apagar_icon"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
