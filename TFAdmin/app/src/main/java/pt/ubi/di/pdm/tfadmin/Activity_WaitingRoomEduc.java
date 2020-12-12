@@ -50,7 +50,7 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
     }
 
     public void displayInscritos(){
-        visualizer = (LinearLayout) findViewById(R.id.visualizar);
+        visualizer = findViewById(R.id.visualizar);
         visualizer.removeAllViewsInLayout();
 
         Cursor oCursor = inscritos_db.query(DBHelper.TINSCRITO, new String[]{"*"}, null, null, null, null, null, null);
@@ -60,21 +60,22 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
             LinearLayout new_inscrito = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar_educ, null);
             new_inscrito.setId(oCursor.getInt(0) * 10 + 4);
 
-            TextView nome_inscrito = (TextView) new_inscrito.findViewById(R.id.nomeAluno);
+            TextView nome_inscrito = new_inscrito.findViewById(R.id.nomeAluno);
             nome_inscrito.setId(oCursor.getInt(0) * 10 + 3);
             nome_inscrito.setText(oCursor.getString(1));
 
-            TextView id_inscrito = (TextView) new_inscrito.findViewById(R.id.idAluno);
+            TextView id_inscrito = new_inscrito.findViewById(R.id.idAluno);
             id_inscrito.setId(oCursor.getInt(0) * 10 + 2);
             id_inscrito.setText(oCursor.getString(0));
 
-            ImageButton btn_aprovar = (ImageButton) new_inscrito.findViewById(R.id.btnVerAluno);
+            ImageButton btn_aprovar = new_inscrito.findViewById(R.id.btnVerAluno);
             btn_aprovar.setId(oCursor.getInt(0) * 10 + 1);
             btn_aprovar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     db_helper.addInscritoToEducador( id, ((v.getId() - 1)/10));
+
                     Log.v("DEBUG", "id admin (5): " + id + ", id_inscrito (7): " + ((v.getId() - 1)/10));
                     displayInscritos();
                     //i.putExtra("id", String.valueOf((v.getId() - 1)/10));
@@ -82,7 +83,7 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
                 }
             });
 
-            ImageButton btn_recusar = (ImageButton) new_inscrito.findViewById(R.id.btnApagar);
+            ImageButton btn_recusar = new_inscrito.findViewById(R.id.btnApagar);
             btn_recusar.setId(oCursor.getInt(0) * 10);
             btn_recusar.setOnClickListener(new View.OnClickListener() {
                 @Override
