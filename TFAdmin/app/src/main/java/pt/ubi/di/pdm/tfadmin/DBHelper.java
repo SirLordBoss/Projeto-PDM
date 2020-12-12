@@ -159,6 +159,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TEDUCADOR);
             db.execSQL(CREATE_TEDUCADOR);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -211,6 +214,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TADMIN);
             db.execSQL(CREATE_TADMIN);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -262,6 +268,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TEDUCANDO);
             db.execSQL(CREATE_TEDUCANDO);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -314,6 +323,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TALERGIA);
             db.execSQL(CREATE_TALERGIA);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -367,6 +379,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE "+TATIVIDADE);
             db.execSQL(CREATE_TATIVIDADE);
             String table = o.getString("table");
+            if(table.isEmpty()){
+                return 1;
+            }
             String[] lines = table.split(";");
             for (String line : lines) {
                 String[] col = line.split(",");
@@ -475,7 +490,6 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS "+TRELATORIO);
             db.execSQL(CREATE_TRELATORIO);
             String table = o.getString("table");
-
             if(table.isEmpty()){
                 return 1;
             }
@@ -554,7 +568,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
-
 
     /** Query 22 - Função editUser
      *

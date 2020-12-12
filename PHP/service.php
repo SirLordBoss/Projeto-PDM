@@ -108,6 +108,17 @@ switch ($_POST['q']){
                             exit();
                         }
                         $u_id = mysqli_insert_id($conn);
+
+                        $sql ="DELETE FFROM to_regist WHERE tr_id = '$id'";
+                        if(!mysqli_query($conn,$sql)){
+                            mysqli_rollback($conn);
+                            $responseObjectError->success = false;
+                            $responseObjectError->error = "Error inserting in users";
+                            $json = json_encode($responseObjectError);
+                            echo $json;
+                            exit();
+                        }
+
                         $uniqid = uniqid('t_',false);
                         $sql = "INSERT INTO turmas (t_token,t_utilizada,u_id) VALUES ('$uniqid',0, (SELECT u.u_id FROM users AS u WHERE u.u_id = '$u_id' LIMIT 1) );";
                         $result = mysqli_query($conn,$sql);
@@ -2525,7 +2536,360 @@ switch ($_POST['q']){
                     exit();
                 }else{
                     $responseObjectError->success = false;
-                    $responseObjectError->error = "Mysql error 3";
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 2";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error 1";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
+
+#505 - Eliminar um educando
+    case 505:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+
+                    mysqli_begin_transaction($conn);
+
+                    $e_id = $_POST['e_id'];
+                    $sql = "DELETE FROM contem WHERE e_id = '$e_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 3";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $sql = "DELETE FROM faltas WHERE e_id = '$e_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 4";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $sql = "DELETE FROM relatorio WHERE e_id = '$e_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 5";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $sql = "DELETE FROM educando WHERE e_id = '$e_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 6";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_commit($conn);
+                    $responseObject->success = true;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 2";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error 1";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
+
+#506 - Eliminar Alergia
+    case 506:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+
+                    mysqli_begin_transaction($conn);
+
+                    $a_id = $_POST['a_id'];
+                    $sql = "DELETE FROM contem WHERE a_id = '$a_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 3";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $sql = "DELETE FROM alergias WHERE a_id = '$a_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 4";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    
+                    mysqli_commit($conn);
+                    $responseObject->success = true;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 2";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error 1";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
+
+#407 - Eliminar atividade
+    case 407:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+
+                    mysqli_begin_transaction($conn);
+
+                    $a_id = $_POST['a_id'];
+                    $sql = "DELETE FROM relatorio WHERE a_id = '$a_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 3";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $sql = "DELETE FROM atividade WHERE a_id = '$a_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 4";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    
+                    mysqli_commit($conn);
+                    $responseObject->success = true;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+            }else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "Mysql error 2";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            }
+        }else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error 1";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    break;
+
+#308 - Eliminar relatório 
+
+    case 308:
+        $id = $_POST['id'];
+        $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+        $result = mysqli_query($conn,$sql);
+        if($result){
+            if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                if($row['c'] == 1){
+                    //VERIFICAR SE EXISTE A BASE DE DADOS NA BASE DE DADOS MAIN E SE A MESMA ESTÁ A SER UTILIZADA NO MOMENTO
+                    $id_u = $_POST['ide'];
+                    $sql = "SELECT t_utilizada,t_token FROM turmas WHERE t_id = '$id_u'";
+                    $result = mysqli_query($conn,$sql);
+                    if(!$result){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error in turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Error fetching turmas";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    if($row['t_utilizada'] != 0){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Turma a ser utilizada";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    mysqli_select_db($conn,$row['t_token']);
+
+                    mysqli_begin_transaction($conn);
+
+                    $a_id = $_POST['a_id'];
+                    $e_id = $_POST['e_id'];
+                    $sql = "DELETE FROM relatorio WHERE a_id = '$a_id' AND e_id = '$e_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 3";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    $sql = "DELETE FROM atividade WHERE a_id = '$a_id'";
+                    if(!mysqli_query($conn,$sql)){
+                        $responseObjectError->success = false;
+                        $responseObjectError->error = "Mysql error 4";
+                        $json = json_encode($responseObjectError);
+                        echo $json;
+                        exit();
+                    }
+                    
+                    mysqli_commit($conn);
+                    $responseObject->success = true;
+                    $json = json_encode($responseObject);
+                    echo $json;
+                    exit();
+
+                }else{
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "User not admin";
                     $json = json_encode($responseObjectError);
                     echo $json;
                     exit();
