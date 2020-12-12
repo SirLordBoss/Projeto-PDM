@@ -37,25 +37,36 @@ public class MarcarFaltas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marcarfaltas);
 
+        //Abre a base de dados local
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
+        //iniciação de widgets
         submeter = (Button)findViewById(R.id.btnSubmeterFaltas);
         cancelar = (Button)findViewById(R.id.btnCancelarFaltas);
 
+        //coloca a tada atual na variavel cD no formato dd/mm/aa
         Calendar calendar = Calendar.getInstance();
         String cD = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
 
 
         displayAlunos();
 
+        //id da atividade
         id_at = VerificaAtividade(cD);
 
+        //Se id_at for "vazio" é porque ainda não foi criada atividade para o dia de hj
         if(id_at.equals("vazio")){
             Toast.makeText(MarcarFaltas.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
         }
 
-
+        //No botão submeter sao editadas as faltas de acordo com as chekbox
+        //há duas arrayList (faltas e pres)
+        //Na arrayList das faltas são colocados os ids do aluno, que tem checkbox marcada
+        //Na arrayList das pres o contrário
+        //Primeiro é feita a verificação se dos alunos do arrayList das faltas, algum ja tem falta marcada (caso tenha remove-se do arrayList)
+        //Verifica-se se algum dos alunos no arrayList pres, tem falta marcada (caso tenha, retira-se a falta)
+        //Marca-se falta aos aluno com id no arrayList faltas
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +125,10 @@ public class MarcarFaltas extends AppCompatActivity {
     }
 
 
+    //Metodo para fazer o display dos alunos
+    //Os alunos que já têm falta marcada começam com a chckbox checked
+    //Os alunos checked ficam com o id na arrayList faltas
+    //os outros com o id na arrayList pres
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.verfaltas);
         Cursor oCursor = base.query(dbHelper.TABLE_NAME1, new String[]{"*"}, null, null, null, null, null, null);
@@ -161,6 +176,7 @@ public class MarcarFaltas extends AppCompatActivity {
 
     }
 
+    //Metodo para verificar se o aluno já tem falta marcada na atividade atual
     public boolean VerificaFalta(String id_at,String id){
         Cursor cursor =base.query(dbHelper.TABLE_NAME4,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
@@ -174,6 +190,7 @@ public class MarcarFaltas extends AppCompatActivity {
     }
 
 
+    //Metodo para verificar se a atividade atual ja foi criada
     public String VerificaAtividade(String date){
         Cursor cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){

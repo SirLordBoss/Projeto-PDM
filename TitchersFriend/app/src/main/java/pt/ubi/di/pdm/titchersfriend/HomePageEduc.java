@@ -27,8 +27,10 @@ SQLiteDatabase base;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepageeduc);
 
+        //Abrir a base de dados local
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
+        //iniciação de widgets (Os image button são o menu)
         gerirAlunos = (ImageButton)findViewById(R.id.gerirAlunos) ;
         gerirAulas = (ImageButton)findViewById(R.id.gerirAulas) ;
         MudarPassword = (ImageButton)findViewById(R.id.mudarPass) ;
@@ -69,6 +71,7 @@ SQLiteDatabase base;
 
             }
         });
+        //butão exit, limpa a base de dados local e diz ao servidor que ja não esta a usar as tabelas
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

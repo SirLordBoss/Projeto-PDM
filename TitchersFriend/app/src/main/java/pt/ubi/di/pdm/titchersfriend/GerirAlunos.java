@@ -25,11 +25,15 @@ public class GerirAlunos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geriralunos);
+
+        //iniciação de widgets e abertura da base de dados local
         add = (Button)findViewById(R.id.btnAddAluno);
         oDBH = new DBHelper(this);
         oSQLDB = oDBH.getWritableDatabase();
 
         displayAlunos();
+
+        //direciona para a pagina AdicionarAluno
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +56,7 @@ public class GerirAlunos extends AppCompatActivity {
             displayAlunos();
         }
 
+        //metodo para fazer o display dos alunos a partir da tabela "Educando"
     public void displayAlunos() {
         oLL = (LinearLayout) findViewById(R.id.visualizar);
         oCursor = oSQLDB.query(oDBH.TABLE_NAME1, new String[]{"*"}, null, null, null, null, null, null);
@@ -69,6 +74,7 @@ public class GerirAlunos extends AppCompatActivity {
             T2.setId(oCursor.getInt(0) * 10 + 2);
             T2.setText(oCursor.getString(0));
 
+            //direciona para a pagina do perfil do aluno
             ImageButton oB1 = (ImageButton) oLL1.findViewById(R.id.btnVerAluno);
             oB1.setId(oCursor.getInt(0) * 10 +1);
             oB1.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +87,7 @@ public class GerirAlunos extends AppCompatActivity {
                     }
                 });
 
+            //Botão para eliminar um aluno (apaga o aluno da tabela educando e todos os seus registos nas outras tabelas)
             ImageButton oB2 = (ImageButton) oLL1.findViewById(R.id.btnApagar);
             oB2.setId(oCursor.getInt(0) * 10);
             oB2.setOnClickListener(new View.OnClickListener() {

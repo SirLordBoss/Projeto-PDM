@@ -28,12 +28,15 @@ public class EditAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editaraluno);
 
+        //Abrir a base de dados local
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
+        //Receber o id do aluno por intent
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
 
+        //iniciaçao de widgets
         submeter = (Button)findViewById(R.id.btnRelatorio);
         cancelar = (Button)findViewById(R.id.btnCancelarRel);
 
@@ -43,6 +46,7 @@ public class EditAlunoActivity extends AppCompatActivity {
         morada = (EditText) findViewById(R.id.editMorada);
         contacto = (EditText) findViewById(R.id.editContacto);
 
+        //Valores para os spinners
         String[] items = new String[]{"Sexo: Feminino", "Sexo: Masculino"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(EditAlunoActivity.this, android.R.layout.simple_spinner_dropdown_item, items);
         sexo.setAdapter(adapter);
@@ -60,6 +64,7 @@ public class EditAlunoActivity extends AppCompatActivity {
         });
 
 
+        //Preenchimento dos campos do aluno com o conteudo atual
         Cursor cursor =base.query(dbHelper.TABLE_NAME1,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T1));
@@ -83,7 +88,7 @@ public class EditAlunoActivity extends AppCompatActivity {
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //coloca os dados novos em content values e faz o update
                 ContentValues oCV = new ContentValues();
 
                 oCV.put(dbHelper.COL1_T1,id);

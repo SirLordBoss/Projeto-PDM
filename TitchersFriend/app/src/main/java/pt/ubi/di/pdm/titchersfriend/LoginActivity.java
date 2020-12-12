@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputpass,inputUser;
     DBHelper dbHelper;
     SQLiteDatabase oSQLDB;
+
+        //Metodo para passar a password para Hash
         public static String getM5(String input) {
             try {
 
@@ -65,11 +67,12 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper.delete();
         oSQLDB = dbHelper.getWritableDatabase();
 
+        //iniciação de widgets
         btnLogin = (Button)findViewById(R.id.btnLogin) ;
         inputpass = (EditText) findViewById(R.id.inputPass);
         inputUser = (EditText) findViewById(R.id.inputUser);
 
-       // Intent iCameFromActivity1 = getIntent() ;
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = inputpass.getText().toString();
                 String enc = getM5(pass);
                 Log.d("ENCRIPT",enc);
+
+                //Manda query para a pagina php com username e password e guarda a resposta na variavel x
+
                 try {
                     x = new Sender(LoginActivity.this,"100","u="+us+"&p="+enc,null).execute().get();
 
@@ -93,10 +99,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     reader = new JSONObject(x);
                     s = reader.getBoolean("success");
+                    //guarda o valor do sucesso na variavel s (true/false)
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                //Se for true recebe os dados do login e direciona para a Homepage
                 if(s){
                     //receber dados
                     try {
@@ -108,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     startActivity(A2) ;
                 }else{
+                    //se for false, faz um toast com o erro e limpa os campos username e password
                     JSONObject erro = null;
                     String e = "erro";
                     try {
@@ -136,6 +145,9 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper.close();
     }
 
+    //Função para receber dados e preencher base de dados local
+    //Tabelas: educando, atividade,alergias,faltas,relatorio,contem
+    //O conteudo de cada tabela está dividido em "," para colunas e ";" para linhas
     public void RecebeDados(String x, String us) throws JSONException {
         JSONObject reader = new JSONObject(x);
         ContentValues oCV = new ContentValues();

@@ -23,12 +23,17 @@ public class PerfAlunoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfaluno);
 
+        //Abre a base de dados local
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
+        //recebe o id do aluno por intent
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
 
+
+        //Este loop foi feito, antes de saber que podia usar o parametro "selection" para fazer a filtragem necessária.
+        //De qualquer das formas, guarda os dados do aluno, para preencher os TextViews
         Cursor cursor =base.query(dbHelper.TABLE_NAME1,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T1));
@@ -42,6 +47,7 @@ public class PerfAlunoActivity extends Activity {
             }
         }
 
+        //iniciação dos widgets
         nome = (TextView)findViewById(R.id.txtNome);
         idade = (TextView)findViewById(R.id.txtIdade);
         sexo = (TextView)findViewById(R.id.txtSexo);
@@ -63,27 +69,28 @@ public class PerfAlunoActivity extends Activity {
         morada.setText("Morada: "+Smorada);
         contacto.setText("Contacto: "+Scontacto);
 
+        //direciona para a pagina para fazer o relatorio do aluno
         rel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent a1 = new Intent(PerfAlunoActivity.this,Relatorio.class);
                 a1.putExtra("id",id);
                 a1.putExtra("nome",nome.getText().toString());
+                //Envia o id e nome do aluno por intent
                 startActivity(a1);
             }
         });
 
+        //direciona para a pagina para editar o aluno
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent a2 = new Intent(PerfAlunoActivity.this, EditAlunoActivity.class);
+                //envia o id do aluno por intent
                 a2.putExtra("id",id);
                 startActivity(a2);
             }
         });
-
-
-
     }
 
     @Override
@@ -91,6 +98,7 @@ public class PerfAlunoActivity extends Activity {
         super.onPause();
         dbHelper.close();
     }
+
     @Override
     public void onResume() {
         super.onResume();

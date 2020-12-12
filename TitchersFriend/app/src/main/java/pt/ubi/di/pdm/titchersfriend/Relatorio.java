@@ -35,23 +35,30 @@ public class Relatorio extends AppCompatActivity {
     int v1=0,v2=0,v3=0,v4=0,modo = 0;
 
 
+    //Apenas se pode fazer um relatorio por dia para cada aluno
+    //A variavel mode é iniciada a 0 se o aluno ainda não tiver relatorio
+    //se tiver relatorio passa a 1 (0-insert//1-update)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
+        //data atual
         Calendar calendar = Calendar.getInstance();
         String cD = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
 
+        //id do aluno
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
 
+        //id da atividade caso esta já tenha sido criada.
         id_at = VerificaAtividade(cD);
+        //verifica se o aluno ja tem relatorio
         VerRel = VerificaRelatorio(id,cD);
 
 
-
+        //iniciação de widgets
         nome = (TextView)findViewById(R.id.titulo_homeeduc);
         submeter = (Button) findViewById(R.id.btnSubmeterRel);
         cancelar = (Button) findViewById(R.id.btnCancelarRel);
@@ -62,10 +69,14 @@ public class Relatorio extends AppCompatActivity {
         chorar = (CheckBox)findViewById(R.id.cboxChorar);
         notas = (EditText) findViewById(R.id.editTextTextPersonName);
 
+        //se id_at for "vazio" é porque ainda não criou atividade
         if(id_at.equals("vazio")){
             Toast.makeText(Relatorio.this,"Tem que criar uma atividade primeiro",Toast.LENGTH_SHORT).show();
         }
 
+
+        //Se verRel for "vazio" é porque ja foi feito relatorio para o aluno o modo passa a 1, e entra em modo edição
+        //Os campos do relatorio são preenchidos com os dados do relatorio original
         if(VerRel.equals("vazio")){
             Toast.makeText(Relatorio.this,"Já fez um relatorio para este aluno, O relatorio antigo será substituido!",Toast.LENGTH_SHORT).show();
             Cursor cursor = base.query(dbHelper.TABLE_NAME5,new String[]{"*"},null,null,null,null,null);
@@ -191,6 +202,10 @@ public class Relatorio extends AppCompatActivity {
             }
         });
 
+        //No botão submeter é feito o insert ou update
+        //as variaveis v1 a v4 podem ser 0 ou 1 (não ou sim)
+        //sao iniciadas a 0 e se as checbox forem checked, passam a 1
+        //No fim é feito o intent para a pagina confereRelatorio, onde o utilizador pode escolher entre enviar para os pais em pdf ou não
         submeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,11 +230,11 @@ public class Relatorio extends AppCompatActivity {
                 }
 
                 if(chorar.isChecked()){
-                    v4 = 10;
+                    v4 = 2;
                 }
 
                 if(chorar.isChecked()&&curativo.isChecked()){
-                    v4 = 11;
+                    v4 = 3;
                 }
 
                 s = notas.getText().toString();

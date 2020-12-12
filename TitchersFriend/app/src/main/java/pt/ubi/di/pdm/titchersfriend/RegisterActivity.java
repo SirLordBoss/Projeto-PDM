@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    //Metodo para passar a password para Hash
     public static String getM5(String input) {
         try {
 
@@ -54,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adduser);
 
+        //iniciação de widgets
         btnCriar = (Button)findViewById(R.id.btnCriar) ;
         inputpass = (EditText) findViewById(R.id.inputPass);
         inputEmail = (EditText) findViewById(R.id.inputEmail);
@@ -63,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputMorada = (EditText) findViewById(R.id.inputMorada);
         dropdown = (Spinner) findViewById(R.id.inputSexo);
 
-
+        //conteudo para os spinners e sua atribuição
         String[] items = new String[]{"Masculino", "Feminino"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterActivity.this, R.layout.spinner_item, items);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -97,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                //Verifica se o email cumpre os requesitos
                 if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
                     inputEmail.setText("");
                     Toast.makeText(RegisterActivity.this,"Email inválido!",Toast.LENGTH_SHORT).show();
@@ -104,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                //Verifica se a password cumpre os requesitos
                 if(!pass.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")){
                     inputpass.setText("");
                     inputRepPass.setText("");
@@ -120,12 +124,15 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                //Passa a password para Hash
                 String enc = getM5(pass);
 
+                //Sexo = 0 (Feminino)
                 if(dropdown.getSelectedItem().toString().contains("Masculino")){
                     Sexo = 1;
                 }
 
+                //Executa a query 50 do php, com os dados necessarios para o registo e guarda a resposta na variavel x
                 try {
                     x = new Sender(RegisterActivity.this,"50","nome="+us+"&idade="+Idade+"&morada="+Morada+"&sexo="+Sexo+"&email="+email+"&pass="+enc,null).execute().get();
                 } catch (ExecutionException | InterruptedException e) {
@@ -137,16 +144,18 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     reader = new JSONObject(x);
                     s = reader.getBoolean("success");
+                    //guarda o conteudo de "sucess" na variave s (true/false)
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 
-                
+                //Se true...
                 if(s){
                     Intent A2 = new Intent(RegisterActivity.this,Aprovacao.class);
                     startActivity(A2) ;
                     Toast.makeText(RegisterActivity.this,"Sucesso na criação da conta",Toast.LENGTH_LONG).show();
                 }
+                //Se false...
                 if(!s){
                     Intent A2 = new Intent(RegisterActivity.this,MainActivity.class);
                     startActivity(A2) ;
