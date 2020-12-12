@@ -83,7 +83,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
-                if(db_helper.addEducador(educ_db, id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
+                if(db_helper.addEducador(id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
                     Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(Activity_AdicionarEducadores.this, "erro!", Toast.LENGTH_SHORT).show();
