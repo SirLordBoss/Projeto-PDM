@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class Activity_AdicionarEducadores extends AppCompatActivity {
@@ -24,13 +27,39 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
     int id, aux, sexo_dropdown_selection;
 
-    EditText educador, idade_educ, morada, email;
+    EditText educador, idade_educ, morada, email, password_educ;
 
     Spinner dropdown;
 
     ArrayList<String> sexList = new ArrayList<>();
 
     Button registo, btn_submeter, btn_cancelar;
+
+    public static String getM5(String input) {
+        try {
+
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // digest() method is called to calculate message digest
+            //  of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+
+            return hashtext;
+        }   // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +77,8 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
         idade_educ = findViewById(R.id.inputIdade);
         morada = findViewById(R.id.inputMorada);
         email = findViewById((R.id.inputEmail));
+
+        password_educ = findViewById(R.id.inputPassword);
 
         dropdown = findViewById(R.id.inputSexo);
 
@@ -84,8 +115,9 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
+                String pwd = getM5(password_educ.getText().toString());
 
-                if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, "pwd") == 1){
+                if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, pwd) == 1){
 
                     Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
