@@ -135,7 +135,8 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                if(aux == 1){
                    Toast.makeText(Activity_GerirFaltas.this,"sucesso",Toast.LENGTH_SHORT).show();
                }else{
-                   Toast.makeText(Activity_GerirFaltas.this,"erro ao marcar faltas",Toast.LENGTH_SHORT).show();
+
+                   Toast.makeText(Activity_GerirFaltas.this,falt.toString(),Toast.LENGTH_SHORT).show();
                }
             }
         });
