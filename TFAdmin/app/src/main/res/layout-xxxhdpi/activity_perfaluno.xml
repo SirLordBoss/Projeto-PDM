@@ -80,28 +80,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnRelatorio"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/cantos_botoes"
-            android:fontFamily="@font/sweet_purple"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:text="@string/escrever_rel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
-            tools:ignore="ButtonStyle" />
-
-        <Button
             android:id="@+id/btnCancelarRel"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:text="@string/editar_dados_espacos"
+            android:padding="15dp"
+            android:text="@string/editar_dados"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"
             tools:ignore="ButtonStyle" />
