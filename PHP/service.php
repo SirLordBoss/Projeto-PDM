@@ -426,7 +426,7 @@ switch ($_POST['q']){
         exit();
     }
     break;
-#ALTERAÇAO QUE FIZ COMEÇA AQUI
+
 #024 - Eliminar inscrito
     case 24:
     $id = $_POST['id'];
@@ -468,7 +468,7 @@ switch ($_POST['q']){
                 $json = json_encode($responseObject);
                 echo $json;
                 exit();
-            } else{
+            }else{
                 $responseObjectError->success = false;
                 $responseObjectError->error = "User not admin";
                 $json = json_encode($responseObjectError);
@@ -490,8 +490,7 @@ switch ($_POST['q']){
         exit();
     }
     break;
-#AS MINHAS ALTERAÇÔES ACABAM AQUI    
-        
+
 #050 - Registo
     case 50: //Registo
     $nome = $_POST['nome'];
@@ -2175,6 +2174,8 @@ switch ($_POST['q']){
 
 #304 - Editar faltas
     case 304:
+
+        
         $id = $_POST['id'];
         $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
         $result = mysqli_query($conn,$sql);
@@ -2214,6 +2215,7 @@ switch ($_POST['q']){
                     
                     
                     $a_id = $_POST['a_id'];
+                    $a_id = str_replace(' ','',$a_id);
                     $sql = "DELETE FROM faltas WHERE a_id = '$a_id'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
@@ -2224,10 +2226,13 @@ switch ($_POST['q']){
                         mysqli_rollback($conn);
                         exit();
                     }
-                    if($tabela =! ''){
+                    if($tabela !== ''){
                         $tline = explode(",",$tabela);
                         foreach ($tline as &$line) {
-                            $e_id = $line; 
+                            $e_id = $line;
+                            $e_id = str_replace(' ','',$e_id);
+                            if(empty($e_id))
+                                continue;
                             $sql = "INSERT INTO faltas (a_id,e_id) VALUES ('$a_id','$e_id')";
                             if(!mysqli_query($conn,$sql)){
                                 $responseObjectError->success = false;
@@ -2242,9 +2247,8 @@ switch ($_POST['q']){
                     
                     mysqli_commit($conn);
                     $responseObject->success = true;
-                    $json = json_encode($responseObjectError);
+                    $json = json_encode($responseObject);
                     echo $json;
-                    
                     exit();
                 }else{
                     $responseObjectError->success = false;
