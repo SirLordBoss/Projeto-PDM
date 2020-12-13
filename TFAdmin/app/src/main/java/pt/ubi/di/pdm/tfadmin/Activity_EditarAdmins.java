@@ -96,6 +96,13 @@ public class Activity_EditarAdmins extends AppCompatActivity {
             }
         });
 
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
     @Override
     protected void onPause() {
