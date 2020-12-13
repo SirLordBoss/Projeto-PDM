@@ -19,8 +19,8 @@
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/nome"
         android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
         tools:ignore="Autofill" />
@@ -36,8 +36,8 @@
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/idade"
         android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
         tools:ignore="Autofill" />
@@ -53,8 +53,8 @@
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/morada"
         android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
         tools:ignore="Autofill" />
@@ -66,6 +66,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:spinnerMode="dropdown" />
 
     <EditText
@@ -79,8 +81,8 @@
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/email_pais"
         android:inputType="textEmailAddress"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
         tools:ignore="Autofill" />
