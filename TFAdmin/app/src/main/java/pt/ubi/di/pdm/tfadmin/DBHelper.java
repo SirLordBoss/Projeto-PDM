@@ -1197,7 +1197,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int deleteInscrito(int id, int id_inscrito){
         String s;
         try {
-            s = new Sender(c,"24", "id="+id+"&id_inscrito="+id_inscrito,null).execute().get();
+            s = new Sender(c,"24", "id="+id+"&i_id="+id_inscrito,null).execute().get();
             if(s == null){
                 return -1;
             }

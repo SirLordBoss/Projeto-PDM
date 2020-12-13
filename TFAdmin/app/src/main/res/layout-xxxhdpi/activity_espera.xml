@@ -41,7 +41,7 @@
             android:orientation="horizontal">
 
             <android.widget.Button
-                android:id="@+id/btnSubmeter"
+                android:id="@+id/btnCancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/cantos_botoes"
