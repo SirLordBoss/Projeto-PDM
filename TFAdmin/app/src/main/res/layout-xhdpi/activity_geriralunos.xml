@@ -19,11 +19,11 @@
         android:shadowRadius="1"
         android:text="@string/gerir_alunos"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="55sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="650dp"
         android:layout_marginTop="20dp">
 
         <LinearLayout

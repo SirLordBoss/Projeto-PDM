@@ -10,20 +10,20 @@
         android:id="@+id/titulo_geriralunos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
-        android:shadowDx="7"
-        android:shadowDy="7"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:shadowRadius="1"
         android:text="@string/gerir_alunos"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="25sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="300dp"
         android:layout_marginTop="20dp">
 
         <LinearLayout
