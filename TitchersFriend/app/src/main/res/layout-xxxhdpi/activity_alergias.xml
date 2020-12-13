@@ -68,36 +68,36 @@
                 android:textSize="45sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center|top"
-            android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center|top"
+        android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnSubmeterAlergias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/cantos_botoes"
-                android:fontFamily="@font/sweet_purple"
-                android:padding="15dp"
-                android:text="@string/submeter"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="40sp"
-                tools:ignore="ButtonStyle" />
+        <Button
+            android:id="@+id/btnSubmeterAlergias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="@font/sweet_purple"
+            android:padding="15dp"
+            android:text="@string/submeter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="40sp"
+            tools:ignore="ButtonStyle" />
 
-            <Button
-                android:id="@+id/btnCancelarAlergias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/cantos_botoes"
-                android:fontFamily="@font/sweet_purple"
-                android:padding="15dp"
-                android:text="@string/cancelar"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="40sp"
-                tools:ignore="ButtonStyle" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnCancelarAlergias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="@font/sweet_purple"
+            android:padding="15dp"
+            android:text="@string/cancelar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="40sp"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
     </LinearLayout>
