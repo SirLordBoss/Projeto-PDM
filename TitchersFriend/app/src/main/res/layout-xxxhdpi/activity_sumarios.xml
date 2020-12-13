@@ -10,9 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
         android:gravity="top"
         android:orientation="vertical">
 
@@ -21,7 +18,7 @@
             android:id="@+id/titulo_geriralunos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="75dp"
             android:fontFamily="@font/sweet_purple"
             android:gravity="center"
             android:shadowColor="@android:color/white"
@@ -36,7 +33,9 @@
             android:id="@+id/inputSumario"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
@@ -44,6 +43,7 @@
             android:hint="@string/sumario"
             android:inputType="textMultiLine"
             android:paddingStart="10dp"
+            android:paddingTop="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp"
             tools:ignore="Autofill,RtlSymmetry" />
@@ -53,7 +53,9 @@
             android:id="@+id/inputNotas"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
@@ -61,6 +63,7 @@
             android:hint="@string/notas"
             android:inputType="textMultiLine"
             android:paddingStart="10dp"
+            android:paddingTop="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp"
             tools:ignore="Autofill,RtlSymmetry" />
@@ -68,18 +71,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnSubmeterRel"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
+            android:padding="15dp"
             android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"
@@ -87,10 +91,11 @@
 
         <Button
             android:id="@+id/btnCancelarRel"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
+            android:padding="15dp"
             android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"

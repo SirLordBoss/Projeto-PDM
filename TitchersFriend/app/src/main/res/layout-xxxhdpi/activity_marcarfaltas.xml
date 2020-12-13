@@ -16,7 +16,7 @@
             android:id="@+id/titulo_marcarfaltas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="100dp"
             android:fontFamily="@font/sweet_purple"
             android:gravity="center"
             android:shadowColor="@android:color/white"
@@ -30,24 +30,25 @@
         <LinearLayout
             android:id="@+id/verfaltas"
             android:layout_width="fill_parent"
-            android:layout_height="350dp"
+            android:layout_height="370dp"
             android:layout_marginTop="25dp"
             android:orientation="vertical" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
             android:gravity="center|top"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnSubmeterFaltas"
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/cantos_botoes"
                 android:fontFamily="@font/sweet_purple"
+                android:padding="15dp"
                 android:text="@string/submeter"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="40sp"
@@ -55,10 +56,11 @@
 
             <Button
                 android:id="@+id/btnCancelarFaltas"
-                android:layout_width="175dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/cantos_botoes"
                 android:fontFamily="@font/sweet_purple"
+                android:padding="15dp"
                 android:text="@string/cancelar"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="40sp"
