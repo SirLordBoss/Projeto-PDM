@@ -7,7 +7,6 @@
     android:weightSum="100"
     tools:context=".Activity_PerfAluno">
 
-
     <TextView
         android:id="@+id/txtNome"
         android:layout_width="match_parent"

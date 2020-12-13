@@ -1194,4 +1194,24 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
+    /*public int deleteInscrito(int id, int id_inscrito){
+        String s;
+        try {
+            s = new Sender(c,"", "id="+id+"&id_inscrito="+id_inscrito,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }*/
 }

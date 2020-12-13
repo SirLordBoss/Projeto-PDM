@@ -57,7 +57,7 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
 
         Boolean bCarryOn = oCursor.moveToFirst();
         while(bCarryOn){
-            LinearLayout new_inscrito = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_visualizar_educ, null);
+            LinearLayout new_inscrito = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_inscritos, null);
             new_inscrito.setId(oCursor.getInt(0) * 10 + 4);
 
             TextView nome_inscrito = new_inscrito.findViewById(R.id.nomeAluno);
@@ -73,13 +73,10 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
             btn_aprovar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     db_helper.addInscritoToEducador( id, ((v.getId() - 1)/10));
-
                     Log.v("DEBUG", "id admin (5): " + id + ", id_inscrito (7): " + ((v.getId() - 1)/10));
-                    displayInscritos();
-                    //i.putExtra("id", String.valueOf((v.getId() - 1)/10));
-                    //startActivity(i);
+                    LinearLayout inscrito_aprovado = (LinearLayout) findViewById(v.getId() + 3);
+                    ((LinearLayout) inscrito_aprovado.getParent()).removeView(inscrito_aprovado);
                 }
             });
 
@@ -88,7 +85,9 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
             btn_recusar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //logica de apagar educ aqui
+                    //db_helper.deleteInscrito(id, (v.getId()/10));
+                    LinearLayout inscrito_rejeitado = (LinearLayout) findViewById(v.getId() + 4);
+                    ((LinearLayout) inscrito_rejeitado.getParent()).removeView(inscrito_rejeitado);
                 }
             });
 
