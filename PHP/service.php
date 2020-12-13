@@ -437,24 +437,6 @@ switch ($_POST['q']){
         if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
             if($row['c'] == 1){
                 $ins_id= $_POST['i_id'];
-                
-                $sql = "SELECT tr_id FROM to_regist WHERE tr_id = '$ins_id'";
-                $result = mysqli_query($conn,$sql);
-                if(!$result){
-                    $responseObjectError->success = false;
-                    $responseObjectError->error = "Mysql error in to_regist";
-                    $json = json_encode($responseObjectError);
-                    echo $json;
-                    exit();
-                }
-                if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
-                    $responseObjectError->success = false;
-                    $responseObjectError->error = "Error fetching to_regist";
-                    $json = json_encode($responseObjectError);
-                    echo $json;
-                    exit();
-                }
-                mysqli_begin_transaction($conn);
                 $sql = "DELETE FROM to_regist WHERE tr_id = '$ins_id'";
                 if(!mysqli_query($conn,$sql)){
                     $responseObjectError->success = false;

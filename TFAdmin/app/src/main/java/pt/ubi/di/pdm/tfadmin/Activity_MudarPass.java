@@ -84,11 +84,11 @@ public class Activity_MudarPass extends AppCompatActivity {
                     Toast.makeText(Activity_MudarPass.this,"As passwords não são iguais",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!new_pwd.equals(old_pwd)){
+                if(new_pwd.equals(old_pwd)){
                     old_p.setText("");
                     new_p.setText("");
                     new_p_rep.setText("");
-                    Toast.makeText(Activity_MudarPass.this,"As passwords são todas iguais",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_MudarPass.this,"As passwords são todas iguais "+new_pwd+" _ "+old_pwd,Toast.LENGTH_SHORT).show();
                     return;
                 }
 
