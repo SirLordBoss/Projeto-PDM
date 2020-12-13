@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/sweet_purple"
             android:shadowColor="@android:color/white"
@@ -26,34 +26,32 @@
             android:text="@string/conf_rel"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="90sp" />
+            android:textSize="50sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="30dp"
             android:fontFamily="@font/sweet_purple"
             android:text="@string/nome"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="80sp" />
+            android:textSize="45sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -63,11 +61,13 @@
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/comeu_bem"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="40sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/outputComeu"
                     android:layout_width="wrap_content"
@@ -83,9 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -95,11 +94,13 @@
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/dormiu_bem"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="40sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/outputDormiu"
                     android:layout_width="wrap_content"
@@ -115,9 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -127,11 +127,13 @@
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/fez_necessidades"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="40sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/outputWC"
                     android:layout_width="wrap_content"
@@ -147,9 +149,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -159,11 +160,13 @@
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/magoou_se"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="40sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/outputMagoar"
                     android:layout_width="wrap_content"
@@ -179,9 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center|top"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -191,11 +193,13 @@
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/chorou"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="75sp" />
+                    android:textSize="40sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/outputChorou"
                     android:layout_width="wrap_content"
@@ -211,9 +215,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:gravity="center|top"
                 android:orientation="vertical">
 
                 <TextView
@@ -226,7 +229,7 @@
                     android:fontFamily="@font/sweet_purple"
                     android:text="@string/comentario"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="72sp" />
+                    android:textSize="45sp" />
 
                 <TextView
                     android:id="@+id/outputComentario"
@@ -236,7 +239,7 @@
                     android:fontFamily="@font/sweet_purple"
                     android:paddingStart="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="72sp"
+                    android:textSize="36sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
 
@@ -245,7 +248,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:gravity="center|top"
             android:orientation="horizontal">
 
@@ -259,7 +262,7 @@
                 android:padding="20dp"
                 android:text="@string/enviar"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="80sp"
+                android:textSize="50sp"
                 tools:ignore="ButtonStyle" />
 
             <Button
@@ -271,7 +274,7 @@
                 android:padding="20dp"
                 android:text="@string/nao_enviar"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="80sp"
+                android:textSize="50sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
