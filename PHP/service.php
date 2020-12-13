@@ -2169,25 +2169,27 @@ switch ($_POST['q']){
                     mysqli_begin_transaction($conn);
 
                     $tabela = $_POST['table'];
-                    $tline = explode(",",$tabela);
+                    
+                    
                     $a_id = $_POST['a_id'];
                     $sql = "DELETE FROM faltas WHERE a_id = '$a_id'";
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error 45";
+                        $responseObjectError->error = "Mysql error ";
                         $json = json_encode($responseObjectError);
                         echo $json;
                         mysqli_rollback($conn);
                         exit();
                     }
-                    if(!empty($tline)){
+                    if($tabela =! ''){
+                        $tline = explode(",",$tabela);
                         foreach ($tline as &$line) {
                             $e_id = $line; 
                             $sql = "INSERT INTO faltas (a_id,e_id) VALUES ('$a_id','$e_id')";
                             if(!mysqli_query($conn,$sql)){
                                 $responseObjectError->success = false;
-                                $responseObjectError->error = "Mysql error 4 ".$e_id;
+                                $responseObjectError->error = "Mysql error 4 ('$a_id','$e_id') - ".mysqli_error($conn);
                                 $json = json_encode($responseObjectError);
                                 echo $json;
                                 mysqli_rollback($conn);
@@ -2195,6 +2197,7 @@ switch ($_POST['q']){
                             }
                         }
                     }
+                    
                     mysqli_commit($conn);
                     $responseObject->success = true;
                     $json = json_encode($responseObjectError);

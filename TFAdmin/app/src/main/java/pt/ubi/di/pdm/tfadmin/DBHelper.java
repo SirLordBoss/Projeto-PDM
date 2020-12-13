@@ -750,6 +750,7 @@ public class DBHelper extends SQLiteOpenHelper {
             if(falta.length()>1){
                 falta = falta.substring(0,falta.length()-1);
             }
+            Log.d("FALTAS",falta);
             s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&table="+falta,null).execute().get();
             if(s == null){
                 return -1;

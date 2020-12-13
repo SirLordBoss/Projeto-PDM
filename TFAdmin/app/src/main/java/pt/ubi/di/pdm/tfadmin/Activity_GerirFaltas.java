@@ -20,12 +20,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Activity_GerirFaltas extends AppCompatActivity {
@@ -69,52 +71,54 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         submeter = findViewById(R.id.btnSubmeterRel);
         cancelar = findViewById(R.id.btnCancelarRel);
 
+        Calendar cal = Calendar.getInstance();//ajudei aqui
+
+        int year = cal.get(Calendar.YEAR);//ajudei aqui
+        int month = cal.get(Calendar.MONTH);//ajudei aqui
+        int day = cal.get(Calendar.DAY_OF_MONTH);//ajudei aqui
 
         String[] itemsDia = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsDia);
         dia.setAdapter(adapter);
+        dia.setSelection(day-1,true);//ajudei aqui
 
         String[] itemsMes = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsMes);
         mes.setAdapter(adapter2);
+        mes.setSelection(month,true);//ajudei aqui
 
-        String[] itemsAno = new String[]{"20","21"};
+        String[] itemsAno = new String[]{"19","20","21","22"};//ajudei aqui
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsAno);
         ano.setAdapter(adapter3);
-
-        Log.d("tag",String.valueOf(id));
-        Log.d("tag",String.valueOf(e_id));
-        Log.d("tag",tk);
-
+        ano.setSelection(Arrays.asList(itemsAno).indexOf(String.valueOf(year%100)),true);//ajudei aqui
 
 
         pesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*Calendar cal = Calendar.getInstance();
-
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog1 = new DatePickerDialog(Activity_GerirFaltas.this, android.R.style.Theme_Holo_Dialog_NoActionBar,mDateSetListener,year,month,day);
-                dialog1.show();*/
-
                 data = dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/" + ano.getSelectedItem().toString();
-                Log.d("tag",data);
 
-                Cursor cursor2 = base.rawQuery("SELECT "+DBHelper.COL1_TATIVIDADE+" FROM "+DBHelper.TATIVIDADE+" WHERE "+DBHelper.COL3_TATIVIDADE+"='"+data+"';",null);
-                //Porque este query não funciona da forma esperada tivemos que usar o query acima - Tiago Almeida
-                // Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{DBHelper.COL1_TATIVIDADE},DBHelper.COL3_TATIVIDADE+"= ?",new String[]{data},null,null,null);
-                if(cursor2.moveToFirst() && cursor2.getCount()>=1){
-                    at_id = cursor2.getInt(0);
+                //Cursor cursor2 = base.rawQuery("SELECT "+DBHelper.COL1_TATIVIDADE+" FROM "+DBHelper.TATIVIDADE+" WHERE "+DBHelper.COL3_TATIVIDADE+"='"+data+"';",null);
+                //Ajudei em toda esta parte daqui para baixo, basicamente isto vai à tabela das atividades e retorna um inteiro com o valor da atividade
+                // depois se esse valor for 0 ou seja nenhuma atividade encontrada então dizemos que não foi encontrada a atividade e para aguardar a criação da aula- Tiago Almeida
+                Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{DBHelper.COL1_TATIVIDADE},DBHelper.COL3_TATIVIDADE+"= ?",new String[]{data},null,null,null);
+                if(cursor2.getCount()<1){
+                    Toast.makeText(Activity_GerirFaltas.this,"A aula neste dia não foi criada,por favor aguarde a sua criação para poder editá-la",Toast.LENGTH_LONG).show();
+                    oLL = findViewById(R.id.visualizar);
+                    oLL.removeAllViews();
+                    return;
+                }
+                cursor2.moveToFirst();
+                at_id = cursor2.getInt(0);
+                if(at_id == 0){
+                    Toast.makeText(Activity_GerirFaltas.this,"A aula neste dia não foi criada, por favor aguarde a sua criação para poder editá-la",Toast.LENGTH_LONG).show();
+                    oLL = findViewById(R.id.visualizar);
+                    oLL.removeAllViews();
+                    return;
                 }
                 cursor2.close();
-                Log.d("tag",String.valueOf(at_id));
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
-
             }
         });
 
@@ -152,8 +156,8 @@ public class Activity_GerirFaltas extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
+        dbHelper.updateAtividade(base,id,e_id,tk); //ajudei aqui Tiago Almeida
     }
 
     public void displayFaltas() {
