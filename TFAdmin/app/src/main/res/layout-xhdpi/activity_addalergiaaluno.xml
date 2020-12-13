@@ -4,66 +4,67 @@
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
-    android:weightSum="100">
+    android:weightSum="100"
+    tools:context=".Activity_AddAlergiaAluno">
 
     <TextView
-        android:id="@+id/titulo_gerireduc"
+        android:id="@+id/titulo_alergias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
-        android:shadowDx="2"
-        android:shadowDy="2"
+        android:shadowDx="7"
+        android:shadowDy="7"
         android:shadowRadius="1"
-        android:text="@string/gerir_educadores"
+        android:text="@string/alergias"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp" />
-
+        android:textSize="50sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="525dp"
         android:layout_marginTop="25dp">
 
         <LinearLayout
-            android:id="@+id/visualizar"
+            android:id="@+id/listaAlergias"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
         <android.widget.Button
-            android:id="@+id/btnEspera"
+            android:id="@+id/btnSubmeterAlergias"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
             android:padding="20dp"
-            android:text="@string/em_espera"
+            android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="25sp"
+            android:textSize="45sp"
             tools:ignore="ButtonStyle" />
 
         <android.widget.Button
-            android:id="@+id/btnAddEduc"
+            android:id="@+id/btnCancelarAlergias"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
             android:padding="20dp"
-            android:text="@string/novo_educador"
+            android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="25sp"
+            android:textSize="45sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
