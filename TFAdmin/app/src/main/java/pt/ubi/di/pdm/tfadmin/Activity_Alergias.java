@@ -108,7 +108,6 @@ public class Activity_Alergias extends AppCompatActivity {
                 }
             });
 
-
             oLL.addView(oLL1);
             bCarryOn = oCursor.moveToNext();
         }
