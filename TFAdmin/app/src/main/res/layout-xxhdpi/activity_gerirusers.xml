@@ -23,7 +23,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="50sp" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnGerirEducs"
         android:layout_width="match_parent"
         android:layout_height="110dp"
@@ -38,7 +38,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnGerirAdmins"
         android:layout_width="match_parent"
         android:layout_height="110dp"

@@ -57,7 +57,7 @@
                 android:textSize="38sp"
                 tools:ignore="Autofill" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnAddAlergia"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -75,7 +75,7 @@
             android:gravity="center|top"
             android:orientation="horizontal">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnSubmeterAlergias"
                 android:layout_width="175dp"
                 android:layout_height="match_parent"
@@ -87,7 +87,7 @@
                 android:textSize="40sp"
                 tools:ignore="ButtonStyle" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnCancelarAlergias"
                 android:layout_width="175dp"
                 android:layout_height="match_parent"

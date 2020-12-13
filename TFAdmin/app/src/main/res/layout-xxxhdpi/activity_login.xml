@@ -70,7 +70,7 @@
         android:textSize="36sp"
         tools:ignore="Autofill" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnLogin"
         android:layout_width="262dp"
         android:layout_height="100dp"
