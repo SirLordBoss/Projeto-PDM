@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ public class Activity_PerfAdmin extends AppCompatActivity {
     SQLiteDatabase user_db;
     TextView nome, idade, sexo, morada, contacto;
     String id_admin;
+
+    Button editar_admin;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,16 @@ public class Activity_PerfAdmin extends AppCompatActivity {
                 break;
             }
         }
+
+        editar_admin = (Button) findViewById(R.id.btnEditarEduc);
+        editar_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editar_educ = new Intent(Activity_PerfAdmin.this, Activity_EditarAdmins.class);
+                editar_educ.putExtra("id", id_admin);
+                startActivity(editar_educ);
+            }
+        });
 
     }
 }
