@@ -21,9 +21,11 @@ public class VerAula extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veraula);
 
+        //Abrir a base de dados local
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
 
+        //recebe o id da atividade por intent
         Intent Cheguei = getIntent();
         id_at = Cheguei.getStringExtra("id");
 
@@ -32,6 +34,7 @@ public class VerAula extends Activity {
         notas = (TextView)findViewById(R.id.inputNotas);
         edit = (Button)findViewById(R.id.btnEditarAula);
 
+        //Procura pela atividade com o id correspondente e preenche os campos
         Cursor cursor = base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
         while (cursor.moveToNext()){
             String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL1_T2));
@@ -47,6 +50,7 @@ public class VerAula extends Activity {
             }
         }
 
+        //direciona para a pagina de editar aula
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

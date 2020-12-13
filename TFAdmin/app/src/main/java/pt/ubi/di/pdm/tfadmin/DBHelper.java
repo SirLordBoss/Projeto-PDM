@@ -750,7 +750,6 @@ public class DBHelper extends SQLiteOpenHelper {
             if(falta.length()>1){
                 falta = falta.substring(0,falta.length()-1);
             }
-            Log.d("FALTAS",falta);
             s = new Sender(c,"304", "id="+id+"&ide="+ed_id+"&a_id="+a_id+"&table="+falta,null).execute().get();
             if(s == null){
                 return -1;
@@ -1039,7 +1038,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int deleteAlergia(int id,int ed_id,int a_id){
         String s;
         try {
-            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&e_id="+a_id,null).execute().get();
+            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&a_id="+a_id,null).execute().get();
             if(s == null){
                 return -1;
             }
@@ -1074,7 +1073,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int deleteAtividade( int id,int ed_id,int a_id){
         String s;
         try {
-            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&a_id="+a_id,null).execute().get();
+            s = new Sender(c,"407", "id="+id+"&ide="+ed_id+"&a_id="+a_id,null).execute().get();
             if(s == null){
                 return -1;
             }
@@ -1195,4 +1194,24 @@ public class DBHelper extends SQLiteOpenHelper {
             return -1;
         }
     }
+
+    /*public int deleteInscrito(int id, int id_inscrito){
+        String s;
+        try {
+            s = new Sender(c,"", "id="+id+"&id_inscrito="+id_inscrito,null).execute().get();
+            if(s == null){
+                return -1;
+            }
+
+            JSONObject o = new JSONObject(s);
+            if(!o.getBoolean("success")){
+                Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }*/
 }

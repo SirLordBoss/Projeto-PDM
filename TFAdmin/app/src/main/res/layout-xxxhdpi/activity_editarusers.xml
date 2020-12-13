@@ -1,3 +1,12 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Activity_EditarAluno">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -37,6 +46,15 @@
         android:textSize="36sp"
         tools:ignore="Autofill" />
 
+    <Spinner
+        android:id="@+id/editSexo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:spinnerMode="dropdown" />
+
     <EditText
         android:id="@+id/editMorada"
         android:layout_width="match_parent"
@@ -67,7 +85,7 @@
         android:textSize="36sp"
         tools:ignore="Autofill" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/inputPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,7 +117,7 @@
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="36sp"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -132,3 +150,4 @@
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
+</ScrollView>

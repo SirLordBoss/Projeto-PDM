@@ -1,3 +1,12 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Activity_PerfEduc">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -5,7 +14,7 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Activity_PerfAluno">
+    tools:context=".Activity_PerfEduc">
 
 
     <TextView
@@ -81,7 +90,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCancelarRel"
+            android:id="@+id/btnEditarEduc"
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/cantos_botoes"
@@ -94,3 +103,4 @@
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
+</ScrollView>

@@ -27,7 +27,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
     int id, aux, sexo_dropdown_selection;
 
-    EditText educador, idade_educ, morada, email, password_educ;
+    EditText educador, idade_educ, morada, email, password_educ, password_repeat;
 
     Spinner dropdown;
 
@@ -79,6 +79,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
         email = findViewById((R.id.inputEmail));
 
         password_educ = findViewById(R.id.inputPassword);
+        password_repeat = findViewById(R.id.inputRepPass);
 
         dropdown = findViewById(R.id.inputSexo);
 
@@ -115,13 +116,19 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
-                String pwd = getM5(password_educ.getText().toString());
-
-                if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, pwd) == 1){
-
-                    Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
-                } else{
-                    Toast.makeText(Activity_AdicionarEducadores.this, "erro!", Toast.LENGTH_SHORT).show();
+                if(password_educ.getText().toString().equals(password_repeat.getText().toString())){
+                    String pwd = getM5(password_educ.getText().toString());
+                    if(db_helper.addEducador(id, educador_nome, idade, mor, sexo, em, pwd) == 1){
+                        Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(Activity_AdicionarEducadores.this, "erro!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Activity_AdicionarEducadores.this, "As passwords não estão repetidas.", Toast.LENGTH_SHORT).show();
+                    password_educ.requestFocus();
+                    password_educ.setText("");
+                    password_repeat.setText("");
+                    return;
                 }
             }
         });

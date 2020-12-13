@@ -43,18 +43,19 @@ public class Activity_AddAluno extends AppCompatActivity {
         myList.add("");
         dbHelper = new DBHelper(Activity_AddAluno.this);
         oSQLDB= dbHelper.getWritableDatabase();
-        alergia = (Button)findViewById(R.id.btnAddAlergia);
-        registo = (Button)findViewById(R.id.btnCriar);
-        educando = (EditText)findViewById(R.id.inputUser);
-        idade = (EditText)findViewById(R.id.inputIdade);
-        morada = (EditText)findViewById(R.id.inputMorada);
-        email = (EditText)findViewById((R.id.inputEmail));
-        dropdown = (Spinner) findViewById(R.id.inputSexo);
+        alergia = findViewById(R.id.btnAddAlergia);
+        registo = findViewById(R.id.btnCriar);
+        educando = findViewById(R.id.inputUser);
+        idade = findViewById(R.id.inputIdade);
+        morada = findViewById(R.id.inputMorada);
+        email = findViewById((R.id.inputEmail));
+        dropdown = findViewById(R.id.inputSexo);
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
 
         ed_id = Integer.parseInt(getIntent().getStringExtra("ed_id"));
+
 
 
         String[] items = new String[]{"Feminino", "Masculino"};
@@ -96,7 +97,7 @@ public class Activity_AddAluno extends AppCompatActivity {
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
                 for(int i=0;i<myList.size();i++){
-                    Log.d("tag",String.valueOf(aler2[i])+":)");
+                    //Log.d("tag",String.valueOf(aler2[i])+":)");
                 }
 
                 dbHelper.addEducando(admin_id,ed_id,ed,Integer.parseInt(id),mor,a1,em,aler2);
@@ -120,7 +121,6 @@ public class Activity_AddAluno extends AppCompatActivity {
     public void onResume() {
 
         super.onResume();
-        educando.setText(myList.get(0));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -131,6 +131,7 @@ public class Activity_AddAluno extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 result=data.getStringExtra("result");
                 myList = new ArrayList(Arrays.asList(result.substring(1, result.length() - 1).replaceAll("\\s", "").split(",")));
+                Log.d("MYLIST",myList.toString());
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
