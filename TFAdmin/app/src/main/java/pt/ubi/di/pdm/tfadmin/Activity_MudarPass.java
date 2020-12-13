@@ -17,7 +17,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Activity_MudarPass extends AppCompatActivity {
 
-    public static String getM5(String input) {
+    //esta função foi retirada da internet, faz a conversão de uma string para uma string com hash md5
+    private static String getM5(String input) {
         try {
 
             // Static getInstance method is called with hashing MD5
@@ -83,11 +84,11 @@ public class Activity_MudarPass extends AppCompatActivity {
                     Toast.makeText(Activity_MudarPass.this,"As passwords não são iguais",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!new_pwd.equals(old_pwd)){
+                if(new_pwd.equals(old_pwd)){
                     old_p.setText("");
                     new_p.setText("");
                     new_p_rep.setText("");
-                    Toast.makeText(Activity_MudarPass.this,"As passwords são todas iguais",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_MudarPass.this,"As passwords são todas iguais "+new_pwd+" _ "+old_pwd,Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -107,9 +108,6 @@ public class Activity_MudarPass extends AppCompatActivity {
                     case 1:
                         Toast.makeText(Activity_MudarPass.this,"Alterado com sucesso",Toast.LENGTH_SHORT).show();
                     break;
-                }
-                if(i == -1){
-                    Toast.makeText(Activity_MudarPass.this,"Erro na comunicação dos dados",Toast.LENGTH_SHORT).show();
                 }
 
 
