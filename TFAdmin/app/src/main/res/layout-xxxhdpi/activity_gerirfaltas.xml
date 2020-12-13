@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,12 +6,6 @@
     android:orientation="vertical"
     android:weightSum="100"
     tools:context=".Activity_GerirFaltas">
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
 
         <TextView
             android:id="@+id/titulo_geriradmins"
@@ -59,16 +53,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Ok" />
+                android:text="@string/ok" />
 
         </LinearLayout>
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="25dp">
+
         <LinearLayout
             android:id="@+id/visualizar"
             android:layout_width="fill_parent"
-            android:layout_height="350dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical" />
+    </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,8 +100,4 @@
                 android:textSize="40sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
-
-    </LinearLayout>
-
-
-</ScrollView>
+</LinearLayout>
