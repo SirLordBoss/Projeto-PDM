@@ -86,8 +86,8 @@ SQLiteDatabase base;
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
-                dbHelper.delete();
-                System.exit(0);
+                //dbHelper.delete();
+                finish();
             }
 
         });

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -101,6 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER);
 
     }
+
     public static void fechando(SQLiteDatabase base, Context c) {
         String x = "false";
         String total = "";
@@ -108,8 +111,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String id = "";
         int count = 0;
         Cursor cursor = base.query(TABLE_NAME7, new String[]{"*"}, null, null, null, null, null);
-        while (cursor.moveToNext()) {
+        if(cursor.moveToFirst()) {
             user = cursor.getString(cursor.getColumnIndex(COL2_T7));
+            id = cursor.getString(cursor.getColumnIndex(COL1_T7));
         }
         cursor = base.query(TABLE_NAME1, new String[]{"*"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
@@ -190,7 +194,6 @@ public class DBHelper extends SQLiteOpenHelper {
         count = 0;
         cursor = base.query(TABLE_NAME6, new String[]{"*"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
-
             String c1 = cursor.getString(cursor.getColumnIndex(COL1_T6));
             String c2 = cursor.getString(cursor.getColumnIndex(COL2_T6));
 
@@ -200,14 +203,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 total = total + ";" + c1 + "," + c2;
             count++;
         }
+
         try {
             x = new Sender(c, "104", total, null).execute().get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        cursor = base.query((TABLE_NAME7), new String[]{"*"}, null, null, null, null, null);
-        cursor.moveToFirst();
-        id = cursor.getString(cursor.getColumnIndex(COL1_T7));
+
 
         try {
             x = new Sender(c, "105", "cs=1&id=" + id, null).execute().get();

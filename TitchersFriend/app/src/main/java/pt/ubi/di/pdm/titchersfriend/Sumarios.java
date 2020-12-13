@@ -27,9 +27,27 @@ public class Sumarios extends AppCompatActivity {
     EditText Esumario,Enotas;
     Button btnSubmeter,btnCancelar;
 
+    String date;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sumarios);
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String monthS, dayS, yearS;
+        if(month<10)
+            monthS = "0"+(month+1);
+        else
+            monthS = ""+(month+1);
+        yearS = ""+(year%100);
+        if(day<10)
+            dayS = "0"+day;
+        else
+            dayS = ""+day;
+        date = dayS+"/"+monthS+"/"+yearS;
 
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
@@ -39,7 +57,20 @@ public class Sumarios extends AppCompatActivity {
 
         btnCancelar = (Button)findViewById(R.id.btnCancelarRel);
         btnSubmeter = (Button)findViewById(R.id.btnSubmeterRel);
+        boolean check = false;
+        Cursor cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
+        while (cursor.moveToNext()){
 
+            String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T2));
+            if (c1.contains(date)){
+                check = true;
+                break;
+            }
+        }
+        if (check){
+            Toast.makeText(Sumarios.this,"Já submeteu um sumário hoje",Toast.LENGTH_SHORT).show();
+            finish();
+        }
         btnSubmeter.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -48,24 +79,6 @@ public class Sumarios extends AppCompatActivity {
                 String Totalsum = "";
                 String sum = Esumario.getText().toString();
                 String notas = Enotas.getText().toString();
-                Calendar calendar = Calendar.getInstance();
-                String date = java.text.DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
-                boolean check = false;
-
-                Cursor cursor =base.query(dbHelper.TABLE_NAME2,new String[]{"*"},null,null,null,null,null);
-                while (cursor.moveToNext()){
-
-                    String c1 =cursor.getString(cursor.getColumnIndex(dbHelper.COL3_T2));
-                    if (c1.contains(date)){
-                        check = true;
-                        break;
-                    }
-                }
-                if (check){
-                    Toast.makeText(Sumarios.this,"Já submeteu um sumário hoje",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
 
                 if(sum.equals("")){
                     Toast.makeText(Sumarios.this,"Não preencheu o sumárario",Toast.LENGTH_SHORT).show();
