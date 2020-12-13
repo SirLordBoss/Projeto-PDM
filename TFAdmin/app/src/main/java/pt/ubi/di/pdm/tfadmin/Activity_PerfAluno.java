@@ -1,6 +1,7 @@
 package pt.ubi.di.pdm.tfadmin;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -76,5 +77,31 @@ public class Activity_PerfAluno extends AppCompatActivity {
         super.onResume();
         dbHelper = new DBHelper(this);
         base = dbHelper.getWritableDatabase();
+
+        SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
+        int id = shp.getInt("id",999);
+
+
+        String tk;
+        Cursor cursor2 = base.query(DBHelper.TEDUCADOR,new String[]{DBHelper.COL7_TEDUCADOR},DBHelper.COL1_TEDUCADOR+"=?",new String[]{id_educadora},null,null,null);
+        cursor2.moveToFirst();
+        tk = cursor2.getString(0);
+        cursor2.close();
+        dbHelper.updateEducando(base,id,Integer.parseInt(id_educadora),tk);
+
+        Cursor cursor = base.query(DBHelper.TEDUCANDO,new String[]{"*"},DBHelper.COL1_TEDUCANDO+"=?",new String[]{id_aluno},null,null,null);
+        cursor.moveToNext();
+
+        nome.setText(cursor.getString(1));
+        idade.setText(cursor.getString(2));
+
+        if (cursor.getString(4).equals("1"))
+            sexo.setText("Sexo: Masculino");
+        else
+            sexo.setText("Sexo: Feminino");
+
+        morada.setText(cursor.getString(3));
+        contacto.setText(cursor.getString(5));
+
     }
 }

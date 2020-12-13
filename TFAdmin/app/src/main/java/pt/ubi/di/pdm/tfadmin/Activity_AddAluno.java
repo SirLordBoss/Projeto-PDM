@@ -89,16 +89,16 @@ public class Activity_AddAluno extends AppCompatActivity {
                     return;
                 }
 
-                for(int i=0;i<myList.size();i++){
-                    aler.add(Integer.parseInt(myList.get(i)));
-                }
-
                 int[] aler2 = {};
-                aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
-                for(int i=0;i<myList.size();i++){
-                    //Log.d("tag",String.valueOf(aler2[i])+":)");
+
+                if (!myList.isEmpty()) {
+                    for (int i = 0; i < myList.size(); i++) {
+                        aler.add(Integer.parseInt(myList.get(i)));
+                    }
+                    aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
                 }
+
 
                 dbHelper.addEducando(admin_id,ed_id,ed,Integer.parseInt(id),mor,a1,em,aler2);
                 finish();
@@ -134,7 +134,7 @@ public class Activity_AddAluno extends AppCompatActivity {
                 Log.d("MYLIST",myList.toString());
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+                myList.clear();
             }
         }
     }//onActivityResult
