@@ -131,7 +131,6 @@ public class AdicionarAluno extends AppCompatActivity {
     public void onResume() {
 
         super.onResume();
-        educando.setText(myList.get(0));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

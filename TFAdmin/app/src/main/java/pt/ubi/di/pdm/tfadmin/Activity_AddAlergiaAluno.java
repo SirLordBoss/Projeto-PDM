@@ -82,7 +82,7 @@ public class Activity_AddAlergiaAluno extends AppCompatActivity {
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
             E1.setId(oCursor.getInt(1) * 10 + 1);
-            E1.setText(oCursor.getString(1));
+            E1.setText(oCursor.getString(2));
 
             final CheckBox T2 = (CheckBox) oLL1.findViewById(R.id.checkBox);
             T2.setId(oCursor.getInt(1) * 10);
