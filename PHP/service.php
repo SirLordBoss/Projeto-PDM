@@ -1947,8 +1947,7 @@ switch ($_POST['q']){
                         mysqli_rollback($conn);
                         exit();
                     }
-                    $alergias = $_POST['e_alergias'];
-                    $aline = explode(",",$alergias);
+                    
 
                     $sql = "DELETE FROM contem WHERE e_id = '$e_id';";
                     if(!mysqli_query($conn,$sql)){
@@ -1959,9 +1958,11 @@ switch ($_POST['q']){
                         mysqli_rollback($conn);
                         exit();
                     }
+                    $alergias = $_POST['e_alergias'];
+                    $aline = explode(",",$alergias);
                     if(strlen($alergias)>0){
                         foreach ($aline as &$line){
-                            $sql = "INSERT INTO contem (e_id,al_id) VALUES ((SELECT ),'$line')";
+                            $sql = "INSERT INTO contem (e_id,al_id) VALUES ('$e_id','$line')";
                             if(!mysqli_query($conn,$sql)){
                                 $responseObjectError->success = false;
                                 $responseObjectError->error = "Mysql error inside foreach ".$alergias;

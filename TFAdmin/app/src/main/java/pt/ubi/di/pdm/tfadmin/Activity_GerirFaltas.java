@@ -98,7 +98,6 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             public void onClick(View v) {
                 data = dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/" + ano.getSelectedItem().toString();
 
-                //Cursor cursor2 = base.rawQuery("SELECT "+DBHelper.COL1_TATIVIDADE+" FROM "+DBHelper.TATIVIDADE+" WHERE "+DBHelper.COL3_TATIVIDADE+"='"+data+"';",null);
                 //Ajudei em toda esta parte daqui para baixo, basicamente isto vai à tabela das atividades e retorna um inteiro com o valor da atividade
                 // depois se esse valor for 0 ou seja nenhuma atividade encontrada então dizemos que não foi encontrada a atividade e para aguardar a criação da aula- Tiago Almeida
                 Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{DBHelper.COL1_TATIVIDADE},DBHelper.COL3_TATIVIDADE+"= ?",new String[]{data},null,null,null);
