@@ -128,7 +128,15 @@ public class Activity_GerirFaltas extends AppCompatActivity {
                 int[] falt2 = {};
                 falt2 = falt.stream().mapToInt(Integer::intValue).toArray();
 
-                dbHelper.editFalta(id,e_id,at_id,falt2);
+                for (int i=0;i<falt2.length;i++)
+                    Log.d("tag",String.valueOf(falt2[i]));
+
+                int aux = dbHelper.editFalta(id,e_id,at_id,falt2);
+               if(aux == 1){
+                   Toast.makeText(Activity_GerirFaltas.this,"sucesso",Toast.LENGTH_SHORT).show();
+               }else{
+                   Toast.makeText(Activity_GerirFaltas.this,"erro ao marcar faltas",Toast.LENGTH_SHORT).show();
+               }
             }
         });
 
