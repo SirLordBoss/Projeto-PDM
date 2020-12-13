@@ -12,9 +12,9 @@
         android:id="@+id/inputUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="210dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="25dp"
         android:ems="10"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/nome_de_utilizador"
@@ -22,16 +22,16 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="75sp"
+        android:textSize="46sp"
         tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/inputEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="25dp"
         android:ems="10"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/email"
@@ -39,16 +39,16 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="75sp"
+        android:textSize="46sp"
         tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/inputIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="25dp"
         android:ems="10"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/idade"
@@ -56,28 +56,27 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="75sp"
+        android:textSize="46sp"
         tools:ignore="Autofill" />
 
     <Spinner
         android:id="@+id/inputSexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="15dp"
-        android:spinnerMode="dropdown"
+        android:layout_marginEnd="25dp"
 
-        />
+        android:layout_marginBottom="15dp"
+        android:spinnerMode="dropdown" />
 
     <EditText
         android:id="@+id/inputMorada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="25dp"
         android:ems="10"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/morada"
@@ -85,36 +84,34 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="75sp"
+        android:textSize="46sp"
         tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/inputPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="25dp"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/palavra_passe"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="75sp"
+        android:textSize="46sp"
         tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/btnCriar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:padding="20dp"
         android:text="@string/criar_conta"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="100sp" />
+        android:textSize="50sp" />
 </LinearLayout>
