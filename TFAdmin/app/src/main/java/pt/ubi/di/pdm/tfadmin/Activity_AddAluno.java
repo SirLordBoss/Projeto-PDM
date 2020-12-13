@@ -50,6 +50,7 @@ public class Activity_AddAluno extends AppCompatActivity {
         morada = findViewById(R.id.inputMorada);
         email = findViewById((R.id.inputEmail));
         dropdown = findViewById(R.id.inputSexo);
+        myList.clear();
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
