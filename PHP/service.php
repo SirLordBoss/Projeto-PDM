@@ -263,7 +263,7 @@ switch ($_POST['q']){
                     $sexo = $_POST['sexo'];
                     $email = $_POST['email'];
 
-                    $sql = "UPDATE users SET (u_nome = ,u_idade = ,u_morada = ,u_sexo = ,u_email = ) WHERE u_id = '$u_id'";
+                    $sql = "UPDATE users SET u_nome = '$username', u_idade = '$idade', u_morada = '$morada', u_sexo = '$sexo', u_email = '$email' WHERE u_id = '$u_id'";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
