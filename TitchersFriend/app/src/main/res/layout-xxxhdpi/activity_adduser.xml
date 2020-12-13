@@ -86,7 +86,6 @@
         android:textSize="36sp"
         tools:ignore="Autofill" />
 
-
     <EditText
         android:id="@+id/inputPass"
         android:layout_width="match_parent"
@@ -94,6 +93,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
+        android:ellipsize="start"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/palavra_passe"
         android:inputType="textPassword"
