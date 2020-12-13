@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class Activity_EditarAdmins extends AppCompatActivity {
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
         id_admin = Integer.parseInt(Cheguei.getStringExtra("id"));
+        Log.v("DEBUG", "id do admin a mudar: " + id_admin);
 
         SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
         admin_id = shp.getInt("id",999);
@@ -57,7 +59,7 @@ public class Activity_EditarAdmins extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_EditarAdmins.this, android.R.layout.simple_spinner_dropdown_item, items);
         sexo.setAdapter(adapter);
 
-        Cursor cursor = admin_db.query(DBHelper.TEDUCADOR,new String[]{"*"},DBHelper.COL1_TEDUCADOR+"=?",new String[]{id},null,null,null);
+        Cursor cursor = admin_db.query(DBHelper.TADMIN,new String[]{"*"},DBHelper.COL1_TADMIN+"=?",new String[]{id},null,null,null);
         cursor.moveToNext();
 
         nome.setText(cursor.getString(1));

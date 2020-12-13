@@ -56,6 +56,7 @@ public class Activity_Alergias extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dbHelper.addAlergia(id,e_id,addAler.getText().toString());
+                addAler.setText("");
             }
         });
 
