@@ -25,7 +25,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="430dp"
         android:layout_marginTop="25dp">
 
         <LinearLayout
@@ -34,18 +34,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnAddAula"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/cantos_botoes"
-        android:fontFamily="@font/sweet_purple"
-        android:padding="15dp"
-        android:text="@string/registar_aula"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
 
     <!--No conection warning -->
     <LinearLayout

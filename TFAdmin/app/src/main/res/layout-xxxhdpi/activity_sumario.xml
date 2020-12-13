@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -74,7 +73,7 @@
         android:gravity="center|top"
         android:orientation="horizontal">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnSubmeterRel"
             android:layout_width="175dp"
             android:layout_height="match_parent"
@@ -86,7 +85,7 @@
             android:textSize="40sp"
             tools:ignore="ButtonStyle" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnCancelarRel"
             android:layout_width="175dp"
             android:layout_height="match_parent"

@@ -20,19 +20,23 @@
         android:text="@string/aprovacao"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnVoltar"
-        android:layout_width="262dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="80dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
+        android:paddingStart="25dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="25dp"
+        android:paddingBottom="20dp"
         android:text="@string/voltar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="30sp" />
 
 </LinearLayout>

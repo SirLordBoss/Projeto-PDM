@@ -104,7 +104,7 @@
         android:id="@+id/btnCriar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:padding="20dp"

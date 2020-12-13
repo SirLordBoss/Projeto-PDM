@@ -31,7 +31,7 @@
             android:orientation="vertical" />
     </ScrollView>
 
-        <Button
+    <android.widget.Button
             android:id="@+id/btn"
             android:layout_width="262dp"
             android:layout_height="75dp"
