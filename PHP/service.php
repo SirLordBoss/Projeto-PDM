@@ -263,7 +263,7 @@ switch ($_POST['q']){
                     $sexo = $_POST['sexo'];
                     $email = $_POST['email'];
 
-                    $sql = "UPDATE users SET (u_nome = ,u_idade = ,u_morada = ,u_sexo = ,u_email = ) WHERE u_id = '$u_id'";
+                    $sql = "UPDATE users SET u_nome = '$username', u_idade = '$idade', u_morada = '$morada', u_sexo = '$sexo', u_email = '$email' WHERE u_id = '$u_id'";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $responseObject->success = true;
@@ -1959,9 +1959,9 @@ switch ($_POST['q']){
                         mysqli_rollback($conn);
                         exit();
                     }
-                    if(empty($alergias)){
+                    if(strlen($alergias)>0){
                         foreach ($aline as &$line){
-                            $sql = "INSERT INTO contem (e_id,a_id) VALUES ('$e_id','$line')";
+                            $sql = "INSERT INTO contem (e_id,al_id) VALUES ((SELECT ),'$line')";
                             if(!mysqli_query($conn,$sql)){
                                 $responseObjectError->success = false;
                                 $responseObjectError->error = "Mysql error inside foreach ".$alergias;
@@ -2497,26 +2497,21 @@ switch ($_POST['q']){
                     $e_id = mysqli_insert_id($conn);
                     $alergias = $_POST['e_alergias'];
                     $aline = explode(",",$alergias);
-                    $sql = "DELETE FROM contem WHERE e_id = '$e_id';";
-                    if(!mysqli_query($conn,$sql)){
-                        $responseObjectError->success = false;
-                        $responseObjectError->error = "Mysql error 1";
-                        $json = json_encode($responseObjectError);
-                        echo $json;
-                        mysqli_rollback($conn);
-                        exit();
-                    }
-                    foreach ($aline as &$line){
-                        $sql = "INSERT INTO contem (e_id,a_id) VALUES ('$e_id','$line')";
-                        if(!mysqli_query($conn,$sql)){
-                            $responseObjectError->success = false;
-                            $responseObjectError->error = "Mysql error inside foreach";
-                            $json = json_encode($responseObjectError);
-                            echo $json;
-                            mysqli_rollback($conn);
-                            exit();
+                    
+                    if(strlen($alergias)>0){
+                        foreach ($aline as &$line){
+                            $sql = "INSERT INTO contem (e_id,al_id) VALUES ('$e_id','$line')";
+                            if(!mysqli_query($conn,$sql)){
+                                $responseObjectError->success = false;
+                                $responseObjectError->error = "Mysql error inside foreach  $alergias";
+                                $json = json_encode($responseObjectError);
+                                echo $json;
+                                mysqli_rollback($conn);
+                                exit();
+                            }
                         }
                     }
+                    
                     mysqli_commit($conn);
                     $responseObject->success = true;
                     $json = json_encode($responseObject);
