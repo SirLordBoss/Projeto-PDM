@@ -81,7 +81,7 @@
         android:orientation="horizontal">
 
         <android.widget.Button
-            android:id="@+id/btnCancelarRel"
+            android:id="@+id/btnEditarEduc"
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/cantos_botoes"
