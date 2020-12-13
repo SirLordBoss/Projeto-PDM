@@ -8,84 +8,70 @@
     tools:context=".PerfAlunoActivity">
 
 
-    <EditText
-        android:id="@+id/editNome"
+    <TextView
+        android:id="@+id/txtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/nome"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="40sp" />
 
-    <EditText
-        android:id="@+id/editIdade"
+    <TextView
+        android:id="@+id/txtIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/idade"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:text="@string/idade"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
 
-
-    <Spinner
-        android:id="@+id/editSexo"
+    <TextView
+        android:id="@+id/txtSexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:spinnerMode="dropdown" />
-
-    <EditText
-        android:id="@+id/editMorada"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/morada"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:text="@string/sexo"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
 
-    <EditText
-        android:id="@+id/editContacto"
+    <TextView
+        android:id="@+id/txtMorada"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/email_pais"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:text="@string/morada"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txtContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/email_pais"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="90dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
@@ -96,11 +82,14 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
-            android:text="@string/submeter"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="15dp"
+            android:text="Escrever\nRelatório"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
-            tools:ignore="ButtonStyle" />
+            android:textSize="36sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
             android:id="@+id/btnCancelarRel"
@@ -108,10 +97,13 @@
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
-            android:text="@string/cancelar"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="15dp"
+            android:text="Editar\nDados"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
-            tools:ignore="ButtonStyle" />
+            android:textSize="36sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
     </LinearLayout>
 </LinearLayout>
