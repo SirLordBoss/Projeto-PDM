@@ -19,11 +19,11 @@
         android:shadowRadius="1"
         android:text="@string/gerir_alunos"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="55sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="500dp"
         android:layout_marginTop="20dp">
 
         <LinearLayout
@@ -41,8 +41,8 @@
         android:layout_marginTop="35dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
-        android:padding="15dp"
+        android:padding="20dp"
         android:text="@string/novo_aluno"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="46sp" />
 </LinearLayout>

@@ -12,7 +12,7 @@
         android:id="@+id/titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/sweet_purple"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
@@ -21,7 +21,7 @@
         android:text="@string/conf_rel"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="48sp" />
+        android:textSize="55sp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -30,15 +30,15 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
         android:fontFamily="@font/sweet_purple"
         android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="38sp" />
+        android:textSize="45sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -57,7 +57,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/comeu_bem"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -91,7 +91,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/dormiu_bem"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
             <View
                 android:layout_width="0dp"
@@ -125,7 +125,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/fez_necessidades"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
             <View
                 android:layout_width="0dp"
@@ -159,7 +159,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/magoou_se"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
             <View
                 android:layout_width="0dp"
@@ -193,7 +193,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/chorou"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="30sp" />
+                android:textSize="40sp" />
 
             <View
                 android:layout_width="0dp"
@@ -229,7 +229,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/comentario"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="36sp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:id="@+id/outputComentario"
@@ -247,7 +247,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
@@ -258,10 +258,10 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
+            android:padding="20dp"
             android:text="@string/enviar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="45sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -270,10 +270,10 @@
             android:layout_height="match_parent"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
+            android:padding="20dp"
             android:text="@string/nao_enviar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="45sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>

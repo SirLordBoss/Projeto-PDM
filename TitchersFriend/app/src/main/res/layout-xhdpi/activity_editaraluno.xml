@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/nome"
@@ -21,7 +21,7 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
+        android:textSize="40sp"
         tools:ignore="Autofill" />
 
     <EditText
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/idade"
@@ -37,7 +37,7 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
+        android:textSize="40sp"
         tools:ignore="Autofill" />
 
 
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:spinnerMode="dropdown" />
 
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/morada"
@@ -63,7 +63,7 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
+        android:textSize="40sp"
         tools:ignore="Autofill" />
 
     <EditText
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
         android:hint="@string/email_pais"
@@ -79,13 +79,13 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
+        android:textSize="40sp"
         tools:ignore="Autofill" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="75dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
@@ -96,10 +96,10 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
+            android:padding="20dp"
             android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="46sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -108,10 +108,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
+            android:padding="20dp"
             android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="46sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
