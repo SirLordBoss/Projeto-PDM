@@ -426,6 +426,72 @@ switch ($_POST['q']){
         exit();
     }
     break;
+#ALTERAÇAO QUE FIZ COMEÇA AQUI
+#024 - Eliminar inscrito
+    case 24:
+    $id = $_POST['id'];
+
+    $sql = "SELECT COUNT(u.u_nome) as c FROM users u INNER JOIN admin a ON ( u.u_id = a.u_id ) WHERE u.u_id = '$id';";
+    $result = mysqli_query($conn,$sql);
+    if($result){
+        if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            if($row['c'] == 1){
+                $ins_id= $_POST['i_id'];
+                
+                $sql = "SELECT tr_id FROM to_regist WHERE tr_id = '$ins_id'";
+                $result = mysqli_query($conn,$sql);
+                if(!$result){
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mysql error in to_regist";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+                if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Error fetching to_regist";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+                mysqli_begin_transaction($conn);
+                $sql = "DELETE FROM to_regist WHERE tr_id = '$ins_id'";
+                if(!mysqli_query($conn,$sql)){
+                    $responseObjectError->success = false;
+                    $responseObjectError->error = "Mysql error in deleting";
+                    $json = json_encode($responseObjectError);
+                    echo $json;
+                    exit();
+                }
+                mysqli_commit($conn);
+                $responseObject->success = true;
+                $json = json_encode($responseObject);
+                echo $json;
+                exit();
+            } else{
+                $responseObjectError->success = false;
+                $responseObjectError->error = "User not admin";
+                $json = json_encode($responseObjectError);
+                echo $json;
+                exit();
+            } 
+        } else{
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Mysql error 2";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+    } else{
+        $responseObjectError->success = false;
+        $responseObjectError->error = "Mysql error 1";
+        $json = json_encode($responseObjectError);
+        echo $json;
+        exit();
+    }
+    break;
+#AS MINHAS ALTERAÇÔES ACABAM AQUI    
+        
 #050 - Registo
     case 50: //Registo
     $nome = $_POST['nome'];
