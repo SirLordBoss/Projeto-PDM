@@ -22,7 +22,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="50sp" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

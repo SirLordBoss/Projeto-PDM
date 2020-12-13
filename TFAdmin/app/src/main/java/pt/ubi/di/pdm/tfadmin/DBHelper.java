@@ -754,7 +754,6 @@ public class DBHelper extends SQLiteOpenHelper {
             if(s == null){
                 return -1;
             }
-
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();

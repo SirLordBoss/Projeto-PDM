@@ -80,7 +80,7 @@
         android:gravity="center|top"
         android:orientation="horizontal">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnSubmeter"
             android:layout_width="175dp"
             android:layout_height="match_parent"
@@ -92,7 +92,7 @@
             android:textSize="40sp"
             tools:ignore="ButtonStyle" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnCancelar"
             android:layout_width="175dp"
             android:layout_height="match_parent"
