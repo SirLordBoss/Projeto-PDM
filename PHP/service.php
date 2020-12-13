@@ -437,24 +437,6 @@ switch ($_POST['q']){
         if($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
             if($row['c'] == 1){
                 $ins_id= $_POST['i_id'];
-                
-                $sql = "SELECT tr_id FROM to_regist WHERE tr_id = '$ins_id'";
-                $result = mysqli_query($conn,$sql);
-                if(!$result){
-                    $responseObjectError->success = false;
-                    $responseObjectError->error = "Mysql error in to_regist";
-                    $json = json_encode($responseObjectError);
-                    echo $json;
-                    exit();
-                }
-                if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
-                    $responseObjectError->success = false;
-                    $responseObjectError->error = "Error fetching to_regist";
-                    $json = json_encode($responseObjectError);
-                    echo $json;
-                    exit();
-                }
-                mysqli_begin_transaction($conn);
                 $sql = "DELETE FROM to_regist WHERE tr_id = '$ins_id'";
                 if(!mysqli_query($conn,$sql)){
                     $responseObjectError->success = false;
@@ -2373,7 +2355,7 @@ switch ($_POST['q']){
         exit();
     break;
 
-#402 - Forgot password 
+#402 - Forgot password (Não implementado na app mas existe esta possíbilidade no php) 
     case 402:
         //TODO tratar da parte da verificação do utilizador
         $email = $_POST['G'];
@@ -2546,6 +2528,9 @@ switch ($_POST['q']){
                     
                     if(strlen($alergias)>0){
                         foreach ($aline as &$line){
+                            $line = str_replace(' ','',$line);
+                            if(empty($line))
+                                continue;
                             $sql = "INSERT INTO contem (e_id,al_id) VALUES ('$e_id','$line')";
                             if(!mysqli_query($conn,$sql)){
                                 $responseObjectError->success = false;

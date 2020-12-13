@@ -807,7 +807,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /** Query 021 - Função adicionar inscritos no educador
+    /** Query 021 - Função addInscritoToEducador
      *
      * @param id  id do administrador que pede os dados
      * @param i_id  id do educador a que a turma pertence
@@ -1194,6 +1194,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /** Query 24 - Eliminar Inscrito
+     *
+     * @param id id do administrador que elimina
+     * @param id_inscrito id do inscrito a eliminar
+     */
     public int deleteInscrito(int id, int id_inscrito){
         String s;
         try {

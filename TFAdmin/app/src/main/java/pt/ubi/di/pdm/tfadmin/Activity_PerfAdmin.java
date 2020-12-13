@@ -54,7 +54,7 @@ public class Activity_PerfAdmin extends AppCompatActivity {
             }
         }
 
-        editar_admin = findViewById(R.id.btnEditarEduc);
+        editar_admin = findViewById(R.id .btnEditarEduc);
         editar_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
