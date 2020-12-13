@@ -2373,7 +2373,7 @@ switch ($_POST['q']){
         exit();
     break;
 
-#402 - Forgot password 
+#402 - Forgot password (Não implementado na app mas existe esta possíbilidade no php) 
     case 402:
         //TODO tratar da parte da verificação do utilizador
         $email = $_POST['G'];

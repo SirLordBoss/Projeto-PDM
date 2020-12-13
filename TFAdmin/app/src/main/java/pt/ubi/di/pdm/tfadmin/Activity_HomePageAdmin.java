@@ -40,16 +40,15 @@ public class Activity_HomePageAdmin extends AppCompatActivity {
         mudar_pass_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //é para mudar a pass aqui, ou para fazer uma atividade dedicada?
-                //Intent mudar_pass = new Intent(HomePageAdmin.this, GerirAulas.class);
-                //startActivity(mudar_pass);
+                Intent mudar_pass = new Intent(Activity_HomePageAdmin.this, Activity_MudarPass.class);
+                startActivity(mudar_pass);
             }
         });
 
         gerir_educ_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Activity_HomePageAdmin.this.getSharedPreferences("important_variables", 0).edit().clear().commit();
+               Activity_HomePageAdmin.this.getSharedPreferences("important_variables", 0).edit().clear().apply();
                DBHelper dbHelper = new DBHelper(Activity_HomePageAdmin.this);
                dbHelper.delete();
                System.exit(0);
