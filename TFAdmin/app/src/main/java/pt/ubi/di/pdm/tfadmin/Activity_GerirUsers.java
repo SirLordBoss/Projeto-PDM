@@ -14,7 +14,7 @@ public class Activity_GerirUsers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //Log.v("DEBUG", "Starting the activity");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_gerirusers);
+        setContentView(R.layout.activity_gerirusers);
 
         //Log.v("DEBUG", "It failed here");
         gerir_educ_button = (Button) findViewById(R.id.btnGerirEducs);

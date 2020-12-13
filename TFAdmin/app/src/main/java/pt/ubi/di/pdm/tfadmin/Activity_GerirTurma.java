@@ -14,7 +14,7 @@ public class Activity_GerirTurma extends AppCompatActivity {
     String id;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivty_gerirturma);
+        setContentView(R.layout.activity_gerirturma);
 
         Intent Cheguei = getIntent();
         id = Cheguei.getStringExtra("id");
