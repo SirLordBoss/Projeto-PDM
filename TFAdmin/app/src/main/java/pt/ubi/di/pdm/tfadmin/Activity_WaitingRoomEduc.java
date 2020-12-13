@@ -93,7 +93,7 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
             btn_recusar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //db_helper.deleteInscrito(id, (v.getId()/10));
+                    db_helper.deleteInscrito(id, (v.getId()/10));
                     LinearLayout inscrito_rejeitado = (LinearLayout) findViewById(v.getId() + 4);
                     ((LinearLayout) inscrito_rejeitado.getParent()).removeView(inscrito_rejeitado);
                 }

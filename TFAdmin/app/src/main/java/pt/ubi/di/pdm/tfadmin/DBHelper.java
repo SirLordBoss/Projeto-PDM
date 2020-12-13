@@ -1195,10 +1195,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /*public int deleteInscrito(int id, int id_inscrito){
+    public int deleteInscrito(int id, int id_inscrito){
         String s;
         try {
-            s = new Sender(c,"", "id="+id+"&id_inscrito="+id_inscrito,null).execute().get();
+            s = new Sender(c,"24", "id="+id+"&id_inscrito="+id_inscrito,null).execute().get();
             if(s == null){
                 return -1;
             }
@@ -1213,5 +1213,5 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
             return -1;
         }
-    }*/
+    }
 }
