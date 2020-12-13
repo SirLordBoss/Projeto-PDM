@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="100"
     tools:context=".Activity_EditarAula">
@@ -11,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="top"
         android:orientation="vertical">
 
 
@@ -19,78 +18,78 @@
             android:id="@+id/dia_aula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/sweet_purple"
             android:gravity="center"
             android:shadowColor="@android:color/white"
-            android:shadowDx="7"
-            android:shadowDy="7"
+            android:shadowDx="2"
+            android:shadowDy="2"
             android:shadowRadius="1"
             android:text="@string/dia"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="50sp" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/inputSumario"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="30dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
             android:gravity="top"
             android:hint="@string/sumario"
             android:inputType="textMultiLine"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="30sp"
+            android:textSize="20sp"
             tools:ignore="Autofill,RtlSymmetry" />
 
 
         <EditText
             android:id="@+id/inputNotas"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="30dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
             android:gravity="top"
             android:hint="@string/notas"
             android:inputType="textMultiLine"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="30sp"
+            android:textSize="20sp"
             tools:ignore="Autofill,RtlSymmetry" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnSubmeterRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
             android:padding="20dp"
             android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="25sp"
             tools:ignore="ButtonStyle" />
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnCancelarRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +98,7 @@
             android:padding="20dp"
             android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="25sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 
