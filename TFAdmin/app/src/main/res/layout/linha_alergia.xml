@@ -29,16 +29,19 @@
             android:text="Nome"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"
-            tools:ignore="LabelFor" />
+            tools:ignore="LabelFor"
+            android:maxWidth="200dp"/>
 
     </LinearLayout>
-
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center">
-
         <ImageButton
             android:id="@+id/btnVerAluno"
             android:layout_width="50dp"

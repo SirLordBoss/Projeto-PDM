@@ -1038,7 +1038,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int deleteAlergia(int id,int ed_id,int a_id){
         String s;
         try {
-            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&e_id="+a_id,null).execute().get();
+            s = new Sender(c,"506", "id="+id+"&ide="+ed_id+"&a_id="+a_id,null).execute().get();
             if(s == null){
                 return -1;
             }

@@ -47,10 +47,10 @@ public class Activity_Alergias extends AppCompatActivity {
 
         Log.d("tag","1");
 
-        submeter = (Button)findViewById(R.id.btnSubmeter);
-        cancelar = (Button)findViewById(R.id.btnCancelar);
-        add = (Button)findViewById(R.id.btnAddAlergia);
-        addAler = (EditText) findViewById(R.id.addAlergia);
+        submeter = findViewById(R.id.btnSubmeter);
+        cancelar = findViewById(R.id.btnCancelar);
+        add = findViewById(R.id.btnAddAlergia);
+        addAler = findViewById(R.id.addAlergia);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,37 +74,37 @@ public class Activity_Alergias extends AppCompatActivity {
         Log.d("tag","3");
         displayAlergias();
     }
-
+    //Ajudei aqui também com algumas pequenas alterações para o código ficar bem - Tiago Almeida
     public void displayAlergias(){
-        oLL = (LinearLayout) findViewById(R.id.listaAlergias);
+        oLL = findViewById(R.id.listaAlergias);
         oLL.removeAllViews();
         oCursor = base.query(DBHelper.TALERGIA, new String[]{DBHelper.COL3_TALERGIA,DBHelper.COL2_TALERGIA}, null, null, DBHelper.COL3_TALERGIA, null, null, null);
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_alergia, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 3);
+            oLL1.setId(oCursor.getInt(1) * 10 + 3);
 
-            final EditText E1 = (EditText) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0) * 10 +2);
+            final EditText E1 = oLL1.findViewById(R.id.nomeAluno);
+            E1.setId(oCursor.getInt(1) * 10 +2);
             E1.setText(oCursor.getString(0));
 
-            ImageButton B1 = (ImageButton) oLL1.findViewById(R.id.btnApagar);
-            B1.setId(oCursor.getInt(0) * 10 +1);
+            ImageButton B1 = oLL1.findViewById(R.id.btnApagar);
+            B1.setId(oCursor.getInt(1) * 10 +1);
             B1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dbHelper.deleteAlergia(id,e_id,(v.getId())/10);
-                    LinearLayout oLL1 =(LinearLayout)findViewById((v.getId())+3);
-                    ((LinearLayout)oLL1.getParent()).removeView(oLL1);
+                    Toast.makeText(Activity_Alergias.this,String.valueOf(((v.getId()-1) /10)),Toast.LENGTH_LONG).show();
+                    dbHelper.deleteAlergia(id,e_id,((v.getId()) -1) /10);
+                    ((LinearLayout)(v.getParent()).getParent()).removeView(oLL1);
                 }
             });
 
-            ImageButton B2 = (ImageButton) oLL1.findViewById(R.id.btnVerAluno);
-            B2.setId(oCursor.getInt(0) * 10 );
+            ImageButton B2 = oLL1.findViewById(R.id.btnVerAluno);
+            B2.setId(oCursor.getInt(1) * 10 );
             B2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     dbHelper.editAlergia(id, e_id, (v.getId()) / 10, E1.getText().toString());
+                     dbHelper.editAlergia(id, e_id, (((v.getId())) / 10) , E1.getText().toString());
                 }
             });
 
