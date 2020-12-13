@@ -35,6 +35,14 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
         SharedPreferences oSP = getApplicationContext().getSharedPreferences("important_variables", 0);
         id = oSP.getInt("id", 999);
 
+        btn_cancelar = (Button) findViewById(R.id.btnCancelar);
+        btn_cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -94,6 +102,10 @@ public class Activity_WaitingRoomEduc extends AppCompatActivity {
             visualizer.addView(new_inscrito);
             bCarryOn = oCursor.moveToNext();
         }
+    }
+
+    public void finish(){
+        super.finish();
     }
 
 }
