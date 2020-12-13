@@ -13,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/sweet_purple"
         android:importantForAutofill="no"
         android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp"
+        android:textSize="55sp"
         tools:ignore="LabelFor,TextFields" />
 
     <LinearLayout
@@ -31,8 +31,8 @@
 
         <ImageView
             android:id="@+id/imgComer"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/comida"
@@ -40,40 +40,40 @@
 
         <CheckBox
             android:id="@+id/cboxComer"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/checkbox"
             android:button="@null" />
 
         <ImageView
             android:id="@+id/imgDormir"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="20dp"
             app:srcCompat="@drawable/dormir"
             tools:ignore="ContentDescription" />
 
         <CheckBox
             android:id="@+id/cboxDormir"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/checkbox"
             android:button="@null" />
 
         <ImageView
             android:id="@+id/imgWc"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="20dp"
             app:srcCompat="@drawable/wc"
             tools:ignore="ContentDescription" />
 
         <CheckBox
             android:id="@+id/cboxWc"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/checkbox"
             android:button="@null" />
@@ -89,31 +89,31 @@
 
         <ImageView
             android:id="@+id/imgMagoar"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:srcCompat="@drawable/magoar"
             tools:ignore="ContentDescription" />
 
         <CheckBox
             android:id="@+id/cboxMagoar"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/checkbox"
             android:button="@null" />
 
         <ImageView
             android:id="@+id/imgChorar"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="30dp"
             app:srcCompat="@drawable/chorar"
             tools:ignore="ContentDescription" />
 
         <CheckBox
             android:id="@+id/cboxChorar"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/checkbox"
             android:button="@null" />
@@ -133,7 +133,7 @@
         <EditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="315dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
@@ -150,7 +150,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
@@ -164,7 +164,7 @@
             android:padding="15dp"
             android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="46sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -176,7 +176,7 @@
             android:padding="15dp"
             android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="46sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 

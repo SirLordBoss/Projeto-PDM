@@ -20,15 +20,15 @@
         android:text="@string/titchersfriend"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="60sp" />
 
     <Button
         android:id="@+id/btnCriarConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"
@@ -41,9 +41,9 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="75dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:paddingTop="30dp"

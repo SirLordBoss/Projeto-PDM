@@ -22,25 +22,26 @@
         android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="60sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/gerirAlunos"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:padding="20dp"
@@ -55,19 +56,19 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_alunos"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/gerirAulas"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:padding="20dp"
@@ -82,7 +83,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_aulas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
 
@@ -90,24 +91,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/mudarPass"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
-                android:padding="10dp"
+                android:padding="20dp"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/mudarpass_icon"
                 tools:ignore="ContentDescription" />
@@ -119,19 +121,19 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/mudar_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/gerirEduc"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:padding="15dp"
@@ -146,7 +148,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/marcar_faltas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="40sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -158,12 +160,12 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
-        android:paddingStart="25dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="25dp"
-        android:paddingBottom="15dp"
+        android:paddingStart="50dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="50dp"
+        android:paddingBottom="20dp"
         android:text="@string/sair"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="60sp" />
 
 </LinearLayout>
