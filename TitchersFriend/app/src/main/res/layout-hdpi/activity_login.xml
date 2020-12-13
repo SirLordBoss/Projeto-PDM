@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/titulo_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/kindergarten"
+        android:gravity="center"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/titchersfriend"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="55sp" />
+
+    <EditText
+        android:id="@+id/inputUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/nome_de_utilizador"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="45sp"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/inputPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/palavra_passe"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="45sp"
+        tools:ignore="Autofill" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="@font/sweet_purple"
+        android:paddingStart="50dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="50dp"
+        android:paddingBottom="15dp"
+        android:text="@string/login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp" />
+</LinearLayout>
