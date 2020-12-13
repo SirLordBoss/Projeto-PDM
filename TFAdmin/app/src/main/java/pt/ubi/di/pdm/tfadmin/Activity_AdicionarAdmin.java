@@ -27,7 +27,7 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
 
     int id, aux, sexo_dropdown_selection;
 
-    EditText nome_admin, idade_admin, morada_admin, email_admin, password_admin;
+    EditText nome_admin, idade_admin, morada_admin, email_admin, password_admin, password_repeat;
 
     Spinner dropdown;
 
@@ -79,6 +79,7 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
         email_admin = findViewById((R.id.inputEmail));
 
         password_admin = findViewById(R.id.inputPassword);
+        password_repeat = findViewById(R.id.inputRepPass);
 
         dropdown = findViewById(R.id.inputSexo);
 
@@ -115,14 +116,19 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
-                String pwd = getM5(password_admin.getText().toString());
-
-                Log.v("DEBUG", "parametros: id=" + id + ", nome=" + nome + ", idade=" + idade + ", morada=" + mor + ", sexo=" + sexo + ", email=" + em);
-
-                if(db_helper.addAdmin(id, nome, idade, mor, sexo, em, pwd) == 1){
-                    Toast.makeText(Activity_AdicionarAdmin.this, "Feito!", Toast.LENGTH_SHORT).show();
-                } else{
-                    Toast.makeText(Activity_AdicionarAdmin.this, "erro!", Toast.LENGTH_SHORT).show();
+                if(password_admin.getText().toString().equals(password_repeat.getText().toString())){
+                    String pwd = getM5(password_admin.getText().toString());
+                    if(db_helper.addAdmin(id, nome, idade, mor, sexo, em, pwd) == 1){
+                        Toast.makeText(Activity_AdicionarAdmin.this, "Feito!", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(Activity_AdicionarAdmin.this, "erro!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Activity_AdicionarAdmin.this, "As passwords não estão repetidas.", Toast.LENGTH_SHORT).show();
+                    password_admin.requestFocus();
+                    password_admin.setText("");
+                    password_repeat.setText("");
+                    return;
                 }
             }
         });
