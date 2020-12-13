@@ -96,7 +96,7 @@ public class Activity_AddAluno extends AppCompatActivity {
                 aler2 = aler.stream().mapToInt(Integer::intValue).toArray();
 
                 for(int i=0;i<myList.size();i++){
-                    Log.d("tag",myList.get(i));
+                    Log.d("tag",String.valueOf(aler2[i])+":)");
                 }
 
                 dbHelper.addEducando(admin_id,ed_id,ed,Integer.parseInt(id),mor,a1,em,aler2);
