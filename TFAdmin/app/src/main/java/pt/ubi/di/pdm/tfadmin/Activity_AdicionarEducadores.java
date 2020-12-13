@@ -27,7 +27,7 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
     int id, aux, sexo_dropdown_selection;
 
-    EditText educador, idade_educ, morada, email;
+    EditText educador, idade_educ, morada, email, password_educ;
 
     Spinner dropdown;
 
@@ -78,6 +78,8 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
         morada = findViewById(R.id.inputMorada);
         email = findViewById((R.id.inputEmail));
 
+        password_educ = findViewById(R.id.inputPassword);
+
         dropdown = findViewById(R.id.inputSexo);
 
         sexList.add("");
@@ -113,8 +115,9 @@ public class Activity_AdicionarEducadores extends AppCompatActivity {
 
                 int sexo = Integer.valueOf(sexo_dropdown_selection);
 
+                String pwd = getM5(password_educ.getText().toString());
 
-                if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, getM5("pwd")) == 1){
+                if(db_helper.addEducador( id, educador_nome, idade, mor, sexo, em, pwd) == 1){
 
                     Toast.makeText(Activity_AdicionarEducadores.this, "Feito!", Toast.LENGTH_SHORT).show();
                 } else{
