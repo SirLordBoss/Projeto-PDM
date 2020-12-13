@@ -140,6 +140,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //Pequena ajuda do Tiago Almeida para não dar erro ao sair pelo botão sair
+        oSQLDB = dbHelper.getWritableDatabase();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         dbHelper.close();

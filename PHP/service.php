@@ -1064,6 +1064,8 @@ switch ($_POST['q']){
             #INSERT into tables
             for($i=0;$i<count($educandolines);$i++){
                 $educandocolumns = explode(",",$educandolines[$i]);
+                if(empty($educandocolumns[0]))
+                    continue;
                 $sql = "INSERT INTO educando (e_id,e_nome,e_idade,e_morada,e_sexo,e_contacto) VALUES  ('$educandocolumns[0]','$educandocolumns[1]','$educandocolumns[2]','$educandocolumns[3]','$educandocolumns[4]','$educandocolumns[5]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
@@ -1079,6 +1081,9 @@ switch ($_POST['q']){
     
             for($i=0;$i<count($atividadelines);$i++){
                 $atividadecolumns = explode(",",$atividadelines[$i]);
+                if(empty($atividadecolumns[1]))
+                    continue;
+                $atividadecolumns[2] = str_replace(' ', '', $atividadecolumns[2]);
                 $sql = "INSERT INTO atividade (a_sumario,a_id,a_data) VALUES  ('$atividadecolumns[0]','$atividadecolumns[1]','$atividadecolumns[2]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
@@ -1094,6 +1099,8 @@ switch ($_POST['q']){
 
             for($i=0;$i<count($alergiaslines);$i++){
                 $alergiascolumns = explode(",",$alergiaslines[$i]);
+                if(empty($alergiascolumns[0]) || empty($alergiascolumns[1]))
+                    continue;
                 $sql = "INSERT INTO alergias (al_id,al_nome) VALUES  ('$alergiascolumns[0]','$alergiascolumns[1]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
@@ -1109,6 +1116,8 @@ switch ($_POST['q']){
     
             for($i=0;$i<count($faltaslines);$i++){
                 $faltascolumns = explode(",",$faltaslines[$i]);
+                if(empty($faltascolumns[0]) || empty($faltascolumns[1]) )
+                    continue;
                 $sql = "INSERT INTO faltas (e_id,a_id) VALUES  ('$faltascolumns[0]','$faltascolumns[1]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
@@ -1123,6 +1132,8 @@ switch ($_POST['q']){
             }
     
             for($i=0;$i<count($relatoriolines);$i++){
+                if(empty($relatoriocolumns[4]) || empty($relatoriocolumns[5]))
+                    continue;
                 $relatoriocolumns = explode(",",$relatoriolines[$i]);
                 $sql = "INSERT INTO relatorio (r_comer,r_dormir,r_coment,r_necessidades,r_curativos,e_id,a_id) VALUES  ('$relatoriocolumns[0]','$relatoriocolumns[1]','$relatoriocolumns[2]','$relatoriocolumns[3]','$relatoriocolumns[4]','$relatoriocolumns[5]','$relatoriocolumns[6]');";
                 $result = mysqli_query($conn,$sql);
@@ -1147,13 +1158,16 @@ switch ($_POST['q']){
             
             for($i=0;$i<count($contemlines);$i++){
                 $contemcolumns = explode(",",$contemlines[$i]);
+                if(empty($contemcolumns[0]) || empty($contemcolumns[1])){
+                    continue;
+                }
                 $sql = "INSERT INTO contem (al_id,e_id) VALUES  ('$contemcolumns[0]','$contemcolumns[1]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     mysqli_rollback($conn);
                     $responseObjectError->success = false;
                     $responseObjectError->error = "Error inserting into contem";
-                    $responseObjectError->debug = mysqli_error($conn);
+                    $responseObjectError->debug = "('$contemcolumns[0]','$contemcolumns[1]')";
                     $json = json_encode($responseObjectError);
                     echo $json;
                     exit();
@@ -2181,11 +2195,11 @@ switch ($_POST['q']){
                             }
                         }
                     }
-
+                    mysqli_commit($conn);
                     $responseObject->success = true;
                     $json = json_encode($responseObjectError);
                     echo $json;
-                    mysqli_commit($conn);
+                    
                     exit();
                 }else{
                     $responseObjectError->success = false;

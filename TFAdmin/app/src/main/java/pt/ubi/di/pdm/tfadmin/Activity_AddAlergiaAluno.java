@@ -78,14 +78,14 @@ public class Activity_AddAlergiaAluno extends AppCompatActivity {
         boolean bCarryOn = oCursor.moveToFirst();
         while (bCarryOn) {
             LinearLayout oLL1 = (LinearLayout) getLayoutInflater().inflate(R.layout.linha_faltas, null);
-            oLL1.setId(oCursor.getInt(0) * 10 + 2);
+            oLL1.setId(oCursor.getInt(1) * 10 + 2);
 
             TextView E1 = (TextView) oLL1.findViewById(R.id.nomeAluno);
-            E1.setId(oCursor.getInt(0) * 10 + 1);
+            E1.setId(oCursor.getInt(1) * 10 + 1);
             E1.setText(oCursor.getString(1));
 
             final CheckBox T2 = (CheckBox) oLL1.findViewById(R.id.checkBox);
-            T2.setId(oCursor.getInt(0) * 10);
+            T2.setId(oCursor.getInt(1) * 10);
             T2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,6 +93,7 @@ public class Activity_AddAlergiaAluno extends AppCompatActivity {
                         Drawable d1 = ResourcesCompat.getDrawable(getResources(),R.drawable.checkmark,null);
                         T2.setBackground(d1);
                         String id = String.valueOf((v.getId())/10);
+                        Log.d("tag",id);
                         subm.add(id);
 
                     }else{

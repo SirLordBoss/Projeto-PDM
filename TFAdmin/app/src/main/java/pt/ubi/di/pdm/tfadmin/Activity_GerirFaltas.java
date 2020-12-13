@@ -1,9 +1,12 @@
 package pt.ubi.di.pdm.tfadmin;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -22,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Activity_GerirFaltas extends AppCompatActivity {
 
@@ -34,6 +39,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
     int id,e_id,at_id;
     Button pesquisa,submeter,cancelar;
     ArrayList<Integer> falt = new ArrayList<Integer>();
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +74,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsDia);
         dia.setAdapter(adapter);
 
-        String[] itemsMes = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
+        String[] itemsMes = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsMes);
         mes.setAdapter(adapter2);
 
@@ -86,18 +92,29 @@ public class Activity_GerirFaltas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                /*Calendar cal = Calendar.getInstance();
+
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog1 = new DatePickerDialog(Activity_GerirFaltas.this, android.R.style.Theme_Holo_Dialog_NoActionBar,mDateSetListener,year,month,day);
+                dialog1.show();*/
+
                 data = dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/" + ano.getSelectedItem().toString();
                 Log.d("tag",data);
+
                 Cursor cursor2 = base.rawQuery("SELECT "+DBHelper.COL1_TATIVIDADE+" FROM "+DBHelper.TATIVIDADE+" WHERE "+DBHelper.COL3_TATIVIDADE+"='"+data+"';",null);
                 //Porque este query não funciona da forma esperada tivemos que usar o query acima - Tiago Almeida
                 // Cursor cursor2 = base.query(DBHelper.TATIVIDADE,new String[]{DBHelper.COL1_TATIVIDADE},DBHelper.COL3_TATIVIDADE+"= ?",new String[]{data},null,null,null);
                 if(cursor2.moveToFirst() && cursor2.getCount()>=1){
                     at_id = cursor2.getInt(0);
-                    cursor2.close();
                 }
+                cursor2.close();
                 Log.d("tag",String.valueOf(at_id));
                 dbHelper.updateFalta(base,id,e_id,tk,data);
                 displayFaltas();
+
             }
         });
 
@@ -124,6 +141,11 @@ public class Activity_GerirFaltas extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
         base.close();
     }
 
