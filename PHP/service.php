@@ -2546,6 +2546,9 @@ switch ($_POST['q']){
                     
                     if(strlen($alergias)>0){
                         foreach ($aline as &$line){
+                            $line = str_replace(' ','',$line);
+                            if(empty($line))
+                                continue;
                             $sql = "INSERT INTO contem (e_id,al_id) VALUES ('$e_id','$line')";
                             if(!mysqli_query($conn,$sql)){
                                 $responseObjectError->success = false;
