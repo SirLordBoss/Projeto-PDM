@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!pass.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")){
                     inputpass.setText("");
 
-                    Toast.makeText(RegisterActivity.this,"Password inválida! 8 carateres (1 maiuscula e 1 minuscula).",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"Password inválida! 8 carateres (1 maiuscula, 1 minuscula e 1 dígito).",Toast.LENGTH_SHORT).show();
                     inputpass.requestFocus();
                     return;
                 }
