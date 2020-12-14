@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
     android:weightSum="100"
     tools:context=".RegisterActivity">
@@ -12,7 +12,7 @@
         android:id="@+id/titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/sweet_purple"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
