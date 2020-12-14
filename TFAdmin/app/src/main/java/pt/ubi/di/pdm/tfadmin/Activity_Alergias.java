@@ -47,7 +47,7 @@ public class Activity_Alergias extends AppCompatActivity {
 
         Log.d("tag","1");
 
-        submeter = findViewById(R.id.btnSubmeter);
+        submeter = findViewById(R.id.btnSubmeterAlergias);
         cancelar = findViewById(R.id.btnCancelarAlergias);
         add = findViewById(R.id.btnAddAlergia);
         addAler = findViewById(R.id.addAlergia);
