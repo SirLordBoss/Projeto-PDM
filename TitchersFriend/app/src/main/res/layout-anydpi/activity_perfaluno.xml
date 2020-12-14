@@ -3,95 +3,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
+    android:gravity="center"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".RegisterActivity">
+    tools:context=".PerfAlunoActivity">
 
 
     <TextView
-        android:id="@+id/titulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:fontFamily="@font/sweet_purple"
-        android:shadowColor="@android:color/white"
-        android:shadowDx="7"
-        android:shadowDy="7"
-        android:shadowRadius="1"
-        android:text="@string/mudar_password"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
-
-    <EditText
-        android:id="@+id/inputPassOld"
+        android:id="@+id/txtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
-        android:ems="10"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/password_anterior"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="40sp" />
 
-    <EditText
-        android:id="@+id/inputPass"
+    <TextView
+        android:id="@+id/txtIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/nova_password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:text="@string/idade"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
 
-    <EditText
-        android:id="@+id/inputRepPass"
+    <TextView
+        android:id="@+id/txtSexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:ems="10"
         android:fontFamily="@font/sweet_purple"
-        android:hint="@string/rep_novapass"
-        android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:text="@string/sexo"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txtMorada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/morada"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txtContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/email_pais"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSubmeterRel"
+            android:id="@+id/btnRelatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
-            android:text="@string/submeter"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="15dp"
+            android:text="Escrever\nRelatório"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
-            tools:ignore="ButtonStyle" />
+            android:textSize="36sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
             android:id="@+id/btnCancelarRel"
@@ -99,10 +98,13 @@
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
-            android:text="@string/cancelar"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="15dp"
+            android:text="Editar\nDados"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
-            tools:ignore="ButtonStyle" />
+            android:textSize="36sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
     </LinearLayout>
 </LinearLayout>

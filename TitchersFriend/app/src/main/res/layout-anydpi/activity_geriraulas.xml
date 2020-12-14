@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
     android:weightSum="100"
     tools:context=".GerirAulas">
@@ -17,18 +17,19 @@
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
-        android:shadowDx="2"
-        android:shadowDy="2"
+        android:shadowDx="7"
+        android:shadowDy="7"
         android:shadowRadius="1"
         android:text="@string/gerir_aulas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp" />
+        android:textSize="50sp" />
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="70">
 
         <LinearLayout
             android:id="@+id/visualizar"
@@ -41,11 +42,11 @@
         android:id="@+id/btnAddAula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
-        android:padding="20dp"
+        android:padding="15dp"
         android:text="@string/sumario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp" />
+        android:textSize="40sp" />
 </LinearLayout>
