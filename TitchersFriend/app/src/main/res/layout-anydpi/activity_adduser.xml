@@ -94,7 +94,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:ellipsize="start"
-        android:fontFamily="@font/sweet_purple"
+        android:fontFamily="sans-serif"
         android:hint="@string/palavra_passe"
         android:inputType="textPassword"
         android:paddingStart="15dp"
