@@ -100,6 +100,7 @@ public class MarcarFaltas extends AppCompatActivity {
                     base.insert(dbHelper.TABLE_NAME4,null,oCV);
                     Toast.makeText(MarcarFaltas.this,"Faltas marcadas!",Toast.LENGTH_SHORT).show();
                 }
+                finish();
             }
         });
 

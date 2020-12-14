@@ -67,10 +67,27 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
         this.context=context;
     }
-      public void delete(){
+    public void delete(){
         context.deleteDatabase(DB_NAME);
     }
 
+    public void onDelete(SQLiteDatabase db){
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME1+";");
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME2+";");
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME3+";");
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME4+";");
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME5+";");
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME6+";");
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME7+";");
+
+        db.execSQL(CREATE_EDUCANDO);
+        db.execSQL(CREATE_ATIVIDADE);
+        db.execSQL(CREATE_ALERGIAS);
+        db.execSQL(CREATE_FALTAS);
+        db.execSQL(CREATE_RELATORIO);
+        db.execSQL(CREATE_CONTEM);
+        db.execSQL(CREATE_USER);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -130,9 +147,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 total = total + ";" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
             count++;
         }
-        total = total + "&";
         count = 0;
         cursor = base.query(TABLE_NAME2, new String[]{"*"}, null, null, null, null, null);
+        if(cursor.getCount()>0){
+            total = total + "&";
+        }
         while (cursor.moveToNext()) {
 
             String c1 = cursor.getString(cursor.getColumnIndex(COL2_T2));
@@ -144,9 +163,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 total = total + ";" + c1 + "," + c2 + "," + c3;
             count++;
         }
-        total = total + "&";
         count = 0;
         cursor = base.query(TABLE_NAME3, new String[]{"*"}, null, null, null, null, null);
+        if(cursor.getCount()>0){
+            total = total + "&";
+        }
         while (cursor.moveToNext()) {
 
             String c1 = cursor.getString(cursor.getColumnIndex(COL1_T3));
@@ -158,9 +179,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 total = total + ";" + c1 + "," + c2;
             count++;
         }
-        total = total + "&";
         count = 0;
         cursor = base.query(TABLE_NAME4, new String[]{"*"}, null, null, null, null, null);
+        if(cursor.getCount()>0){
+            total = total + "&";
+        }
         while (cursor.moveToNext()) {
 
             String c1 = cursor.getString(cursor.getColumnIndex(COL1_T4));
@@ -172,9 +195,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 total = total + ";" + c1 + "," + c2;
             count++;
         }
-        total = total + "&";
         count = 0;
         cursor = base.query(TABLE_NAME5, new String[]{"*"}, null, null, null, null, null);
+        if(cursor.getCount()>0){
+            total = total + "&";
+        }
         while (cursor.moveToNext()) {
 
             String c1 = cursor.getString(cursor.getColumnIndex(COL1_T5));
@@ -190,9 +215,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 total = total + ";" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6 + "," + c7;
             count++;
         }
-        total = total + "&";
         count = 0;
         cursor = base.query(TABLE_NAME6, new String[]{"*"}, null, null, null, null, null);
+        if(cursor.getCount()>0){
+            total = total + "&";
+        }
         while (cursor.moveToNext()) {
             String c1 = cursor.getString(cursor.getColumnIndex(COL1_T6));
             String c2 = cursor.getString(cursor.getColumnIndex(COL2_T6));
@@ -205,17 +232,13 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         try {
+            Log.d("TOTAL",total);
             x = new Sender(c, "104", total, null).execute().get();
+            Toast.makeText(c,x,Toast.LENGTH_LONG).show();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
-
-        try {
-            x = new Sender(c, "105", "cs=1&id=" + id, null).execute().get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
     }
 
 }

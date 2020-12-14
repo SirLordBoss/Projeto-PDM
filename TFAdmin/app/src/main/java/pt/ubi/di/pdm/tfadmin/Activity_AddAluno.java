@@ -111,6 +111,7 @@ public class Activity_AddAluno extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Activity_AddAluno.this,Activity_AddAlergiaAluno.class);
+                i.putExtra("ed_id",String.valueOf(ed_id));
                 startActivityForResult(i, 2);
             }
         });

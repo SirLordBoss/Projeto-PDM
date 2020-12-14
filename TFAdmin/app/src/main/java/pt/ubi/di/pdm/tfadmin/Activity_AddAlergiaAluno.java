@@ -3,6 +3,7 @@ package pt.ubi.di.pdm.tfadmin;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
@@ -70,6 +71,26 @@ public class Activity_AddAlergiaAluno extends AppCompatActivity {
             }
         });
     }
+
+    protected void onResume() {
+        super.onResume();
+
+
+
+        Cursor cursor = oSQLDB.query(DBHelper.TEDUCADOR,new String[]{DBHelper.COL7_TEDUCADOR},DBHelper.COL1_TEDUCADOR+"=?",new String[]{String.valueOf(getIntent().getStringExtra("ed_id"))},null,null,null);
+        cursor.moveToFirst();
+        String tk = cursor.getString(0);
+        cursor.close();
+
+        SharedPreferences shp = getApplicationContext().getSharedPreferences("important_variables",0);
+        int id = shp.getInt("id",999);
+
+        Log.d("TOKEN",tk);
+        int aux = dbHelper.updateAlergia(oSQLDB,id,Integer.parseInt(getIntent().getStringExtra("ed_id")),tk);
+
+        displayAlunos();
+    }
+
     public void displayAlunos() {
 
         oLL = (LinearLayout) findViewById(R.id.listaAlergias);

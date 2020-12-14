@@ -100,13 +100,13 @@ public class Activity_MudarPass extends AppCompatActivity {
 
                 switch (i){
                     case -1:
-                        Toast.makeText(Activity_MudarPass.this,"Erro na comunicação dos dados verifique a sua ligação à internet",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Activity_MudarPass.this,"Erro na comunicação dos dados verifique a sua ligação à internet",Toast.LENGTH_SHORT).show();
                     break;
                     case 0:
-                        Toast.makeText(Activity_MudarPass.this,"Erro na comunicação dos dados",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Activity_MudarPass.this,"Erro na comunicação dos dados",Toast.LENGTH_SHORT).show();
                     break;
                     case 1:
-                        Toast.makeText(Activity_MudarPass.this,"Alterado com sucesso",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Activity_MudarPass.this,"Alterado com sucesso",Toast.LENGTH_SHORT).show();
                     break;
                 }
 

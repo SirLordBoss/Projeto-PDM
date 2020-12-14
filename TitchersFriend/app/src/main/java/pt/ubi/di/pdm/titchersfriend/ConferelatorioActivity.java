@@ -267,9 +267,9 @@ public class ConferelatorioActivity extends Activity {
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY,sheetWidth-80, not);
         lastY +=TEXT_PARAGRAPH;
         lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY,sheetWidth-80, "Desejamos que tenha uma continuação de um bom dia,");
-        lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY,sheetWidth-80, "A equipa do Teachers Friend.");
+        lastY = drawTextAndBreakLine(cnvs,myPaint,40,lastY,sheetWidth-80, "A equipa da TitchersFriend.");
         myPaint.setTextSize(TEXT_MINIATURE);
-        drawTextAndBreakLine(cnvs,myPaint,40,sheetHeight-80,sheetWidth-80, "PDF produzido automáticamente pela app TeachersFriend, se ocorrer algum erro na configuração deste documento contacte-nos para o email teachersfriendapp@gmail.com.");
+        drawTextAndBreakLine(cnvs,myPaint,40,sheetHeight-80,sheetWidth-80, "PDF produzido automáticamente pela app TitchersFriend, se ocorrer algum erro na configuração deste documento contacte-nos para o email teachersfriendapp@gmail.com.");
         myDocument.finishPage(myPage1);
 
         File f = new File(getApplicationContext().getExternalFilesDir(null),"/lastReport.pdf");
@@ -304,7 +304,7 @@ public class ConferelatorioActivity extends Activity {
             if(reader.getBoolean("success")){
                 Toast.makeText(getApplicationContext(),"Enviado",Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(getApplicationContext(),reader.getString("error"),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),x,Toast.LENGTH_SHORT).show();
             }
 
         } catch (JSONException e) {
@@ -322,7 +322,6 @@ public class ConferelatorioActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
     }
 }

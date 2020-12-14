@@ -1177,11 +1177,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public int changePassword( int id,String new_pwd,String old_pwd){
         String s;
         try {
-            s = new Sender(c,"401", "id="+id+"&pwd2="+new_pwd+"&pwd="+old_pwd,null).execute().get();
+            s = new Sender(c,"401", "user="+id+"&pwd2="+new_pwd+"&pwd="+old_pwd,null).execute().get();
             if(s == null){
                 return -1;
             }
-
+            Toast.makeText(c,s,Toast.LENGTH_LONG).show();
             JSONObject o = new JSONObject(s);
             if(!o.getBoolean("success")){
                 Toast.makeText(c,o.getString("error"),Toast.LENGTH_SHORT).show();

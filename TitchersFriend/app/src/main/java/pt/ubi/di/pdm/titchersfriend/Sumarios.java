@@ -84,6 +84,10 @@ public class Sumarios extends AppCompatActivity {
                     Toast.makeText(Sumarios.this,"Não preencheu o sumárario",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(sum.contains(",") || notas.contains(",")){
+                    Toast.makeText(Sumarios.this,"Não pode meter virgulas no sumário nem nas notas",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Totalsum = "Sumario:"+sum+"//Notas:"+notas;
 
