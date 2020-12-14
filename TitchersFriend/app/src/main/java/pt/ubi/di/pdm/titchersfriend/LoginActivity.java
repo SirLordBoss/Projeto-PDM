@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        dbHelper.close();
+        oSQLDB.close();
     }
 
     //Função para receber dados e preencher base de dados local

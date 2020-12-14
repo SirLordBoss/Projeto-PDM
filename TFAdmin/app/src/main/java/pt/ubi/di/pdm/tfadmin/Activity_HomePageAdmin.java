@@ -57,4 +57,13 @@ public class Activity_HomePageAdmin extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Activity_HomePageAdmin.this.getSharedPreferences("important_variables", 0).edit().clear().apply();
+        DBHelper dbHelper = new DBHelper(Activity_HomePageAdmin.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        dbHelper.delete(db);
+        finish();
+    }
 }

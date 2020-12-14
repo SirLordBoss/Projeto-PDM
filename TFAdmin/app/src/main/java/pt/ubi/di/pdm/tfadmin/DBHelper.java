@@ -136,6 +136,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TRELATORIO);
         db.execSQL("DROP TABLE IF EXISTS "+TFALTA);
         db.execSQL("DROP TABLE IF EXISTS "+TINSCRITO);
+        db.execSQL(CREATE_TADMIN);
+        db.execSQL(CREATE_TEDUCADOR);
+        db.execSQL(CREATE_TEDUCANDO);
+        db.execSQL(CREATE_TALERGIA);
+        db.execSQL(CREATE_TATIVIDADE);
+        db.execSQL(CREATE_TRELATORIO);
+        db.execSQL(CREATE_TFALTA);
+        db.execSQL(CREATE_TINSCRITO);
     }
 
     /** Query 200 - Função updateEducador para meter no método onResume
