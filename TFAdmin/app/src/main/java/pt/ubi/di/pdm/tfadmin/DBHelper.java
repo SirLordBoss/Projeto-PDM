@@ -127,7 +127,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db,newVersion,oldVersion);
     }
-    public void delete(){c.deleteDatabase(DB_NAME);}
+    public void delete(SQLiteDatabase db){
+        db.execSQL("DROP TABLE IF EXISTS " +TADMIN);
+        db.execSQL("DROP TABLE IF EXISTS "+TEDUCADOR);
+        db.execSQL("DROP TABLE IF EXISTS "+TEDUCANDO);
+        db.execSQL("DROP TABLE IF EXISTS "+TALERGIA);
+        db.execSQL("DROP TABLE IF EXISTS "+TATIVIDADE);
+        db.execSQL("DROP TABLE IF EXISTS "+TRELATORIO);
+        db.execSQL("DROP TABLE IF EXISTS "+TFALTA);
+        db.execSQL("DROP TABLE IF EXISTS "+TINSCRITO);
+    }
 
     /** Query 200 - Função updateEducador para meter no método onResume
     *

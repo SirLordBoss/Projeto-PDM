@@ -1,6 +1,7 @@
 package pt.ubi.di.pdm.tfadmin;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +51,8 @@ public class Activity_HomePageAdmin extends AppCompatActivity {
             public void onClick(View v) {
                Activity_HomePageAdmin.this.getSharedPreferences("important_variables", 0).edit().clear().apply();
                DBHelper dbHelper = new DBHelper(Activity_HomePageAdmin.this);
-               dbHelper.delete();
+               SQLiteDatabase db = dbHelper.getWritableDatabase();
+               dbHelper.delete(db);
                finish();
             }
         });
