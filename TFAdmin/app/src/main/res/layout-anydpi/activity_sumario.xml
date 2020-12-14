@@ -5,79 +5,68 @@
     android:background="@drawable/fundo"
     android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="100"
-    tools:context=".RegisterActivity">
-
+    android:weightSum="100">
 
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/titulo_geriralunos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/sweet_purple"
+        android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
         android:shadowDy="7"
         android:shadowRadius="1"
-        android:text="@string/mudar_password"
-        android:textAlignment="center"
+        android:text="@string/sumario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
+        android:textSize="50sp" />
 
     <EditText
-        android:id="@+id/inputPassOld"
+        android:id="@+id/inputSumario"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/password_anterior"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
-        tools:ignore="Autofill" />
-
-    <EditText
-        android:id="@+id/inputPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="sans-serif"
-        android:hint="@string/nova_password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="45"
+        android:background="@drawable/cantos_botoes"
+        android:ems="10"
+        android:fontFamily="@font/sweet_purple"
+        android:gravity="top"
+        android:hint="@string/sumario"
+        android:inputType="textMultiLine"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
-        tools:ignore="Autofill" />
+        android:textSize="30sp"
+        tools:ignore="Autofill,RtlSymmetry" />
+
 
     <EditText
-        android:id="@+id/inputRepPass"
+        android:id="@+id/inputNotas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="25"
+        android:background="@drawable/cantos_botoes"
         android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/rep_novapass"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:fontFamily="@font/sweet_purple"
+        android:gravity="top"
+        android:hint="@string/notas"
+        android:inputType="textMultiLine"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
-        tools:ignore="Autofill" />
+        android:textSize="30sp"
+        tools:ignore="Autofill,RtlSymmetry" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
@@ -88,10 +77,10 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
+            android:textSize="40sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -100,10 +89,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
+            android:textSize="40sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
+
 </LinearLayout>

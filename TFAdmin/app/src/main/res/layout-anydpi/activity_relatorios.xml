@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Activity_GerirRelatorios">
+
+    <TextView
+        android:id="@+id/titulo_geriraulas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/sweet_purple"
+        android:gravity="center"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"
+        android:text="@string/gerir_rels"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="80">
+
+        <LinearLayout
+            android:id="@+id/visualizar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+
+</LinearLayout>

@@ -6,93 +6,89 @@
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity_PerfAluno">
 
 
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/txtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:shadowColor="@android:color/white"
-        android:shadowDx="7"
-        android:shadowDy="7"
-        android:shadowRadius="1"
-        android:text="@string/mudar_password"
-        android:textAlignment="center"
+        android:text="@string/nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="40sp" />
 
-    <EditText
-        android:id="@+id/inputPassOld"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/password_anterior"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
-        tools:ignore="Autofill" />
-
-    <EditText
-        android:id="@+id/inputPass"
+    <TextView
+        android:id="@+id/txtIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:fontFamily="sans-serif"
-        android:hint="@string/nova_password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/idade"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
 
-    <EditText
-        android:id="@+id/inputRepPass"
+    <TextView
+        android:id="@+id/txtSexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/rep_novapass"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/sexo"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
-        tools:ignore="Autofill" />
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txtMorada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/morada"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txtContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:text="@string/email_pais"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSubmeterRel"
+            android:id="@+id/btnRelatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="20dp"
-            android:text="@string/submeter"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="Escrever\nRelatório"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
-            tools:ignore="ButtonStyle" />
+            android:textSize="30sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
             android:id="@+id/btnCancelarRel"
@@ -100,10 +96,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="20dp"
-            android:text="@string/cancelar"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="Editar\nDados"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
-            tools:ignore="ButtonStyle" />
+            android:textSize="30sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
     </LinearLayout>
 </LinearLayout>

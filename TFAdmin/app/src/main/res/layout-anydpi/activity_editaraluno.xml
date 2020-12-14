@@ -6,72 +6,81 @@
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity_EditarAluno">
 
 
-    <TextView
-        android:id="@+id/titulo"
+    <EditText
+        android:id="@+id/editNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/sweet_purple"
-        android:shadowColor="@android:color/white"
-        android:shadowDx="7"
-        android:shadowDy="7"
-        android:shadowRadius="1"
-        android:text="@string/mudar_password"
-        android:textAlignment="center"
+        android:hint="@string/nome"
+        android:inputType="text"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="40sp" />
-
-    <EditText
-        android:id="@+id/inputPassOld"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/password_anterior"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
+        android:textSize="36sp"
         tools:ignore="Autofill" />
 
     <EditText
-        android:id="@+id/inputPass"
+        android:id="@+id/editIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
-        android:fontFamily="sans-serif"
-        android:hint="@string/nova_password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/idade"
+        android:inputType="number"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
+        android:textSize="36sp"
+        tools:ignore="Autofill" />
+
+
+    <Spinner
+        android:id="@+id/editSexo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:spinnerMode="dropdown" />
+
+    <EditText
+        android:id="@+id/editMorada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/morada"
+        android:inputType="text"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="36sp"
         tools:ignore="Autofill" />
 
     <EditText
-        android:id="@+id/inputRepPass"
+        android:id="@+id/editContacto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/rep_novapass"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/email_pais"
+        android:inputType="text"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="25sp"
+        android:textSize="36sp"
         tools:ignore="Autofill" />
 
     <LinearLayout
@@ -82,16 +91,16 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSubmeterRel"
+            android:id="@+id/btnRelatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
+            android:textSize="40sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -100,10 +109,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
+            android:textSize="40sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
