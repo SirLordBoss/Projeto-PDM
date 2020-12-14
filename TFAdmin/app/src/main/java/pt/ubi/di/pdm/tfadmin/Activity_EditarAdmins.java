@@ -56,7 +56,8 @@ public class Activity_EditarAdmins extends AppCompatActivity {
         cancelar = findViewById(R.id.btnCancelarRel);
 
         String[] items = new String[]{"Sexo: Feminino", "Sexo: Masculino"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_EditarAdmins.this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_EditarAdmins.this, R.layout.spinner_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         sexo.setAdapter(adapter);
 
         Cursor cursor = admin_db.query(DBHelper.TADMIN,new String[]{"*"},DBHelper.COL1_TADMIN+"=?",new String[]{id},null,null,null);

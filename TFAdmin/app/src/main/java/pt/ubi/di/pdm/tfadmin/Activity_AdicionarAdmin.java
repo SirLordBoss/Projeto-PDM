@@ -86,8 +86,10 @@ public class Activity_AdicionarAdmin extends AppCompatActivity {
         sexList.add("");
         String[] items = new String[]{"Feminino", "Masculino"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_AdicionarAdmin.this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_AdicionarAdmin.this, R.layout.spinner_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         dropdown.setAdapter(adapter);
+
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

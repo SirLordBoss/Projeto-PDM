@@ -48,7 +48,8 @@ public class EditAlunoActivity extends AppCompatActivity {
 
         //Valores para os spinners
         String[] items = new String[]{"Sexo: Feminino", "Sexo: Masculino"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(EditAlunoActivity.this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(EditAlunoActivity.this, R.layout.spinner_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         sexo.setAdapter(adapter);
         sexo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

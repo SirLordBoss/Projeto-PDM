@@ -49,7 +49,8 @@ public class AdicionarAluno extends AppCompatActivity {
         dropdown = (Spinner) findViewById(R.id.inputSexo);
 
         String[] items = new String[]{"Feminino", "Masculino"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(AdicionarAluno.this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(AdicionarAluno.this, R.layout.spinner_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

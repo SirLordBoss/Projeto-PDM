@@ -78,19 +78,22 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         int day = cal.get(Calendar.DAY_OF_MONTH);//ajudei aqui
 
         String[] itemsDia = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsDia);
-        dia.setAdapter(adapter);
-        dia.setSelection(day-1,true);//ajudei aqui
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(Activity_GerirFaltas.this, R.layout.spinner_item, itemsDia);
+        adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        dia.setAdapter(adapter1);
+        dia.setSelection(day-1,true);
 
         String[] itemsMes = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsMes);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(Activity_GerirFaltas.this, R.layout.spinner_item, itemsMes);
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mes.setAdapter(adapter2);
         mes.setSelection(month,true);//ajudei aqui
 
-        String[] itemsAno = new String[]{"19","20","21","22"};//ajudei aqui
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(Activity_GerirFaltas.this, android.R.layout.simple_spinner_dropdown_item, itemsAno);
+        String[] itemsAno = new String[]{"19","20","21","22"};
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(Activity_GerirFaltas.this, R.layout.spinner_item, itemsAno);
+        adapter3.setDropDownViewResource(R.layout.spinner_dropdown_item);
         ano.setAdapter(adapter3);
-        ano.setSelection(Arrays.asList(itemsAno).indexOf(String.valueOf(year%100)),true);//ajudei aqui
+        ano.setSelection(Arrays.asList(itemsAno).indexOf(String.valueOf(year%100)),true);
 
 
         pesquisa.setOnClickListener(new View.OnClickListener() {
