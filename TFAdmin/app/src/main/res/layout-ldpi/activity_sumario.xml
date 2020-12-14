@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Activity_VerAula">
+    tools:context=".Sumarios">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,80 +13,88 @@
         android:gravity="top"
         android:orientation="vertical">
 
-
         <TextView
-            android:id="@+id/dia_aula"
+            android:id="@+id/titulo_geriralunos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/sweet_purple"
             android:gravity="center"
             android:shadowColor="@android:color/white"
-            android:shadowDx="7"
-            android:shadowDy="7"
+            android:shadowDx="2"
+            android:shadowDy="2"
             android:shadowRadius="1"
-            android:text="@string/dia"
+            android:text="@string/sumario"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="50sp" />
+            android:textSize="25sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/inputSumario"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
             android:gravity="top"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
-            android:text="@string/sumario"
+            android:hint="@string/sumario"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
+            android:textSize="20sp"
             tools:ignore="Autofill,RtlSymmetry" />
 
 
-        <TextView
+        <EditText
             android:id="@+id/inputNotas"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginStart="20dp"
+            android:layout_height="100dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
             android:background="@drawable/cantos_botoes"
             android:ems="10"
             android:fontFamily="@font/sweet_purple"
             android:gravity="top"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
-            android:text="@string/notas"
+            android:hint="@string/notas"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="36sp"
+            android:textSize="20sp"
             tools:ignore="Autofill,RtlSymmetry" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
         <android.widget.Button
-            android:id="@+id/btnEditarAula"
+            android:id="@+id/btnSubmeterRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
             android:padding="20dp"
-            android:text="@string/editar_aula"
+            android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="40sp"
+            android:textSize="25sp"
             tools:ignore="ButtonStyle" />
 
+        <android.widget.Button
+            android:id="@+id/btnCancelarRel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="@font/sweet_purple"
+            android:padding="20dp"
+            android:text="@string/cancelar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="25sp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>
