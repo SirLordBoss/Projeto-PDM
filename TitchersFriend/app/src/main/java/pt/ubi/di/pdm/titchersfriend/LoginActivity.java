@@ -67,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper.delete();
         oSQLDB = dbHelper.getWritableDatabase();
 
+        dbHelper.onDelete(oSQLDB);
+
         //iniciação de widgets
         btnLogin = (Button)findViewById(R.id.btnLogin) ;
         inputpass = (EditText) findViewById(R.id.inputPass);

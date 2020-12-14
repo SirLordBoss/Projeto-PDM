@@ -51,7 +51,7 @@ public class Activity_HomePageAdmin extends AppCompatActivity {
                Activity_HomePageAdmin.this.getSharedPreferences("important_variables", 0).edit().clear().apply();
                DBHelper dbHelper = new DBHelper(Activity_HomePageAdmin.this);
                dbHelper.delete();
-               System.exit(0);
+               finish();
             }
         });
     }

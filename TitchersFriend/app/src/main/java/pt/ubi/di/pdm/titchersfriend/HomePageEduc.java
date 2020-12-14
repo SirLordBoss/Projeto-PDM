@@ -64,11 +64,8 @@ SQLiteDatabase base;
         faltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent A2 = new Intent(HomePageEduc.this,MarcarFaltas.class);
                 startActivity(A2) ;
-
-
             }
         });
         //butão exit, limpa a base de dados local e diz ao servidor que ja não esta a usar as tabelas
@@ -86,7 +83,7 @@ SQLiteDatabase base;
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
-                //dbHelper.delete();
+                dbHelper.onDelete(base);
                 finish();
             }
 
@@ -95,16 +92,11 @@ SQLiteDatabase base;
     }
     @Override
     public void onPause() {
-
         super.onPause();
-
-
         base.close();
-
     }
     @Override
     public void onResume() {
-
         super.onResume();
         base = dbHelper.getWritableDatabase();
     }

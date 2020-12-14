@@ -1179,23 +1179,16 @@ switch ($_POST['q']){
             }
     
             for($i=0;$i<count($relatoriolines);$i++){
-                if(empty($relatoriocolumns[4]) || empty($relatoriocolumns[5]))
-                    continue;
                 $relatoriocolumns = explode(",",$relatoriolines[$i]);
-                $sql = "INSERT INTO relatorio (r_comer,r_dormir,r_coment,r_necessidades,r_curativos,e_id,a_id) VALUES  ('$relatoriocolumns[0]','$relatoriocolumns[1]','$relatoriocolumns[2]','$relatoriocolumns[3]','$relatoriocolumns[4]','$relatoriocolumns[5]','$relatoriocolumns[6]');";
+                //if(empty($relatoriocolumns[5]) || empty($relatoriocolumns[6]))
+                //    continue;
+                $sql = "INSERT INTO relatorio (r_comer, r_dormir, r_coment, r_necessidades, r_curativos, e_id, a_id) VALUES  ('$relatoriocolumns[0]','$relatoriocolumns[1]','$relatoriocolumns[2]','$relatoriocolumns[3]','$relatoriocolumns[4]','$relatoriocolumns[5]','$relatoriocolumns[6]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     mysqli_rollback($conn);
                     $responseObjectError->success = false;
-                    $responseObjectError->error = "Error inserting into relatorio";
+                    $responseObjectError->error = "Error inserting into relatorio ".$relatorio;
                     $responseObjectError->debug = mysqli_error($conn);
-                    if ($conn -> warning_count) {
-                        if ($result = $conn -> query("SHOW WARNINGS")) {
-                          $row = $result -> fetch_row();
-                          print_r($row);
-                          $result -> close();
-                        }
-                      }
                     $json = json_encode($responseObjectError);
                     echo $json;
                     exit();
@@ -1223,6 +1216,7 @@ switch ($_POST['q']){
     
             mysqli_commit($conn);
             $responseObject->success = true;
+            $responseObject->relatorio = $relatoriolines;
             $json = json_encode($responseObject);
             echo $json;
             exit();
@@ -1264,12 +1258,11 @@ switch ($_POST['q']){
 #106 - Enviar um email para o pai do educando 
     case 106:
         $email = $_POST['c'];
+        $email = str_replace(' ','',$email);
         $u_nome = $_POST['e'];
         $data = $_POST['d'];
+        $data = str_replace(' ','',$data);
         $pdf = $_FILES['f'];
-
-        
-
         $sql = "SELECT t.t_token, u_email,u_sexo FROM users u INNER JOIN turmas t ON ( u.u_id = t.u_id ) WHERE u.u_id = '$u_nome'";
         $result = mysqli_query($conn,$sql);
         if(!$result){
@@ -1289,8 +1282,21 @@ switch ($_POST['q']){
         $database_name = $row['t_token'];
         $emaile = $row['u_email']; 
         $sexoe = $row['u_sexo'];
-        mysqli_select_db($conn,$database_name);
-        $sql = "SELECT count(*) as c, e_nome, e_sexo FROM educando e INNER JOIN relatorio r ON ( e.e_id = r.e_id  ) INNER JOIN atividade a ON ( r.a_id = a.a_id  ) WHERE e.e_contacto = '$email' AND a.a_data = '$data'";
+
+        if(!mysqli_select_db($conn,$row['t_token'])){
+            $responseObjectError->success = false;
+            $responseObjectError->error = "Error selecting database";
+            $json = json_encode($responseObjectError);
+            echo $json;
+            exit();
+        }
+
+        $sql = "SELECT e.e_nome, e.e_sexo, count(*) as c FROM atividade a 
+            INNER JOIN relatorio r ON ( a.a_id = r.a_id  )  
+                INNER JOIN educando e ON ( r.e_id = e.e_id  )  
+        WHERE a.a_data = '$data' AND
+            e.e_contacto = '$email'
+            GROUP BY e.e_nome, e.e_sexo";
         $result = mysqli_query($conn,$sql);
         if(!$result){
             $responseObjectError->success = false;
@@ -1301,7 +1307,7 @@ switch ($_POST['q']){
         }
         if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
             $responseObjectError->success = false;
-            $responseObjectError->error = "Fetching error";
+            $responseObjectError->error = "Fetching error ".$row;
             $json = json_encode($responseObjectError);
             echo $json;
             exit();
@@ -2339,7 +2345,9 @@ switch ($_POST['q']){
     case 401:
         $id = $_POST['user'];
         $pwd = $_POST['pwd'];
+        $pwd = str_replace(' ','',$pwd);
         $newpwd = $_POST['pwd2'];
+        $newpwd = str_replace(' ','',$newpwd);
         $sql = "UPDATE users SET u_pwd = '$newpwd' WHERE (u_id = '$id' AND u_pwd = '$pwd')";
         $result = mysqli_query($conn,$sql);
         if(!$result){
@@ -2350,6 +2358,7 @@ switch ($_POST['q']){
             exit();
         }
         $responseObject->success = true;
+        $responseObject->error = mysqli_error($conn);
         $json = json_encode($responseObject);
         echo $json;
         exit();
