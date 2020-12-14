@@ -6,13 +6,13 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Gerir">
+    tools:context=".Activity_GerirUsers">
 
     <TextView
         android:id="@+id/titulo_gerirusers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="175dp"
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"

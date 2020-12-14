@@ -3,28 +3,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:weightSum="100">
+    android:weightSum="100"
+    tools:context=".Activity_GerirFaltas">
 
     <TextView
-        android:id="@+id/titulo_gerireduc"
+        android:id="@+id/titulo_geriradmins"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
         android:shadowDx="7"
         android:shadowDy="7"
         android:shadowRadius="1"
-        android:text="@string/gerir_educadores"
+        android:text="@string/gerir_faltas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="50sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <Spinner
+            android:id="@+id/inputDia"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/inputMes"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/inputAno"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown" />
+
+        <android.widget.Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/cantos_botoes"
+            android:text="@string/ok" />
+
+    </LinearLayout>
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="400dp"
         android:layout_marginTop="25dp">
 
         <LinearLayout
@@ -35,33 +73,33 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:gravity="center|top"
         android:orientation="horizontal">
 
         <android.widget.Button
-            android:id="@+id/btnEspera"
+            android:id="@+id/btnSubmeterRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
-            android:text="@string/em_espera"
+            android:padding="20dp"
+            android:text="@string/submeter"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"
             tools:ignore="ButtonStyle" />
 
         <android.widget.Button
-            android:id="@+id/btnAddEduc"
+            android:id="@+id/btnCancelarRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:padding="15dp"
-            android:text="@string/novo_educador"
+            android:padding="20dp"
+            android:text="@string/cancelar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"
             tools:ignore="ButtonStyle" />

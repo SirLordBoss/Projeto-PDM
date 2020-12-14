@@ -12,7 +12,7 @@
         android:id="@+id/nomeTurma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="150dp"
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
@@ -34,46 +34,46 @@
         android:fontFamily="@font/sweet_purple"
         android:text="@string/gerir_alunos"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp" />
+        android:textSize="40sp" />
 
     <android.widget.Button
         android:id="@+id/btnGerirAulas"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:text="@string/gerir_aulas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp" />
+        android:textSize="40sp" />
 
     <android.widget.Button
         android:id="@+id/btnGerirFaltas"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:text="@string/gerir_faltas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp" />
+        android:textSize="40sp" />
 
     <android.widget.Button
         android:id="@+id/btnAlergias"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
         android:text="@string/alergias"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp" />
+        android:textSize="40sp" />
 
 
 </LinearLayout>

@@ -42,7 +42,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="75dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -109,7 +109,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:orientation="horizontal">
 
