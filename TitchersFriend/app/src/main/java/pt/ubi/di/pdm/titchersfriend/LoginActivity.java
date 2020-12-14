@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         s = reader.getString("contem");
-        if(!(s.equals("none")||s.equals(""))) {
+        if(!(s.equals("none") || s.equals(""))) {
         arr = s.split(";");
         oCV.clear();
 
