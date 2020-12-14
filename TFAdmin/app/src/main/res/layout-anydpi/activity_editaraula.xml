@@ -71,7 +71,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnSubmeterRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
             android:textSize="36sp"
             tools:ignore="ButtonStyle" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnCancelarRel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
