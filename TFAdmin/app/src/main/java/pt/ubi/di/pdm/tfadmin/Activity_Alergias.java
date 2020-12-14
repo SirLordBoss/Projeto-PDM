@@ -60,6 +60,20 @@ public class Activity_Alergias extends AppCompatActivity {
             }
         });
 
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        submeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     protected void onResume() {
@@ -94,7 +108,6 @@ public class Activity_Alergias extends AppCompatActivity {
             B1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(Activity_Alergias.this,String.valueOf(((v.getId()-1) /10)),Toast.LENGTH_LONG).show();
                     dbHelper.deleteAlergia(id,e_id,((v.getId()) -1) /10);
                     ((LinearLayout)(v.getParent()).getParent()).removeView(oLL1);
                 }
