@@ -13,16 +13,16 @@
         android:id="@+id/titulo_homeadmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/kindergarten"
         android:gravity="center"
         android:shadowColor="@android:color/white"
-        android:shadowDx="8"
-        android:shadowDy="8"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:shadowRadius="1"
         android:text="@string/titchersfriend"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="50sp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/admin"
@@ -30,32 +30,32 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/kindergarten"
         android:shadowColor="@android:color/white"
-        android:shadowDx="7"
-        android:shadowDy="7"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:shadowRadius="1"
         android:text="@string/admin"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/gerirUsers"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:paddingStart="10dp"
@@ -73,19 +73,19 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_utilizadores"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="36sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/gerirAulas"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:padding="15dp"
@@ -100,7 +100,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/gerir_dados"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="36sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
 
@@ -109,20 +109,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/mudarPass"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:padding="10dp"
@@ -137,19 +137,19 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/mudar_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="36sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="160dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/gerirEduc"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/cantos_botoes"
                 android:padding="20dp"
@@ -164,7 +164,7 @@
                 android:fontFamily="@font/sweet_purple"
                 android:text="@string/sair"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="36sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
 

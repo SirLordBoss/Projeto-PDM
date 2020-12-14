@@ -6,13 +6,13 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".Gerir">
+    tools:context=".Activity_GerirTurma">
 
     <TextView
         android:id="@+id/nomeTurma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="150dp"
         android:fontFamily="@font/sweet_purple"
         android:gravity="center"
         android:shadowColor="@android:color/white"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
