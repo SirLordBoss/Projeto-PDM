@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".HomePageEduc"
-    android:weightSum="100">
+    android:weightSum="100"
+    tools:context=".HomePageEduc">
 
     <TextView
         android:id="@+id/titulo_homeeduc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:layout_weight="20"
         android:fontFamily="@font/kindergarten"
         android:gravity="center"
         android:shadowColor="@android:color/white"
@@ -28,10 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:baselineAligned="false"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:weightSum="120"
-        android:baselineAligned="false">
+        android:weightSum="120">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -61,7 +62,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/gerir_alunos"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="28sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +93,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/gerir_aulas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="28sp" />
         </LinearLayout>
 
 
@@ -101,10 +102,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:weightSum="120"
-        android:baselineAligned="false">
+        android:weightSum="120">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -164,7 +165,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/marcar_faltas"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="32sp" />
+                android:textSize="28sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -174,11 +175,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_weight="20"
         android:background="@drawable/cantos_botoes"
         android:fontFamily="@font/sweet_purple"
-        android:paddingStart="25dp"
+        android:paddingStart="35dp"
         android:paddingTop="15dp"
-        android:paddingEnd="25dp"
+        android:paddingEnd="35dp"
         android:paddingBottom="15dp"
         android:text="@string/sair"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
