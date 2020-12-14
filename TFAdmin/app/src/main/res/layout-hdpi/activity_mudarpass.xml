@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:weightSum="100"
+    tools:context=".Activity_MudarPass">
+
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/sweet_purple"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="1"
+        android:text="@string/mudar_password"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp" />
+
+    <EditText
+        android:id="@+id/inputPassOld"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/password_anterior"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="40sp"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/inputPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/nova_password"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="40sp"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/inputRepPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:fontFamily="@font/sweet_purple"
+        android:hint="@string/rep_novapass"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="40sp"
+        tools:ignore="Autofill" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center|top"
+        android:orientation="horizontal">
+
+        <android.widget.Button
+            android:id="@+id/btnSubmeter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="@font/sweet_purple"
+            android:padding="20dp"
+            android:text="@string/submeter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="50sp"
+            tools:ignore="ButtonStyle" />
+
+        <android.widget.Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cantos_botoes"
+            android:fontFamily="@font/sweet_purple"
+            android:padding="20dp"
+            android:text="@string/cancelar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="50sp"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

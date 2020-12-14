@@ -1,12 +1,3 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    android:orientation="vertical"
-    android:weightSum="100"
-    tools:context=".Activity_PerfAluno">
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -91,16 +82,14 @@
 
         <android.widget.Button
             android:id="@+id/btnEditarEduc"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/cantos_botoes"
             android:fontFamily="@font/sweet_purple"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+            android:padding="20dp"
             android:text="@string/editar_dados_espacos"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="40sp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
-</ScrollView>

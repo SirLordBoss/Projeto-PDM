@@ -5,7 +5,7 @@
     android:background="@drawable/fundo"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity_Login">
 
     <TextView
         android:id="@+id/titulo_login"

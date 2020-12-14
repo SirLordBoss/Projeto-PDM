@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/kindergarten"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:text="@string/titchersfriend"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp" />
+
+    <android.widget.Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/cantos_botoes"
+        android:fontFamily="@font/sweet_purple"
+        android:paddingStart="60dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="60dp"
+        android:paddingBottom="30dp"
+        android:text="@string/login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30sp" />
+
+</LinearLayout>

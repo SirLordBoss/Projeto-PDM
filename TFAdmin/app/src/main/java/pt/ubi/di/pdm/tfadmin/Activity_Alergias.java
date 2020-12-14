@@ -47,8 +47,8 @@ public class Activity_Alergias extends AppCompatActivity {
 
         Log.d("tag","1");
 
-        submeter = findViewById(R.id.btnSubmeter);
-        cancelar = findViewById(R.id.btnCancelar);
+        submeter = findViewById(R.id.btnSubmeterAlergias);
+        cancelar = findViewById(R.id.btnCancelarAlergias);
         add = findViewById(R.id.btnAddAlergia);
         addAler = findViewById(R.id.addAlergia);
 
@@ -57,6 +57,20 @@ public class Activity_Alergias extends AppCompatActivity {
             public void onClick(View v) {
                 dbHelper.addAlergia(id,e_id,addAler.getText().toString());
                 addAler.setText("");
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        submeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -94,7 +108,6 @@ public class Activity_Alergias extends AppCompatActivity {
             B1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(Activity_Alergias.this,String.valueOf(((v.getId()-1) /10)),Toast.LENGTH_LONG).show();
                     dbHelper.deleteAlergia(id,e_id,((v.getId()) -1) /10);
                     ((LinearLayout)(v.getParent()).getParent()).removeView(oLL1);
                 }
