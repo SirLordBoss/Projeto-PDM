@@ -101,4 +101,8 @@ SQLiteDatabase base;
         base = dbHelper.getWritableDatabase();
     }
 
+    @Override
+    public void onBackPressed() {//acrescentei isto para o utilizador não clicar no botão de sair sem querer
+        Toast.makeText(HomePageEduc.this,"Clique no botão 'sair' para sair da aplicação",Toast.LENGTH_SHORT).show();
+    }
 }

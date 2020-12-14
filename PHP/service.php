@@ -1180,8 +1180,8 @@ switch ($_POST['q']){
     
             for($i=0;$i<count($relatoriolines);$i++){
                 $relatoriocolumns = explode(",",$relatoriolines[$i]);
-                //if(empty($relatoriocolumns[5]) || empty($relatoriocolumns[6]))
-                //    continue;
+                if(empty($relatoriocolumns[5]) || empty($relatoriocolumns[6]))
+                    continue;
                 $sql = "INSERT INTO relatorio (r_comer, r_dormir, r_coment, r_necessidades, r_curativos, e_id, a_id) VALUES  ('$relatoriocolumns[0]','$relatoriocolumns[1]','$relatoriocolumns[2]','$relatoriocolumns[3]','$relatoriocolumns[4]','$relatoriocolumns[5]','$relatoriocolumns[6]');";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){

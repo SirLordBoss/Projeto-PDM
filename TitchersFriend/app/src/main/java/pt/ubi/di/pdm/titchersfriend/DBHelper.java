@@ -132,9 +132,12 @@ public class DBHelper extends SQLiteOpenHelper {
             user = cursor.getString(cursor.getColumnIndex(COL2_T7));
             id = cursor.getString(cursor.getColumnIndex(COL1_T7));
         }
-        cursor = base.query(TABLE_NAME1, new String[]{"*"}, null, null, null, null, null);
+        total = total + "user=" + user;
+                cursor = base.query(TABLE_NAME1, new String[]{"*"}, null, null, null, null, null);
+        if(cursor.getCount()>0){
+            total = total + "&";
+        }
         while (cursor.moveToNext()) {
-
             String c1 = cursor.getString(cursor.getColumnIndex(COL1_T1));
             String c2 = cursor.getString(cursor.getColumnIndex(COL2_T1));
             String c3 = cursor.getString(cursor.getColumnIndex(COL3_T1));
@@ -142,7 +145,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String c5 = cursor.getString(cursor.getColumnIndex(COL5_T1));
             String c6 = cursor.getString(cursor.getColumnIndex(COL6_T1));
             if (count == 0)
-                total = "user=" + user + "&" + "ed" + "=" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
+                total = "ed" + "=" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
             if (count != 0)
                 total = total + ";" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
             count++;
@@ -232,9 +235,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         try {
-            Log.d("TOTAL",total);
             x = new Sender(c, "104", total, null).execute().get();
-            Toast.makeText(c,x,Toast.LENGTH_LONG).show();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
