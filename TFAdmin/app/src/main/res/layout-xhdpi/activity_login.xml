@@ -12,7 +12,7 @@
         android:id="@+id/titulo_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="175dp"
         android:fontFamily="@font/kindergarten"
         android:gravity="center"
         android:shadowColor="@android:color/white"
