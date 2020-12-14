@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Refjanela = this ;
 
-        oTV = (TextView)findViewById(R.id.Título);
+        oTV = (TextView)findViewById(R.id.titulo);
         btnCriaConta = (Button)findViewById(R.id.btnCriarConta);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
