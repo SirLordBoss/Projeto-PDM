@@ -35,7 +35,7 @@
     </ScrollView>
 
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnAddAluno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
