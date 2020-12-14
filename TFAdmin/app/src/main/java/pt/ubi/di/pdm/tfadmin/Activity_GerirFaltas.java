@@ -81,7 +81,7 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(Activity_GerirFaltas.this, R.layout.spinner_item, itemsDia);
         adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
         dia.setAdapter(adapter1);
-        dia.setSelection(day-1,true);//ajudei aqui
+        dia.setSelection(day-1,true);
 
         String[] itemsMes = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(Activity_GerirFaltas.this, R.layout.spinner_item, itemsMes);
@@ -89,11 +89,11 @@ public class Activity_GerirFaltas extends AppCompatActivity {
         mes.setAdapter(adapter2);
         mes.setSelection(month,true);//ajudei aqui
 
-        String[] itemsAno = new String[]{"19","20","21","22"};//ajudei aqui
+        String[] itemsAno = new String[]{"19","20","21","22"};
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(Activity_GerirFaltas.this, R.layout.spinner_item, itemsAno);
         adapter3.setDropDownViewResource(R.layout.spinner_dropdown_item);
         ano.setAdapter(adapter3);
-        ano.setSelection(Arrays.asList(itemsAno).indexOf(String.valueOf(year%100)),true);//ajudei aqui
+        ano.setSelection(Arrays.asList(itemsAno).indexOf(String.valueOf(year%100)),true);
 
 
         pesquisa.setOnClickListener(new View.OnClickListener() {
