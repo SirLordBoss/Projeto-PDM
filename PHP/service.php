@@ -1028,7 +1028,7 @@ switch ($_POST['q']){
             }
             if(!($row = mysqli_fetch_array($result,MYSQLI_ASSOC))){
                 $responseObjectError->success = false;
-                $responseObjectError->error = "Error user not found";
+                $responseObjectError->error = "Error user not found ".$u_name;
                 $responseObjectError->debug = mysqli_error($conn);
                 $json = json_encode($responseObjectError);
                 echo $json;

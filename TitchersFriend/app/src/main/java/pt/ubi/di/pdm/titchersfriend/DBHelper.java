@@ -134,6 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         total = total + "user=" + user;
                 cursor = base.query(TABLE_NAME1, new String[]{"*"}, null, null, null, null, null);
+
         if(cursor.getCount()>0){
             total = total + "&";
         }
@@ -145,7 +146,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String c5 = cursor.getString(cursor.getColumnIndex(COL5_T1));
             String c6 = cursor.getString(cursor.getColumnIndex(COL6_T1));
             if (count == 0)
-                total = "ed" + "=" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
+                total += "ed" + "=" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
             if (count != 0)
                 total = total + ";" + c1 + "," + c2 + "," + c3 + "," + c4 + "," + c5 + "," + c6;
             count++;
@@ -235,7 +236,9 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         try {
+
             x = new Sender(c, "104", total, null).execute().get();
+            //Toast.makeText(c,x,Toast.LENGTH_SHORT).show();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
